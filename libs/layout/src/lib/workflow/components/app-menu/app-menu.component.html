@@ -1,0 +1,43 @@
+<nav
+  class="app-menu"
+  [ngClass]="{ opened: opened, closed: !opened }"
+  [@slideContent]="animationState"
+  (@slideContent.start)="onAnimationStart($event)"
+  (@slideContent.done)="onAnimationDone($event)"
+>
+  <div class="app-menu-user-area">
+    <div class="btn-user">
+      Logged in as <br />
+      <b>{{ (currentUser$ | async)?.user?.full_name | titlecase }}</b>
+    </div>
+
+    <a class="btn-menu-item" (click)="signout($event)">
+      <!-- <flx-icon hover="primary" class="ui-icon" type="app-menu-logout"></flx-icon>Log out</a -->
+    </a>
+  </div>
+  <!-- <flx-glow-line margin="1rem 0"></flx-glow-line> -->
+
+  <div class="app-menu-button-group">
+    <a *ngFor="let item of navItems" class="btn-menu-item" (click)="redirect(item)">
+      <!-- <flx-icon hover="primary" class="ui-icon" [type]="item?.iconType"></flx-icon> -->
+      {{ item?.name }}
+    </a>
+  </div>
+  <!-- <flx-glow-line margin="1rem 0"></flx-glow-line> -->
+
+  <div class="app-menu-theme-settings">
+    <div class="togglebutton">
+      <p class="uppertextleft">Dark</p>
+      <label class="switch">
+        <input type="checkbox" (change)="toggleEditable($event)" [checked]="themeCheckedStatus" />
+        <span class="slider two round"></span>
+      </label>
+      <p class="uppertextright">Light</p>
+    </div>
+  </div>
+  <!-- <flx-glow-line margin="1rem 0"></flx-glow-line> -->
+
+  <div class="btn-user version">Version {{ version }}</div>
+  <!-- </div> -->
+  <div class="app-menu-logo"><span class="branding" [inlineSVG]="logo_url"></span></div>
+</nav>

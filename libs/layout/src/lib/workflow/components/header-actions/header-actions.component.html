@@ -1,0 +1,34 @@
+<div class="actions-container">
+
+  <div class="workflow-action" *ngIf="isOffline">
+    <flx-icon
+      [type]="isOffline ? 'offline' : 'online'"
+      use="app-bar"
+      active="danger"
+      [isActive]="isOffline"
+      hover="none"
+      [instruction]="isOffline ? 'Offline' : 'Online'"
+      class="action-panel-button"
+    >
+    </flx-icon>
+  </div>
+
+  <ng-container>
+    <div class="workflow-action" *ngFor="let control of headerControls$ | async">
+      <flx-icon
+        *ngIf="control?.type === 'standalone'"
+        [type]="control?.icon"
+        [isActive]="clickedControl?.id === control.id ? true : false"
+        active="none"
+        class="action-panel-button"
+        (click)="onClick(control)"
+        [instruction]="control.instruction"
+        >{{ control?.icon }}</flx-icon>
+      <!-- <flx-context-menu *ngIf="action?.type === 'dropdown'" icon="view" use="app-bar" [state]="state">
+        <ul>
+          <li *ngFor="let childAction of action.children" (click)="onClick(childAction)">{{ childAction?.text }}</li>
+        </ul>
+      </flx-context-menu> -->
+    </div>
+  </ng-container>
+</div>

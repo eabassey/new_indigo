@@ -1,0 +1,99 @@
+:host {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  height: 100%;
+  width: 100%;
+
+  &:last-child {
+    border: none;
+
+    .job-card {
+      border-bottom-right-radius: var(--radius);
+    }
+  }
+
+  &:first-child {
+    .job-card {
+      border-top-right-radius: var(--radius);
+    }
+  }
+}
+.job-card {
+  display: grid;
+  grid-template-columns: 0.5rem 100px 1fr;
+  height: 100%;
+  width: 100%;
+  padding: 0.5rem 0;
+  transition: all 350ms;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--job-card-hover);
+
+    & > .job-card-actions .context-menu-container {
+      opacity: 1;
+    }
+  }
+
+  &.is-offline {
+    pointer-events: none;
+  }
+
+  &.is-online {
+    cursor: pointer;
+  }
+
+  .indicator,
+  .job-info,
+  .appointment-state-info,
+  .take-action,
+  .job-card-actions {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .job-info-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    @media screen and (max-width: 1199px) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .job-info {
+    padding-left: 0.5rem;
+    @media only screen and (max-width: 1199px) {
+      padding-left: 0;
+    }
+    p {
+      max-width: 240px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .job-card-actions {
+    .context-menu-container {
+      opacity: 0;
+      transition: all 350ms;
+      display: inline-flex;
+    }
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 0.5rem;
+
+    .action {
+      margin-left: 0.5rem;
+    }
+  }
+}

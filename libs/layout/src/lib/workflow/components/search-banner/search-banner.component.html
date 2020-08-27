@@ -1,0 +1,27 @@
+<div class="search-banner" *ngIf="hasSearchValues">
+  <div class="search-banner__center">
+    <span>Showing&nbsp;</span>
+    <span *ngIf="searchData?.inSearch"
+      >search results for:&nbsp;<b>{{ searchData?.inSearch }}</b></span
+    >
+    <span *ngFor="let filter of searchData.filters; let last = last; let first = first">
+      <ng-container *ngIf="!filter?.filterType?.includes('bucket'); else bucketFilter">
+        <span *ngIf="first">
+          <span *ngIf="searchData?.inSearch">,&nbsp;Additionally&nbsp;</span
+          >{{ searchData?.inSearch ? 'f' : 'F' }}iltered by
+        </span>
+        <span
+          >{{ filter?.filterName }}:&nbsp;<b>{{ filter?.filterValue }}</b></span
+        >
+        <span *ngIf="!last">,&nbsp;</span>
+      </ng-container>
+    </span>
+    <ng-template #bucketFilter> Bucket results. </ng-template>
+  </div>
+  <span class="search-banner__right" (click)="clearSearch()"
+    >Clear
+    {{
+      searchData?.inSearch && searchData.filters.length > 0 ? 'All' : searchData?.inSearch ? 'Search' : 'Filters'
+    }}</span
+  >
+</div>

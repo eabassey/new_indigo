@@ -28,6 +28,15 @@
     "sil-e2e": {
       "tags": [],
       "implicitDependencies": ["sil"]
+    },
+    "engine": {
+      "tags": []
+    },
+    "layout": {
+      "tags": []
+    },
+    "templates": {
+      "tags": []
     }
   }
 }

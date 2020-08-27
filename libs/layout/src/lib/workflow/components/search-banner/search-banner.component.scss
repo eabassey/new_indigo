@@ -1,0 +1,21 @@
+.search-banner {
+  background-color: var(--linear-gradient-primary-light);
+  color: var(--text-primary-hover);
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding: 0.4rem 1rem;
+  .search-banner__center {
+    text-align: center;
+  }
+  .search-banner__right {
+    position: absolute;
+    right: 1rem;
+    top: 0.4rem;
+    cursor: pointer;
+    &:hover {
+      color: var(--danger);
+    }
+  }
+}

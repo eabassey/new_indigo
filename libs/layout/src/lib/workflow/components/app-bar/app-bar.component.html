@@ -1,0 +1,21 @@
+<header class="module-header">
+  <div
+    class="hamburger-menu"
+    (click)="toggleMenu()"
+    [ngClass]="{ active: true }"
+    [class.disableMenu]="disableMenu"
+  >
+  hello
+    <flx-icon type="app-menu-hamburger"></flx-icon>
+  </div>
+
+  <div class="current-module">
+    <ng-content select=".component-title"></ng-content>
+    {{ title$ | async }} Hello Title
+  </div>
+
+  <div class="module-actions">
+    <flx-header-actions></flx-header-actions>
+  </div>
+</header>
+<!-- <flx-glow-line [color]="isOffline ? 'danger' : 'default'" size="100%"></flx-glow-line> -->

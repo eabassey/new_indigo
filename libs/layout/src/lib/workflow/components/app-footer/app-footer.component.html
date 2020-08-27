@@ -1,0 +1,15 @@
+<footer class="module-footer">
+  <ng-container *ngIf="(activeNode$ | async) as node">
+    <pagination-controls
+      *ngIf="node?.footerType === 'pagination'"
+      class="flx-pagination"
+      (pageChange)="setCurrentPage($event)"
+      id="list"
+      maxSize="5"
+      previousLabel="←"
+      nextLabel="→"
+    >
+    </pagination-controls>
+    <workflow-node-footer [navs]="node?.navs" [compInstances]="compInstances$ | async" *ngIf="node?.footerType === 'node_nav'"></workflow-node-footer>
+  </ng-container>
+</footer>

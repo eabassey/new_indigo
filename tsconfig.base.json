@@ -15,7 +15,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@indigo/engine": ["libs/engine/src/index.ts"],
+      "@indigo/layout": ["libs/layout/src/index.ts"],
+      "@indigo/templates": ["libs/templates/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

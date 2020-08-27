@@ -1,0 +1,107 @@
+.card-container {
+  @media only screen and (max-width: 1199px) {
+    grid-template-columns: 1.5fr 2fr;
+  }
+
+  background-color: var(--claim-card);
+  border-radius: var(--radius);
+  display: grid;
+  grid-template-columns: 1.5fr 3fr;
+  margin-bottom: 0.25rem;
+
+  .claim-card {
+    background-color: var(--claim-card);
+    border-top-left-radius: var(--radius);
+    border-bottom-left-radius: var(--radius);
+    display: grid;
+    grid-template-columns: 0.5rem 100px 1fr;
+    transition: all 350ms;
+    cursor: pointer;
+    min-height: 96px;
+
+    &:hover {
+      background-color: var(--claim-card-hover);
+
+      & > .claim-card-icons .context-menu-container {
+        opacity: 1;
+      }
+    }
+
+    &.is-offline {
+      pointer-events: none;
+    }
+
+    &.is-online {
+      cursor: pointer;
+    }
+
+    .indicator {
+      display: flex;
+      align-items: center;
+    }
+
+    .claim-card-icons {
+      display: flex;
+      flex-direction: row;
+      padding: 0.5rem 0;
+      justify-content: left;
+      align-items: center;
+
+      .context-menu-container {
+        transition: all 350ms;
+        opacity: 0;
+        display: flex;
+      }
+
+      .indicator-icons {
+        display: flex;
+        flex-direction: row;
+      }
+    }
+
+    .claim-info {
+      text-align: right;
+      padding: 0.5rem 1rem 0.5rem 0;
+      p {
+        margin: 0;
+      }
+      .claim-number {
+        font-size: 0.9rem;
+        font-weight: 700;
+      }
+      .claim-type {
+        font-weight: 400;
+      }
+      .claimant,
+      .claim-state,
+      .sla-timer {
+        font-size: 0.75rem;
+      }
+
+      .sla-timer {
+        line-height: 1rem;
+        height: 1.2rem;
+      }
+    }
+  }
+
+  .job-cards-container {
+    background-color: var(--job-card);
+    border-top-right-radius: var(--radius);
+    border-bottom-right-radius: var(--radius);
+  }
+}
+
+.action {
+  display: flex;
+  justify-content: left;
+  margin: 0.2rem;
+  align-items: center;
+}
+
+.context-menu-icon {
+}
+
+.pc {
+  padding: 0.2rem;
+}

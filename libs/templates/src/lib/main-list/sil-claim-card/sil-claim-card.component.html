@@ -1,0 +1,39 @@
+<div class="card-container" [id]="'claim-' + itemOne.id">
+  <div
+    class="claim-card"
+    (click)="takeClaimAction()"
+  >
+    <!-- <div class="indicator"><flx-indicator></flx-indicator></div> -->
+    <div class="claim-card-icons">
+      <div class="context-menu-container">
+        <div class="action">
+
+        </div>
+      </div>
+      <div class="indicator-icons">
+
+
+      </div>
+    </div>
+    <div class="claim-info">
+      <p class="claim-number">
+        <small>{{itemOne?.title}}</small>
+        <!-- <small *ngIf="engClaimType" class="claim-type">{{ engClaimType }}</small> -->
+        <span class="hv-copy">&nbsp;{{ itemOne?.mid }}</span>
+      </p>
+      <p class="claimant">
+        {{ itemOne.applicant?.first_name + ' ' + itemOne.applicant?.surname || 'No Client Name Captured' }}
+      </p>
+      <!-- <p *ngIf="engState" class="claim-state">{{ itemOne.state }}: {{ engState }}</p> -->
+      <p class="sla-timer"></p>
+    </div>
+  </div>
+  <!-- <div class="job-cards-container">
+    <flx-sil-job-card
+      [itemTwo]="itemTwo"
+      [itemOne]="itemOne"
+      *ngFor="let itemTwo of itemOne.jobs"
+    >
+    </flx-sil-job-card>
+  </div> -->
+</div>

@@ -1,0 +1,53 @@
+import { actionTypes } from '../actions/variable.actions';
+
+
+const initialState = {}
+
+export function reducer(state = initialState, action) {
+    switch (action.type) {
+        case actionTypes.SET_VARIABLE: {
+            const {key, data} = action.payload;
+            return {
+                ...state,
+                [key]: data
+            };
+        }
+        case actionTypes.ADD_FILTER: {
+            const {key, filter} = action.payload;
+            return {
+                ...state,
+                [key]: {
+                    ...state[key],
+                    filterBy: {
+                        ...state[key].filterBy,
+                        ...filter
+                    }
+                }
+            };
+        }
+        case actionTypes.REMOVE_FILTER: {
+            const {key, filterKey} = action.payload;
+            const filterBy = state[key].filterBy;
+            delete filterBy[filterKey];
+            return {
+                ...state,
+                [key]: {
+                    ...state[key],
+                    filterBy
+                }
+            };
+        }
+        case actionTypes.RESET_FILTER: {
+            const {key} = action.payload;
+            return {
+                ...state,
+                [key]: {
+                    ...state[key],
+                    filterBy: {}
+                }
+            };
+        }
+        default:
+            return state;
+    }
+}

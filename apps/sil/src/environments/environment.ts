@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  bff_url: 'https://auto-medic-bff.azurewebsites.net',
 };
 
 /*
