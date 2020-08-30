@@ -8,6 +8,8 @@
     "nx": "nx",
     "start": "ng serve",
     "build": "ng build",
+    "docker:dev": "docker build -t nginx-angular -f nginx.dockerfile . && docker run -p 8080:80 -v $(pwd)/dist:/usr/share/nginx/html nginx-angular",
+    "docker:prod": "docker build -t nginx-angular -f nginx.prod.dockerfile .",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
     "e2e": "ng e2e",
