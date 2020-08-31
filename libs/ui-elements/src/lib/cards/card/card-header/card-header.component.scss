@@ -1,0 +1,38 @@
+/*     border-color: white;
+    border-width: thin;
+    border-style: solid; */
+
+.card-header {
+  padding-bottom: 0.2em;
+  border-bottom: 0.09em solid dimgray;
+  display: flex;
+}
+
+.card-header-vertical {
+  flex-direction: column;
+}
+.card-header-horizontal {
+  flex-direction: row;
+}
+
+.card-header-subtitle {
+  color: darkgray;
+  font-size: 0.9em;
+  padding: 0% 3% 0% 2%;
+}
+.card-header-title {
+  font-size: 1.2em;
+  color: whitesmoke;
+}
+/* no idea how to do the bellow honestly */
+.card-header-content {
+}
+.card-header-content-vertical {
+}
+.card-header-content-horizontal {
+  border-left: 0.09em solid dimgray;
+  flex-basis: 50%;
+  margin-left: 1em;
+  flex-shrink: 0;
+  /* float: right; */
+}

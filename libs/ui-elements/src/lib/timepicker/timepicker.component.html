@@ -1,0 +1,36 @@
+<form [formGroup]="formGroup" #timePicker>
+  <flx-input-text
+    class="timepicker__input"
+    type="time"
+    (click)="timePickerShow()"
+    placeholder="Select Time"
+    formControlName="formatted_time"
+    readonly="true"
+    [isDisabled]="isDisabled"
+    required
+    margin="0"
+  ></flx-input-text>
+
+  <div class="time-picker" *ngIf="autoOpen && !isDisabled">
+    <div class="time-card hour-card" id="listHour">
+      <div
+        class="tick"
+        *ngFor="let hour of hours"
+        [ngClass]="{ highlight: hour === selectedHour, disabled: isHourDisabled(hour) }"
+        (click)="pickHour(hour)"
+      >
+        {{ hour }}
+      </div>
+    </div>
+    <div class="time-card min-card">
+      <div
+        class="tick"
+        *ngFor="let minute of minutes"
+        [ngClass]="{ highlight: minute === selectedMinute }"
+        (click)="minPicker(minute)"
+      >
+        {{ minute }}
+      </div>
+    </div>
+  </div>
+</form>

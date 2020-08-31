@@ -1,0 +1,44 @@
+.flx-card-main {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.flx-card-standard {
+  background-color: var(--panel);
+}
+.flx-card-warn {
+  box-shadow: 0px 0px 3px 0px var(--warning);
+}
+.flx-card-danger {
+  box-shadow: 0px 0px 3px 0px var(--danger);
+}
+.flx-card-info {
+  box-shadow: 0px 0px 3px 0px var(--primary);
+}
+.flx-card-success {
+  box-shadow: 0px 0px 3px 0px var(--success);
+}
+
+.flx-card-part {
+  padding: 0.4rem;
+}
+
+.flx-card-expansion {
+  background-color: var(--dropdown-background);
+  position: relative;
+
+  &:before {
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    top: 0;
+    content: '';
+    background-image: linear-gradient(90deg, transparent, var(--linear-gradient-default-2), transparent);
+  }
+}
+
+.flx-card-footer,
+.flx-card-part {
+  background-color: var(--dropdown-background);
+}

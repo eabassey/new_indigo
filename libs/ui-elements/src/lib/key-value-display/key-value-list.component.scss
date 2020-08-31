@@ -1,0 +1,86 @@
+.key-value-list {
+  display: grid;
+  grid-gap: 0.5rem 0.8rem;
+  grid-template-columns: 1fr 1fr;
+  margin: 1rem;
+
+  &.key-value-list--align-default {
+    .key-value-list__row__left-col {
+      text-align: right;
+    }
+    .key-value-list__row__right-col {
+      text-align: left;
+    }
+  }
+
+  &.key-value-list--align-even {
+    .key-value-list__row__left-col {
+      text-align: center;
+    }
+
+    .key-value-list__row__right-col {
+      text-align: center;
+    }
+  }
+
+  &.key-value-list--align-ends {
+    .key-value-list__row__left-col {
+      text-align: left;
+    }
+    .key-value-list__row__right-col {
+      text-align: right;
+    }
+  }
+
+  &.key-value-list--align-left {
+    grid-template-columns: auto 1fr;
+    justify-content: left;
+
+    .key-value-list__row__left-col,
+    .key-value-list__row__right-col {
+      text-align: left;
+    }
+  }
+
+  &.key-value-list--size-extra-small {
+    font-size: 0.5rem;
+  }
+
+  &.key-value-list--size-small {
+    font-size: 0.8rem;
+  }
+
+  &.key-value-list--size-medium {
+    font-size: 1rem;
+  }
+
+  &.key-value-list--size-large {
+    font-size: 1.2rem;
+  }
+
+  &.key-value-list--color-default {
+    color: #a5a5a5;
+  }
+
+  &.key-value-list--color-secondary {
+    color: #d09100;
+  }
+
+  &.key-value-list--color-primary {
+    color: #2962ff;
+  }
+
+  &.key-value-list--text-default {
+    text-transform: capitalize;
+  }
+
+  &.key-value-list--text-none {
+    text-transform: none;
+  }
+}
+
+.key-value-list__row__right-col {
+  max-width: 35vw;
+  word-wrap: normal;
+  contain: content;
+}

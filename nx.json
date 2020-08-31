@@ -37,6 +37,18 @@
     },
     "templates": {
       "tags": []
+    },
+    "pipes": {
+      "tags": []
+    },
+    "directives": {
+      "tags": []
+    },
+    "ui-elements": {
+      "tags": []
+    },
+    "utilities": {
+      "tags": []
     }
   }
 }

@@ -1,0 +1,17 @@
+.content-wrapper {
+  display: flex;
+  /* flex-direction: column; */
+}
+
+.sidebar-container {
+  flex-grow: 1;
+  flex-direction: column;
+  color: #fafafa;
+  /* margin-top: 75px; */
+}
+
+.content-container {
+  flex-grow: 4;
+  color: #fafafa;
+  /* margin-left: 30px; */
+}

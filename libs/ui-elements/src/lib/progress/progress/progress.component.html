@@ -1,0 +1,18 @@
+<div class="er-progress-container" [ngClass]="[modeClass]">
+  <div
+    *ngIf="isMetricRequired"
+    style="text-align: center; z-index: 10; height: 100%; padding-top: 2px; position: absolute; width:100%; margin:auto; font-size: .75rem; vertical-align: center"
+    id="progress"
+  >
+    {{ width + max + unit }}
+  </div>
+  <div class="er-progress-bar" [ngStyle]="{ width: width + '%' }" [ngClass]="[progressClass]">
+    <!-- <div class="er-progress-bar" [ngStyle]="{'width':width+'%'}" [ngClass]="[progressClass]"> -->
+  </div>
+</div>
+
+<!--
+*ngIf="isPercentage"
+
+
+ -->

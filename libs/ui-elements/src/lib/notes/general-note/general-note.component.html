@@ -1,0 +1,18 @@
+<div
+  class="general-note-container"
+  [ngClass]="locationClass"
+  [ngStyle]="{
+    'background-color': currentUser === note.safe_name ? 'var(--modal)' : 'var(--border-color)'
+  }"
+>
+  <div class="general-note-header">
+    <p class="general-note-author meta-data">{{ note?.safe_name }}</p>
+    <p class="general-note-contact meta-data">{{ note?.author_contact }}</p>
+    <p class="general-note-company meta-data" *ngIf="note?.author_company?.length > 1">
+      from {{ note?.author_company }}
+    </p>
+    <p class="general-note-roles meta-data" *ngIf="note?.author_roles">({{ getRoles(note?.author_roles) }})</p>
+    <p class="general-note-timestamp meta-data">{{ note?.timestamp | date: 'medium' }}</p>
+  </div>
+  <div class="general-note-body">{{ note?.message }}</div>
+</div>

@@ -3,7 +3,7 @@
     class="claim-card"
     (click)="takeClaimAction()"
   >
-    <!-- <div class="indicator"><flx-indicator></flx-indicator></div> -->
+    <div class="indicator"><flx-indicator></flx-indicator></div>
     <div class="claim-card-icons">
       <div class="context-menu-container">
         <div class="action">
@@ -11,29 +11,50 @@
         </div>
       </div>
       <div class="indicator-icons">
-
+        <!-- CAT indicator -->
+        <div class="action" *ngIf="itemOne && itemOne?.cat_code && itemOne?.cat_code != null">
+          <flx-icon size="small" type="storms" instruction="Catastrophe" color="indicator" isClickable="false">
+          </flx-icon>
+        </div>
+        <!-- Private Client indicator -->
+        <div class="action" *ngIf="itemOne && itemOne.private_banking !== null && itemOne.private_banking === 1">
+          <flx-icon class="pc" instruction="Private Banking Client" type="private-client" color="indicator"></flx-icon>
+          <!-- <flx-icon size="extra-small" instruction="Private Banking Client" type="star" color="indicator"></flx-icon> -->
+        </div>
+        <!-- Notes indicator -->
+        <div class="action" *ngIf="itemOne && itemOne.note_count !== null && itemOne.note_count > 0">
+          <!-- <flx-icon
+            size="small"
+            [instruction]="itemOne.note_count > 1 ? itemOne.note_count + ' notes' : itemOne.note_count + ' note'"
+            type="notes"
+            (click)="selectMenuItem(itemOne, { key: 'SIL_CONTEXT_MENU_NOTES' })"
+          ></flx-icon>
+        </div> -->
+        <!-- <div class="action" *ngIf="itemOne && itemOne.cat_code && itemOne.cat_code != null">
+          <flx-icon size="default" instruction="Private Client" type="star" color="indicator" isClickable="false"></flx-icon>
+        </div> -->
 
       </div>
     </div>
     <div class="claim-info">
       <p class="claim-number">
         <small>{{itemOne?.title}}</small>
-        <!-- <small *ngIf="engClaimType" class="claim-type">{{ engClaimType }}</small> -->
+        <small *ngIf="engClaimType" class="claim-type">{{ engClaimType }}</small>
         <span class="hv-copy">&nbsp;{{ itemOne?.mid }}</span>
       </p>
       <p class="claimant">
         {{ itemOne.applicant?.first_name + ' ' + itemOne.applicant?.surname || 'No Client Name Captured' }}
       </p>
-      <!-- <p *ngIf="engState" class="claim-state">{{ itemOne.state }}: {{ engState }}</p> -->
+      <p *ngIf="engState" class="claim-state">{{ itemOne?.state }}: {{ engState }}</p>
       <p class="sla-timer"></p>
     </div>
   </div>
-  <!-- <div class="job-cards-container">
+  <div class="job-cards-container">
     <flx-sil-job-card
       [itemTwo]="itemTwo"
       [itemOne]="itemOne"
       *ngFor="let itemTwo of itemOne.jobs"
     >
     </flx-sil-job-card>
-  </div> -->
+  </div>
 </div>

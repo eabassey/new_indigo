@@ -1,0 +1,22 @@
+.glow-line {
+  height: 1px;
+  margin: 0 auto;
+  &.glow-line-default {
+    background: linear-gradient(90deg, transparent, var(--linear-gradient-default-2), transparent);
+  }
+  &.glow-line-primary {
+    background: linear-gradient(90deg, transparent, var(--linear-gradient-primary), transparent);
+  }
+  &.glow-line-primary-light {
+    background: linear-gradient(90deg, transparent, var(--linear-gradient-primary-light), transparent);
+  }
+  &.glow-line-secondary {
+    background: linear-gradient(90deg, transparent, var(--linear-gradient-secondary), transparent);
+  }
+  &.glow-line-secondary-light {
+    background: linear-gradient(90deg, transparent, var(--linear-gradient-secondary-light), transparent);
+  }
+  &.glow-line-danger {
+    background: linear-gradient(90deg, transparent, var(--linear-gradient-danger), transparent);
+  }
+}

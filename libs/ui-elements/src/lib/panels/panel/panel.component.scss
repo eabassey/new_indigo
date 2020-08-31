@@ -1,0 +1,45 @@
+:host {
+  width: 100%;
+  padding-bottom: 4rem;
+}
+section {
+  box-sizing: border-box;
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-bottom: 4rem;
+
+  &.has-bg {
+    background-color: var(--panel);
+  }
+}
+
+@media screen and (max-width: 991px) {
+  /* start of large tabled styles */
+}
+
+@media screen and (max-width: 767px) {
+  /* start of medium tablet styles */
+}
+
+.flx-ui-panel-default {
+  padding: 3rem;
+}
+
+.flx-ui-panel-cozy {
+  padding: 1.5rem;
+}
+
+.flx-ui-panel-compact {
+  padding: 0.5rem;
+}
+
+.shadow {
+  // box-shadow: 3px 3px 8px 2px #111;
+}
+
+.no-shadow {
+  box-shadow: none;
+}

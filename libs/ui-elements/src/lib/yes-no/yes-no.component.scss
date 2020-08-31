@@ -1,0 +1,155 @@
+:root {
+  --label-side-padding: calc(33% / 7);
+  --body-cell-content-margin: 8%;
+  --body-cell-content-size: calc(100% - var(--body-cell-content-margin) * 2);
+}
+
+.yesNoSelector {
+  overflow: auto;
+  text-align: center;
+  padding: 1rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.yesButton,
+.noButton {
+  top: var(--body-cell-content-margin);
+  left: var(--body-cell-content-margin);
+  background-color: var(--date-picker-cell);
+  box-shadow: 0 0 1px var(--date-picker-cell);
+  color: var(--button-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 2rem;
+  height: 2rem;
+  outline: none;
+  margin: 2px;
+  border-radius: var(--radius);
+  position: relative;
+
+  line-height: 1;
+
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--date-picker-cell);
+
+  transition: all 350ms ease-in-out;
+
+  &:hover {
+    border: 1px solid var(--button-shadow);
+    box-shadow: 0 0 6px var(--button-shadow);
+
+    &::before {
+      background: linear-gradient(90deg, transparent, var(--linear-gradient-button-default), transparent);
+    }
+    &::after {
+      background: linear-gradient(90deg, transparent, var(--linear-gradient-button-default), transparent);
+    }
+  }
+}
+
+.yesButton {
+  color: var(--success);
+  box-shadow: 0 0 2px var(--success);
+  position: relative;
+
+  &:hover {
+    border: 1px solid var(--success);
+    box-shadow: 0 0 6px var(--success);
+  }
+
+  &.selected {
+    background-color: var(--button-background-success);
+    border: 1px solid var(--success);
+    box-shadow: 0 0 6px var(--success);
+    color: var(--button-text-success);
+    &:hover {
+      border: 1px solid var(--success);
+      box-shadow: 0 0 6px var(--success);
+    }
+    &::before {
+      background: linear-gradient(90deg, transparent, var(--linear-gradient-success), transparent);
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 80%;
+      bottom: 0;
+      height: 1px;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+      z-index: 4;
+    }
+
+    &::after {
+      background: linear-gradient(90deg, transparent, var(--linear-gradient-success), transparent);
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 80%;
+      top: 0;
+      height: 1px;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+      z-index: 4;
+    }
+  }
+}
+
+.noButton {
+  color: var(--alert);
+  box-shadow: 0 0 2px var(--alert);
+  position: relative;
+
+  &:hover {
+    border: 1px solid var(--alert);
+    box-shadow: 0 0 6px var(--alert);
+  }
+
+  &.selected {
+    background-color: var(--button-background-alert);
+    border: 1px solid var(--alert);
+    box-shadow: 0 0 6px var(--alert);
+    color: var(--button-text-alert);
+    &:hover {
+      border: 1px solid var(--alert);
+      box-shadow: 0 0 6px var(--alert);
+    }
+    &::before {
+      background: linear-gradient(90deg, transparent, var(--linear-gradient-alert), transparent);
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 80%;
+      bottom: 0;
+      height: 1px;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+      z-index: 4;
+    }
+
+    &::after {
+      background: linear-gradient(90deg, transparent, var(--linear-gradient-alert), transparent);
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 80%;
+      top: 0;
+      height: 1px;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+      z-index: 4;
+    }
+  }
+}
+
+.selected {
+  cursor: default;
+  position: relative;
+}

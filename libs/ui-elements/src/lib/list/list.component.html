@@ -1,0 +1,25 @@
+<flx-flex-container>
+  <div class="list-container">
+    <!-- {{ ItemList }} -->
+    <ng-container *ngFor="let entryList of ItemList; let itemListIdx = index">
+      <div *ngIf="itemListIdx > 0; else firstList" class="list-entry-container">
+        <ng-container *ngFor="let entry of entryList; let entryListIdx = index">
+          <span *ngIf="entryListIdx > 0; else firstEntry" class="list-entry">{{ entry }}</span>
+          <ng-template #firstEntry>
+            <span [ngClass]="rowHeadingClasses" class="list-entry">{{ entry }} </span>
+          </ng-template>
+        </ng-container>
+      </div>
+      <ng-template #firstList>
+        <div class="list-entry-container">
+          <ng-container *ngFor="let entry of entryList; let entryListIdx = index">
+            <span [ngClass]="columnHeadingClasses" *ngIf="entryListIdx > 0; else firstEntry" class="list-entry">{{ entry }}</span>
+            <ng-template #firstEntry>
+              <span [ngClass]="rowHeadingClasses" class="list-entry"> {{ entry }}</span>
+            </ng-template>
+          </ng-container>
+        </div>
+      </ng-template>
+    </ng-container>
+  </div>
+</flx-flex-container>

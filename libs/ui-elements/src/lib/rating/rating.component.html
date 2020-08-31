@@ -1,0 +1,10 @@
+<div class="ratingSelector">
+  <button
+    *ngFor="let rating of ratings; index as i"
+    class="ratingButton"
+    [ngClass]="{ fa: rating === value, fa1: rating !== value }"
+    (click)="setValue(i + 1)"
+  >
+    {{ rating }}
+  </button>
+</div>

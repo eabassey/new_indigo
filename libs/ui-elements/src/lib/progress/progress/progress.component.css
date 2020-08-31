@@ -1,0 +1,32 @@
+.flx-progress-container {
+  width: 98%;
+  height: 15px;
+  background-color: #3c3c3c;
+  border-radius: 3px;
+  border: solid 1px rgb(64, 232, 227);
+  box-shadow: 1px 1px 3px 1px rgb(15, 15, 15) inset;
+  position: relative;
+}
+.flx-progress-container-thin {
+  width: 98%;
+  height: 3px;
+  border: none;
+  background-color: black;
+}
+.flx-progress-bar {
+  /* width: 12%; */
+  height: 13px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  box-shadow: 1px 1px 3px 1px rgb(15, 15, 15) inset;
+  background-image: linear-gradient(rgb(54, 91, 90), rgb(64, 232, 227), rgb(54, 91, 90));
+  transition: all 0.25s ease;
+  position: absolute;
+}
+.flx-progress-bar-thin {
+  /* width: 12%; */
+  height: 3px;
+  background-image: none;
+  background-color: rgb(64, 232, 227);
+  transition: all 0.25s ease;
+}

@@ -1,0 +1,115 @@
+///// COLORS
+
+.indicator {
+  .indicator-svg {
+    height: 36px;
+    width: 6px;
+  }
+}
+
+.indicator-color-blue {
+  .indicator-svg {
+    fill: var(--colour-1);
+    stroke: var(--colour-1-dark);
+  }
+  svg {
+    -webkit-filter: drop-shadow(0 0 10px var(--colour-1-glow));
+    filter: drop-shadow(0 0 10px var(--colour-1-glow));
+  }
+}
+
+.indicator-color-green {
+  .indicator-svg {
+    fill: var(--colour-2);
+    stroke: var(--colour-2-dark);
+  }
+  svg {
+    -webkit-filter: drop-shadow(0 0 10px var(--colour-2-glow));
+    filter: drop-shadow(0 0 10px var(--colour-2-glow));
+  }
+}
+
+.indicator-color-orange {
+  .indicator-svg {
+    fill: var(--colour-6);
+    stroke: var(--colour-6-dark);
+  }
+  svg {
+    -webkit-filter: drop-shadow(0 0 10px var(--colour-6-glow));
+    filter: drop-shadow(0 0 10px var(--colour-6-glow));
+  }
+}
+
+.indicator-color-purple {
+  .indicator-svg {
+    fill: var(--colour-4);
+    stroke: var(--colour-4-dark);
+  }
+  svg {
+    -webkit-filter: drop-shadow(0 0 10px var(--colour-4-glow));
+    filter: drop-shadow(0 0 10px var(--colour-4-glow));
+  }
+}
+
+.indicator-color-pink {
+  .indicator-svg {
+    fill: var(--colour-3);
+    stroke: var(--colour-3-dark);
+  }
+  svg {
+    -webkit-filter: drop-shadow(0 0 10px var(--colour-3-glow));
+    filter: drop-shadow(0 0 10px var(--colour-3-glow));
+  }
+}
+
+.indicator-color-red {
+  .indicator-svg {
+    fill: var(--colour-7);
+    stroke: var(--colour-7-dark);
+  }
+  svg {
+    -webkit-filter: drop-shadow(0 0 10px var(--colour-7-glow));
+    filter: drop-shadow(0 0 10px var(--colour-7-glow));
+  }
+}
+
+.indicator-color-yellow {
+  .indicator-svg {
+    fill: var(--colour-5);
+    stroke: var(--colour-5-dark);
+  }
+  svg {
+    -webkit-filter: drop-shadow(0 0 10px var(--colour-5-glow));
+    filter: drop-shadow(0 0 10px var(--colour-5-glow));
+  }
+}
+
+.indicator-color-grey {
+  .indicator-svg {
+    fill: var(--colour-8);
+    stroke: var(--colour-8-dark);
+  }
+}
+
+///// POSITION
+
+.indicator-position-right {
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+///// SIZE
+
+.indicator-size-default {
+  .indicator-svg {
+    height: 36px;
+    width: 6px;
+  }
+}
+
+.indicator-size-small {
+  .indicator-svg {
+    height: 36px;
+    width: 5px;
+  }
+}

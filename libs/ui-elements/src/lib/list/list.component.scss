@@ -1,0 +1,28 @@
+.list-container {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: stretch;
+  line-height: 1.2;
+  color: var(--text-primary);
+  // justify-content: space-around;
+  // border: 1px solid rgba(146, 146, 146, 0.445);
+  // border-radius: 1px;
+}
+.list-entry-container {
+  display: flex;
+  flex-flow: row nowrap;
+  padding: 0.5em;
+  margin: 0.1em;
+  // background-color: rgba(146, 146, 146, 0.445);
+  // box-shadow: none;
+}
+.list-container :hover {
+  // box-shadow: 0 0 5px rgba(177, 177, 177, 0.8);
+}
+.list-entry {
+  box-shadow: none;
+  flex-grow: 1;
+}
+.bold {
+  font-weight: bold;
+}

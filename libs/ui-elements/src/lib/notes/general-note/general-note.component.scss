@@ -1,0 +1,56 @@
+.general-note-container {
+  background-color: var(--modal);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.compact {
+  .general-note-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    p {
+      margin: 0.2rem;
+    }
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+
+    .general-note-author {
+      color: var(--heading-secondary);
+      font-size: 12px;
+      padding-bottom: 0.5rem;
+    }
+  }
+  .general-note-body {
+    margin: 0.4rem;
+    font-size: 14px;
+  }
+}
+
+.scattered {
+  .general-note-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    p {
+      margin: 0.2rem;
+    }
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+
+    .general-note-author {
+      color: var(--heading-secondary);
+      font-size: 12px;
+      padding-bottom: 0.5rem;
+    }
+  }
+}
+
+.meta-data {
+  font-size: 10px;
+}

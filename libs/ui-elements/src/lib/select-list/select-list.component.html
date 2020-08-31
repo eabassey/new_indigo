@@ -1,0 +1,33 @@
+<div class="flex-container">
+  <div class="filtered-select-form" [style.width]="maxWidth">
+    <flx-heading *ngIf="heading" size="medium" align="center">{{ heading }}</flx-heading>
+    <flx-heading *ngIf="subheading" size="extra-small" align="center">{{ subheading }}</flx-heading>
+
+    <form [formGroup]="FilterForm">
+      <div class="filtered-select-input" *ngIf="canFilter && !isCollapsed">
+        <flx-input-text size="large" formControlName="searchField" type="search" placeholder="Type to filter" #txtname>
+        </flx-input-text>
+      </div>
+    </form>
+    <div
+      class="button-select-list"
+      [style.maxHeight]="height"
+      [class.condenseSelection]="isCollapsed && collapseOnSelect"
+    >
+      <flx-glow-line></flx-glow-line>
+      <div class="select-options" [style.maxHeight]="height" #scrollContent>
+        <div
+          *ngFor="let item of (displayList | async)"
+          (click)="selectOption(item)"
+          [class.selected]="selectedOptions.has(item.value)"
+          class="select-carousel-options"
+        >
+          <div class="select-list-row" [id]="item.value">
+            <div>{{ item.display }}</div>
+          </div>
+        </div>
+      </div>
+      <flx-glow-line></flx-glow-line>
+    </div>
+  </div>
+</div>

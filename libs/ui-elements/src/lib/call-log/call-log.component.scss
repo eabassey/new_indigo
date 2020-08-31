@@ -1,0 +1,82 @@
+.call-log-container {
+  background-color: var(--modal);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.compact {
+  padding: 0.5rem;
+
+  &:hover {
+    cursor: pointer;
+
+    .show-auth {
+      color: var(--primary);
+    }
+  }
+
+  .call-log-header {
+    display: flex;
+    // flex-direction: column;
+    justify-content: space-between;
+
+    p {
+      margin: 0.2rem;
+    }
+
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+
+    .call-log-details {
+      color: var(--heading-secondary);
+      font-size: 12px;
+      padding-bottom: 0.5rem;
+    }
+  }
+
+  .call-log-body {
+    margin: 0.4rem;
+    font-size: 14px;
+  }
+
+  .compact-extra-info {
+    margin-bottom: 0.5rem;
+    margin-left: 0.2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .show-auth {
+    font-size: 10px;
+
+    // &:hover {
+    //   color: var(--primary);
+    // }
+  }
+}
+
+.scattered {
+  .call-log-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    p {
+      margin: 0.2rem;
+    }
+
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+
+    .call-log-details {
+      color: var(--heading-secondary);
+      font-size: 12px;
+      padding-bottom: 0.5rem;
+    }
+  }
+}
+
+.meta-data {
+  font-size: 10px;
+}

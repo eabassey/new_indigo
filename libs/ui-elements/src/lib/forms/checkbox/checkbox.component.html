@@ -1,0 +1,5 @@
+<label class="container" [ngStyle]="{ padding: padding, margin: margin }">
+  <ng-content></ng-content>
+  <input type="checkbox" [ngModel]="checked" (ngModelChange)="onChange($event)" [disabled]="disabled" [id]="id" [ngClass]="arrClasses" />
+  <span class="checkmark"></span>
+</label>

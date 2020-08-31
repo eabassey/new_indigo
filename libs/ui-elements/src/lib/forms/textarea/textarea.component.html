@@ -1,0 +1,19 @@
+<div [ngStyle]="styles">
+  <textarea
+    #inputElement
+    [defaultValue]="defaultValue"
+    [attr.placeholder]="placeholder"
+    [attr.wrap]="wrap"
+    [attr.name]="name"
+    [attr.cols]="cols"
+    [attr.rows]="rows"
+    [attr.autofocus]="autofocus"
+    [attr.disabled]="disabled"
+    [attr.readonly]="readonly"
+    [attr.maxLength]="maxLength"
+    [attr.id]="id"
+    (input)="handleChanges()"
+    (focus)="this.inFocus = true"
+    (blur)="this.inFocus = false"
+  ></textarea>
+</div>

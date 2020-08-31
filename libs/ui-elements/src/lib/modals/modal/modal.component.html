@@ -1,0 +1,25 @@
+<ng-template cdk-portal #overlayTemplate="cdkPortal">
+  <div class="flx-modal" [ngClass]="arrClasses" #modalHeader>
+    <div class="flx-modal-heading" *ngIf="displayHeading">
+      <flx-heading size="large" [color]="color" align="center">{{ heading | fsProperEnglish }}</flx-heading>
+      <flx-heading *ngIf="subheading" [color]="color" size="small" align="center">{{ subheading }}</flx-heading>
+    </div>
+
+    <div class="flx-modal-body">
+      <div [className]="type">
+        <div>{{ message }}</div>
+        <div id="modal-content-output" #modalContent><ng-content></ng-content></div>
+      </div>
+    </div>
+    <ng-container *ngIf="navButtons !== null">
+      <div class="flx-modal-footer-one">
+        <ng-container *ngFor="let button of navButtons">
+          <flx-button [color]="button.color" (click)="takeButtonAction(button)">{{ button.text }}</flx-button>
+        </ng-container>
+      </div>
+    </ng-container>
+    <div class="flx-modal-footer">
+      <flx-button color="alert" *ngIf="closeButton === true" (click)="close()">Close</flx-button>
+    </div>
+  </div>
+</ng-template>

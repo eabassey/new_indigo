@@ -9,17 +9,18 @@ import { SilClaimCardComponent } from './main-list/sil-claim-card/sil-claim-card
 import { SilJobCardComponent } from './main-list/sil-job-card/sil-job-card.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { RouterModule } from '@angular/router';
+import {UIElementsModule} from '@indigo/ui-elements';
 
 
 const components = [
-    Node1Component, 
-    Node2Component, 
+    Node1Component,
+    Node2Component,
     FormRendererComponent,
     MainListComponent
 ];
 @NgModule({
     declarations: [...components, SilClaimCardComponent, SilJobCardComponent],
     exports: [...components],
-    imports: [CommonModule,  RouterModule, ReactiveFormsModule, NgxPaginationModule]
+    imports: [CommonModule, UIElementsModule.forRoot({environment: ''}),  RouterModule, ReactiveFormsModule, NgxPaginationModule]
 })
 export class TemplatesModule {}

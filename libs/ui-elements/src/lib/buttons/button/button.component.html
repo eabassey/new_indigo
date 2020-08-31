@@ -1,0 +1,16 @@
+<button
+  class="button"
+  [disabled]="disabled || (isLoading$ | async)"
+  [ngClass]="arrClasses"
+  [ngStyle]="{
+    'max-width.px': maxWidth,
+    'text-align': align,
+    margin: margin,
+    'text-transform': allCaps ? 'uppercase' : 'capitalize'
+  }"
+  [tabindex]="tabIndex"
+  (click)="clicked.next()"
+>
+  <span *ngIf="title">{{ title }}</span>
+  <ng-content></ng-content>
+</button>

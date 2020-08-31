@@ -1,0 +1,48 @@
+.flx-alert {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0.4rem;
+  color: var(--text-primary);
+  justify-content: center;
+}
+
+.flx-alert-primary {
+  color: var(--primary);
+  .alert-icon {
+    fill: var(--primary);
+  }
+}
+
+.flx-alert-secondary {
+  color: var(--secondary);
+  .alert-icon {
+    fill: var(--secondary);
+  }
+}
+
+.flx-alert-success {
+  color: var(--success);
+  .alert-icon {
+    fill: var(--success);
+  }
+}
+
+.flx-alert-danger {
+  color: var(--danger);
+  .alert-icon {
+    fill: var(--danger);
+  }
+}
+
+.flx-alert-warning {
+  color: var(--warning);
+  .alert-icon {
+    fill: var(--warning);
+  }
+}
+
+p {
+  margin: 0.8rem;
+  font-size: 0.8rem;
+}

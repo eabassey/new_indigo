@@ -1,0 +1,79 @@
+.flx-modal {
+  z-index: 15;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  min-width: 400px;
+  max-width: 70vw;
+  text-align: center;
+  background: var(--panel);
+  color: var(--text-primary);
+  border-radius: var(--radius);
+}
+
+/* ===================================================== Modal Types ===================================================== */
+.modal--colour-warning {
+  color: var(--alert);
+
+  border: 1px solid var(--modal-border-alert);
+  box-shadow: 0 var(--modal-x-shadow) var(--modal-blur-shadow) var(--modal-shadow-alert);
+}
+
+.modal--colour-infomation {
+  color: var(--primary);
+
+  border: 1px solid var(--modal-border-info);
+  box-shadow: 0 var(--modal-x-shadow) var(--modal-blur-shadow) var(--modal-shadow-info);
+}
+
+.modal--colour-danger {
+  color: var(--danger);
+
+  border: 1px solid var(--modal-border-danger);
+  box-shadow: 0 var(--modal-x-shadow) var(--modal-blur-shadow) var(--modal-shadow-danger);
+}
+
+.default {
+  border: none;
+  padding: 20px;
+}
+
+.info {
+  border: none;
+  padding: 16px;
+  border-radius: 1em;
+  min-height: 152px;
+}
+
+.warning {
+  border: none;
+  border-radius: 1em;
+  min-height: 152px;
+}
+
+/* ===================================================== General Styles ===================================================== */
+.flx-modal-heading {
+  text-align: center;
+  display: inline;
+}
+
+.flx-modal-footer-one {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 1rem;
+  vertical-align: bottom;
+}
+
+.flx-modal-body {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  color: var(--text-primary);
+}
+
+#modal-content-output {
+  margin: 1rem;
+}

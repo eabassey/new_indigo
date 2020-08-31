@@ -1,0 +1,10 @@
+div {
+  margin-bottom: 0.5rem;
+}
+
+.form-input-hint {
+  &.has-error {
+    color: var(--alert);
+    font-size: 0.7rem;
+  }
+}

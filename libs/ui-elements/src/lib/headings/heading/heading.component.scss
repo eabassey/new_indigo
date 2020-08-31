@@ -1,0 +1,104 @@
+span {
+  display: block;
+  color: var(--heading-primary);
+}
+
+.heading--size-extra-small {
+  font-size: 0.875rem;
+}
+
+.heading--size-small {
+  font-size: 1rem;
+}
+
+.heading--size-medium {
+  font-size: 1.25rem;
+}
+
+.heading--size-large {
+  font-size: 1.5rem;
+}
+
+.heading--size-extra-large {
+  font-size: 2em;
+}
+
+.heading--color-default {
+  color: var(--heading-primary);
+}
+
+.heading--color-scratch {
+  color: var(--scratch-text);
+}
+
+.heading--color-primary {
+  color: var(--primary);
+}
+
+.heading--color-secondary {
+  color: var(--heading-secondary);
+}
+
+.heading--color-subheading {
+  color: var(--heading-sub);
+}
+
+.heading--color-alert {
+  color: var(--alert);
+}
+
+.heading--color-success {
+  color: var(--success);
+}
+
+.heading--color-danger {
+  color: var(--danger);
+}
+
+.heading--weight-extra-light {
+  font-weight: 100;
+}
+
+.heading--weight-light {
+  font-weight: 300;
+}
+
+.heading--weight-normal {
+  font-weight: 400;
+}
+
+.heading--weight-bold {
+  font-weight: 700;
+}
+
+.heading--type-page {
+  margin: 1rem 0 1rem 0;
+}
+
+.heading--type-form {
+  margin: 1rem 0 0 0;
+}
+
+.heading--type-creation {
+  margin: 2rem 0 0.5rem 0;
+}
+
+.heading--type-paragraph {
+  margin: 0.4rem 0 0 0;
+}
+
+.heading--type-no-margin {
+  margin: 0;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.align-right {
+  text-align: right;
+}

@@ -1,0 +1,22 @@
+<div class="call-log-container" [ngClass]="locationClass" (click)="toggleOpen()">
+  <div class="call-log-header">
+    <p class="call-log-details meta-data">{{ callLog?.direction }} - {{ callLog?.reason }} - {{ log?.channel }}</p>
+    <ng-container *ngIf="!isCompact">
+      <p class="call-log-author meta-data">{{ callLog?.authorDetails?.name }}</p>
+      <p class="call-log-contact meta-data">{{ callLog?.authorDetails?.contact_number }}</p>
+      <p class="call-log-email meta-data">{{ callLog?.authorDetails?.email }}</p>
+    </ng-container>
+    <p class="call-log-timestamp meta-data">{{ log?.date }} {{ log?.time }}</p>
+  </div>
+  <ng-container *ngIf="isCompact">
+    <div class="compact-extra-info">
+      <p class="show-auth" *ngIf="!isVisible">Show Author Details</p>
+      <ng-container *ngIf="isVisible">
+        <p class="call-log-author meta-data">{{ callLog?.authorDetails?.name }}</p>
+        <p class="call-log-contact meta-data">{{ callLog?.authorDetails?.contact_number }}</p>
+        <p class="call-log-email meta-data">{{ callLog?.authorDetails?.email }}</p>
+      </ng-container>
+    </div>
+  </ng-container>
+  <div class="call-log-body">{{ callLog?.message }}</div>
+</div>

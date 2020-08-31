@@ -1,0 +1,32 @@
+.svg-button-container {
+  position: relative;
+  border: 1px solid #777777;
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  position: relative;
+  box-shadow: inset 0 0 10px #000000;
+  background: #161616;
+  /* box-shadow: 0 0 8px 0 #40e8e3; */
+}
+
+.svg-button-container:hover {
+  box-shadow: 0 0 8px 0 #40e8e3;
+  cursor: pointer;
+}
+
+.svg-button-icon {
+  position: absolute;
+  bottom: 40%;
+  width: 100%;
+  text-align: center;
+}
+
+.svg-button-text {
+  position: absolute;
+  bottom: 1em;
+  text-align: center;
+  width: 100%;
+}

@@ -1,0 +1,7 @@
+<div class="accordion">
+  <button [ngClass]="arrClasses" class="button" (click)="clicked.next()">
+    <ng-content></ng-content>
+    <i class="arrows"><flx-icon size="small" [color]="iconColor" [type]="arrow"></flx-icon></i>
+    <span *ngIf="title">{{ title }}</span>
+  </button>
+</div>

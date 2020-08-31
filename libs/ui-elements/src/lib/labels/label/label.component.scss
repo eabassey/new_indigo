@@ -1,0 +1,25 @@
+label {
+  display: inline-flex;
+  margin-bottom: 0.2rem;
+}
+.small {
+  font-size: 0.75rem;
+}
+.medium {
+  font-size: 0.85rem;
+}
+.large {
+  font-size: 1.3rem;
+}
+.info {
+  color: var(--primary);
+}
+.warning {
+  color: var(--warning);
+}
+.danger {
+  color: var(--danger);
+}
+.success {
+  color: var(--success);
+}

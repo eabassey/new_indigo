@@ -1,0 +1,5 @@
+<div *ngIf="!!this.options" class="toggle-container" [ngClass]="containerClass">
+  <div class="toggle-option" *ngFor="let option of options" (click)="handleClick(option)" [ngClass]="{ selected: option === selectedOption }">
+    {{ option }}
+  </div>
+</div>

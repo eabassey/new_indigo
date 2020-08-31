@@ -1,0 +1,8 @@
+<div class="entity-card">
+  <div class="entity-card__column" *ngFor="let col of data$?.columns">
+    <div class="entity-card__column__title">{{ col.title }}</div>
+    <div class="entity-card__column__sub-title">{{ col.subTitle }}</div>
+    <div class="entity-card__column__description">{{ col.description }}</div>
+  </div>
+  <div class="indicator"><flx-indicator [color]="getIndicatorColor(this.data$?.cardStateInfo?.state)" position="right"></flx-indicator></div>
+</div>

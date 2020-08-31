@@ -1,0 +1,9 @@
+<div class="loading-container">
+  <div class="flx-loader">
+    <!-- <flx-loading-spinner *ngIf="isFullScreen; else inlineLoader"></flx-loading-spinner> -->
+    <!-- <ng-template #inlineLoader><flx-loading-spinner-inline></flx-loading-spinner-inline></ng-template> -->
+    <ng-container #inlineLoader><flx-loading-spinner-inline></flx-loading-spinner-inline></ng-container>
+  </div>
+  <div *ngIf="showText && isFullScreen" class="loading-text">{{ loadingMessage }}<span #loadingDots></span></div>
+</div>
+<div class="flx-loader-background" *ngIf="!disableBackground" [ngClass]="{ 'full-screen': isFullScreen }"></div>

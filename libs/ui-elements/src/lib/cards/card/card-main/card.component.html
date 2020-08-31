@@ -1,0 +1,20 @@
+<div [ngClass]="mainCardClass" (click)="handleClick(cardClickLocation.main)">
+  <div class="flx-card-header flx-card-part" (click)="handleClick(cardClickLocation.header)"><ng-content select="flx-card-header"></ng-content></div>
+  <div>
+    <div class="flx-card-body flx-card-part" (click)="handleClick(cardClickLocation.body)"><ng-content select="flx-card-body"></ng-content></div>
+    <!-- <ng-container > -->
+    <div
+      *ngIf="expanded === true"
+      class="flx-card-expansion flx-card-part"
+      [ngClass]="{
+        'flx-card-bellow-body': config.expansionLocation === 'after-body',
+        'flx-card-above-body': config.expansionLocation === 'before-body'
+      }"
+      (click)="handleClick(cardClickLocation.expansion)"
+    >
+      <ng-content select="flx-card-expansion"></ng-content>
+    </div>
+  </div>
+  <!-- </ng-container> -->
+  <div class="flx-card-footer flx-card-part" (click)="handleClick(cardClickLocation.footer)"><ng-content select="flx-card-footer"></ng-content></div>
+</div>

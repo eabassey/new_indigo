@@ -8,8 +8,8 @@ import { Store } from '@ngrx/store';
 //   SetFilterSet,
 //   ResetServerSearch,
 //   getFilterData
-// } from '@flexus/ui-composites/src';
-// import { BigFormService, getAllInfo } from '@flexus/engine/src';
+// } from '@indigo/ui-composites/src';
+// import { BigFormService, getAllInfo } from '@indigo/engine/src';
 import { map, take, skipWhile, withLatestFrom } from 'rxjs/operators';
 
 @Component({
@@ -27,7 +27,7 @@ export class FLXSearchBannerComponent implements OnInit, OnDestroy {
   public searchData: { inSearch: string; filters: any[] } = { inSearch: '', filters: [] };
 
   // ============================== constructor ==============================
-  constructor(private _store: Store<any>, 
+  constructor(private _store: Store<any>,
     // private _bf: BigFormService,
      private _cdr: ChangeDetectorRef) {}
 

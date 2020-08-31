@@ -1,0 +1,156 @@
+.flex-container {
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem auto 0 auto;
+  height: 100%;
+}
+
+.filtered-select-form {
+  width: 100%;
+}
+
+.select-options {
+  border-radius: 4px;
+}
+
+@mixin fadient() {
+  position: relative;
+  transition: 0.2s ease-in-out background-image;
+
+  &:before {
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    top: 0;
+    z-index: 3;
+    content: '';
+    background-image: linear-gradient(90deg, transparent, var(--linear-gradient-default-2), transparent);
+  }
+
+  &:after {
+    width: 100%;
+    height: 1px;
+    z-index: 3;
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    bottom: 0;
+    content: '';
+    background-image: linear-gradient(90deg, transparent, var(--linear-gradient-default-2), transparent);
+  }
+}
+
+.select-carousel-options {
+  margin: 5px 4px;
+  transition: all 0.2s ease-in-out;
+  background: var(--input-background);
+  color: var(--input-text);
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 4px;
+  text-transform: capitalize;
+}
+
+.select-carousel-options:hover {
+  background: var(--input-background-active);
+  color: var(--text-primary-active);
+  cursor: pointer;
+  @include fadient;
+}
+
+.button-select-list {
+  border-radius: 4px;
+  position: relative;
+  margin: 1em auto;
+  transition: all 0.2s ease-in-out;
+  transition: height 0.3s ease-in-out;
+
+  &.condenseSelection {
+    height: 44px !important;
+    overflow: hidden;
+
+    .select-options {
+      overflow-y: hidden;
+    }
+  }
+}
+
+.select-list-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px;
+}
+
+.selectText {
+  user-select: none;
+  margin-top: 4px;
+}
+
+.selected {
+  background: var(--selectList-active);
+  position: relative;
+  color: var(--selectList-text-active);
+  box-shadow: 0 0 5px var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.selected:hover {
+  background: var(--selectList-active) !important;
+  color: var(--selectList-text-active) !important;
+  box-shadow: 0 0 5px var(--primary) !important;
+}
+
+.selected::before,
+.selected:hover::before {
+  width: 100%;
+  height: 1px;
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  top: 0;
+  content: '';
+  background-image: linear-gradient(90deg, transparent, var(--linear-gradient-primary), transparent);
+}
+
+.selected::after,
+.selected:hover::after {
+  width: 100%;
+  height: 1px;
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  bottom: 0;
+  content: '';
+  background-image: linear-gradient(90deg, transparent, var(--linear-gradient-primary), transparent);
+}
+
+.selected:hover {
+  background: var(--input-background);
+  color: var(--input-text);
+  cursor: pointer;
+}
+
+/* Scroll bar styles */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+#select-go-up,
+#select-go-down {
+  cursor: pointer;
+  width: 50px;
+  user-select: none;
+  margin: 0 auto;
+}
+
+.select-options {
+  overflow-x: hidden;
+  overflow-y: auto;
+  white-space: nowrap;
+  width: 100%;
+  background-color: var(--panel);
+  margin: 0 auto;
+  position: relative;
+}

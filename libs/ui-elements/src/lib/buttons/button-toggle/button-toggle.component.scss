@@ -1,0 +1,17 @@
+.toggle-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.selected {
+  font-weight: bolder;
+}
+
+.vertical-toggle {
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+.horizontal-toggle {
+  flex-direction: row;
+  flex-wrap: nowrap;
+}

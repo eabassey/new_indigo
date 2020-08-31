@@ -1,0 +1,18 @@
+<div class="yesNoSelector">
+  <button
+    class="noButton ynbutton"
+    [disabled]="this.isDisabled"
+    [ngClass]="{ selected: !this.value, unselected: this.value }"
+    (click)="this.setValue(false)"
+  >
+    NO
+  </button>
+  <button
+    class="yesButton ynbutton"
+    [disabled]="this.isDisabled"
+    [ngClass]="{ selected: this.value, unselected: !this.value }"
+    (click)="this.setValue(true)"
+  >
+    YES
+  </button>
+</div>

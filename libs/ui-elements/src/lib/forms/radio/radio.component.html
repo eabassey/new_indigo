@@ -1,0 +1,5 @@
+<label class="container">
+    <ng-content></ng-content>
+    <input type="radio" [name]="name" [checked]="checked" (input)="onChange()" [disabled]="disabled" [id]="id" [ngClass]="[stackedClass]">
+    <span class="checkmark"></span>
+  </label>

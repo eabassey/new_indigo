@@ -8,7 +8,7 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-// import { returnOrDefault } from '@flexus/utilities';
+// import { returnOrDefault } from '@indigo/utilities';
 import { IconTypes } from './icon-types';
 import { Platform } from '@angular/cdk/platform';
 

@@ -1,0 +1,106 @@
+.accordion {
+  display: flex;
+  flex-direction: column;
+}
+
+.arrows {
+  padding: 0.3rem;
+}
+
+.button {
+  border: 1px solid transparent;
+  color: var(--text-primary);
+  display: inline-block;
+  font-family: 'Titillium Web', 'Helvetica Neue', sans-serif;
+  min-width: 140px;
+  font-size: 14px;
+  outline: none;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  text-transform: capitalize;
+  position: relative;
+  margin-bottom: 0.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: var(--radius);
+  padding: 0.3rem;
+  margin: 0.1rem;
+
+  &.span {
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: var(--background);
+    color: var(--button-text);
+    border-radius: var(--radius);
+    border: 1px solid;
+    box-shadow: 0 0 6px var(--button-shadow);
+
+    &::after {
+      background: none;
+    }
+
+    &::before {
+      background: none;
+    }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 80%;
+    top: 0;
+    height: 1px;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 4;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 80%;
+    bottom: 0;
+    height: 1px;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 4;
+  }
+}
+
+.accordButton--colour-default {
+  background: var(--accordion-btn-default);
+}
+
+.accordButton--colour-primary {
+  background: var(--button-background);
+  border: 1px solid var(--primary);
+  box-shadow: 0 0 8px 0 var(--primary);
+  color: var(--primary);
+
+  &:hover {
+    cursor: pointer;
+    background: var(--button-background);
+    border: 1px solid var(--primary);
+    box-shadow: 0 0 8px 0 var(--primary);
+    color: var(--primary);
+  }
+
+  &::after {
+    background: linear-gradient(90deg, transparent, var(--linear-gradient-primary), transparent);
+  }
+
+  &::before {
+    background: linear-gradient(90deg, transparent, var(--linear-gradient-primary), transparent);
+  }
+}

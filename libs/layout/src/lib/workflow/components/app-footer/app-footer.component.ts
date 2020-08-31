@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { tap, delay } from 'rxjs/operators';
 import { CoreServices } from '@indigo/engine';
-// import { SetCurrentPage } from '@flexus/ux';
+// import { SetCurrentPage } from '@indigo/ux';
 
 @Component({
   selector: 'app-footer',

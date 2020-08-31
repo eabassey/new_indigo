@@ -1,0 +1,3 @@
+<label [ngClass]="[sizeClass, colorClass]">
+  <span *ngIf="text$">{{ text$ | async }}</span> <ng-content></ng-content
+></label>

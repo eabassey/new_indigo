@@ -1,0 +1,73 @@
+.ratingSelector {
+  background-color: inherit;
+  overflow: auto;
+  text-align: center;
+  padding: 1rem 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.ratingButton {
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  border: none;
+  font-style: unset;
+  text-align: center;
+
+  background-color: var(--date-picker-cell);
+  box-shadow: 0 0 1px var(--date-picker-cell);
+  color: var(--button-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 2rem;
+  height: 2rem;
+  outline: none;
+  margin: 2px;
+  border-radius: var(--radius);
+  position: relative;
+
+  line-height: 1;
+
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--date-picker-cell);
+
+  transition: all 350ms ease-in-out;
+
+  &:hover {
+    box-shadow: 0 0 6px var(--button-shadow);
+
+    &::before {
+      background: linear-gradient(90deg, transparent, var(--linear-gradient-button-default), transparent);
+    }
+    &::after {
+      background: linear-gradient(90deg, transparent, var(--linear-gradient-button-default), transparent);
+    }
+  }
+}
+
+.fa {
+  border: 1px solid var(--primary);
+  box-shadow: 0 0 6px var(--DatePicker-glow);
+  color: var(--paginator-text-active);
+  background-color: var(--paginator-background-active);
+
+  &::before {
+    background: linear-gradient(90deg, transparent, var(--linear-gradient-primary), transparent);
+  }
+  &::after {
+    background: linear-gradient(90deg, transparent, var(--linear-gradient-primary), transparent);
+  }
+  &:hover {
+    box-shadow: 0 0 15px var(--primary);
+  }
+}
+
+.fa1 {
+  background-color: var(--button-background);
+}

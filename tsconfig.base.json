@@ -18,7 +18,11 @@
     "paths": {
       "@indigo/engine": ["libs/engine/src/index.ts"],
       "@indigo/layout": ["libs/layout/src/index.ts"],
-      "@indigo/templates": ["libs/templates/src/index.ts"]
+      "@indigo/templates": ["libs/templates/src/index.ts"],
+      "@indigo/pipes": ["libs/pipes/src/index.ts"],
+      "@indigo/directives": ["libs/directives/src/index.ts"],
+      "@indigo/ui-elements": ["libs/ui-elements/src/index.ts"],
+      "@indigo/utilities": ["libs/utilities/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -55,6 +55,8 @@ export class SilJobCardComponent implements OnInit, AfterViewInit, OnDestroy, On
     this.getValuesFromAllInfo();
   }
 
+  takeAction(item) {}
+
   ngOnChanges(changes: SimpleChanges) {
     this.getValuesFromAllInfo();
     if (changes['itemTwoPermissions']) {
@@ -86,9 +88,9 @@ export class SilJobCardComponent implements OnInit, AfterViewInit, OnDestroy, On
   ngAfterViewInit() {}
 
   private getValuesFromAllInfo() {
-    this.skill = this.findName(this.itemTwo.skill, this.allInfo.skills);
+    this.skill = this.findName(this.itemTwo?.skill, this.allInfo?.skills);
     this.sp =
-      this.allInfo && this.allInfo.sps ? this.allInfo.sps.filter(element => element.id === this.itemTwo.sp)[0] : null;
+      this.allInfo && this.allInfo?.sps ? this.allInfo?.sps?.filter(element => element.id === this.itemTwo.sp)[0] : null;
     this.stateDescription = this.getStateDescription(this.itemTwo.state);
   }
 

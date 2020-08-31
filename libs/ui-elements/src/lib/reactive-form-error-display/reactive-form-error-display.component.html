@@ -1,0 +1,62 @@
+<ng-container *ngIf="control && control.dirty">
+  <ng-container *ngFor="let key of (control.errors | fsObjectKeys)">
+    <ng-container [ngSwitch]="key">
+      <div [ngStyle]="{ margin: margin }">
+        <span *ngSwitchCase="'required'" class="form-input-hint has-error">This field is required.</span>
+        <span *ngSwitchCase="'minlength'" class="form-input-hint has-error"
+          >Minimum of {{ control.errors[key].requiredLength }} characters required.</span
+        >
+        <span *ngSwitchCase="'hardmaxlength'" class="form-input-hint has-error"
+          >{{ control.errors[key].len }} character limit exceeded.</span
+        >
+        <span *ngSwitchCase="'isdate'" class="form-input-hint has-error">Invalid date selected.</span>
+        <span *ngSwitchCase="'nofuturedate'" class="form-input-hint has-error">This date needs to be in the past.</span>
+        <span *ngSwitchCase="'numeric'" class="form-input-hint has-error">Numeric values only.</span>
+        <span *ngSwitchCase="'alphanumericwithspaces'" class="form-input-hint has-error"
+          >This field only accepts Letters ,Numbers , _'s and Spaces.</span
+        >
+        <span *ngSwitchCase="'alphanumericwithspacesdotdash'" class="form-input-hint has-error"
+          >This field only accepts Letters ,Numbers , _'s , .'s , -'s and Spaces.</span
+        >
+
+        <span *ngSwitchCase="'unfilledpartnerclaimant'" class="form-input-hint has-error"
+          >Partner Details or Claimant Details need to be filled</span
+        >
+        <span *ngSwitchCase="'alphanumeric'" class="form-input-hint has-error"
+          >This field only accepts Letters, Numbers , _'s.</span
+        >
+        <span *ngSwitchCase="'charactersWithSpaces'" class="form-input-hint has-error"
+          >This field only accepts Letters and spaces</span
+        >
+        <span *ngSwitchCase="'currency'" class="form-input-hint has-error"
+          >Only enter numbers, '.',2 decimal digits</span
+        >
+        <span *ngSwitchCase="'email'" class="form-input-hint has-error">Invalid email address (xxx@yyy.zz).</span>
+        <span *ngSwitchCase="'nospaces'" class="form-input-hint has-error">No spaces allowed.</span>
+
+        <ng-container *ngSwitchCase="'cellphone'">
+          <span class="form-input-hint has-error" *ngIf="control.errors[key].issue === 'digits'"
+            >Invalid cellphone number.
+          </span>
+          <span class="form-input-hint has-error" *ngIf="control.errors[key].issue === 'disallowed_characters_found'"
+            >This field should only have numbers.</span
+          >
+        </ng-container>
+        <ng-container *ngSwitchCase="'contact_number'">
+          <span class="form-input-hint has-error" *ngIf="control.errors[key].issue === 'digits'"
+            >Invalid contact number.
+          </span>
+          <span class="form-input-hint has-error" *ngIf="control.errors[key].issue === 'disallowed_characters_found'"
+            >This field should only have numbers.</span
+          >
+        </ng-container>
+
+        <!-- this functions as a catch all for the pattern matching -->
+        <span *ngSwitchCase="'pattern'" class="form-input-hint has-error"
+          >This field is not valid. Check that this field is the correct type.Try removing spaces, then numbers or
+          letters and any special characters from it</span
+        >
+      </div>
+    </ng-container>
+  </ng-container>
+</ng-container>

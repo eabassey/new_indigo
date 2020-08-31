@@ -1,0 +1,21 @@
+<div class="input-container" [ngStyle]="{ margin: margin, width: width }" #inputContainer>
+  <ng-container>
+    <input
+      #inputElement
+      [hidden]="!this.open"
+      [type]="type === 'number' ? 'text' : type"
+      [ngClass]="arrClasses"
+      [placeholder]="placeholder"
+      [autofocus]="autofocus"
+      [disabled]="disabled"
+      [readonly]="readonly"
+      [autocomplete]="'' + autocomplete"
+      [id]="id"
+      (input)="handleChanges()"
+      (focus)="this.inFocus = true"
+      (blur)="this.inFocus = false"
+      (paste)="onPaste($event)"
+      [style.borderRadius]="radius"
+    />
+  </ng-container>
+</div>

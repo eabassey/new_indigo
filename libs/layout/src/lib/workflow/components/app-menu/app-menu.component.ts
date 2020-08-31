@@ -11,7 +11,7 @@ import { trigger, state, style, transition, animate, AnimationEvent } from '@ang
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-// import { getActiveTheme, SetTheme, CloseAppMenu } from '@flexus/ux';
+// import { getActiveTheme, SetTheme, CloseAppMenu } from '@indigo/ux';
 
 import { map, skipWhile, take } from 'rxjs/operators';
 // import { AppMenuOverlayService } from './app-menu.service';

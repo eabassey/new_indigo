@@ -1,0 +1,86 @@
+<div class="error-messages" *ngIf="errorMessage">{{ errorMessage }}</div>
+<div #singleSlider>
+  <div class="container">
+    <div class="selected-time">
+      <h3>
+        Selected Time: <br />
+        {{ text }}<br />
+      </h3>
+    </div>
+    &nbsp;
+    <div class="tp-rs-label-containter"><span #rsBullet class="rs-label">0</span></div>
+    &nbsp;
+    <div class="time-picker-container">
+      <div class="start-buffer" [ngStyle]="{ width: calculatedWidth() + '%' }"></div>
+      <div class="reserve-start-buffer" [ngStyle]="{ width: calculateBufferWidth() + '%' }"></div>
+
+      <div [formGroup]="singleSliderForm" class="input-slider">
+        <input
+          #rsRangeLine
+          formControlName="sldr"
+          value="0"
+          min="0"
+          max="{{ maxTimeInterval }}"
+          type="range"
+          list="dl"
+          step="1"
+        />
+      </div>
+      <div class="reserve-end-buffer" [ngStyle]="{ width: calculateEndBufferWith() + '%' }"></div>
+      <div class="end-buffer" [ngStyle]="{ width: calculateEndWith() + '%' }"></div>
+    </div>
+    <div class="container-label">
+      <span>{{ this.createlistTimeFromInterval()[0] }}</span>
+      <span>{{ this.createlistTimeFromInterval()[this.createlistTimeFromInterval().length - 1] }}</span>
+    </div>
+  </div>
+</div>
+<div #multipleSlider>
+  <div class="container">
+    <div class="selected-time">
+      <h3>
+        Selected Time: <br />
+        {{ this.beginTime }} - {{ this.endTime }} <br />
+      </h3>
+    </div>
+    &nbsp;
+    <div class="tp-rs-label-containter">
+      <span #rsBullet0 class="rs-label">0</span><span #rsBullet1 class="rs-label">0</span>
+    </div>
+    &nbsp;
+    <div class="time-picker-container">
+      <div class="start-buffer" [ngStyle]="{ width: calculatedWidth() + '%' }"></div>
+      <div class="reserve-start-buffer" [ngStyle]="{ width: calculateBufferWidth() + '%' }"></div>
+      <section [formGroup]="multipleSliderForm" class="range-slider">
+        <input
+          #slider1
+          id="r"
+          value="0"
+          min="0"
+          max="{{ maxTimeInterval }}"
+          step="1"
+          type="range"
+          formControlName="sldr1"
+          list="dl"
+        />
+        <input
+          #slider2
+          id="r"
+          value="{{ maxTimeInterval }}"
+          min="0"
+          max="{{ maxTimeInterval }}"
+          step="1"
+          type="range"
+          formControlName="sldr2"
+          list="dl"
+        />
+      </section>
+      <div class="reserve-end-buffer" [ngStyle]="{ width: calculateEndBufferWith() + '%' }"></div>
+      <div class="end-buffer" [ngStyle]="{ width: calculateEndWith() + '%' }"></div>
+    </div>
+    <div class="container-label">
+      <span>{{ this.createlistTimeFromInterval()[0] }}</span>
+      <span>{{ this.createlistTimeFromInterval()[this.createlistTimeFromInterval().length - 1] }}</span>
+    </div>
+  </div>
+</div>

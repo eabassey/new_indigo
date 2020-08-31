@@ -1,0 +1,7 @@
+<div [ngClass]="cardHeaderClassObj">
+  <div>
+    <p class="card-header-title">{{ config.title }}</p>
+    <p class="card-header-subtitle">{{ config.subTitle }}</p>
+  </div>
+  <div [class]="'card-header-content card-header-content-' + config.display"><ng-content></ng-content></div>
+</div>

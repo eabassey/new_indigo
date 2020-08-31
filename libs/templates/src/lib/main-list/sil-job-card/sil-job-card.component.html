@@ -1,19 +1,60 @@
 <div
   class="job-card"
+  [id]="'job-' + itemTwo.id"
+  [ngClass]="{
+    'unselected-job': selectedItemTwo && selectedItemTwo?.id != itemTwo.id,
+    'selected-job': selectedItemTwo?.id === itemTwo.id,
+    'is-offline': !isOnline
+  }"
+  (click)="takeAction(itemTwo)"
   [class.can-edit]="true"
 >
-  <!-- <div class="indicator"><flx-indicator></flx-indicator></div> -->
-
+  <!--  <div class="indicator"><flx-indicator *ngI f="(canEdit$ | async)" [color]="indicatorClass"></flx-indicator></div>-->
+  <div class="indicator"><flx-indicator></flx-indicator></div>
+  <div class="job-card-actions">
+    <!-- <flx-context-menu
+      class="context-menu-container"
+      iconSize="small"
+      *ngIf="isOnline && itemTwoContextMenuList?.length && (user?.user?.roles)[0] !== 18"
+    >
+      <ul>
+        <ng-container *ngFor="let menuItem of itemTwoContextMenuList">
+          <li *ngIf="checkPermission(menuItem)" (click)="selectMenuItem(itemTwo, menuItem)">{{ menuItem?.name }}</li>
+        </ng-container>
+        <li class="divider"><flx-glow-line></flx-glow-line></li>
+      </ul>
+    </flx-context-menu> -->
+    <div class="indicator-icons">
+      <!-- Notes indicator -->
+      <div class="action" *ngIf="itemTwo && itemTwo.note_count !== null && itemTwo.note_count > 0">
+        <flx-icon
+          size="extra-small"
+          [instruction]="itemTwo.note_count > 1 ? itemTwo.note_count + ' notes' : itemTwo.note_count + ' note'"
+          type="notes"
+          (click)="selectMenuItem(itemTwo, { key: 'SIL_CONTEXT_MENU_JOB_NOTES' })"
+        ></flx-icon>
+      </div>
+    </div>
+  </div>
   <div class="job-info-container">
     <div class="job-info">
-      <!-- <p *ngIf="skill && skill.name" class="job-skill">{{ skill.name }}</p>
-      <p *ngIf="sp && sp.name" class="sp-name">{{ sp.name }}</p> -->
+      <p *ngIf="skill && skill.name" class="job-skill">{{ skill.name }}</p>
+      <p *ngIf="sp && sp.name" class="sp-name">{{ sp.name }}</p>
     </div>
 
     <div class="appointment-state-info">
       <p class="appointment-info"></p>
-      <!-- <p *ngIf="!!stateDescription" class="job-state">{{ itemTwo.state }}: {{ stateDescription }}</p> -->
+      <p *ngIf="!!stateDescription" class="job-state">{{ itemTwo.state }}: {{ stateDescription }}</p>
     </div>
     <div class="take-action"><!-- Gets Populated Dynamically --></div>
   </div>
+
+  <!--  <div [class.disabled]="!isOnline" class="take-action  item-two-button-holder">-->
+  <!--    &lt;!&ndash; <ng-container>-->
+  <!--      <button class="wfb wfb-primary" (click)="takeAction(itemTwo)" [disabled]="!isOnline"-->
+  <!--        [ngClass]="jobStateLookupTable[itemTwo.state]">-->
+  <!--        {{ stateInstruction }}-->
+  <!--      </button>-->
+  <!--    </ng-container> &ndash;&gt;-->
+  <!--  </div>-->
 </div>
