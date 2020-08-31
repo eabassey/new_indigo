@@ -146,7 +146,7 @@ export class MainListComponent implements OnInit {
     constructor(private svc: CoreServices) {}
 
     ngOnInit() {
-        this.currentPage$ = this.svc.route.queryParamMap.pipe(map(paramMap => paramMap.get('currentPage')))
+        this.currentPage$ = this.svc.route.queryParamMap.pipe(map(paramMap => paramMap.get('currentPage') || 1))
     }
 
     trackByFunc(idx, item) {
