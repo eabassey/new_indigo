@@ -1,10 +1,9 @@
 # Indigo
 
-This project was generated using [Nx](https://nx.dev).
+This project is a monorepo containing client application configurations and library projects which will each
 
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+be their own publishables. The libraries are left in there for fast dev cycle but can be moved when we need to.
 
-🔎 **Nx is a set of Extensible Dev Tools for Monorepos.**
 
 ## Quick Start & Documentation
 
@@ -14,52 +13,29 @@ This project was generated using [Nx](https://nx.dev).
 
 [Interactive Tutorial](https://nx.dev/angular/tutorial/01-create-application)
 
-## Adding capabilities to your workspace
+## Setting up demo API
+ Install Mockoon software on you computer. Add a `GET` endpoint in Mockoon called `claimSummary`. Find the `data.json` file in the 
+ 
+ root of the project and import it into the body of the endpoint and startup Mockoon on `http://localhost:3000`. When you run the 
+ 
+ app, everything should work.
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
 
-Below are our core plugins:
 
-- [Angular](https://angular.io)
-  - `ng add @nrwl/angular`
-- [React](https://reactjs.org)
-  - `ng add @nrwl/react`
-- Web (no framework frontends)
-  - `ng add @nrwl/web`
-- [Nest](https://nestjs.com)
-  - `ng add @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `ng add @nrwl/express`
-- [Node](https://nodejs.org)
-  - `ng add @nrwl/node`
+## Generate a client application
 
-There are also many [community plugins](https://nx.dev/nx-community) you could add.
+Run `ng g @nrwl/angular:app fnb` to generate an application for `fnb` company. This will also generate an e2e project for the app.
 
-## Generate an application
+> You can also choose to generate a standalone application outside the monorepo for the client and point to the libs from npm or 
 
-Run `ng g @nrwl/angular:app my-app` to generate an application.
+using git urls.
 
-> You can use any of the plugins above to generate applications as well.
-
-When using Nx, you can create multiple applications and libraries in the same workspace.
-
-## Generate a library
-
-Run `ng g @nrwl/angular:lib my-lib` to generate a library.
-
-> You can also use any of the plugins above to generate libraries as well.
-
-Libraries are sharable across libraries and applications. They can be imported from `@indigo/mylib`.
 
 ## Development server
 
 Run `ng serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
-
-Run `ng g component my-component --project=my-app` to generate a new component.
 
 ## Build
 
@@ -81,18 +57,19 @@ Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
 
 Run `nx dep-graph` to see a diagram of the dependencies of your projects.
 
-## Further help
+## Project Structure
 
-Visit the [Nx Documentation](https://nx.dev/angular) to learn more.
+Application layouts, engine and templates are in their own projects in the libs and can be managed in their own publishable project 
 
-## ☁ Nx Cloud
+if necessary. The libraries also include projects for ui-elements, directives, pipes that can also be extended.
 
-### Computation Memoization in the Cloud
+## Engine
+The engine to be codenamed `WiloJS` can expects to consume configuration. Therefore, the client applications should contain only 
 
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
+configurations that follow the opinionated approach taken and expected my the engine (WiloJS).
 
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
 
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
+## Deployment
+To deploy each client project, you build the associated dockerfile for the client by tagging it first. This will generate an image 
 
-Visit [Nx Cloud](https://nx.app/) to learn more.
+which we can eiher create docker container from manually, use docker-compose or kubernetes to orchestrate the containers.
