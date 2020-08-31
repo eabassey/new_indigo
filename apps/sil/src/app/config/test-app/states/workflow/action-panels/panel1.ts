@@ -1,4 +1,4 @@
-import {  addFilter, resetFilter, ActionPanelConfig } from '@indigo/engine';
+import {  addFilter, resetFilter, ActionPanelConfig } from '@wilo';
 import * as TP from '@indigo/templates';
 
 export const panel1: ActionPanelConfig = {

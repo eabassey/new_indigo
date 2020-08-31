@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CoreServices, FlexusStateBase } from '@indigo/engine';
+import { CoreServices, FlexusStateBase } from '@wilo';
 import { ActivatedRoute } from '@angular/router';
 
 

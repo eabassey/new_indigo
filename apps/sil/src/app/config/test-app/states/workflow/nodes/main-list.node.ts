@@ -1,5 +1,5 @@
 import * as TP from '@indigo/templates';
-import { NodeConfig } from '@indigo/engine';
+import { NodeConfig } from '@wilo';
 import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
 

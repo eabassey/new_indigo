@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpInterceptor, HTTP_INTERCEPTORS, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
 import { map, switchMap, skipWhile, take } from 'rxjs/operators';
-import { CoreServices } from '@indigo/engine';
+import { CoreServices } from '@wilo';
 
 
 @Injectable({providedIn: 'root'})

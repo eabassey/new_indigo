@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {EngineModule, AuthService} from '@indigo/engine';
+import {EngineModule, AuthService} from '@wilo';
 import {WorkflowLayoutModule, WorkflowLayoutComponent} from '@indigo/layout';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';

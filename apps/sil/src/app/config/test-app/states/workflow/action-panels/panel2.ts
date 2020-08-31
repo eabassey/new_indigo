@@ -1,5 +1,5 @@
 import * as TP from '@indigo/templates';
-import { ActionPanelConfig } from '@indigo/engine';
+import { ActionPanelConfig } from '@wilo';
 
 export const panel2: ActionPanelConfig = {
     id: 'panel2',

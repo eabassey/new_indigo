@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import {Observable} from 'rxjs';
-import { CoreServices } from '@indigo/engine';
+import { CoreServices } from '@wilo';
 import { map } from 'rxjs/operators';
 
 

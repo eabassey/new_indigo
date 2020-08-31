@@ -20,7 +20,7 @@ import { FLXHeaderActionsComponent } from './components/header-actions/header-ac
 import { FLXAppBarComponent } from './components/app-bar/app-bar.component';
 import { WorkflowPanelNodeComponent } from './workflow-panel-node.component';
 import { DynamicModule } from 'ng-dynamic-component';
-import {EngineModule} from '@indigo/engine';
+import {EngineModule} from '@wilo';
 import { RoutesService } from './routes.service';
 
 

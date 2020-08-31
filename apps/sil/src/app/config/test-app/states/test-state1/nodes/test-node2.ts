@@ -2,7 +2,7 @@ import * as TP from '@indigo/templates';
 import {of, from} from 'rxjs';
 
 
-import { NodeConfig } from '@indigo/engine';
+import { NodeConfig } from '@wilo';
 import { mergeMap } from 'rxjs/operators';
 
 

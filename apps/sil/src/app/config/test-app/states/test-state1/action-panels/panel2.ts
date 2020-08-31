@@ -1,4 +1,4 @@
-import { ActionPanelConfig } from '@indigo/engine';
+import { ActionPanelConfig } from '@wilo';
 import * as TP from '@indigo/templates';
 
 export const panel2: ActionPanelConfig = {

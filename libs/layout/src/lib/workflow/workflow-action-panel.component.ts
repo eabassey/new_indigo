@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FlexusActionPanelBase, CoreServices } from '@indigo/engine';
+import { FlexusActionPanelBase, CoreServices } from '@wilo';
 
 
 @Component({

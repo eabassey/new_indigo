@@ -1,6 +1,6 @@
 
 import { testApp } from './test-app';
-import { ClientConfig } from '@indigo/engine';
+import { ClientConfig } from '@wilo';
 
 export const silConfig: ClientConfig = {
     name: 'Standard Bank',

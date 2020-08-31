@@ -1,6 +1,6 @@
 import {mainListNode, testNode1} from './nodes';
 import {panel1, panel2, panel3} from './action-panels';
-import { StateConfig } from '@indigo/engine';
+import { StateConfig } from '@wilo';
 
 export const workflow: StateConfig = {
     id: 'workflow',

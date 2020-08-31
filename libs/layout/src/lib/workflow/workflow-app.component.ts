@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { CoreServices, FlexusAppBase } from '@indigo/engine';
+import { CoreServices, FlexusAppBase } from '@wilo';
 import { ActivatedRoute } from '@angular/router';
 import {Router} from '@angular/router';
 

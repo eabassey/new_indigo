@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { Router, Route } from '@angular/router';
-import { CLIENT_CONFIG, ClientConfig } from '@indigo/engine';
+import { CLIENT_CONFIG, ClientConfig } from '@wilo';
 import { WorkflowLayoutComponent } from './workflow-layout.component';
 
 

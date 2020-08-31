@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { tap, delay } from 'rxjs/operators';
-import { CoreServices } from '@indigo/engine';
+import { CoreServices } from '@wilo';
 // import { SetCurrentPage } from '@indigo/ux';
 
 @Component({

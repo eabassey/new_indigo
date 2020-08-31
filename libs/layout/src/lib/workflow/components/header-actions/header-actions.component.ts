@@ -11,7 +11,7 @@ import { Store } from '@ngrx/store';
 import { take, skipWhile } from 'rxjs/operators';
 import { Subscription, isObservable, Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { ToolbarControlConfig, CoreServices } from '@indigo/engine';
+import { ToolbarControlConfig, CoreServices } from '@wilo';
 
 @Component({
   selector: 'flx-header-actions',

@@ -1,4 +1,4 @@
-import { StateConfig} from '@indigo/engine';
+import { StateConfig} from '@wilo';
 import {of} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {panel1, panel2, panel3} from './action-panels';

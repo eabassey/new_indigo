@@ -3,7 +3,7 @@ import * as TP from '@indigo/templates';
 // import {InputControlModel} from 'src/app/dyn-form/core/models/input-control-model';
 // import {FormGroupModel} from 'src/app/dyn-form/core/models/form-group-model';
 // import { DynFormComponent } from 'src/app/dyn-form/components';
-import { NodeConfig } from '@indigo/engine';
+import { NodeConfig } from '@wilo';
 
 
 export const testNode1: NodeConfig = {

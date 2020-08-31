@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { from, Observable, of } from 'rxjs';
-import { IAuthService } from '@indigo/engine';
+import { IAuthService } from '@wilo';
 
 @Injectable({providedIn: 'root'})
 export class AuthImplService implements IAuthService {

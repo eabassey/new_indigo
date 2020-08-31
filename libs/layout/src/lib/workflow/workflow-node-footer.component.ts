@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CoreServices, NodeFooterBase } from '@indigo/engine';
+import { CoreServices, NodeFooterBase } from '@wilo';
 
 
 @Component({

@@ -1,11 +1,11 @@
 import { Component, ViewEncapsulation, Inject, HostBinding, Renderer2, PLATFORM_ID } from '@angular/core';
-import { CoreServices, CLIENT_CONFIG } from '@indigo/engine';
+import { CoreServices, CLIENT_CONFIG } from '@wilo';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { THEMES, ACTIVE_THEME, Theme } from './theming/symbols';
 import { isPlatformBrowser } from '@angular/common';
-import { ClientConfigBase } from '@indigo/engine';
-import { AppConfig, StateConfig, NodeConfig, ClientConfig } from '@indigo/engine';
+import { ClientConfigBase } from '@wilo';
+import { AppConfig, StateConfig, NodeConfig, ClientConfig } from '@wilo';
 
 
 @Component({

@@ -1,7 +1,7 @@
 
 import * as TP from '@indigo/templates';
 import {of} from 'rxjs';
-import { NodeConfig } from '@indigo/engine';
+import { NodeConfig } from '@wilo';
 
 
 export const testNode3: NodeConfig = {

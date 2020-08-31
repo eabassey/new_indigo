@@ -16,7 +16,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@indigo/engine": ["libs/engine/src/index.ts"],
+      "@wilo": ["libs/engine/src/index.ts"],
       "@indigo/layout": ["libs/layout/src/index.ts"],
       "@indigo/templates": ["libs/templates/src/index.ts"],
       "@indigo/pipes": ["libs/pipes/src/index.ts"],
