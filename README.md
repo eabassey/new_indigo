@@ -14,9 +14,7 @@ be their own publishables. The libraries are left in there for fast dev cycle bu
 [Interactive Tutorial](https://nx.dev/angular/tutorial/01-create-application)
 
 ## Setting up demo API
- Install Mockoon software on you computer. Add a `GET` endpoint in Mockoon called `claimSummary`. Find the `data.json` file in the 
- 
- root of the project and import it into the body of the endpoint and startup Mockoon on `http://localhost:3000`. When you run the 
+ Install Mockoon software on you computer. Add a `GET` endpoint in Mockoon called `api/v1/staff_action/get_summary/`. Find the `get_summary.json` file in the  root of the project and import it into the body of the endpoint. Also add another `GET` endpoint called `api/v1/all_info/` and fill its body response with the `all_info.json` file at the root for the project and startup Mockoon on `http://localhost:3000`. When you run the 
  
  app, everything should work.
 

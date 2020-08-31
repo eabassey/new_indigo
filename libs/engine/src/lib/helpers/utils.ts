@@ -159,7 +159,7 @@ export const renderServerQueries = (serverQueries: ServerQueryConfig[], svc: Cor
        const {key, endpoint} = query;
       //  svc.loader.add(key);
        const dataSub = svc.http.post(
-         `${svc.baseUrl}/api/query`, 
+         `${svc.baseUrl}/api/query`,
          endpoint, {headers: { Authorization: 'Bearer ' + accessToken,}}).subscribe(
         (res: any) => {
            svc.store.dispatch(setVariable({key, data: res}));
@@ -226,7 +226,8 @@ export const renderServerCalls = (serverCalls: ServerCallConfig[], svc: CoreServ
           }
           svc.store.dispatch(setVariable({key, data}));
         }
-        onSuccess(successResults, svc, call);
+        if (onSuccess)
+          onSuccess(successResults, svc, call);
       };
       //
       if (functionName) {

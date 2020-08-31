@@ -18,7 +18,7 @@ export interface ServerCallConfig {
     nextNode?: string; // This is set from a nav button, but can also be written to directly if required
     followUpSuccessCalls?: ServerCallConfig[];
     followUpFailCalls?: ServerCallConfig[];
-    onSuccess: (result: any, svc?: CoreServices, serverCall?: ServerCallConfig) => void;
+    onSuccess?: (result: any, svc?: CoreServices, serverCall?: ServerCallConfig) => void;
     onError?: (err: any) => void;
     onComplete?: () => void;
   };

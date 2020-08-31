@@ -29,7 +29,7 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
       clientConfig: silConfig,
       clientService: SilService,
       indexedDbName: 'dynDB',
-      base_url: environment.bff_url
+      base_url: environment.api_url
     }),
     TemplatesModule,
     // DynFormModule,

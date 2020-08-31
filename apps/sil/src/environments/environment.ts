@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  bff_url: 'https://auto-medic-bff.azurewebsites.net',
+  api_url: 'http://localhost:3000',
 };
 
 /*

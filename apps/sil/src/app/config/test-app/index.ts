@@ -12,4 +12,13 @@ export const testApp: AppConfig = {
         testState1,
         workflow
     },
+    serverCalls: [
+      {
+        key: 'all_info',
+        errorMessage: '',
+        directCall: ({http, baseUrl}) => {
+          return http.get(`${baseUrl}/api/v1/all_info/`);
+        }
+      }
+    ]
 }
