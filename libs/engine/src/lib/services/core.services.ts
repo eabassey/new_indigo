@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import { ModalService } from './modal.service';
 import { NavService } from './nav.service';
 import { StoreQuery } from './store-query.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CLIENT_SERVICE, BASE_URL } from './constants';
 import { Store } from '@ngrx/store';
 import { LoaderService } from './loader.service';
@@ -24,6 +24,7 @@ export class CoreServices {
         public nav: NavService,
         public sq: StoreQuery,
         public router: Router,
+        public route: ActivatedRoute,
         public store: Store<any>,
         public loader: LoaderService,
         public auth: AuthService,

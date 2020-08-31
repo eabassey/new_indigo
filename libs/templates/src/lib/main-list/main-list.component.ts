@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import {Observable} from 'rxjs';
 import { CoreServices } from '@indigo/engine';
+import { map } from 'rxjs/operators';
 
 
 
@@ -145,7 +146,7 @@ export class MainListComponent implements OnInit {
     constructor(private svc: CoreServices) {}
 
     ngOnInit() {
-        this.currentPage$ = this.svc.footerAccessor.currentPage;
+        this.currentPage$ = this.svc.route.queryParamMap.pipe(map(paramMap => paramMap.get('currentPage')))
     }
 
     trackByFunc(idx, item) {

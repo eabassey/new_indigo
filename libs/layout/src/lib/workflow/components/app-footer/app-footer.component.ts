@@ -19,6 +19,6 @@ export class AppFooterComponent implements OnInit {
   }
 
   setCurrentPage(currentPage: number) {
-    this.svc.footerAccessor.setPage(currentPage);
+    this.svc.router.navigate([''], {queryParams: {currentPage}, queryParamsHandling: 'merge'})
   }
 }
