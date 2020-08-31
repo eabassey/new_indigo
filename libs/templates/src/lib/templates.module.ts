@@ -5,11 +5,11 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormRendererComponent } from './form-renderer.component';
 import {MainListComponent} from './main-list/main-list.component';
-import { SilClaimCardComponent } from './main-list/sil-claim-card/sil-claim-card.component';
-import { SilJobCardComponent } from './main-list/sil-job-card/sil-job-card.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { RouterModule } from '@angular/router';
 import {UIElementsModule} from '@indigo/ui-elements';
+import { ItemOneCardComponent } from './main-list/item-one-card/item-one-card.component';
+import { ItemTwoCardComponent } from './main-list/item-two-card/item-two-card.component';
 
 
 const components = [
@@ -19,7 +19,7 @@ const components = [
     MainListComponent
 ];
 @NgModule({
-    declarations: [...components, SilClaimCardComponent, SilJobCardComponent],
+    declarations: [...components, ItemOneCardComponent, ItemTwoCardComponent],
     exports: [...components],
     imports: [CommonModule, UIElementsModule.forRoot({environment: ''}),  RouterModule, ReactiveFormsModule, NgxPaginationModule]
 })

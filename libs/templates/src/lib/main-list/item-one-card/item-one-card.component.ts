@@ -20,12 +20,12 @@ import { Router } from '@angular/router';
 
 
 @Component({
-  selector: 'flx-sil-claim-card',
-  templateUrl: './sil-claim-card.component.html',
-  styleUrls: ['./sil-claim-card.component.scss'],
+  selector: 'item-one-card',
+  templateUrl: './item-one-card.component.html',
+  styleUrls: ['./item-one-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SilClaimCardComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+export class ItemOneCardComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   @Input() itemOne: any;
 
   subs: any[] = [];
@@ -72,7 +72,7 @@ export class SilClaimCardComponent implements OnInit, OnChanges, AfterViewInit, 
   }
 
   takeClaimAction(): void {
- 
+
   }
 
   checkPermission(menuItem: any) {
@@ -90,7 +90,7 @@ export class SilClaimCardComponent implements OnInit, OnChanges, AfterViewInit, 
   }
 
   deleteLocalDraft(key: string) {
-    
+
   }
 
   ngOnDestroy() {

@@ -18,12 +18,12 @@ import { Subscription } from 'rxjs';
 
 
 @Component({
-  selector: 'flx-sil-job-card',
-  templateUrl: './sil-job-card.component.html',
-  styleUrls: ['./sil-job-card.component.scss'],
+  selector: 'item-two-card',
+  templateUrl: './item-two-card.component.html',
+  styleUrls: ['./item-two-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SilJobCardComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
+export class ItemTwoCardComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
   @Input() itemTwo: any;
   @Input() itemOne: any;
   @Input() itemTwoContextMenuList = [];

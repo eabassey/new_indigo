@@ -21,7 +21,7 @@ import { map } from 'rxjs/operators';
                 <div
                 *ngFor="let item of (items | paginate: { itemsPerPage: pageSize, currentPage: (currentPage$ | async), id: 'list' }); index as i; trackBy: trackByFunc"
                 >
-                    <flx-sil-claim-card [itemOne]="item"></flx-sil-claim-card>
+                    <item-one-card [itemOne]="item"></item-one-card>
                 </div>
                 </ng-container>
             </ng-container>
