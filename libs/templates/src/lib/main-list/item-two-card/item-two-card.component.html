@@ -38,12 +38,12 @@
   </div>
   <div class="job-info-container">
     <div class="job-info">
-      <p *ngIf="skill && skill.name" class="job-skill">{{ skill.name }}</p>
-      <p *ngIf="sp && sp.name" class="sp-name">{{ sp.name }}</p>
+      <p *ngIf="skill?.name" class="job-skill">{{ skill?.name }}</p>
+      <p *ngIf="sp?.name" class="sp-name">{{ sp?.name }}</p>
     </div>
 
     <div class="appointment-state-info">
-      <p class="appointment-info"></p>
+      <p #appointmentInfo class="appointment-info">{{appointment_text}}</p>
       <p *ngIf="!!stateDescription" class="job-state">{{ itemTwo.state }}: {{ stateDescription }}</p>
     </div>
     <div class="take-action"><!-- Gets Populated Dynamically --></div>

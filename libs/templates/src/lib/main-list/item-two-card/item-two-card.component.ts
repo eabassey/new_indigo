@@ -12,9 +12,10 @@ import {
   ChangeDetectionStrategy,
   NgZone
 } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { humaniseDate } from '@indigo/utilities';
+import * as moment from 'moment';
 
 
 @Component({
@@ -23,92 +24,61 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./item-two-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ItemTwoCardComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
+export class ItemTwoCardComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() itemTwo: any;
   @Input() itemOne: any;
   @Input() itemTwoContextMenuList = [];
   @Input() user: any;
-  @Input() itemTwoPermissions = [];
   @Input() activeOrg;
-  @Input() allInfo: any;
   @Input() isOnline: boolean;
   selectedItemTwo: any;
   buttonText: string;
+  appointment_text;
+  appointment_type;
+  @ViewChild('appointmentInfo', {read: ElementRef}) appointmentInfoHolder: ElementRef;
 
-  stateDescription: string;
-  sp: any;
+  @Input() skillsMap: {[id: number]: any};
+  @Input() spsMap: {[id: number]: any};
+  @Input() statesMap: {[id: number]: any};
+  @Input() appointmentsMap: {[id: number]: any};
   skill: any;
+  sp: any;
+  stateDescription: string;
   appt: string;
 
   sub: Subscription[] = [];
   constructor(
-    private _store: Store<any>,
-    // private controller: ManifestController<any>,
     private router: Router,
-    private route: ActivatedRoute,
-    private renderer: Renderer2,
-    private el: ElementRef,
-    private ngZone: NgZone
+    private renderer: Renderer2
   ) {}
 
   ngOnInit() {
-    this.getValuesFromAllInfo();
+    this.skill = this.skillsMap[this.itemTwo?.skill];
+    this.sp = this.spsMap[this.itemTwo?.sp];
+    this.stateDescription = this.statesMap[this.itemTwo.state]?.description;
+    this.renderAppointmentInfo();
   }
 
   takeAction(item) {}
 
-  ngOnChanges(changes: SimpleChanges) {
-    this.getValuesFromAllInfo();
-    if (changes['itemTwoPermissions']) {
-      this.ngZone.runOutsideAngular(() => {
-        this.sub.forEach(s => {
-          if (s) s.unsubscribe();
-        });
-        if (this.itemTwo && this.itemOne && this.user && this.activeOrg && this.allInfo) {
-          this.itemTwoPermissions.forEach(fn => {
-            const res = fn(
-              this.itemTwo,
-              this.itemOne,
-              this.user,
-              this.renderer,
-              this.el.nativeElement,
-              this.activeOrg,
-              this.allInfo,
-              this
-            );
-            if (res) {
-              this.sub.push(res);
-            }
-          });
-        }
-      });
-    }
+
+  ngAfterViewInit() {
   }
 
-  ngAfterViewInit() {}
-
-  private getValuesFromAllInfo() {
-    this.skill = this.findName(this.itemTwo?.skill, this.allInfo?.skills);
-    this.sp =
-      this.allInfo && this.allInfo?.sps ? this.allInfo?.sps?.filter(element => element.id === this.itemTwo.sp)[0] : null;
-    this.stateDescription = this.getStateDescription(this.itemTwo.state);
-  }
-
-  findName(id: number, arr: any[]) {
-    if (arr !== undefined && id !== undefined) {
-      const res = arr.find(obj => obj.id === id) || {};
-      return res;
-    } else {
-      return {};
-    }
-  }
-
-  getStateDescription(state: any): string {
-    if (this.allInfo && this.allInfo.states) {
-      return this.allInfo.states.filter(element => element.id === state)[0].description;
-    } else {
-      return '';
-    }
+  renderAppointmentInfo() {
+    // const appointmentInfoEl = this.appointmentInfoHolder.nativeElement;
+      this.appointment_type =
+        this.itemTwo.appointment && this.itemTwo?.appointment?.appointment_type
+          ? this.appointmentsMap[this.itemTwo.appointment.appointment_type]?.name
+          : '';
+      this.appointment_text = 'No Appointment';
+      if (this.itemTwo.appointment.range_start !== null && this.appointment_type !== '') {
+        this.appointment_text = `${humaniseDate(this.itemTwo.appointment.range_start)} ${this.appointment_type} ${moment(
+          this.itemTwo.appointment.range_start
+        ).format('HH:mm')}`;
+      } else {
+        // if (appointmentInfoEl) this.renderer.setAttribute(appointmentInfoEl, 'style', 'color: var(--input-placeholder)');
+      }
   }
 
 

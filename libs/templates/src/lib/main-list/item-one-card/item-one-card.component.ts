@@ -2,21 +2,13 @@ import {
   Component,
   OnInit,
   Input,
-  Output,
-  EventEmitter,
   OnDestroy,
-  Renderer2,
-  ElementRef,
   AfterViewInit,
   OnChanges,
   SimpleChanges,
-  ViewChild,
   ChangeDetectionStrategy,
-  NgZone
 } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { take } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { get_sla_time } from '../item-utils';
 
 
 @Component({
@@ -27,6 +19,12 @@ import { Router } from '@angular/router';
 })
 export class ItemOneCardComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   @Input() itemOne: any;
+  @Input() statesMap: {[id: number]: any};
+  @Input() skillsMap: {[id: number]: any};
+  @Input() appointmentsMap: {[id: number]: any};
+  @Input() spsMap: {[id: number]: any};
+  slaTimeColor = 'grey';
+  sla: {text: string; color: string};
 
   subs: any[] = [];
 
@@ -37,17 +35,15 @@ export class ItemOneCardComponent implements OnInit, OnChanges, AfterViewInit, O
   // This preload class is used to guard against the hiding animation on load.
   preload = true;
   isOffline = '';
+  isOnline = false;
   indicatorClass = '';
 
-  constructor(
-    private _store: Store<any>,
-    private router: Router,
-    private renderer: Renderer2,
-    private el: ElementRef,
-    private ngZone: NgZone
-  ) {}
 
-  ngOnInit() {}
+  constructor() {}
+
+  ngOnInit() {
+    this.sla = get_sla_time(this.itemOne, this.statesMap);
+  }
 
   ngOnChanges(changes: SimpleChanges) {
   }
@@ -56,6 +52,10 @@ export class ItemOneCardComponent implements OnInit, OnChanges, AfterViewInit, O
 
   selectItem(itemOne) {
     // this.select.emit(itemOne);
+  }
+
+  selectMenuItem(item, {}) {
+
   }
 
   expandContent(): void {

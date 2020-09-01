@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import {Observable} from 'rxjs';
-import { CoreServices } from '@wilo';
-import { map } from 'rxjs/operators';
+import { CoreServices, getVariables } from '@wilo';
+import { map, skipWhile } from 'rxjs/operators';
+import { select } from '@ngrx/store';
 
 
 
@@ -21,7 +22,13 @@ import { map } from 'rxjs/operators';
                 <div
                 *ngFor="let item of (items | paginate: { itemsPerPage: pageSize, currentPage: (currentPage$ | async), id: 'list' }); index as i; trackBy: trackByFunc"
                 >
-                    <item-one-card [itemOne]="item"></item-one-card>
+                    <item-one-card
+                    [skillsMap]="skillsMap"
+                    [statesMap]="statesMap"
+                    [spsMap]="spsMap"
+                    [appointmentsMap]="appointmentsMap"
+                    [itemOne]="item"
+                    ></item-one-card>
                 </div>
                 </ng-container>
             </ng-container>
@@ -143,10 +150,27 @@ export class MainListComponent implements OnInit {
     @Input() list$: Observable<any>;
     currentPage$;
     pageSize = 30;
+    statesMap: {[id: number]: any};
+    skillsMap: {[id: number]: any};
+    spsMap: {[id: number]: any};
+    appointmentsMap: {[id: number]: any};
     constructor(private svc: CoreServices) {}
 
     ngOnInit() {
         this.currentPage$ = this.svc.route.queryParamMap.pipe(map(paramMap => paramMap.get('currentPage') || 1))
+
+        this.svc.store.pipe(
+          select(getVariables),
+          map(val => val?.all_info),
+          // tap(console.log),
+          skipWhile(x => !x)
+          ).subscribe(({dataset}) => {
+            this.statesMap =  dataset.states
+               .reduce((acc, state) => ({ ...acc, [state.id]: state }), {});
+            this.skillsMap = dataset.skills.reduce((acc, skill) => ({...acc, [skill.id]: skill}), {});
+            this.spsMap = dataset.sps.reduce((acc, sp) => ({...acc, [sp.id]: sp}), {});
+            this.appointmentsMap = dataset.appointment_types.reduce((acc, apt) => ({...acc, [apt.id]: apt}), {});
+           });
     }
 
     trackByFunc(idx, item) {

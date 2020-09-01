@@ -1409,7 +1409,7 @@ export class ERIconComponent implements OnInit, OnDestroy {
         this.icon.nativeElement.className = this.size + this.color + this.hasBackground;
       }
     }
-    this.cd.detectChanges();
+    // this.cd.detectChanges();
   }
 
   @Input() set hasBackground(value: string) {
