@@ -1,0 +1,37 @@
+<form [formGroup]="internalForm">
+  <div>{{ prompt }}</div>
+
+  <div class="search-container">
+    <flx-input-text
+      formControlName="inSearch"
+      placeholder="Type to search"
+      radius="4px 0 0 4px"
+      (keyup.enter)="sendSearch()"
+    ></flx-input-text>
+    <flx-icon
+      type="search"
+      use="button"
+      instruction="Search"
+      color="button"
+      hover="container"
+      layout="right"
+      (click)="sendSearch()"
+    ></flx-icon>
+    <flx-icon
+      *ngIf="internalForm.value['inSearch'].length > 3"
+      instruction="Clear Search"
+      class="remove-icon"
+      type="remove"
+      (click)="this.clearForm()"
+    ></flx-icon>
+  </div>
+  <div class="error">
+    <!-- <flx-reactive-form-error-display [control]="internalForm.controls['inSearch']"></flx-reactive-form-error-display> -->
+  </div>
+  <div class="togglebutton">
+    <label class="switch">
+      <input type="checkbox" formControlName="checkClosed" /> <span class="slider two round"></span>
+    </label>
+    <p class="uppertextright">Include closed claims</p>
+  </div>
+</form>

@@ -1,5 +1,5 @@
 import {mainListNode, testNode1} from './nodes';
-import {panel1, panel2, panel3} from './action-panels';
+import {panel1, panel2, panel3, silSearchPanel} from './action-panels';
 import { StateConfig } from '@wilo';
 
 export const workflow: StateConfig = {
@@ -11,6 +11,7 @@ export const workflow: StateConfig = {
         testNode1
     },
     actionPanel: {
+      search: silSearchPanel,
         panel1,
         panel2,
         panel3

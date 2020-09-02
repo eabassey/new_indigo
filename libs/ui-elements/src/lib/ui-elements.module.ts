@@ -33,6 +33,7 @@ import { FLXScrollContainerModule } from './containers/scroll-container/scroll-c
 import { FLXSelectListModule } from './select-list';
 import { FLXLoadingSpinnerInlineModule } from './loading-spinner-inline';
 import { FLXCallLogModule } from './call-log';
+import {FLXSearchBarModule} from './search-bar';
 
 export const UIElements: any[] = [
   FLXModalsModule,
@@ -69,13 +70,14 @@ export const UIElements: any[] = [
   FLXNoResultsModule,
   FLXNotesModule,
   FLXScrollContainerModule,
-  FLXCallLogModule
+  FLXCallLogModule,
+  // FLXSearchBarModule
 ];
 
 @NgModule({
   imports: [...UIElements],
-  exports: [...UIElements],
-  entryComponents: [FLXButtonComponent]
+  exports: [...UIElements, FLXSearchBarModule],
+  entryComponents: []
 })
 export class UIElementsModule {
   static forRoot(config) {

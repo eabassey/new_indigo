@@ -10,17 +10,19 @@ import { RouterModule } from '@angular/router';
 import {UIElementsModule} from '@indigo/ui-elements';
 import { ItemOneCardComponent } from './main-list/item-one-card/item-one-card.component';
 import { ItemTwoCardComponent } from './main-list/item-two-card/item-two-card.component';
+import { SearchComponent } from './search.component';
 
 
 const components = [
     Node1Component,
     Node2Component,
     FormRendererComponent,
-    MainListComponent
+    MainListComponent,
+    SearchComponent
 ];
 @NgModule({
     declarations: [...components, ItemOneCardComponent, ItemTwoCardComponent],
-    exports: [...components],
+    exports: [...components, ReactiveFormsModule],
     imports: [CommonModule, UIElementsModule.forRoot({environment: ''}),  RouterModule, ReactiveFormsModule, NgxPaginationModule]
 })
 export class TemplatesModule {}

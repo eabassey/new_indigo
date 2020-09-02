@@ -34,7 +34,7 @@ export class ItemTwoCardComponent implements OnInit, AfterViewInit, OnDestroy {
   selectedItemTwo: any;
   buttonText: string;
   appointment_text;
-  appointment_type;
+  appointment_text_color = '';
   @ViewChild('appointmentInfo', {read: ElementRef}) appointmentInfoHolder: ElementRef;
 
   @Input() skillsMap: {[id: number]: any};
@@ -67,16 +67,17 @@ export class ItemTwoCardComponent implements OnInit, AfterViewInit, OnDestroy {
 
   renderAppointmentInfo() {
     // const appointmentInfoEl = this.appointmentInfoHolder.nativeElement;
-      this.appointment_type =
+      const appointment_type =
         this.itemTwo.appointment && this.itemTwo?.appointment?.appointment_type
           ? this.appointmentsMap[this.itemTwo.appointment.appointment_type]?.name
           : '';
       this.appointment_text = 'No Appointment';
-      if (this.itemTwo.appointment.range_start !== null && this.appointment_type !== '') {
-        this.appointment_text = `${humaniseDate(this.itemTwo.appointment.range_start)} ${this.appointment_type} ${moment(
+      if (this.itemTwo.appointment.range_start !== null && appointment_type !== '') {
+        this.appointment_text = `${humaniseDate(this.itemTwo.appointment.range_start)} ${appointment_type} ${moment(
           this.itemTwo.appointment.range_start
         ).format('HH:mm')}`;
       } else {
+        this.appointment_text_color = 'var(--input-placeholder)';
         // if (appointmentInfoEl) this.renderer.setAttribute(appointmentInfoEl, 'style', 'color: var(--input-placeholder)');
       }
   }

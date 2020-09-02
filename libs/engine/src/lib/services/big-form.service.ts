@@ -22,18 +22,17 @@ export class BigFormService {
   bigFormErrors = {};
   storeObject: any;
   storeObjectSubscription: Subscription;
-  // constructor(
-  //   public fb: FormBuilder,
-  //   public formService: DynamicFormService
-  // ) {
-  //   // this.initForm();
-  // }
+  constructor(
+    public fb: FormBuilder,
+  ) {
+    this.initForm();
+  }
 
-  // initForm() {
-  //   if (!this.bigForm) {
-  //     this.bigForm = new FormGroup({});
-  //   }
-  // }
+  initForm() {
+    if (!this.bigForm) {
+      this.bigForm = new FormGroup({});
+    }
+  }
 
   initialize(formGroup: FormGroup) {
     this.bigForm = formGroup;

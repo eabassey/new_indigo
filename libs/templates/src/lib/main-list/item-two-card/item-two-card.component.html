@@ -43,7 +43,7 @@
     </div>
 
     <div class="appointment-state-info">
-      <p #appointmentInfo class="appointment-info">{{appointment_text}}</p>
+      <p #appointmentInfo class="appointment-info" [style.color]="appointment_text_color">{{appointment_text}}</p>
       <p *ngIf="!!stateDescription" class="job-state">{{ itemTwo.state }}: {{ stateDescription }}</p>
     </div>
     <div class="take-action"><!-- Gets Populated Dynamically --></div>
