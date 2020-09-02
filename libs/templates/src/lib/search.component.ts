@@ -6,13 +6,13 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'search',
   template:`
-   <!-- <flx-flex-container> -->
+   <flx-flex-container>
   <flx-heading type="page" size="medium">Search</flx-heading>
   <form [formGroup]="svc.bf.bigForm">
     <input type="text" formControlName="search"/>
     <!-- <flx-search-bar formControlName="search" (clear)="clearSearch()" (doSearch)="doSearch()"></flx-search-bar> -->
   </form>
-<!-- </flx-flex-container> -->
+</flx-flex-container>
 
   `,
   styles: [`

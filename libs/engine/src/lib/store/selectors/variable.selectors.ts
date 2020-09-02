@@ -1,8 +1,11 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 
-const getFlexusFeature = createFeatureSelector('dyn'); 
+const getFlexusFeature = createFeatureSelector('dyn');
 
-export const getVariables = createSelector(
+export const getVariable = (prop) => {
+  return createSelector(
     getFlexusFeature,
-    (state: any) => state && state.variables
+    (state: any) => state && state?.variables[prop]
 );
+
+}

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import {Observable} from 'rxjs';
-import { CoreServices, getVariables } from '@wilo';
+import { CoreServices, getVariable } from '@wilo';
 import { map, skipWhile } from 'rxjs/operators';
 import { select } from '@ngrx/store';
 
@@ -160,8 +160,7 @@ export class MainListComponent implements OnInit {
         this.currentPage$ = this.svc.route.queryParamMap.pipe(map(paramMap => paramMap.get('currentPage') || 1))
 
         this.svc.store.pipe(
-          select(getVariables),
-          map(val => val?.all_info),
+          select(getVariable('all_info')),
           // tap(console.log),
           skipWhile(x => !x)
           ).subscribe(({dataset}) => {

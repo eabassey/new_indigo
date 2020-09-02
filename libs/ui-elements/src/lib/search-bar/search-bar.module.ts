@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SearchBarComponent } from './search-bar.component';
+import { FLXFormsModule } from '../forms';
+import { FLXIconModule } from '../inline-icons';
+import { FLXButtonsModule } from '../buttons';
 // import { FLXAlertMessagesModule } from '@flexus/ui-composites';
-import { FLXFormsModule, FLXButtonsModule,
-  // FLXReactiveFormsErrorDisplayModule,
-  FLXIconModule } from '@indigo/ui-elements';
+
 
 @NgModule({
   imports: [CommonModule, FLXFormsModule, FLXButtonsModule,

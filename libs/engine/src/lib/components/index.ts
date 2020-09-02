@@ -7,3 +7,4 @@ export * from './flexus-state.base';
 export * from './node-footer-button.component';
 export * from './node-footer.component';
 export * from './node-router.component';
+export * from './decision-node.component';

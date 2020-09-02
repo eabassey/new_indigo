@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 
 
 export interface AppConfig {
-    appKey: string;
+    name: string;
     settings?: {
       addActionPanel?: boolean;
       addHeaderActions?: boolean;

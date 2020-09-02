@@ -4,3 +4,4 @@ export * from './node2.component';
 export * from './templates.module';
 export * from './main-list/main-list.component';
 export * from './search.component';
+// export * from './search-filter.component';

@@ -1,9 +1,9 @@
 import jmespath from 'jmespath';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import render from 'json-templater/object';
+import {compile} from 'handlebars';
 
-export const renderJson = (jsonStr: string, queryProps: {[key: string]: string}) => (source: Observable<any>) => {
+export const renderTemplate = (templateStr: string, queryProps: {[key: string]: string}) => (source: Observable<any>) => {
   return source.pipe(
     map(state => {
       const queryResult = Object.entries(queryProps).reduce((acc, [prop, query]) => {
@@ -12,7 +12,8 @@ export const renderJson = (jsonStr: string, queryProps: {[key: string]: string})
           [prop]: jmespath.search(state, query)
         };
       }, {});
-      return render(jsonStr, queryResult);
+      const template = compile(templateStr);
+      return template(queryResult);
     })
-  );
+  )
 };

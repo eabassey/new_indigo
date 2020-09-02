@@ -23,7 +23,7 @@ export const mainListNode: NodeConfig = {
         {
             key: 'claims',
             errorMessage: '',
-            filterable: false,
+            filterable: true,
             sortable: false,
             directCall: (svc, route) => {
                 return svc.http.get(`${svc.baseUrl}/api/v1/staff_action/get_summary/`, {

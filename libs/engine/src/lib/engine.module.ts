@@ -11,6 +11,7 @@ import { StoreModule } from '@ngrx/store';
 import { flexusReducers } from './store';
 import { NodeRouterComponent } from './components/node-router.component';
 import { ClientConfig } from './models';
+import { DecisionNodeComponent } from './components';
 
 
 
@@ -24,6 +25,7 @@ const coreModules = [
   declarations: [
     NodeFooterButtonComponent,
     NodeRouterComponent,
+    DecisionNodeComponent
   ],
   imports: [CommonModule, StoreModule.forFeature('dyn', flexusReducers), RouterModule, ...coreModules],
   exports: [...coreModules, NodeRouterComponent, NodeFooterButtonComponent, RouterModule]

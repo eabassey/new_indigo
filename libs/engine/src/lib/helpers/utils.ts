@@ -4,12 +4,15 @@ import { map, delay, switchMap, distinctUntilChanged, pluck, skipWhile } from 'r
 import { combineLatest, empty, interval, of, Subscription, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { setVariable } from '../store';
-import { getVariables } from '../store/selectors/variable.selectors';
+import { getVariable } from '../store/selectors/variable.selectors';
+import { DecisionNodeComponent } from '../components/decision-node.component';
 
 
 
 export const renderTemplateDefs = (activeNode: NodeConfig, svc: CoreServices, route: ActivatedRoute) => {
-    if (typeof activeNode.component === 'function') {
+    if (activeNode.nodeType === 'decision') {
+      return [{component: DecisionNodeComponent, inputs: {activeNode}}];
+    } else if (typeof activeNode.component === 'function') {
       const inputs = transformInputs(activeNode.inputs, svc);
       const outputs = transformOutputs(activeNode.outputs, svc, route);
       return [{component: activeNode.component, inputs, outputs}];
@@ -52,8 +55,7 @@ const transformInputs = (inputs: {[key: string]: any}, svc: CoreServices) => {
       } else {
         // TYPE: VariableQuerySet -> { variableName: '', filterFunctions: {}, sortFunctions: {}}
         if (value.variableName) {
-          val = svc.store.select(getVariables).pipe(
-            pluck(value.variableName),
+          val = svc.store.select(getVariable(value.variableName)).pipe(
             skipWhile(x => !x),
             map((querySet) => {
               // querySet -> {dataset: [], filterBy: {'filter_name': arg}, sortBy: {}}

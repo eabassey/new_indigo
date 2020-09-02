@@ -12,6 +12,7 @@ export const workflow: StateConfig = {
     },
     actionPanel: {
       search: silSearchPanel,
+      // filter: silFilterPanel,
         panel1,
         panel2,
         panel3
