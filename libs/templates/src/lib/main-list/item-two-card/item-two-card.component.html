@@ -6,7 +6,7 @@
     'selected-job': selectedItemTwo?.id === itemTwo.id,
     'is-offline': !isOnline
   }"
-  (click)="takeAction(itemTwo)"
+  [routerLink]="['/test']"
   [class.can-edit]="true"
 >
   <!--  <div class="indicator"><flx-indicator *ngI f="(canEdit$ | async)" [color]="indicatorClass"></flx-indicator></div>-->

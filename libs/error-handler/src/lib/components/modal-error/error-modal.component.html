@@ -1,0 +1,31 @@
+<!-- <ng-container *ngIf="(errorMessage.errors | json) != '{}'"> -->
+<div class="flx-modal" *ngFor="let key of errorKeys">
+  <div class="flx-modal-heading">
+    <flx-heading size="large" type="creation" color="alert" align="center">Warning</flx-heading>
+  </div>
+
+  <div class="flx-modal-body">
+    <!-- <div [className]="type"> -->
+    <div class="warning">
+      <!-- <div id="modal-content-output"><ng-content></ng-content></div> -->
+      <!-- <div class="alert alert-danger" *ngFor="let key of errorKeys"> -->
+      <div *ngIf="errors[key]?.error?.reason; else OtherError">{{ errors[key]?.error?.reason }}</div>
+      <!-- <div *ngIf="errors[key]?.error?.message">{{ errors[key]?.error?.message }}</div> -->
+      <ng-template #OtherError>
+        <div *ngIf="errors[key]?.errorMessage">{{ errors[key]?.errorMessage }}</div>
+      </ng-template>
+
+      <!-- </div> -->
+    </div>
+  </div>
+  <div class="flx-modal-footer">
+    <flx-button (click)="onCancel(key)">Cancel</flx-button>
+    <flx-button *ngIf="node?.errorHandler?.retryPolicy === 'manual'" (click)="onRetry(errors[key].retryCall)"
+      >Retry</flx-button
+    >
+  </div>
+
+  <!-- <div class="er-modal-footer"><flx-button (click)="close()">Close </flx-button></div> -->
+</div>
+<div class="flx-modal-background" *ngFor="let key of errorKeys"></div>
+<!-- </ng-container> -->

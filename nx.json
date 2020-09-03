@@ -49,6 +49,9 @@
     },
     "utilities": {
       "tags": []
+    },
+    "error-handler": {
+      "tags": []
     }
   }
 }

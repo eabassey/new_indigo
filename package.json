@@ -49,6 +49,7 @@
     "jmespath": "^0.15.0",
     "ng-dynamic-component": "^7.0.1",
     "ngx-pagination": "^5.0.0",
+    "ngx-toastr": "^13.0.0",
     "ramda": "^0.27.1",
     "rxjs": "~6.5.5",
     "zone.js": "^0.10.2"

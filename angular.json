@@ -344,6 +344,38 @@
           "style": "scss"
         }
       }
+    },
+    "error-handler": {
+      "projectType": "library",
+      "root": "libs/error-handler",
+      "sourceRoot": "libs/error-handler/src",
+      "prefix": "indigo",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/error-handler/tsconfig.lib.json",
+              "libs/error-handler/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/error-handler/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/error-handler/jest.config.js",
+            "tsConfig": "libs/error-handler/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/error-handler/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {

@@ -8,7 +8,6 @@ export const panel1: ActionPanelConfig = {
     startNode: 'node1',
     nodes: {
         node1: {
-            id: 'node1',
             component: TP.Node1Component,
             outputs: {
                 doWork: (ev, sv) => {

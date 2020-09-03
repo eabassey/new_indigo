@@ -10,6 +10,7 @@ import { NodeConfig } from './node.config';
 
 export interface StateConfig {
     id: string;
+    name?: string;
     layout?: {
       showFooter: boolean;
       showHeader: boolean;
@@ -18,12 +19,11 @@ export interface StateConfig {
     };
     controls?: (svc: CoreServices) => ToolbarControlConfig[];
     title?: string | ((svc: CoreServices, route?: ActivatedRoute) => Observable<string>);
-  
+
     canActivate?: any[];
     canDeactivate?: any[];
     activateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;
     deactivateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;
-    name: string;
     useMockData?: boolean;
     mockData?: {[key: string]: any};
     actionPanel?: {[id: string]: ActionPanelConfig};

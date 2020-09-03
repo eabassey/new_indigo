@@ -1,0 +1,29 @@
+.warning-error {
+  background-color: var(--danger);
+  border-top: 1px solid var(--danger-dark);
+  width: 100%;
+  color: var(--inlineError-text);
+  display: flex;
+  align-items: center;
+}
+
+.error-message {
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0.4rem;
+  color: var(--inlineError-text);
+  width: 100%;
+}
+
+.buttons {
+  margin-right: 0.5rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.alert-icon {
+  margin: 0.2rem;
+  padding: 0.4rem;
+}

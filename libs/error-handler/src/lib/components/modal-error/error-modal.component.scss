@@ -1,0 +1,102 @@
+/* MODAL STYLES
+-------------------------------*/
+flx-modal {
+  display: none;
+  margin: auto;
+}
+
+.flx-modal {
+  position: absolute;
+  transform: translate(0%, 55%);
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 13;
+  overflow: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  width: 520px;
+  min-height: 380px;
+  max-height: 500px;
+  text-align: center;
+
+  background: var(--panel);
+  box-shadow: 0 0 150px 0 var(--alert);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  /* margin exposes part of the modal background */
+  margin: auto;
+}
+
+.flx-modal-heading {
+  text-align: center;
+  display: inline;
+}
+
+.flx-modal-body {
+  text-align: center;
+}
+
+.flx-modal-footer {
+  padding: 1rem;
+  text-align: center;
+}
+
+.default {
+  border: none;
+  padding: 20px;
+}
+
+.info {
+  border: none;
+  padding: 16px;
+}
+
+.warning {
+  border: none;
+  border-radius: 1em;
+  min-height: 152px;
+  text-transform: capitalize;
+  font-size: 1rem;
+}
+
+.flx-modal-body {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.flx-modal-background {
+  /* modal background fixed across whole screen */
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background-color: var(--background);
+  opacity: 0.9;
+
+  /* z-index must be below .jw-modal and above everything else  */
+  z-index: 12;
+}
+
+.flx-modal-open {
+  /* body overflow is hidden to hide main scrollbar when modal window is open */
+  overflow: hidden;
+}
+
+#modal-content-output {
+  margin: 1rem;
+}
+
+.flx-modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  vertical-align: bottom;
+}

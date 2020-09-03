@@ -1,7 +1,7 @@
 <div class="card-container" [id]="'claim-' + itemOne.id">
   <div
     class="claim-card"
-    (click)="takeClaimAction()"
+    (click)="takeAction(itemOne)"
     [ngClass]="!isOnline && itemOne.state !== 169 ? 'is-offline' : null"
   >
     <div class="indicator"><flx-indicator></flx-indicator></div>

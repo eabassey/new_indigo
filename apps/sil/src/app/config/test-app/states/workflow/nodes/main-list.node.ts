@@ -6,7 +6,6 @@ import { map } from 'rxjs/operators';
 
 
 export const mainListNode: NodeConfig = {
-    id: 'main-list',
     component: TP.MainListComponent,
     inputs: {
         // list$: 'dyn.variables.claims.dataset'

@@ -9,6 +9,7 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 import { get_sla_time } from '../item-utils';
+import { CoreServices } from '@wilo';
 
 
 @Component({
@@ -39,7 +40,7 @@ export class ItemOneCardComponent implements OnInit, OnChanges, AfterViewInit, O
   indicatorClass = '';
 
 
-  constructor() {}
+  constructor(private svc: CoreServices) {}
 
   ngOnInit() {
     this.sla = get_sla_time(this.itemOne, this.statesMap);
@@ -71,8 +72,9 @@ export class ItemOneCardComponent implements OnInit, OnChanges, AfterViewInit, O
     // this.fseSendJobMessage.emit(jobId);
   }
 
-  takeClaimAction(): void {
-
+  takeAction(itemOne): void {
+    const text = (this.statesMap[itemOne.state] as string).toLowerCase().split(' ').join('-');
+    this.svc.router.navigate([`../${text}`, {claimId: itemOne.id}])
   }
 
   checkPermission(menuItem: any) {

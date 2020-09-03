@@ -9,7 +9,6 @@ import { Type } from '@angular/core';
 import { FooterButtonConfig } from './footer-button.config';
 
 export interface NodeConfig {
-    id: string;
     name?: string;
     layout?: {
       showFooter: boolean;

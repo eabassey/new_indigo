@@ -2,7 +2,7 @@ import {App} from './app';
 import { AppConfig } from './app.config';
 
 export interface ClientConfig {
-    name: string;
+    name?: string;
     address?: string;
     colorSet?: any;
     startApp: string;

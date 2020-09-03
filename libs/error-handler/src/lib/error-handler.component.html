@@ -1,0 +1,22 @@
+<ng-container>
+  <!-- <flx-inline-error *ngIf="loginPageError$"></flx-inline-error> -->
+  <!--Quick fix for the login check if theres a node first-->
+  <flx-inline-error
+    [@slide]
+    *ngIf="node && (!node?.errorHandler?.displayFormat || node?.errorHandler?.displayFormat === 'inline')"
+    [node]="node"
+    (cancel)="cancel($event)"
+    (retry)="retry($event)"
+  ></flx-inline-error>
+
+  <flx-toast-error *ngIf="node?.errorHandler?.displayFormat === 'toast'"></flx-toast-error>
+
+  <!-- <flx-submit-result *ngIf="node?.errorHandler?.displayFormat === 'dialog'"></flx-submit-result> -->
+  <flx-error-modal
+    *ngIf="node?.errorHandler?.displayFormat === 'dialog'"
+    [node]="node"
+    (cancel)="cancel($event)"
+    (retry)="retry($event)"
+    id="submit-fail"
+  ></flx-error-modal>
+</ng-container>

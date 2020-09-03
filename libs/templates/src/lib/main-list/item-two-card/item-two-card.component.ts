@@ -16,6 +16,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { humaniseDate } from '@indigo/utilities';
 import * as moment from 'moment';
+import { CoreServices } from '@wilo';
 
 
 @Component({
@@ -48,8 +49,7 @@ export class ItemTwoCardComponent implements OnInit, AfterViewInit, OnDestroy {
 
   sub: Subscription[] = [];
   constructor(
-    private router: Router,
-    private renderer: Renderer2
+    private svc: CoreServices,
   ) {}
 
   ngOnInit() {
@@ -59,7 +59,11 @@ export class ItemTwoCardComponent implements OnInit, AfterViewInit, OnDestroy {
     this.renderAppointmentInfo();
   }
 
-  takeAction(item) {}
+  takeAction(item): void {
+    console.log({item})
+    const text = (this.statesMap[item.state] as string).toLowerCase().split(' ').join('-');
+    this.svc.router.navigate([`../${text}`, {jobId: item.id}])
+  }
 
 
   ngAfterViewInit() {
@@ -84,7 +88,7 @@ export class ItemTwoCardComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   selectMenuItem(itemTwo, menuItem) {
-    this.router.navigate(['/workflow/detail'], { skipLocationChange: true });
+    this.svc.router.navigate(['/workflow/detail'], { skipLocationChange: true });
   }
 
   ngOnDestroy() {

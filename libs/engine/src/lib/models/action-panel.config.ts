@@ -8,7 +8,7 @@ import { EventConfig } from './event.config';
 import { NodeConfig } from './node.config';
 
 export interface ActionPanelConfig {
-    id: string;
+    id?: string;
     name?: string;
     icon?: string;
     instruction?: string;
@@ -20,7 +20,7 @@ export interface ActionPanelConfig {
     deactivateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;
     useMockData?: boolean;
     mockData?: {[key: string]: any};
-  
+
     initFormFields?: (svc: CoreServices, route?: ActivatedRoute) => void | Subscription;
     checkValidityForFields?: string[];
     mockContextData?: {
@@ -34,5 +34,5 @@ export interface ActionPanelConfig {
     nodes?: { [id: string]: NodeConfig };
     onPanelInit?: (svc: CoreServices, route?: ActivatedRoute) => void;
     onPanelDestroy?: (svc: CoreServices, route?: ActivatedRoute) => void;
-  
+
   }

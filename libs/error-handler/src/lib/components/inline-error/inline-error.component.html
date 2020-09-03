@@ -1,0 +1,49 @@
+<div *ngFor="let key of errorKeys">
+  <ng-container
+    *ngIf="
+      errors[key].retryCall?.displayError === null ||
+      errors[key].retryCall?.displayError === undefined ||
+      errors[key].retryCall?.displayError ||
+      errors[key]?.error?.reason
+    "
+  >
+    <div class="warning-error">
+      <div class="error-message">
+        <flx-icon class="alert-icon" type="alert" color="button" [isClickable]="false"></flx-icon>
+        <div *ngIf="errors[key]?.error?.reason; else OtherError">{{ errors[key]?.error?.reason }}</div>
+        <ng-template #OtherError>
+          <div *ngIf="errors[key]?.errorMessage">{{ errors[key]?.errorMessage }}</div>
+        </ng-template>
+        <div *ngIf="errors[key]?.error?.message">
+          :
+          {{
+            errors[key]?.error?.message.substr(
+              errors[key].error.message.lastIndexOf(':') + 1,
+              errors[key].error.message.length
+            )
+          }}
+        </div>
+      </div>
+      <div class="buttons">
+        <flx-icon
+          *ngIf="node?.errorHandler?.retryPolicy === 'manual'"
+          class="alert-icon"
+          type="refresh"
+          color="button"
+          [isClickable]="true"
+          instruction="Retry"
+          (click)="onRetry(errors[key].retryCall)"
+        ></flx-icon>
+        <flx-icon
+          class="alert-icon"
+          type="remove"
+          color="button"
+          instruction="Dismiss"
+          [isClickable]="true"
+          (click)="onCancel(key)"
+        ></flx-icon>
+        <!-- <button *ngIf="node?.errorHandler?.retryPolicy === 'manual'" (click)="onRetry(errors[key].retryCall)">Retry</button> -->
+      </div>
+    </div>
+  </ng-container>
+</div>

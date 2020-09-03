@@ -8,7 +8,6 @@ export const silSearchPanel: ActionPanelConfig = {
     startNode: 'search',
     nodes: {
         search: {
-            id: 'search',
             component: TP.SearchComponent,
             outputs: {
                 doWork: (ev, sv) => {

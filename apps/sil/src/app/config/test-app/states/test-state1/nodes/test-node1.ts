@@ -7,7 +7,6 @@ import { NodeConfig } from '@wilo';
 
 
 export const testNode1: NodeConfig = {
-    id: 'testNode1',
     component: {
         children: [
             {

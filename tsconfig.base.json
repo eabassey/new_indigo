@@ -22,7 +22,8 @@
       "@indigo/pipes": ["libs/pipes/src/index.ts"],
       "@indigo/directives": ["libs/directives/src/index.ts"],
       "@indigo/ui-elements": ["libs/ui-elements/src/index.ts"],
-      "@indigo/utilities": ["libs/utilities/src/index.ts"]
+      "@indigo/utilities": ["libs/utilities/src/index.ts"],
+      "@indigo/error-handler": ["libs/error-handler/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

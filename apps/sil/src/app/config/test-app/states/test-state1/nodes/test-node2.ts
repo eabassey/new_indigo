@@ -7,7 +7,6 @@ import { mergeMap } from 'rxjs/operators';
 
 
 export const testNode2: NodeConfig = {
-    id: 'testNode2',
     component: TP.FormRendererComponent,
     serverQueries: [
         {

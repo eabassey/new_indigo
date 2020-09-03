@@ -5,7 +5,6 @@ import { NodeConfig } from '@wilo';
 
 
 export const testNode3: NodeConfig = {
-    id: 'testNode3',
     component: TP.FormRendererComponent,
     inputs: {
         formModel: [
