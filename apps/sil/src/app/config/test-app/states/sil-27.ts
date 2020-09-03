@@ -1,12 +1,15 @@
 import { StateConfig } from '@wilo';
 import { EMPTY, forkJoin, of } from 'rxjs';
-
+import * as TP from '@indigo/templates';
 
 export const SIL_27: StateConfig = {
   id: '27',
   name: 'job-invoiced',
-  startNode: 'MiscellaneousClass',
+  startNode: 'node1',
   nodes: {
+    node1: {
+      component: TP.Node1Component
+    },
     MiscellaneousClass: {
       name: 'miscellaneous-class',
       nodeType: 'decision',
@@ -22,7 +25,7 @@ export const SIL_27: StateConfig = {
           key: 'fullItemOne',
           errorMessage: '',
           directCall: ({http}, route) => {
-            const claimId = route.snapshot.paramMap.get('claimId');
+            const claimId = route.snapshot.paramMap.get('jobId');
             console.log({claimId})
             return of({val: 'test'});
           }

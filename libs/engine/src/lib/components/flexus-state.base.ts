@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { renderServerCalls, renderEvents, renderFormModels, renderServerQueries } from '../helpers/utils';
 
 @Component({template: ''})
-export abstract class FlexusStateBase implements OnChanges, OnDestroy {
+export abstract class FlexusStateBase implements OnInit, OnDestroy {
     @Input() state: StateConfig;
     @Input() node: NodeConfig;
     sub: Subscription;
@@ -18,8 +18,11 @@ export abstract class FlexusStateBase implements OnChanges, OnDestroy {
 
     constructor(private svc: CoreServices,  private route: ActivatedRoute) {}
 
-    ngOnChanges() {
-        this.handleConfig(this.state);
+    ngOnInit() {
+      this.sub = this.route.data.subscribe((state: StateConfig) => {
+        this.state = state;
+        this.handleConfig(state);
+      })
     }
 
 
@@ -74,6 +77,9 @@ export abstract class FlexusStateBase implements OnChanges, OnDestroy {
         if (this.state && this.state.onStateDestroy) {
             this.state.onStateDestroy(this.svc, this.route);
         }
+        if (this.sub) {
+          this.sub.unsubscribe();
+      }
 
         if(this.test) {
             this.test.unsubscribe();

@@ -8,9 +8,9 @@ import { CLIENT_CONFIG } from '../services';
 @Component({template: ''})
 export abstract class ClientConfigBase implements OnInit, OnDestroy {
     loading$: Observable<boolean>;
-    app: AppConfig;
-    state: StateConfig;
-    node: NodeConfig;
+    // app: AppConfig;
+    // state: StateConfig;
+    // node: NodeConfig;
     sub: Subscription;
   constructor(
     public svc: CoreServices,
@@ -20,15 +20,15 @@ export abstract class ClientConfigBase implements OnInit, OnDestroy {
 
     ngOnInit() {
       this.loading$ = this.svc.loader.loading$;
-      this.sub = this.route.paramMap.subscribe((params: ParamMap) => {
-        const appId = params.get('app');
-        const stateId = params.get('state');
-        const nodeId = params.get('node');
-        this.app = this.clientConfig.apps[appId];
-        this.state = this.app.appStates[stateId];
-        this.node = this.state.nodes[nodeId];
-        console.log({appId, stateId, nodeId,a: this.app, s: this.state, n: this.node});
-      });
+      // this.sub = this.route.paramMap.subscribe((params: ParamMap) => {
+      //   const appId = params.get('app');
+      //   const stateId = params.get('state');
+      //   const nodeId = params.get('node');
+      //   this.app = this.clientConfig.apps[appId];
+      //   this.state = this.app.appStates[stateId];
+      //   this.node = this.state.nodes[nodeId];
+      //   console.log({appId, stateId, nodeId,a: this.app, s: this.state, n: this.node});
+      // });
     }
 
 

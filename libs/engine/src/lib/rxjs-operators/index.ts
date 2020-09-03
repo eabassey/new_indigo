@@ -1,3 +1,3 @@
 export * from './query';
 export * from './transform-to-shape';
-export * from './render-template';
+export * from './render-string';

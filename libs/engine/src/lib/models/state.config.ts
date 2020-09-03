@@ -19,7 +19,10 @@ export interface StateConfig {
     };
     controls?: (svc: CoreServices) => ToolbarControlConfig[];
     title?: string | ((svc: CoreServices, route?: ActivatedRoute) => Observable<string>);
-
+    instructions?: {
+      editRoles: { [id: number]: string };
+      viewRoles: { [id: number]: string };
+    };
     canActivate?: any[];
     canDeactivate?: any[];
     activateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;

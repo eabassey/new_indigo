@@ -16,7 +16,8 @@ import {Router} from '@angular/router';
                 <section class="module-wrapper">
                 <flx-app-bar></flx-app-bar>
                 <section class="module-container">
-                    <workflow-state [state]="state" [node]="node"></workflow-state>
+                  <router-outlet></router-outlet>
+                    <!-- <workflow-state [state]="state" [node]="node"></workflow-state> -->
                 </section>
                 <app-footer></app-footer>
                 </section>

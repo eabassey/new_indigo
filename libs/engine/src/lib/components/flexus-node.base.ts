@@ -7,8 +7,8 @@ import { renderServerCalls, renderTemplateDefs, renderEvents, renderServerQuerie
 
 
 @Component({template: ''})
-export abstract class FlexusNodeBase implements OnDestroy, OnChanges {
-    @Input() node: NodeConfig;
+export abstract class FlexusNodeBase implements OnDestroy, OnInit {
+    node: NodeConfig;
     sub: Subscription;
     compInstances = [];
     serverQueriesSubs: Subscription[];
@@ -23,9 +23,11 @@ export abstract class FlexusNodeBase implements OnDestroy, OnChanges {
 
     constructor(private svc: CoreServices, private route: ActivatedRoute) {}
 
-    ngOnChanges() {
-      console.log({node: this.node})
-      this.handleConfig(this.node);
+    ngOnInit() {
+      this.sub =  this.route.data.subscribe((node: NodeConfig) => {
+        this.node = node;
+        this.handleConfig(node);
+      });
     }
 
     handleConfig(node: NodeConfig) {

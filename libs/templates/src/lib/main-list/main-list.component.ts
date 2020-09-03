@@ -1,6 +1,6 @@
-import { Component, Input, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import { Component, Input, OnInit, ChangeDetectionStrategy, Inject } from "@angular/core";
 import {Observable} from 'rxjs';
-import { CoreServices, getVariable } from '@wilo';
+import { CoreServices, getVariable, CLIENT_CONFIG, ClientConfig } from '@wilo';
 import { map, skipWhile } from 'rxjs/operators';
 import { select } from '@ngrx/store';
 
@@ -27,6 +27,7 @@ import { select } from '@ngrx/store';
                     [statesMap]="statesMap"
                     [spsMap]="spsMap"
                     [appointmentsMap]="appointmentsMap"
+                    [instructionsMap]="instructionsMap"
                     [itemOne]="item"
                     ></item-one-card>
                 </div>
@@ -154,11 +155,12 @@ export class MainListComponent implements OnInit {
     skillsMap: {[id: number]: any};
     spsMap: {[id: number]: any};
     appointmentsMap: {[id: number]: any};
+    instructionsMap: {[id: number]: any};
     constructor(private svc: CoreServices) {}
 
     ngOnInit() {
         this.currentPage$ = this.svc.route.queryParamMap.pipe(map(paramMap => paramMap.get('currentPage') || 1))
-
+        this.instructionsMap = this.getStateInstructions(this.svc.clientConfig);
         this.svc.store.pipe(
           select(getVariable('all_info')),
           // tap(console.log),
@@ -170,6 +172,12 @@ export class MainListComponent implements OnInit {
             this.spsMap = dataset.sps.reduce((acc, sp) => ({...acc, [sp.id]: sp}), {});
             this.appointmentsMap = dataset.appointment_types.reduce((acc, apt) => ({...acc, [apt.id]: apt}), {});
            });
+    }
+
+    getStateInstructions(clientConfig: ClientConfig) {
+      return Object.entries(clientConfig.apps[clientConfig.startApp].appStates).reduce(
+        (acc, [st, config]) => (config?.instructions ? {...acc, [st]: config.instructions} : {...acc}), {}
+      );
     }
 
     trackByFunc(idx, item) {

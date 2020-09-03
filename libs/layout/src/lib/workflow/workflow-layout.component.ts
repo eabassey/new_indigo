@@ -14,8 +14,8 @@ import { AppConfig, StateConfig, NodeConfig, ClientConfig } from '@wilo';
       <!-- <h1>Workflow layouter</h1>
       <h1>{{user | json }}</h1>
       <h2 *ngIf="loading$ | async">Busy Loading....................................</h2> -->
-      <!-- <router-outlet></router-outlet> -->
-      <workflow-app [app]="app" [state]="state" [node]="node"></workflow-app>
+      <router-outlet></router-outlet>
+      <!-- <workflow-app [app]="app" [state]="state" [node]="node"></workflow-app> -->
     `,
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['workflow-layout.component.scss']

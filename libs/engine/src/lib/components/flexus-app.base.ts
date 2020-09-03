@@ -8,9 +8,8 @@ import {delay} from 'rxjs/operators';
 
 @Component({template: ''})
 export abstract class FlexusAppBase implements OnInit, OnChanges, OnDestroy {
-    @Input() app: AppConfig;
-    @Input() state: StateConfig;
-    @Input() node: NodeConfig;
+    app: AppConfig;
+    state: StateConfig;
     activePanel: ActionPanelConfig;
     sub: Subscription;
     panelActionsSub: Subscription;
@@ -21,12 +20,19 @@ export abstract class FlexusAppBase implements OnInit, OnChanges, OnDestroy {
     eventsSub: Subscription[];
     paramsSub: Subscription;
     panelActions = [];
-    
+
     // ...
     constructor(private svc: CoreServices, private route: ActivatedRoute, private router: Router) {}
     ngOnInit() {
+      this.sub = this.route.data.subscribe((app: AppConfig) => {
+        this.app = app;
+        this.handleConfig(app);
+      });
+      this.route.firstChild.data.subscribe((state: StateConfig) => {
+        this.state = state;
+        this.getPanelActions(state);
+      });
         this.getQueryParams();
-        this.getPanelActions()
     }
     ngOnChanges() {
         this.handleConfig(this.app);
@@ -60,8 +66,8 @@ export abstract class FlexusAppBase implements OnInit, OnChanges, OnDestroy {
         }
     }
 
-    getPanelActions(): void {
-        this.panelActions = this.state?.actionPanel ? Object.values(this.state.actionPanel) : [];
+    getPanelActions(state): void {
+        this.panelActions = state?.actionPanel ? Object.values(state.actionPanel) : [];
     }
 
 
@@ -109,5 +115,5 @@ export abstract class FlexusAppBase implements OnInit, OnChanges, OnDestroy {
             this.app.onAppDestroy(this.svc, this.route);
         }
     }
-    
+
 }

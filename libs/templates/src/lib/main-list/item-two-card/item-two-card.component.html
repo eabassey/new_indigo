@@ -6,7 +6,7 @@
     'selected-job': selectedItemTwo?.id === itemTwo.id,
     'is-offline': !isOnline
   }"
-  [routerLink]="['/test']"
+  (click)="takeAction(itemTwo)"
   [class.can-edit]="true"
 >
   <!--  <div class="indicator"><flx-indicator *ngI f="(canEdit$ | async)" [color]="indicatorClass"></flx-indicator></div>-->
@@ -46,7 +46,7 @@
       <p #appointmentInfo class="appointment-info" [style.color]="appointment_text_color">{{appointment_text}}</p>
       <p *ngIf="!!stateDescription" class="job-state">{{ itemTwo.state }}: {{ stateDescription }}</p>
     </div>
-    <div class="take-action"><!-- Gets Populated Dynamically --></div>
+    <div class="take-action"><span>{{instruction}}</span></div>
   </div>
 
   <!--  <div [class.disabled]="!isOnline" class="take-action  item-two-button-holder">-->

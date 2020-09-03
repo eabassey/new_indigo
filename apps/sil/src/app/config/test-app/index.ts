@@ -12,7 +12,7 @@ export const testApp: AppConfig = {
     appStates: {
         testState1,
         workflow,
-        'job-invoiced': SIL_27
+        '27': SIL_27
     },
     serverCalls: [
       {

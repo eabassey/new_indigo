@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { query, renderTemplate, transformToShape } from '../rxjs-operators';
+import { query, renderString, transformToShape } from '../rxjs-operators';
 
 
 @Injectable({providedIn: 'root'})
@@ -15,9 +15,9 @@ export class StoreQuery {
     );
   }
 
-  renderJson(templateStr: string, queryProps: {[key: string]: string}) {
+  renderTemplate(templateStr: string, queryProps: {[key: string]: string}) {
     return this.store.pipe(
-      renderTemplate(templateStr, queryProps)
+      renderString(templateStr, queryProps)
     );
   }
 

@@ -4,7 +4,7 @@ import { ModalService } from './modal.service';
 import { NavService } from './nav.service';
 import { StoreQuery } from './store-query.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CLIENT_SERVICE, BASE_URL } from './constants';
+import { CLIENT_SERVICE, BASE_URL, CLIENT_CONFIG } from './constants';
 import { Store } from '@ngrx/store';
 import { LoaderService } from './loader.service';
 import { AuthService } from './auth.service';
@@ -13,6 +13,7 @@ import { FooterAccessorService } from './footer-accessor.service';
 import { HeaderAccessorService } from './header-accessor.service';
 import { IndexedDbService } from './indexeddb.service';
 import { BigFormService } from './big-form.service';
+import { ClientConfig } from '../models';
 
 
 @Injectable({providedIn: 'root'})
@@ -33,6 +34,7 @@ export class CoreServices {
         public footerAccessor: FooterAccessorService,
         public headerAcessor: HeaderAccessorService,
         @Inject(BASE_URL) public baseUrl: string,
+        @Inject(CLIENT_CONFIG) public clientConfig: ClientConfig,
         @Inject(CLIENT_SERVICE) public clientService: any
     ) {}
 }

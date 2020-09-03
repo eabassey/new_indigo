@@ -23,6 +23,7 @@ export class ItemOneCardComponent implements OnInit, OnChanges, AfterViewInit, O
   @Input() statesMap: {[id: number]: any};
   @Input() skillsMap: {[id: number]: any};
   @Input() appointmentsMap: {[id: number]: any};
+  @Input() instructionsMap: {[id: number]: any};
   @Input() spsMap: {[id: number]: any};
   slaTimeColor = 'grey';
   sla: {text: string; color: string};

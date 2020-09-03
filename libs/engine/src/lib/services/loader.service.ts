@@ -1,7 +1,7 @@
 import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { map, tap, delay } from 'rxjs/operators';
-import {remove} from 'lodash';
+import * as remove from 'lodash.remove';
 
 @Injectable({providedIn: 'root'})
 export class LoaderService {

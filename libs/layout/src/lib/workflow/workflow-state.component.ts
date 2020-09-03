@@ -6,8 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
     selector: 'workflow-state',
     template: `
-    <!-- <router-outlet></router-outlet> -->
-    <workflow-node [node]="node"></workflow-node>
+    <router-outlet></router-outlet>
+    <!-- <workflow-node [node]="node"></workflow-node> -->
     `,
     styleUrls: ['workflow-state.component.scss']
 })

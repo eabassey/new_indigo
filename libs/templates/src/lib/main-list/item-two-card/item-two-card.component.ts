@@ -42,31 +42,43 @@ export class ItemTwoCardComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() spsMap: {[id: number]: any};
   @Input() statesMap: {[id: number]: any};
   @Input() appointmentsMap: {[id: number]: any};
+  @Input() instructionsMap: {[id: number]: any}
   skill: any;
   sp: any;
   stateDescription: string;
   appt: string;
+  instruction: string;
 
   sub: Subscription[] = [];
   constructor(
     private svc: CoreServices,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.skill = this.skillsMap[this.itemTwo?.skill];
     this.sp = this.spsMap[this.itemTwo?.sp];
     this.stateDescription = this.statesMap[this.itemTwo.state]?.description;
+    this.instruction = this.rd(true, 1, {editRoles: {1: 'Allow something'}});
     this.renderAppointmentInfo();
   }
 
   takeAction(item): void {
-    console.log({item})
-    const text = (this.statesMap[item.state] as string).toLowerCase().split(' ').join('-');
-    this.svc.router.navigate([`../${text}`, {jobId: item.id}])
+    console.log({route: this.route})
+    // const text = (this.statesMap[item.state].description as string).toLowerCase().split(' ').join('-');
+    this.router.navigate(['/testApp', item.state, {jobId: item.id}])
   }
 
 
   ngAfterViewInit() {
+  }
+
+  rd(userCanEdit: boolean, userRole: any, instructions: any) {
+    const instructionText = userCanEdit
+        ? (instructions && instructions.editRoles[userRole]) || (instructions && instructions.editRoles[0]) || ''
+        : (instructions && instructions.viewRoles[userRole]) || (instructions && instructions.viewRoles[0]) || '';
+        return instructionText;
   }
 
   renderAppointmentInfo() {
