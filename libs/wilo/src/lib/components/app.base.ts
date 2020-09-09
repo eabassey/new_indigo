@@ -7,7 +7,7 @@ import { renderServerCalls, renderEvents, renderServerQueries } from '../helpers
 import {delay} from 'rxjs/operators';
 
 @Component({template: ''})
-export abstract class FlexusAppBase implements OnInit, OnChanges, OnDestroy {
+export abstract class AppBase implements OnInit, OnChanges, OnDestroy {
     app: AppConfig;
     activePanel: ActionPanelConfig;
     sub: Subscription;

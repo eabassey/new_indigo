@@ -6,7 +6,7 @@ import { of } from 'rxjs';
 @Injectable({
     providedIn: 'root',
   })
-  export class FlexusDeactivateGuard implements CanDeactivate<any> {
+  export class DeactivateGuard implements CanDeactivate<any> {
         constructor(private svc: CoreServices,  private route: ActivatedRoute) {}
 
         canDeactivate(

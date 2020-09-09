@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CoreServices, FlexusPanelNodeBase } from '@wilo';
+import { CoreServices, PanelNodeBase } from '@wilo';
 import { ActivatedRoute } from '@angular/router';
 
 
@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
         <node-router [organisms]="organisms" [compInstances]="compInstances"></node-router>
     `
 })
-export class WorkflowPanelNodeComponent extends FlexusPanelNodeBase {
+export class WorkflowPanelNodeComponent extends PanelNodeBase {
     constructor(svc: CoreServices, route: ActivatedRoute) {
         super(svc, route);
     }

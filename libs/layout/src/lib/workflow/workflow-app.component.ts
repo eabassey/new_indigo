@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { CoreServices, FlexusAppBase } from '@wilo';
+import { CoreServices, AppBase } from '@wilo';
 import { ActivatedRoute } from '@angular/router';
 import {Router} from '@angular/router';
 
@@ -67,7 +67,7 @@ import {Router} from '@angular/router';
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['workflow-app.component.scss']
 })
-export class WorkflowAppComponent extends FlexusAppBase {
+export class WorkflowAppComponent extends AppBase {
 
     constructor(svc: CoreServices, route: ActivatedRoute, router: Router) {
         super(svc, route, router);

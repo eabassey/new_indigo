@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {EngineModule, AuthService} from '@wilo';
+import {WiloModule, AuthService} from '@wilo';
 import {WorkflowLayoutModule, WorkflowLayoutComponent} from '@indigo/layout';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
@@ -22,10 +22,9 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    EngineModule,
     WorkflowLayoutModule,
     StoreModule.forRoot({}),
-    EngineModule.forRoot({
+    WiloModule.forRoot({
       clientConfig: silConfig,
       clientService: SilService,
       indexedDbName: 'dynDB',

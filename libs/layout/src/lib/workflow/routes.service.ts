@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { Router, Route } from '@angular/router';
-import { CLIENT_CONFIG, ClientConfig, AppConfig, FlexusActivatedGuard, FlexusDeactivateGuard } from '@wilo';
+import { CLIENT_CONFIG, ClientConfig, AppConfig, ActivatedGuard, DeactivateGuard } from '@wilo';
 import { WorkflowLayoutComponent } from './workflow-layout.component';
 import { WorkflowAppComponent } from './workflow-app.component';
 import { WorkflowStateComponent } from './workflow-state.component';
@@ -59,8 +59,8 @@ export class RoutesService {
                 {
                     path: appKey,
                     component: WorkflowAppComponent, // app.appComp, // this.appBase,  // FlexusAppComponent,
-                    canActivate: [FlexusActivatedGuard],
-                    canDeactivate: [FlexusDeactivateGuard],
+                    canActivate: [ActivatedGuard],
+                    canDeactivate: [DeactivateGuard],
                     data: {...app },
                     children: [
                         {path: '', redirectTo: app.startState, pathMatch: 'prefix'},
@@ -70,16 +70,16 @@ export class RoutesService {
                                     path: stateKey,
                                     component: WorkflowStateComponent, // app.stateComp, // this.stateBase, // FlexusStateComponent,
                                     data: {...state },
-                                    canActivate: [FlexusActivatedGuard],
-                                    canDeactivate: [FlexusDeactivateGuard],
+                                    canActivate: [ActivatedGuard],
+                                    canDeactivate: [DeactivateGuard],
                                     children: [
                                         {path: '', redirectTo: state.startNode, pathMatch: 'prefix'},
                                         ...Object.entries(state.nodes).map(([nodeKey, node]) => {
                                                 return {
                                                     path: nodeKey,
                                                     component: WorkflowNodeComponent, // app.nodeComp, // this.nodeBase, // FlexusNodeComponent,
-                                                    canActivate: [FlexusActivatedGuard],
-                                                    canDeactivate: [FlexusDeactivateGuard],
+                                                    canActivate: [ActivatedGuard],
+                                                    canDeactivate: [DeactivateGuard],
                                                     data: {...node }
                                                 } as Route;
                                             })

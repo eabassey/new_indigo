@@ -7,7 +7,7 @@ import { renderServerCalls, renderTemplateDefs, renderEvents, renderServerQuerie
 
 
 @Component({template: ''})
-export class FlexusPanelNodeBase implements OnInit, OnDestroy, OnChanges {
+export class PanelNodeBase implements OnInit, OnDestroy, OnChanges {
     @Input() activePanel: ActionPanelConfig;
     activeNode: NodeConfig;
     sub: Subscription;

@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 
 
 @Injectable({providedIn: 'root'})
-export class FlexusActivatedGuard implements CanActivate {
+export class ActivatedGuard implements CanActivate {
     constructor(private svc: CoreServices,  private route: ActivatedRoute) {}
     canActivate(
       next: ActivatedRouteSnapshot,

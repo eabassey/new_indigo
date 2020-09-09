@@ -6,7 +6,7 @@ import { CoreServices } from '../services';
 import { renderServerCalls, renderTemplateDefs, renderServerQueries, renderEvents, renderFormModels } from '../helpers/utils';
 
 @Component({template: ''})
-export abstract class FlexusActionPanelBase implements OnChanges, OnDestroy {
+export abstract class ActionPanelBase implements OnChanges, OnDestroy {
     @Input() activePanel: ActionPanelConfig;
     serverCallsSubs: Subscription[];
     serverQueriesSubs: Subscription[];

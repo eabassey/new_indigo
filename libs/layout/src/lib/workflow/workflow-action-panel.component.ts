@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FlexusActionPanelBase, CoreServices } from '@wilo';
+import { ActionPanelBase, CoreServices } from '@wilo';
 
 
 @Component({
@@ -12,7 +12,7 @@ import { FlexusActionPanelBase, CoreServices } from '@wilo';
         <!-- <node-router [organisms]="organisms" [compInstances]="compInstances"></node-router> -->
     `
 })
-export class WorkflowActionPanelComponent extends FlexusActionPanelBase {
+export class WorkflowActionPanelComponent extends ActionPanelBase {
     constructor(svc: CoreServices, route: ActivatedRoute) {
         super(svc, route);
     }

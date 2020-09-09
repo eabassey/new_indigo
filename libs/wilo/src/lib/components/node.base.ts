@@ -7,7 +7,7 @@ import { renderServerCalls, renderTemplateDefs, renderEvents, renderServerQuerie
 
 
 @Component({template: ''})
-export abstract class FlexusNodeBase implements OnDestroy, OnInit {
+export abstract class NodeBase implements OnDestroy, OnInit {
     node: NodeConfig;
     sub: Subscription;
     compInstances = [];

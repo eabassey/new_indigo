@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CoreServices, FlexusStateBase } from '@wilo';
+import { CoreServices, StateBase } from '@wilo';
 import { ActivatedRoute } from '@angular/router';
 
 
@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
     `,
     styleUrls: ['workflow-state.component.scss']
 })
-export class WorkflowStateComponent extends FlexusStateBase {
+export class WorkflowStateComponent extends StateBase {
     constructor(svc: CoreServices, route: ActivatedRoute) {
         super(svc, route);
     }

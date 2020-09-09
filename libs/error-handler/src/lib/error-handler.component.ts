@@ -3,8 +3,7 @@ import { trigger, style, animate, transition } from '@angular/animations';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { RemoveError } from './store/error-handler.actions';
-import { getActiveNode, MakeServerCall, ManifestController, getLoginError } from '@flexus/engine';
-import { FLXModalComponent } from '@flexus/ui-elements';
+import { FLXModalComponent } from '@indigo/ui-elements';
 
 @Component({
   selector: 'flx-error-handler',
@@ -22,16 +21,16 @@ export class ErrorHandlerComponent implements OnInit, OnDestroy {
   loginPageError$;
   @ViewChild(FLXModalComponent, { static: true }) warningModal: FLXModalComponent;
 
-  constructor(private store: Store<any>, private controller: ManifestController<any>) {}
+  constructor(private store: Store<any>) {}
 
   ngOnInit() {
-    this.loginPageError$ = this.store.select(getLoginError);
-    this.nodeSub = this.controller.select(getActiveNode).subscribe(node => {
-      this.node = node;
-      // if (this.node && this.node.errorHandler && this.node.erroHandler.displayFormat && this.node.erroHandler.displayFormat === 'dialog') {
-      //   this.warningModal.open();
-      // }
-    });
+    // this.loginPageError$ = this.store.select(getLoginError);
+    // this.nodeSub = this.controller.select(getActiveNode).subscribe(node => {
+    //   this.node = node;
+    //   // if (this.node && this.node.errorHandler && this.node.erroHandler.displayFormat && this.node.erroHandler.displayFormat === 'dialog') {
+    //   //   this.warningModal.open();
+    //   // }
+    // });
   }
 
   cancel(key: string) {
@@ -45,8 +44,8 @@ export class ErrorHandlerComponent implements OnInit, OnDestroy {
   }
 
   retry(retryCall) {
-    this.store.dispatch(new RemoveError({ dataKey: retryCall.dataKey }));
-    this.store.dispatch(new MakeServerCall({ ...retryCall }));
+    // this.store.dispatch(new RemoveError({ dataKey: retryCall.dataKey }));
+    // this.store.dispatch(new MakeServerCall({ ...retryCall }));
   }
 
   ngOnDestroy() {

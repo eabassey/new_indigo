@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { renderServerCalls, renderEvents, renderServerQueries } from '../helpers/utils';
 
 @Component({template: ''})
-export abstract class FlexusStateBase implements OnInit, OnDestroy {
+export abstract class StateBase implements OnInit, OnDestroy {
     @Input() state: StateConfig;
     @Input() node: NodeConfig;
     sub: Subscription;

@@ -1,6 +1,6 @@
 
 import {reducer as variables } from './variable.reducer';
 
-export const flexusReducers = {
+export const wiloReducers = {
     variables
 };

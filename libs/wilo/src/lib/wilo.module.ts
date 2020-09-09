@@ -8,7 +8,7 @@ import {RouterModule, Route } from '@angular/router';
 import { CLIENT_CONFIG, CLIENT_SERVICE, BASE_URL, INDEXED_DB_NAME } from './services/constants';
 import { NodeFooterButtonComponent } from './components/node-footer-button.component';
 import { StoreModule } from '@ngrx/store';
-import { flexusReducers } from './store';
+import { wiloReducers } from './store';
 import { NodeRouterComponent } from './components/node-router.component';
 import { ClientConfig } from './models';
 import { DecisionNodeComponent } from './components';
@@ -27,13 +27,13 @@ const coreModules = [
     NodeRouterComponent,
     DecisionNodeComponent
   ],
-  imports: [CommonModule, StoreModule.forFeature('dyn', flexusReducers), RouterModule, ...coreModules],
+  imports: [CommonModule, StoreModule.forFeature('dyn', wiloReducers), RouterModule, ...coreModules],
   exports: [...coreModules, NodeRouterComponent, NodeFooterButtonComponent, RouterModule]
 })
-export class EngineModule {
-  constructor(@Optional() @SkipSelf() parentModule: EngineModule) {
+export class WiloModule {
+  constructor(@Optional() @SkipSelf() parentModule: WiloModule) {
     if ( parentModule ) {
-          throw new Error('FlexusModule is already loaded. Import it in the AppModule only!');
+          throw new Error('WilowModule is already loaded. Import it in the AppModule only!');
       }
   }
   static forRoot(config: {
@@ -41,9 +41,9 @@ export class EngineModule {
     clientService: any;
     base_url: string;
     indexedDbName: string;
-  }): ModuleWithProviders<EngineModule> {
+  }): ModuleWithProviders<WiloModule> {
     return {
-      ngModule: EngineModule,
+      ngModule: WiloModule,
       providers: [
         {provide: CLIENT_CONFIG, useValue: config.clientConfig},
         {provide: CLIENT_SERVICE, useExisting: config.clientService},

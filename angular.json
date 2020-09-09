@@ -121,29 +121,29 @@
         }
       }
     },
-    "engine": {
+    "wilo": {
       "projectType": "library",
-      "root": "libs/engine",
-      "sourceRoot": "libs/engine/src",
+      "root": "libs/wilo",
+      "sourceRoot": "libs/wilo/src",
       "prefix": "indigo",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "libs/engine/tsconfig.lib.json",
-              "libs/engine/tsconfig.spec.json"
+              "libs/wilo/tsconfig.lib.json",
+              "libs/wilo/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/engine/**/*"]
+            "exclude": ["**/node_modules/**", "!libs/wilo/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/engine/jest.config.js",
-            "tsConfig": "libs/engine/tsconfig.spec.json",
+            "jestConfig": "libs/wilo/jest.config.js",
+            "tsConfig": "libs/wilo/tsconfig.spec.json",
             "passWithNoTests": true,
-            "setupFile": "libs/engine/src/test-setup.ts"
+            "setupFile": "libs/wilo/src/test-setup.ts"
           }
         }
       },
