@@ -1,8 +1,8 @@
-import { Component, OnInit,  OnDestroy, ComponentRef, Inject, OnChanges, Input } from '@angular/core';
-import {  NodeConfig, ClientConfig, StateConfig, AppConfig } from '../models';
+import { Component, OnInit,  OnDestroy } from '@angular/core';
+import {  NodeConfig } from '../models';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { CoreServices, CLIENT_CONFIG } from '../services';
+import { ActivatedRoute } from '@angular/router';
+import { CoreServices } from '../services';
 import { renderServerCalls, renderTemplateDefs, renderEvents, renderServerQueries } from '../helpers/utils';
 
 

@@ -3,7 +3,7 @@ import { StateConfig, ServerCallConfig, NodeConfig } from '../models';
 import { CoreServices } from '../services/core.services';
 import { Subscription, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { renderServerCalls, renderEvents, renderFormModels, renderServerQueries } from '../helpers/utils';
+import { renderServerCalls, renderEvents, renderServerQueries } from '../helpers/utils';
 
 @Component({template: ''})
 export abstract class FlexusStateBase implements OnInit, OnDestroy {
@@ -12,7 +12,6 @@ export abstract class FlexusStateBase implements OnInit, OnDestroy {
     sub: Subscription;
     eventsSub: Subscription[];
     setValuesSub: Subscription;
-    test;
     serverCallsSubs: Subscription[];
     serverQueriesSubs: Subscription[];
 
@@ -22,7 +21,7 @@ export abstract class FlexusStateBase implements OnInit, OnDestroy {
       this.sub = this.route.data.subscribe((state: StateConfig) => {
         this.state = state;
         this.handleConfig(state);
-      })
+      });
     }
 
 
@@ -33,8 +32,9 @@ export abstract class FlexusStateBase implements OnInit, OnDestroy {
         }
         //
         if (state?.actionPanel) {
-            const panels = Object.values(state.actionPanel);
-            this.svc.actionPanel.setActionPanel(panels);
+            this.svc.actionPanel.setActionPanel(state.actionPanel);
+        } else {
+          this.svc.actionPanel.setActionPanel({});
         }
         //
         // const formGroup = this.svc.bf.createFormGroup(renderFormModels(state));
@@ -80,10 +80,6 @@ export abstract class FlexusStateBase implements OnInit, OnDestroy {
         if (this.sub) {
           this.sub.unsubscribe();
       }
-
-        if(this.test) {
-            this.test.unsubscribe();
-        }
     }
 
 

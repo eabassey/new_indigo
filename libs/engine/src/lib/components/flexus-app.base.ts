@@ -9,10 +9,10 @@ import {delay} from 'rxjs/operators';
 @Component({template: ''})
 export abstract class FlexusAppBase implements OnInit, OnChanges, OnDestroy {
     app: AppConfig;
-    state: StateConfig;
     activePanel: ActionPanelConfig;
     sub: Subscription;
     panelActionsSub: Subscription;
+    panelsMap: {[id: string]: ActionPanelConfig}
     expandActionPanel;
     clickedActionPanel = null;
     serverCallsSubs: Subscription[];
@@ -28,14 +28,15 @@ export abstract class FlexusAppBase implements OnInit, OnChanges, OnDestroy {
         this.app = app;
         this.handleConfig(app);
       });
-      this.route.firstChild.data.subscribe((state: StateConfig) => {
-        this.state = state;
-        this.getPanelActions(state);
+      this.panelActionsSub = this.svc.actionPanel.panelActions$.pipe(delay(0)).subscribe((panelsMap) => {
+        this.panelsMap = panelsMap;
+        const res = Object.values(panelsMap).map(act => ({id: act.id, path: act.id, instruction: act.instruction, icon: act.icon}));
+        this.panelActions = res || [];
       });
         this.getQueryParams();
     }
     ngOnChanges() {
-        this.handleConfig(this.app);
+        // this.handleConfig(this.app);
     }
 
     getQueryParams() {
@@ -66,15 +67,11 @@ export abstract class FlexusAppBase implements OnInit, OnChanges, OnDestroy {
         }
     }
 
-    getPanelActions(state): void {
-        this.panelActions = state?.actionPanel ? Object.values(state.actionPanel) : [];
-    }
-
 
     initActionPanel(panel): void {
         if (panel && this.clickedActionPanel !== panel) {
             this.clickedActionPanel = panel;
-            this.activePanel = this.state.actionPanel[this.clickedActionPanel];
+            this.activePanel = this.panelsMap[this.clickedActionPanel];
         }
     }
 
@@ -86,7 +83,7 @@ export abstract class FlexusAppBase implements OnInit, OnChanges, OnDestroy {
           } else {
               this.expandActionPanel = true;
             this.clickedActionPanel = path;
-            this.activePanel = this.state.actionPanel[this.clickedActionPanel];
+            this.activePanel = this.panelsMap[this.clickedActionPanel];
           }
     }
 
@@ -105,6 +102,9 @@ export abstract class FlexusAppBase implements OnInit, OnChanges, OnDestroy {
         if (this.paramsSub) {
             this.paramsSub.unsubscribe();
         }
+        if (this.panelActionsSub) {
+          this.panelActionsSub.unsubscribe();
+      }
         if (this.serverCallsSubs) {
             this.serverCallsSubs.forEach(sb => sb.unsubscribe());
         }

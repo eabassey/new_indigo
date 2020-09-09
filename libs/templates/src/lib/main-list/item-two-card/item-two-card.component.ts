@@ -31,7 +31,7 @@ export class ItemTwoCardComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() itemTwoContextMenuList = [];
   @Input() user: any;
   @Input() activeOrg;
-  @Input() isOnline: boolean;
+  @Input() isOnline: boolean = true;
   selectedItemTwo: any;
   buttonText: string;
   appointment_text;

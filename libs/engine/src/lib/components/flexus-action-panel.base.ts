@@ -13,7 +13,6 @@ export abstract class FlexusActionPanelBase implements OnChanges, OnDestroy {
     setValuesSub: Subscription;
     eventsSub: Subscription[];
     sub: Subscription;
-;
 
     constructor(private svc: CoreServices, private route: ActivatedRoute) {}
 
@@ -24,19 +23,19 @@ export abstract class FlexusActionPanelBase implements OnChanges, OnDestroy {
     }
 
     handleConfig(panel: ActionPanelConfig) {
-        if (panel.onPanelInit) {
+        if (panel?.onPanelInit) {
             panel.onPanelInit(this.svc, this.route);
         }
-        if (panel.serverQueries) {
+        if (panel?.serverQueries) {
             this.serverQueriesSubs = renderServerQueries(panel.serverQueries, this.svc, this.route)
         }
-        if (panel.serverCalls) {
+        if (panel?.serverCalls) {
             this.serverCallsSubs = renderServerCalls(panel.serverCalls, this.svc, this.route);
         }
-        if (panel.setValuesToBigForm) {
+        if (panel?.setValuesToBigForm) {
             this.setValuesSub = panel.setValuesToBigForm(this.svc, this.route).subscribe();
         }
-        if (panel.events) {
+        if (panel?.events) {
             this.eventsSub = renderEvents(panel.events, this.svc);
         }
         // Customize headers for action panel

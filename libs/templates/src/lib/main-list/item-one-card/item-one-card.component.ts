@@ -36,8 +36,8 @@ export class ItemOneCardComponent implements OnInit, OnChanges, AfterViewInit, O
 
   // This preload class is used to guard against the hiding animation on load.
   preload = true;
-  isOffline = '';
-  isOnline = false;
+  isOffline = false;
+  isOnline = true;
   indicatorClass = '';
 
 
