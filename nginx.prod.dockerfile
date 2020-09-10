@@ -1,16 +1,23 @@
-## STAGE 1
-FROM node:latest as node
-LABEL author="Enoch"
-WORKDIR /app
-COPY package.json package.json
+FROM gmathieu/node-browsers:3.0.0 AS build
+
+COPY package.json /usr/angular-workdir/
+WORKDIR /usr/angular-workdir
 RUN npm install
-COPY . .
-RUN npm i -g @angular/cli@10.0.0
-RUN ng build sil -c production
 
+COPY ./ /usr/angular-workdir
+RUN npx ng build -c production
 
-### STAGE 2
-FROM nginx:alpine
-VOLUME /var/cache/nginx
-COPY --from=node /app/dist /usr/share/nginx/html
-COPY ./config/nginx.conf /etc/nginx/conf.d/default.conf
+FROM nginx:1.15.8-alpine
+
+## Remove default Nginx website
+RUN rm -rf /usr/share/nginx/html/*
+
+COPY ./config/nginx.conf /etc/nginx/nginx.conf
+
+COPY --from=build  /usr/angular-workdir/dist/ /usr/share/nginx/html
+
+RUN echo "mainFileName=\"\$(ls /usr/share/nginx/html/main*.js)\" && \
+          envsubst '\$BACKEND_API_URL \$DEFAULT_LANGUAGE ' < \${mainFileName} > main.tmp && \
+          mv main.tmp  \${mainFileName} && nginx -g 'daemon off;'" > run.sh
+
+ENTRYPOINT ["sh", "run.sh"]
