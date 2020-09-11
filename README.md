@@ -73,4 +73,4 @@ To deploy each client project, you build the associated dockerfile for the clien
 which we can eiher create docker container from manually, use docker-compose or kubernetes to orchestrate the containers.
 
 ### Docker
-docker run -d  -p 80:80 --env BACKEND_API_URL=http://localhost:3000 eabassey/angular-docker:latest
+docker run -d  -p 80:80 --env BACKEND_API_URL=http://localhost:3000 abassey/sil-fe:latest
