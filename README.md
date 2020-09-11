@@ -71,3 +71,6 @@ configurations that follow the opinionated approach taken and expected my the en
 To deploy each client project, you build the associated dockerfile for the client by tagging it first. This will generate an image 
 
 which we can eiher create docker container from manually, use docker-compose or kubernetes to orchestrate the containers.
+
+### Docker
+docker run -d  -p 80:80 --env BACKEND_API_URL=http://localhost:3000 eabassey/angular-docker:latest
