@@ -140,12 +140,12 @@ export const renderFormModels = (state: StateConfig | ActionPanelConfig) => {
     return Object.values(state.nodes).reduce((acc, node) => {
          return [
              ...acc,
-             ...(node && node.inputs && node.inputs.formModel ?  node.inputs.formModel : []),
+             ...(node && node.inputs && node.inputs.formModel ?  node.inputs.formModel.fields : []),
              ...(typeof node.component !== 'function' ? (
                  node.component.children.reduce((acc2, ch) => {
                      return [
                          ...acc2,
-                         ...(ch.inputs && ch.inputs.formModel ? ch.inputs.formModel : [])
+                         ...(ch.inputs && ch.inputs.formModel ? ch.inputs.formModel.fields : [])
                      ];
                  }, [])
              ) : [])

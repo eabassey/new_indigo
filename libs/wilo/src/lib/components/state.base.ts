@@ -3,7 +3,7 @@ import { StateConfig, ServerCallConfig, NodeConfig } from '../models';
 import { CoreServices } from '../services/core.services';
 import { Subscription, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { renderServerCalls, renderEvents, renderServerQueries } from '../helpers/utils';
+import { renderServerCalls, renderEvents, renderServerQueries, renderFormModels } from '../helpers/utils';
 
 @Component({template: ''})
 export abstract class StateBase implements OnInit, OnDestroy {
@@ -37,8 +37,8 @@ export abstract class StateBase implements OnInit, OnDestroy {
           this.svc.actionPanel.setActionPanel({});
         }
         //
-        // const formGroup = this.svc.bf.createFormGroup(renderFormModels(state));
-        // this.svc.bf.initialize(formGroup);
+        const formGroup = this.svc.bf.createFormGroup(renderFormModels(state));
+        this.svc.bf.initialize(formGroup);
         //
         // initialize form fields
         if (state?.setValuesToBigForm) {
