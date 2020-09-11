@@ -1,0 +1,18 @@
+<div [hidden]="isHidden$ | async" [class]="field.controlGroupClasses" [formGroup]="form">
+    <label [class]="field.labelClasses" [attr.for]="field.label">
+      {{field?.label}}
+      <!-- <strong class="text-danger" *ngIf="showRequiredSign">*</strong> -->
+    </label>
+    <div [class]="field.controlClasses" [ngSwitch]="field.type">
+     <textbox [disabled]="isDisabled$ | async" *ngSwitchCase="'text'" [field]="field" [form]="form"></textbox>
+      <!--  <dropdown [disabled]="isDisabled$ | async" *ngSwitchCase="'dropdown'" [field]="field" [form]="form"></dropdown>
+      <checkbox [disabled]="isDisabled$ | async" *ngSwitchCase="'checkbox'" [field]="field" [form]="form"></checkbox>
+      <radio [disabled]="isDisabled$ | async" *ngSwitchCase="'radio'" [field]="field" [form]="form"></radio>
+      <file [disabled]="isDisabled$ | async" *ngSwitchCase="'file'" [field]="field" [form]="form"></file> -->
+      <div class="alert alert-danger my-1 p-2 fadeInDown animated" *ngIf="!isValid && isDirty">
+          <div *ngIf="fieldErrors['required']">{{errorMessages['required']}}</div>
+          <div *ngIf="fieldErrors['minlength']">{{errorMessages['minLength']}}  </div>
+          <div *ngIf="fieldErrors['maxlength']">{{errorMessages['maxLength']}}</div>
+      </div>
+    </div>
+  </div>

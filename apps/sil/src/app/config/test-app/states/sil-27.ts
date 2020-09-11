@@ -1,6 +1,7 @@
 import { StateConfig } from '@wilo';
 import { EMPTY, forkJoin, of } from 'rxjs';
 import * as TP from '@indigo/templates';
+import { FormBuilderComponent, FormModel } from '@indigo/dynamic-forms';
 
 export const SIL_27: StateConfig = {
   id: '27',
@@ -8,7 +9,23 @@ export const SIL_27: StateConfig = {
   startNode: 'node1',
   nodes: {
     node1: {
-      component: TP.Node1Component
+      component: {
+        children:[
+          {component: TP.Node1Component, inputs: {}},
+          {
+            component: FormBuilderComponent,
+            inputs: {
+              formModel: {
+                fields: [
+                  {type: 'text', label: 'First Name', name: 'firstName', value: ''},
+                  {type: 'text', label: 'Last Name', name: 'lastName', value: ''}
+                ]
+              } as FormModel
+            }
+          },
+          {component: TP.Node1Component, inputs: {}},
+        ]
+      }
     },
     MiscellaneousClass: {
       name: 'miscellaneous-class',

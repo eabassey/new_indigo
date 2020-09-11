@@ -23,7 +23,8 @@
       "@indigo/directives": ["libs/directives/src/index.ts"],
       "@indigo/ui-elements": ["libs/ui-elements/src/index.ts"],
       "@indigo/utilities": ["libs/utilities/src/index.ts"],
-      "@indigo/error-handler": ["libs/error-handler/src/index.ts"]
+      "@indigo/error-handler": ["libs/error-handler/src/index.ts"],
+      "@indigo/dynamic-forms": ["libs/dynamic-forms/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

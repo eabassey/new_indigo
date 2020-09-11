@@ -20,6 +20,7 @@ export abstract class StateBase implements OnInit, OnDestroy {
     ngOnInit() {
       this.sub = this.route.data.subscribe((state: StateConfig) => {
         this.state = state;
+        this.svc.bf.bigForm.reset({});
         this.handleConfig(state);
       });
     }
@@ -37,8 +38,12 @@ export abstract class StateBase implements OnInit, OnDestroy {
           this.svc.actionPanel.setActionPanel({});
         }
         //
-        const formGroup = this.svc.bf.createFormGroup(renderFormModels(state));
-        this.svc.bf.initialize(formGroup);
+        console.log({state})
+        const formModel = renderFormModels(state);
+        if (formModel) {
+          const formGroup = this.svc.bf.createFormGroup(formModel);
+          this.svc.bf.initialize(formGroup);
+        }
         //
         // initialize form fields
         if (state?.setValuesToBigForm) {
