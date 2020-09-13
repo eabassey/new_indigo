@@ -67,7 +67,8 @@ export class ItemTwoCardComponent implements OnInit, AfterViewInit, OnDestroy {
   takeAction(item): void {
     console.log({route: this.route})
     // const text = (this.statesMap[item.state].description as string).toLowerCase().split(' ').join('-');
-    this.router.navigate(['/testApp', item.state, {jobId: item.id}])
+    this.svc.keyValueStore.setItem('workflowURL', this.router.url);
+    this.router.navigate(['/testApp', item.state, {jobId: item.id}], {queryParams: {expandActionPanel: false, actionPanel: null}})
   }
 
 

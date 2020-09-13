@@ -3,14 +3,15 @@ import { FormGroup } from '@angular/forms';
 
 // text,email,tel,textarea,password,
 @Component({
-    selector: 'textbox',
+    selector: 'textarea-input',
     template: `
       <div [formGroup]="form">
-        <input [disabled]="disabled" [attr.type]="field.type"  [id]="field.name" [name]="field.name" [formControlName]="field.name" />
+      <textarea [disabled]="disabled" [class.is-invalid]="isDirty && !isValid" [formControlName]="field.name" [id]="field.name"
+        [rows]="field.rows" [cols]="field.cols" class="form-control" [placeholder]="field.placeholder" ></textarea>
       </div>
     `
 })
-export class TextBoxComponent {
+export class TextAreaInputComponent {
     @Input() field: any = {};
     @Input() form: FormGroup;
     @Input() disabled: boolean;

@@ -46,10 +46,10 @@ export class NodeFooterButtonComponent implements OnInit {
 
     onClick(ev: MouseEvent) {
         if (this.nav.onClick) {
-            this.nav.onClick(ev, this.compInstances, this.svc, this.route);
+            this.nav.onClick(this.svc, this.compInstances, this.route, ev);
         }
         if (this.nav.routerLink) {
-            this.svc.router.navigate(this.nav.routerLink, { relativeTo: this.route });
+            this.svc.router.navigate(this.nav.routerLink, { relativeTo: this.route, });
         }
     }
 

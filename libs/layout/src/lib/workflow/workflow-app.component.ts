@@ -19,7 +19,7 @@ import {Router} from '@angular/router';
                   <router-outlet></router-outlet>
                     <!-- <workflow-state [state]="state" [node]="node"></workflow-state> -->
                 </section>
-                <app-footer></app-footer>
+                <!-- <app-footer></app-footer> -->
                 </section>
             </section>
             <ng-container>

@@ -5,6 +5,7 @@
     </label>
     <div [class]="field.controlClasses" [ngSwitch]="field.type">
      <textbox [disabled]="isDisabled$ | async" *ngSwitchCase="'text'" [field]="field" [form]="form"></textbox>
+     <textarea-input [disabled]="isDisabled$ | async" *ngSwitchCase="'textarea'" [field]="field" [form]="form"></textarea-input>
       <!--  <dropdown [disabled]="isDisabled$ | async" *ngSwitchCase="'dropdown'" [field]="field" [form]="form"></dropdown>
       <checkbox [disabled]="isDisabled$ | async" *ngSwitchCase="'checkbox'" [field]="field" [form]="form"></checkbox>
       <radio [disabled]="isDisabled$ | async" *ngSwitchCase="'radio'" [field]="field" [form]="form"></radio>

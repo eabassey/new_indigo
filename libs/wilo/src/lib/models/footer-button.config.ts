@@ -5,13 +5,13 @@ import { Observable } from 'rxjs';
 export interface FooterButtonConfig {
     isPreviousButton?: boolean;
     text: string;
-    routerLink: any[];
+    routerLink?: any[];
     linkType?: 'portal' | 'submit';
     portalData?: {
       type: 'actionPanel' | 'modal';
       paramFunc: (svc: CoreServices, route?: ActivatedRoute) => void;
     };
-    onClick?: (ev?: MouseEvent, compInstances?: any[], svc?: CoreServices, route?: ActivatedRoute) => void;
+    onClick?: (svc?: CoreServices, compInstances?: any[], route?: ActivatedRoute, ev?: MouseEvent) => void;
     serverFirst?: boolean;
     optIntoValidation?: boolean;
     location?: 'left' | 'center' | 'right';

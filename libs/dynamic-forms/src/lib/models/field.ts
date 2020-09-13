@@ -6,6 +6,8 @@ export interface Field {
     name: string;
     label?: string;
     value?: any;
+    rows?: number;
+    cols?: number;
     disabled?: boolean;
     hidden?: boolean;
     controlClasses?: string;

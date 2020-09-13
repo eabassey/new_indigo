@@ -3,6 +3,7 @@ import { EMPTY, forkJoin, of } from 'rxjs';
 import * as TP from '@indigo/templates';
 import { FormBuilderComponent, FormModel } from '@indigo/dynamic-forms';
 
+
 export const SIL_27: StateConfig = {
   id: '27',
   name: 'job-invoiced',
@@ -17,15 +18,49 @@ export const SIL_27: StateConfig = {
             inputs: {
               formModel: {
                 fields: [
-                  {type: 'text', label: 'First Name', name: 'firstName', value: ''},
-                  {type: 'text', label: 'Last Name', name: 'lastName', value: ''}
+                  {type: 'text', label: 'First Name', name: 'firstName', value: '', validators: [{type: 'required', errorMessage :"Please give first name"}, {type: 'minLength', arg: 5}]},
+                  {type: 'text', label: 'Last Name', name: 'lastName', value: ''},
+                  {type: 'textarea', label: 'Address', name: 'address', value: '', placeholder : '', rows: 4, cols: 20}
                 ]
               } as FormModel
             }
           },
           {component: TP.Node1Component, inputs: {}},
         ]
-      }
+      },
+      navs: [
+        {text: 'To Workflow',
+        onClick: (svc) => {
+          const url = svc.keyValueStore.getItem('workflowURL');
+          svc.router.navigateByUrl(url);
+        } ,
+        location: 'left'
+      },
+        {text: 'To Node 22', routerLink: ['node2'], location: 'right'}
+      ],
+      footerType: 'node_nav'
+    },
+    node2: {
+      component: {
+        children:[
+          {component: TP.Node1Component, inputs: {}},
+          {
+            component: FormBuilderComponent,
+            inputs: {
+              formModel: {
+                fields: [
+                  {type: 'text', label: 'First Name', name: 'firstName', value: '', validators: [{type: 'required', errorMessage :"Please give first name"}, {type: 'minLength', arg: 5}]},
+                ]
+              } as FormModel
+            }
+          },
+          {component: TP.Node1Component, inputs: {}},
+        ]
+      },
+      navs: [
+        {text: 'Back To Node 1', routerLink: ['./node1'], location: 'right'}
+      ],
+      footerType: 'node_nav'
     },
     MiscellaneousClass: {
       name: 'miscellaneous-class',
