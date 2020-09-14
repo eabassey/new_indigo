@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
-import { Validators, FormGroup } from '@angular/forms';
+import { Validators, FormGroup, ValidatorFn, AbstractControl } from '@angular/forms';
 import {map, tap} from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Field } from '../models/field';
@@ -106,6 +106,9 @@ export class FieldBuilderComponent implements OnInit, OnChanges {
       case 'email': {
         this.errorMessages['email'] = validator.errorMessage || 'This field has to be a valid email address';
         return Validators.email;
+      }
+      default: {
+        return (control: AbstractControl) => null
       }
     }
   }
