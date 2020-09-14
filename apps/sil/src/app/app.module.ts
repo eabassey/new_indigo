@@ -13,6 +13,7 @@ import { environment } from '../environments/environment';
 import { requestOptionsProvider, Interceptor } from './interceptor';
 import {TemplatesModule} from '@indigo/templates';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {DynamicFormsModule} from '@indigo/dynamic-forms'
 // import {DynFormModule} from 'src/app/dyn-form/dyn-form.module';
 
 @NgModule({
@@ -23,6 +24,7 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
     BrowserModule,
     BrowserAnimationsModule,
     WorkflowLayoutModule,
+    DynamicFormsModule,
     StoreModule.forRoot({}),
     WiloModule.forRoot({
       clientConfig: silConfig,

@@ -5,7 +5,8 @@ import {
   AbstractControl,
   FormBuilder,
   ValidationErrors,
-  FormArray
+  FormArray,
+  AbstractControlOptions
 } from '@angular/forms';
 import { Observable, combineLatest, Subscription } from 'rxjs';
 import { map, tap, debounceTime, take } from 'rxjs/operators';
@@ -36,6 +37,31 @@ export class BigFormService {
 
   initialize(formGroup: FormGroup) {
     this.bigForm = formGroup;
+  }
+
+  createFormGroup(formModel: any[], options: AbstractControlOptions = {}) {
+    const controls = {};
+    formModel.forEach(model => {
+      switch (model.type) {
+        case 'checkbox': {
+          const opts = {};
+          for (const opt of model.options) {
+            opts[opt.key] = new FormControl();
+          }
+          controls[model.name] = new FormGroup(opts)
+          break;
+        }
+
+        default: {
+          // for form control
+          const controlState = {value: model.value || null, disabled: model.disabled };
+          const controlOptions = {};
+          controls[model.name] = new FormControl(controlState, controlOptions);
+        }
+      }
+
+    });
+    return new FormGroup(controls, options);
   }
 
 

@@ -140,17 +140,17 @@ export const renderFormModels = (state: StateConfig | ActionPanelConfig) => {
     return Object.values(state.nodes).reduce((acc, node) => {
          return [
              ...acc,
-             ...(node && node.inputs && node.inputs.formModel ?  node.inputs.formModel : []),
-             ...(typeof node.component !== 'function' ? (
-                 node.component.children.reduce((acc2, ch) => {
+             ...(node && node.inputs && node.inputs.formModel ?  node.inputs.formModel.fields : []),
+             ...(node.component && typeof node.component !== 'function' && node.component.children ? (
+               node.component.children.reduce((acc2, ch) => {
                      return [
                          ...acc2,
-                         ...(ch.inputs && ch.inputs.formModel ? ch.inputs.formModel : [])
+                         ...(ch && ch.inputs && ch.inputs.formModel && ch.inputs.formModel.fields ? ch.inputs.formModel.fields : [])
                      ];
                  }, [])
              ) : [])
          ];
-     }, []);
+     }, []) || [];
  };
 
 export const renderServerQueries = (serverQueries: ServerQueryConfig[], svc: CoreServices, route: ActivatedRoute) => {

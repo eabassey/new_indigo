@@ -52,6 +52,9 @@
     },
     "error-handler": {
       "tags": []
+    },
+    "dynamic-forms": {
+      "tags": []
     }
   }
 }

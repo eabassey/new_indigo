@@ -4,7 +4,9 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
     selector: 'node1',
-    template: `Node1 stuff: {{greeting}}
+    template: `
+    <div>
+    Node1 stuff: {{greeting}}
         <button (click)="doWork.emit('workings')">doWork</button>
         <button (click)="setFilter.emit({by_state2: 7})">Filter Top</button>
         <button (click)="setFilter.emit({by_state: 10})">Filter Down</button>
@@ -17,6 +19,7 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
         <a [routerLink]="['./']"
         [queryParams]="{ panelNodeId: 'node1'}" queryParamsHandling="merge"
         >Go Next2</a>
+    </div>
     `
 })
 export class Node1Component {

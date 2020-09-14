@@ -69,7 +69,7 @@ export abstract class AppBase implements OnInit, OnChanges, OnDestroy {
 
 
     initActionPanel(panel): void {
-        if (panel && this.clickedActionPanel !== panel) {
+        if (panel && this.clickedActionPanel !== panel && this.clickedActionPanel) {
             this.clickedActionPanel = panel;
             this.activePanel = this.panelsMap[this.clickedActionPanel];
         }

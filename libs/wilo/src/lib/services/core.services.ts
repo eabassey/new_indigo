@@ -14,6 +14,7 @@ import { HeaderAccessorService } from './header-accessor.service';
 import { IndexedDbService } from './indexeddb.service';
 import { BigFormService } from './big-form.service';
 import { ClientConfig } from '../models';
+import { KeyValueStoreService } from './key-value-store.service';
 
 
 @Injectable({providedIn: 'root'})
@@ -31,6 +32,7 @@ export class CoreServices {
         public auth: AuthService,
         public indexedDb: IndexedDbService,
         public actionPanel: ActionPanelService,
+        public keyValueStore: KeyValueStoreService,
         public footerAccessor: FooterAccessorService,
         public headerAcessor: HeaderAccessorService,
         @Inject(BASE_URL) public baseUrl: string,

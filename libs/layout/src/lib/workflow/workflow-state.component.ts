@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
     template: `
     <router-outlet></router-outlet>
     <!-- <workflow-node [node]="node"></workflow-node> -->
+                <app-footer></app-footer>
     `,
     styleUrls: ['workflow-state.component.scss']
 })

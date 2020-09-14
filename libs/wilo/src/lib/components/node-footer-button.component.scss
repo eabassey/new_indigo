@@ -1,3 +1,4 @@
+
 .button {
     border: 1px solid transparent;
     background-color: var(--button-background);
@@ -10,20 +11,20 @@
     text-decoration: none;
     transition: all 0.2s ease-in-out;
     position: relative;
-  
+
     &:hover {
       border: 1px solid;
     }
-  
+
     &:active {
       outline: none;
       text-decoration: none;
     }
-  
+
     &:disabled {
       opacity: 0.2;
     }
-  
+
     &::before {
       content: '';
       position: absolute;
@@ -35,7 +36,7 @@
       margin-left: auto;
       margin-right: auto;
     }
-  
+
     &::after {
       content: '';
       position: absolute;
@@ -47,25 +48,25 @@
       margin-left: auto;
       margin-right: auto;
     }
-  
+
     &:disabled {
       pointer-events: none;
       color: var(--button-text);
       opacity: 0.5;
     }
   }
-  
+
   // COLOURS
-  
+
   .button--colour-default {
     color: var(--button-text);
     box-shadow: 0 0 3px var(--button-shadow);
-  
+
     &:hover {
       box-shadow: 0 0 6px var(--button-shadow);
       border-color: var(--button-shadow);
     }
-  
+
     &:active {
       box-shadow: 0 0 16px 0 var(--button-shadow), 0 0 4px var(--button-shadow), 0 2px 4px rgba(0, 0, 0, 0.5),
         0 0 10px var(--button-shadow) inset;
@@ -77,17 +78,17 @@
       background: linear-gradient(90deg, transparent, var(--linear-gradient-button-default), transparent);
     }
   }
-  
+
   .button--colour-primary {
     color: var(--button-text-primary);
     box-shadow: 0 0 3px 0px var(--colour-1-glow);
     background-color: var(--button-background-primary);
-  
+
     &:hover {
       box-shadow: 0 0 8px 0px var(--primary);
       border-color: var(--primary);
     }
-  
+
     &:active {
       box-shadow: 0 0 16px 0 var(--primary), 0 0 4px var(--primary), 0 2px 4px rgba(0, 0, 0, 0.5),
         0 0 10px var(--primary) inset;
@@ -99,17 +100,17 @@
       background: linear-gradient(90deg, transparent, var(--linear-gradient-theme), transparent);
     }
   }
-  
+
   .button--colour-secondary {
     color: var(--button-text-secondary);
     box-shadow: 0 0 5px var(--colour-6-glow);
     background-color: var(--button-background-secondary);
-  
+
     &:hover {
       box-shadow: 0 0 10px var(--secondary);
       border-color: var(--secondary);
     }
-  
+
     &:active {
       box-shadow: 0 0 16px 0 var(--secondary), 0 0 4px var(--secondary), 0 2px 4px rgba(0, 0, 0, 0.5),
         0 0 10px var(--secondary) inset;
@@ -121,17 +122,17 @@
       background: linear-gradient(90deg, transparent, var(--linear-gradient-secondary), transparent);
     }
   }
-  
+
   .button--colour-success {
     color: var(--button-text-success);
     box-shadow: 0 0 5px var(--colour-2-glow);
     background-color: var(--button-background-success);
-  
+
     &:hover {
       box-shadow: 0 0 10px var(--success);
       border-color: var(--success);
     }
-  
+
     &:active {
       box-shadow: 0 0 16px 0 var(--success), 0 0 4px var(--success), 0 2px 4px rgba(0, 0, 0, 0.5),
         0 0 10px var(--success) inset;
@@ -143,17 +144,17 @@
       background: linear-gradient(90deg, transparent, var(--linear-gradient-success), transparent);
     }
   }
-  
+
   .button--colour-alert {
     color: var(--button-text-alert);
     box-shadow: 0 0 5px var(--colour-6-glow);
     background-color: var(--button-background-alert);
-  
+
     &:hover {
       box-shadow: 0 0 10px var(--alert);
       border-color: var(--alert);
     }
-  
+
     &:active {
       box-shadow: 0 0 16px 0 var(--alert), 0 0 4px var(--alert), 0 2px 4px rgba(0, 0, 0, 0.5), 0 0 10px var(--alert) inset;
     }
@@ -164,17 +165,17 @@
       background: linear-gradient(90deg, transparent, var(--linear-gradient-alert), transparent);
     }
   }
-  
+
   .button--colour-warn {
     color: var(--button-text-warn);
     box-shadow: 0 0 5px var(--colour-9-glow);
     background-color: var(--button-background-warning);
-  
+
     &:hover {
       box-shadow: 0 0 10px var(--warning);
       border-color: var(--warning);
     }
-  
+
     &:active {
       box-shadow: 0 0 16px 0 var(--warning), 0 0 4px var(--warning), 0 2px 4px rgba(0, 0, 0, 0.5),
         0 0 10px var(--warning) inset;
@@ -186,17 +187,17 @@
       background: linear-gradient(90deg, transparent, var(--linear-gradient-warning), transparent);
     }
   }
-  
+
   .button--colour-danger {
     color: var(--button-text-danger);
     box-shadow: 0 0 5px var(--colour-7-glow);
     background-color: var(--button-background-danger);
-  
+
     &:hover {
       box-shadow: 0 0 10px var(--danger);
       border-color: var(--danger);
     }
-  
+
     &:active {
       box-shadow: 0 0 16px 0 var(--danger), 0 0 4px var(--danger), 0 2px 4px rgba(0, 0, 0, 0.5),
         0 0 10px var(--danger) inset;
@@ -212,18 +213,18 @@
     border: 1px solid transparent;
     color: var(--button-text);
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-  
+
     &:hover {
       border: 1px solid transparent;
       color: var(--primary);
     }
-  
+
     &:active {
       border: 1px solid transparent;
       color: var(--primary);
       box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.5);
     }
-  
+
     &:active::before {
       background: linear-gradient(90deg, transparent, var(--linear-gradient-primary-light), transparent);
     }
@@ -231,46 +232,45 @@
       background: linear-gradient(90deg, transparent, var(--linear-gradient-primary-light), transparent);
     }
   }
-  
+
   // SIZES
-  
+
   .button--size-default {
     font-size: 0.8rem;
     padding: 0.5rem 1.5rem;
   }
-  
+
   .button--size-small {
     font-size: 0.75rem;
     padding: 0.2rem 0.5rem;
   }
-  
+
   .button--size-medium {
     font-size: 1.25rem;
     padding: 0.8rem 1rem;
   }
-  
+
   .button--size-large {
     font-size: 1.5rem;
     padding: 0.9rem 1rem;
   }
-  
+
   // SHAPE
-  
+
   .button--shape-rounded {
     border-radius: var(--radius);
   }
-  
+
   // DISPLAY
   .button--display-inline {
     display: inline-block;
   }
-  
+
   .button--display-block {
     width: 100%;
     display: block;
   }
-  
+
   .button--display-none {
     display: none;
   }
-  
