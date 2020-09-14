@@ -16,6 +16,7 @@ export class FieldBuilderComponent implements OnInit, OnChanges {
   get isValid() { return this.form.controls[this.field.name].valid; }
   get isDirty() { return this.form.controls[this.field.name].dirty; }
   get fieldErrors() { return this.form.controls[this.field.name].errors; }
+  get errorKeys() { console.log({errors: this.errorMessages}); return Object.keys(this.errorMessages); }
   // get showRequiredSign() { return this.field.validators.map(val => val.type).some(type => type === 'required')}
   isHidden$: Observable<boolean>;
   isDisabled$: Observable<boolean>;
@@ -89,17 +90,17 @@ export class FieldBuilderComponent implements OnInit, OnChanges {
 
 
   handleValidator(validator) {
-    switch (validator.type.toLowerCase()) {
+    switch (validator.type) {
       case 'required': {
         this.errorMessages['required'] = validator.errorMessage || 'This field is required';
         return Validators.required;
       }
       case 'minlength': {
-        this.errorMessages['minLength'] = validator.errorMessage || `This field needs a minimum length of ${validator.arg}`;
+        this.errorMessages['minlength'] = validator.errorMessage || `This field needs a minimum length of ${validator.arg}`;
         return Validators.minLength(validator.arg);
       }
       case 'maxlength': {
-        this.errorMessages['maxLength'] = validator.errorMessage || `This field needs a maximum length of ${validator.arg}`;
+        this.errorMessages['maxlength'] = validator.errorMessage || `This field needs a maximum length of ${validator.arg}`;
         return Validators.maxLength(validator.arg);
       }
       case 'email': {

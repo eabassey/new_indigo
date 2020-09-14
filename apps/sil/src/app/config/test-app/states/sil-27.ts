@@ -18,9 +18,10 @@ export const SIL_27: StateConfig = {
             inputs: {
               formModel: {
                 fields: [
-                  {type: 'text', label: 'First Name', name: 'firstName', value: '', validators: [{type: 'required', errorMessage :"Please give first name"}, {type: 'minLength', arg: 5}]},
+                  {type: 'text', label: 'First Name', name: 'firstName', value: '', validators: [{type: 'required', errorMessage :"Please give first name"}, {type: 'minlength', arg: 5}]},
                   {type: 'text', label: 'Last Name', name: 'lastName', value: ''},
-                  {type: 'textarea', label: 'Address', name: 'address', value: '', placeholder : '', rows: 4, cols: 20}
+                  {type: 'textarea', label: 'Address', name: 'address', value: '', placeholder : '', rows: 4, cols: 20},
+                  {type: 'checkbox', name: 'gender', options: [{label: 'Male', key: 'male'}, {label: 'Female', key: 'female'}]}
                 ]
               } as FormModel
             }

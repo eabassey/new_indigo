@@ -6,14 +6,14 @@
     <div [class]="field.controlClasses" [ngSwitch]="field.type">
      <textbox [disabled]="isDisabled$ | async" *ngSwitchCase="'text'" [field]="field" [form]="form"></textbox>
      <textarea-input [disabled]="isDisabled$ | async" *ngSwitchCase="'textarea'" [field]="field" [form]="form"></textarea-input>
+     <checkbox [disabled]="isDisabled$ | async" *ngSwitchCase="'checkbox'" [field]="field" [form]="form"></checkbox>
       <!--  <dropdown [disabled]="isDisabled$ | async" *ngSwitchCase="'dropdown'" [field]="field" [form]="form"></dropdown>
-      <checkbox [disabled]="isDisabled$ | async" *ngSwitchCase="'checkbox'" [field]="field" [form]="form"></checkbox>
       <radio [disabled]="isDisabled$ | async" *ngSwitchCase="'radio'" [field]="field" [form]="form"></radio>
       <file [disabled]="isDisabled$ | async" *ngSwitchCase="'file'" [field]="field" [form]="form"></file> -->
       <div class="alert alert-danger my-1 p-2 fadeInDown animated" *ngIf="!isValid && isDirty">
-          <div *ngIf="fieldErrors['required']">{{errorMessages['required']}}</div>
-          <div *ngIf="fieldErrors['minlength']">{{errorMessages['minLength']}}  </div>
-          <div *ngIf="fieldErrors['maxlength']">{{errorMessages['maxLength']}}</div>
+        <div *ngFor="let key of errorKeys">
+          <div *ngIf="fieldErrors[key]">{{errorMessages[key]}}</div>
+        </div>
       </div>
     </div>
   </div>
