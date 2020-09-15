@@ -1,19 +1,20 @@
 import * as TP from '@indigo/templates';
 import { NodeConfig } from '@wilo';
+import { WorkflowListComponent } from 'apps/sil/src/app/components/workflow/workflow-list.component';
 import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 
 
 export const mainListNode: NodeConfig = {
-    component: TP.MainListComponent,
+    component: WorkflowListComponent,
     inputs: {
         // list$: 'dyn.variables.claims.dataset'
         // list$: {
         //     variableName: 'claims',
         //     filterFunctions: {by_state: (id) => p => p.id < id, by_state2: (id) => p => p.id > id}
         // },
-        list$: {
+        claims$: {
             variableName: 'claims',
             // filterFunctions: {by_state: (id) => p => !!p.id}
         }

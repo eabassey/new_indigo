@@ -7,7 +7,7 @@ import { select } from '@ngrx/store';
 
 
 @Component({
-    selector: 'main-list',
+    selector: 'workflow-list',
     template: `
     <div
     class="workflow-shell"
@@ -17,19 +17,19 @@ import { select } from '@ngrx/store';
     }"
     >
         <ng-container>
-            <ng-container *ngIf="(list$ | async) as items">
-                <ng-container *ngIf="items.length >= 1">
+            <ng-container *ngIf="(claims$ | async) as claims">
+                <ng-container *ngIf="claims.length >= 1">
                 <div
-                *ngFor="let item of (items | paginate: { itemsPerPage: pageSize, currentPage: (currentPage$ | async), id: 'list' }); index as i; trackBy: trackByFunc"
+                *ngFor="let claim of (claims | paginate: { itemsPerPage: pageSize, currentPage: (currentPage$ | async), id: 'list' }); index as i; trackBy: trackByFunc"
                 >
-                    <item-one-card
+                    <claim-card
                     [skillsMap]="skillsMap"
                     [statesMap]="statesMap"
                     [spsMap]="spsMap"
                     [appointmentsMap]="appointmentsMap"
                     [instructionsMap]="instructionsMap"
-                    [itemOne]="item"
-                    ></item-one-card>
+                    [claim]="claim"
+                    ></claim-card>
                 </div>
                 </ng-container>
             </ng-container>
@@ -145,10 +145,10 @@ import { select } from '@ngrx/store';
 
     `]
 })
-export class MainListComponent implements OnInit {
+export class WorkflowListComponent implements OnInit {
     opened = false;
     hasSearchValues = false;
-    @Input() list$: Observable<any>;
+    @Input() claims$: Observable<any>;
     currentPage$;
     pageSize = 30;
     statesMap: {[id: number]: any};

@@ -15,6 +15,8 @@ import {TemplatesModule} from '@indigo/templates';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {DynamicFormsModule} from '@indigo/dynamic-forms'
 // import {DynFormModule} from 'src/app/dyn-form/dyn-form.module';
+import {SilComponentsModule} from './components/sil-components.module';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import {DynamicFormsModule} from '@indigo/dynamic-forms'
       indexedDbName: 'dynDB',
       base_url: environment.api_url
     }),
+    SilComponentsModule,
     TemplatesModule,
     // DynFormModule,
     RouterModule.forRoot([], {

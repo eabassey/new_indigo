@@ -20,19 +20,19 @@ import { CoreServices } from '@wilo';
 
 
 @Component({
-  selector: 'item-two-card',
-  templateUrl: './item-two-card.component.html',
-  styleUrls: ['./item-two-card.component.scss'],
+  selector: 'job-card',
+  templateUrl: './job-card.component.html',
+  styleUrls: ['./job-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ItemTwoCardComponent implements OnInit, AfterViewInit, OnDestroy {
-  @Input() itemTwo: any;
-  @Input() itemOne: any;
-  @Input() itemTwoContextMenuList = [];
+export class JobCardComponent implements OnInit, AfterViewInit, OnDestroy {
+  @Input() job: any;
+  @Input() claim: any;
+  @Input() jobContextMenuList = [];
   @Input() user: any;
   @Input() activeOrg;
   @Input() isOnline: boolean = true;
-  selectedItemTwo: any;
+  selectedJob: any;
   buttonText: string;
   appointment_text;
   appointment_text_color = '';
@@ -57,18 +57,18 @@ export class ItemTwoCardComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.skill = this.skillsMap[this.itemTwo?.skill];
-    this.sp = this.spsMap[this.itemTwo?.sp];
-    this.stateDescription = this.statesMap[this.itemTwo.state]?.description;
+    this.skill = this.skillsMap[this.job?.skill];
+    this.sp = this.spsMap[this.job?.sp];
+    this.stateDescription = this.statesMap[this.job.state]?.description;
     this.instruction = this.rd(true, 1, {editRoles: {1: 'Allow something'}});
     this.renderAppointmentInfo();
   }
 
-  takeAction(item): void {
+  takeAction(job): void {
     console.log({route: this.route})
     // const text = (this.statesMap[item.state].description as string).toLowerCase().split(' ').join('-');
     this.svc.keyValueStore.setItem('workflowURL', this.router.url);
-    this.router.navigate(['/testApp', item.state, {jobId: item.id}], {queryParams: {expandActionPanel: false, actionPanel: null}})
+    this.router.navigate(['/testApp', job.state, {jobId: job.id}], {queryParams: {expandActionPanel: false, actionPanel: null}})
   }
 
 
@@ -85,13 +85,13 @@ export class ItemTwoCardComponent implements OnInit, AfterViewInit, OnDestroy {
   renderAppointmentInfo() {
     // const appointmentInfoEl = this.appointmentInfoHolder.nativeElement;
       const appointment_type =
-        this.itemTwo.appointment && this.itemTwo?.appointment?.appointment_type
-          ? this.appointmentsMap[this.itemTwo.appointment.appointment_type]?.name
+        this.job.appointment && this.job?.appointment?.appointment_type
+          ? this.appointmentsMap[this.job.appointment.appointment_type]?.name
           : '';
       this.appointment_text = 'No Appointment';
-      if (this.itemTwo.appointment.range_start !== null && appointment_type !== '') {
-        this.appointment_text = `${humaniseDate(this.itemTwo.appointment.range_start)} ${appointment_type} ${moment(
-          this.itemTwo.appointment.range_start
+      if (this.job.appointment.range_start !== null && appointment_type !== '') {
+        this.appointment_text = `${humaniseDate(this.job.appointment.range_start)} ${appointment_type} ${moment(
+          this.job.appointment.range_start
         ).format('HH:mm')}`;
       } else {
         this.appointment_text_color = 'var(--input-placeholder)';
@@ -100,7 +100,7 @@ export class ItemTwoCardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
 
-  selectMenuItem(itemTwo, menuItem) {
+  selectMenuItem(job, menuItem) {
     this.svc.router.navigate(['/workflow/detail'], { skipLocationChange: true });
   }
 

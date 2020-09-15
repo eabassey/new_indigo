@@ -13,13 +13,13 @@ import { CoreServices } from '@wilo';
 
 
 @Component({
-  selector: 'item-one-card',
-  templateUrl: './item-one-card.component.html',
-  styleUrls: ['./item-one-card.component.scss'],
+  selector: 'claim-card',
+  templateUrl: './claim-card.component.html',
+  styleUrls: ['./claim-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ItemOneCardComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
-  @Input() itemOne: any;
+export class ClaimCardComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+  @Input() claim: any;
   @Input() statesMap: {[id: number]: any};
   @Input() skillsMap: {[id: number]: any};
   @Input() appointmentsMap: {[id: number]: any};
@@ -44,7 +44,7 @@ export class ItemOneCardComponent implements OnInit, OnChanges, AfterViewInit, O
   constructor(private svc: CoreServices) {}
 
   ngOnInit() {
-    this.sla = get_sla_time(this.itemOne, this.statesMap);
+    this.sla = get_sla_time(this.claim, this.statesMap);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -52,8 +52,8 @@ export class ItemOneCardComponent implements OnInit, OnChanges, AfterViewInit, O
 
   ngAfterViewInit() {}
 
-  selectItem(itemOne) {
-    // this.select.emit(itemOne);
+  selectItem(claim) {
+    // this.select.emit(claim);
   }
 
   selectMenuItem(item, {}) {
@@ -73,9 +73,9 @@ export class ItemOneCardComponent implements OnInit, OnChanges, AfterViewInit, O
     // this.fseSendJobMessage.emit(jobId);
   }
 
-  takeAction(itemOne): void {
-    const text = (this.statesMap[itemOne.state] as string).toLowerCase().split(' ').join('-');
-    this.svc.router.navigate([`../${text}`, {claimId: itemOne.id}])
+  takeAction(claim): void {
+    const text = (this.statesMap[claim.state] as string).toLowerCase().split(' ').join('-');
+    this.svc.router.navigate([`../${text}`, {claimId: claim.id}])
   }
 
   checkPermission(menuItem: any) {

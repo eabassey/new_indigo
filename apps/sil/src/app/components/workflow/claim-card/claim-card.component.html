@@ -1,8 +1,8 @@
-<div class="card-container" [id]="'claim-' + itemOne.id">
+<div class="card-container" [id]="'claim-' + claim.id">
   <div
     class="claim-card"
-    (click)="takeAction(itemOne)"
-    [ngClass]="!isOnline && itemOne.state !== 169 ? 'is-offline' : null"
+    (click)="takeAction(claim)"
+    [ngClass]="!isOnline && claim.state !== 169 ? 'is-offline' : null"
   >
     <div class="indicator"><flx-indicator></flx-indicator></div>
     <div class="claim-card-icons">
@@ -13,25 +13,25 @@
       </div>
       <div class="indicator-icons">
         <!-- CAT indicator -->
-        <div class="action" *ngIf="itemOne && itemOne?.cat_code && itemOne?.cat_code != null">
+        <div class="action" *ngIf="claim && claim?.cat_code && claim?.cat_code != null">
           <flx-icon size="small" type="storms" instruction="Catastrophe" color="indicator" isClickable="false">
           </flx-icon>
         </div>
         <!-- Private Client indicator -->
-        <div class="action" *ngIf="itemOne && itemOne.private_banking !== null && itemOne.private_banking === 1">
+        <div class="action" *ngIf="claim && claim.private_banking !== null && claim.private_banking === 1">
           <flx-icon class="pc" instruction="Private Banking Client" type="private-client" color="indicator"></flx-icon>
           <!-- <flx-icon size="extra-small" instruction="Private Banking Client" type="star" color="indicator"></flx-icon> -->
         </div>
         <!-- Notes indicator -->
-        <div class="action" *ngIf="itemOne && itemOne.note_count !== null && itemOne.note_count > 0">
+        <div class="action" *ngIf="claim && claim.note_count !== null && claim.note_count > 0">
           <flx-icon
             size="small"
-            [instruction]="itemOne.note_count > 1 ? itemOne.note_count + ' notes' : itemOne.note_count + ' note'"
+            [instruction]="claim.note_count > 1 ? claim.note_count + ' notes' : claim.note_count + ' note'"
             type="notes"
-            (click)="selectMenuItem(itemOne, { key: 'SIL_CONTEXT_MENU_NOTES' })"
+            (click)="selectMenuItem(claim, { key: 'SIL_CONTEXT_MENU_NOTES' })"
           ></flx-icon>
         </div>
-        <!-- <div class="action" *ngIf="itemOne && itemOne.cat_code && itemOne.cat_code != null">
+        <!-- <div class="action" *ngIf="claim && claim.cat_code && claim.cat_code != null">
           <flx-icon size="default" instruction="Private Client" type="star" color="indicator" isClickable="false"></flx-icon>
         </div> -->
 
@@ -39,30 +39,30 @@
     </div>
     <div class="claim-info">
       <p class="claim-number">
-        <small>{{itemOne?.title}}</small>
+        <small>{{claim?.title}}</small>
         <small *ngIf="engClaimType" class="claim-type">{{ engClaimType }}</small>
-        <span class="hv-copy">&nbsp;{{ itemOne?.mid }}</span>
+        <span class="hv-copy">&nbsp;{{ claim?.mid }}</span>
       </p>
       <p class="claimant">
-        {{ itemOne.applicant?.first_name + ' ' + itemOne.applicant?.surname || 'No Client Name Captured' }}
+        {{ claim.applicant?.first_name + ' ' + claim.applicant?.surname || 'No Client Name Captured' }}
       </p>
-      <p *ngIf="engState" class="claim-state">{{ itemOne?.state }}: {{ engState }}</p>
+      <p *ngIf="engState" class="claim-state">{{ claim?.state }}: {{ engState }}</p>
       <p class="sla-timer">
         <span [style.color]="sla?.color">{{sla?.text}}</span>
       </p>
     </div>
   </div>
   <div class="job-cards-container">
-    <item-two-card
-      [itemTwo]="itemTwo"
-      [itemOne]="itemOne"
+    <job-card
+      [job]="job"
+      [claim]="claim"
       [skillsMap]="skillsMap"
       [spsMap]="spsMap"
       [statesMap]="statesMap"
       [appointmentsMap]="appointmentsMap"
       [instructionsMap]="instructionsMap"
-      *ngFor="let itemTwo of itemOne.jobs"
+      *ngFor="let job of claim.jobs"
     >
-    </item-two-card>
+    </job-card>
   </div>
 </div>

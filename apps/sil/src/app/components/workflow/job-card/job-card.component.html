@@ -1,12 +1,12 @@
 <div
   class="job-card"
-  [id]="'job-' + itemTwo.id"
+  [id]="'job-' + job.id"
   [ngClass]="{
-    'unselected-job': selectedItemTwo && selectedItemTwo?.id != itemTwo.id,
-    'selected-job': selectedItemTwo?.id === itemTwo.id,
+    'unselected-job': selectedJob && selectedJob?.id != job.id,
+    'selected-job': selectedJob?.id === job.id,
     'is-offline': !isOnline
   }"
-  (click)="takeAction(itemTwo)"
+  (click)="takeAction(job)"
   [class.can-edit]="true"
 >
   <!--  <div class="indicator"><flx-indicator *ngI f="(canEdit$ | async)" [color]="indicatorClass"></flx-indicator></div>-->
@@ -15,23 +15,23 @@
     <!-- <flx-context-menu
       class="context-menu-container"
       iconSize="small"
-      *ngIf="isOnline && itemTwoContextMenuList?.length && (user?.user?.roles)[0] !== 18"
+      *ngIf="isOnline && jobContextMenuList?.length && (user?.user?.roles)[0] !== 18"
     >
       <ul>
-        <ng-container *ngFor="let menuItem of itemTwoContextMenuList">
-          <li *ngIf="checkPermission(menuItem)" (click)="selectMenuItem(itemTwo, menuItem)">{{ menuItem?.name }}</li>
+        <ng-container *ngFor="let menuItem of jobContextMenuList">
+          <li *ngIf="checkPermission(menuItem)" (click)="selectMenuItem(job, menuItem)">{{ menuItem?.name }}</li>
         </ng-container>
         <li class="divider"><flx-glow-line></flx-glow-line></li>
       </ul>
     </flx-context-menu> -->
     <div class="indicator-icons">
       <!-- Notes indicator -->
-      <div class="action" *ngIf="itemTwo && itemTwo.note_count !== null && itemTwo.note_count > 0">
+      <div class="action" *ngIf="job && job.note_count !== null && job.note_count > 0">
         <flx-icon
           size="extra-small"
-          [instruction]="itemTwo.note_count > 1 ? itemTwo.note_count + ' notes' : itemTwo.note_count + ' note'"
+          [instruction]="job.note_count > 1 ? job.note_count + ' notes' : job.note_count + ' note'"
           type="notes"
-          (click)="selectMenuItem(itemTwo, { key: 'SIL_CONTEXT_MENU_JOB_NOTES' })"
+          (click)="selectMenuItem(job, { key: 'SIL_CONTEXT_MENU_JOB_NOTES' })"
         ></flx-icon>
       </div>
     </div>
@@ -44,15 +44,15 @@
 
     <div class="appointment-state-info">
       <p #appointmentInfo class="appointment-info" [style.color]="appointment_text_color">{{appointment_text}}</p>
-      <p *ngIf="!!stateDescription" class="job-state">{{ itemTwo.state }}: {{ stateDescription }}</p>
+      <p *ngIf="!!stateDescription" class="job-state">{{ job.state }}: {{ stateDescription }}</p>
     </div>
     <div class="take-action"><span>{{instruction}}</span></div>
   </div>
 
   <!--  <div [class.disabled]="!isOnline" class="take-action  item-two-button-holder">-->
   <!--    &lt;!&ndash; <ng-container>-->
-  <!--      <button class="wfb wfb-primary" (click)="takeAction(itemTwo)" [disabled]="!isOnline"-->
-  <!--        [ngClass]="jobStateLookupTable[itemTwo.state]">-->
+  <!--      <button class="wfb wfb-primary" (click)="takeAction(job)" [disabled]="!isOnline"-->
+  <!--        [ngClass]="jobStateLookupTable[job.state]">-->
   <!--        {{ stateInstruction }}-->
   <!--      </button>-->
   <!--    </ng-container> &ndash;&gt;-->
