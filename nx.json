@@ -55,6 +55,9 @@
     },
     "dynamic-forms": {
       "tags": []
+    },
+    "identity": {
+      "tags": []
     }
   }
 }

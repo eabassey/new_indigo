@@ -1,6 +1,6 @@
 import {  TemplateDefinition, NodeConfig, EventConfig, ServerCallConfig, ActionPanelConfig, StateConfig, ServerQueryConfig } from '../models';
 import { CoreServices } from '../services';
-import { map, delay, switchMap, distinctUntilChanged, pluck, skipWhile } from 'rxjs/operators';
+import { map, delay, switchMap, distinctUntilChanged, pluck, skipWhile, take } from 'rxjs/operators';
 import { combineLatest, empty, interval, of, Subscription, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { setVariable } from '../store';
@@ -155,26 +155,32 @@ export const renderFormModels = (state: StateConfig | ActionPanelConfig) => {
 
 export const renderServerQueries = (serverQueries: ServerQueryConfig[], svc: CoreServices, route: ActivatedRoute) => {
   const subs: Subscription[] = [];
-  const accessToken = svc.auth.accessToken;
-  if (serverQueries && serverQueries.length) {
-     serverQueries.forEach(query => {
-       const {key, endpoint} = query;
-      //  svc.loader.add(key);
-       const dataSub = svc.http.post(
-         `${svc.baseUrl}/api/query`,
-         endpoint, {headers: { Authorization: 'Bearer ' + accessToken,}}).subscribe(
-        (res: any) => {
-           svc.store.dispatch(setVariable({key, data: res}));
-       },
-       err => {
+  const tokenSub = svc.auth.getAccessToken().pipe(
+    skipWhile(t => !t),
+    take(1),
+  ).subscribe(accessToken => {
+    if (serverQueries && serverQueries.length) {
+      serverQueries.forEach(query => {
+        const {key, endpoint} = query;
+       //  svc.loader.add(key);
+        const dataSub = svc.http.post(
+          `${svc.baseUrl}/api/query`,
+          endpoint, {headers: { Authorization: 'Bearer ' + accessToken,}}).subscribe(
+         (res: any) => {
+            svc.store.dispatch(setVariable({key, data: res}));
+        },
+        err => {
 
-       },
-       () => {
+        },
+        () => {
 
-       });
-       subs.push(dataSub);
-     });
-   }
+        });
+        subs.push(dataSub);
+      });
+    }
+  });
+  subs.push(tokenSub);
+
   return subs;
  };
 

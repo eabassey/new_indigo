@@ -3,9 +3,11 @@ import { Injectable } from '@angular/core';
 import { IAuthService } from './i-auth.service';
 
 
-@Injectable({providedIn: 'root'}) 
+@Injectable({providedIn: 'root'})
 export class AuthService implements IAuthService {
-    accessToken: string;
+    setUser(user) {
+      throw new Error('');
+    }
     logout(): Promise<void> {
         throw new Error('Method not implemented.');
     }

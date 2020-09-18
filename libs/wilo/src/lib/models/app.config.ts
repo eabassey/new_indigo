@@ -16,6 +16,8 @@ export interface AppConfig {
       addReminder?: boolean;
     };
     activateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;
+    canActivate?: any[],
+    canDeactivate?: any[],
     deactivateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;
     appMenu: (svc: CoreServices, route?: ActivatedRoute) => Observable<any[]>;
   //   virtualStatesFunction?: Function;

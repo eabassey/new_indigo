@@ -23,8 +23,8 @@ export interface StateConfig {
       editRoles: { [id: number]: string };
       viewRoles: { [id: number]: string };
     };
-    canActivate?: any[];
-    canDeactivate?: any[];
+    canActivate?: any[],
+    canDeactivate?: any[],
     activateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;
     deactivateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;
     useMockData?: boolean;

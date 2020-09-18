@@ -5,7 +5,7 @@ import { map, switchMap, skipWhile, take } from 'rxjs/operators';
 import { CoreServices } from '@wilo';
 
 
-@Injectable({providedIn: 'root'})
+// @Injectable({providedIn: 'root'})
 export class Interceptor implements HttpInterceptor {
 
   constructor(public svc: CoreServices) {}
