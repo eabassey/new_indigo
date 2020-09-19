@@ -26,7 +26,6 @@ export class AuthenticationService {
 
   constructor(
     private _http: HttpClient,
-    @Inject(JWT_TOKEN_KEY) private tokenKey: string,
     @Inject(ENVIRONMENT) private environment: any,
     private router: Router,
     @Inject(IDENTITY_CONFIG) private identityConfig: IdentityConfig,
@@ -78,6 +77,7 @@ export class AuthenticationService {
   login(credentials: { email: string; password: string }): Observable<{ success: boolean; user: any }> {
     if (window.navigator.onLine) {
       const { api_url } = this.environment;
+      console.log({credentials, config: this.identityConfig})
       return this._http
         .post<any>(this.identityConfig.login_endpoint, {
           user: credentials
@@ -85,6 +85,7 @@ export class AuthenticationService {
         .pipe(
           // delay(500000),
           map(data => {
+            console.log({data})
             // this.token = data.user.token;
             return data;
           }),

@@ -21,7 +21,7 @@ export const testApp: AppConfig = {
         key: 'all_info',
         errorMessage: '',
         directCall: ({http, baseUrl}) => {
-          return http.get(`${baseUrl}/api/v1/all_info/`);
+          return http.get(`${baseUrl}v1/all_info/`);
         }
       }
     ]

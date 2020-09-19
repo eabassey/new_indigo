@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NoAuthGuard, AuthGuard } from './guards';
-import { AuthenticationService, AuthorizationService, LocalAuthInterceptorService } from './services';
+import { AuthenticationService, AuthImplService, AuthorizationService, LocalAuthInterceptorService } from './services';
 import { StoreModule } from '@ngrx/store';
 import { identityReducer, IdentityEffects } from './store';
 import { EffectsModule } from '@ngrx/effects';
@@ -10,6 +10,7 @@ import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { ENVIRONMENT, IdentityConfig, IDENTITY_CONFIG, JWT_TOKEN_KEY } from './services/constants';
 import { MsalModule } from '@azure/msal-angular';
 import { AuthModule } from './auth/auth.module';
+import { AuthService } from '@wilo';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ export class IdentityModule {
     return {
       ngModule: IdentityModule,
       providers: [
+        {provide: AuthService, useClass: AuthImplService},
         { provide: IDENTITY_CONFIG, useValue: config },
         { provide: ENVIRONMENT, useValue: environment },
         {provide: JWT_TOKEN_KEY, useValue: localStorage.getItem('flexus.web.jwtToken')},

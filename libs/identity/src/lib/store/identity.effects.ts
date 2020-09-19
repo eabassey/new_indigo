@@ -58,13 +58,13 @@ export class IdentityEffects {
   @Effect()
   login$ = this.actions$.pipe(
     ofType<IdentityActions.Login>(IdentityActions.IdentityActionTypes.LOGIN),
-    switchMap<any, any>(action => {
+    mergeMap<any, any>(action => {
       const credentials = action.payload;
       // if (window.navigator.onLine) {
       //   this.cryptoService.createKeyAsBlobAndStore(credentials);
       // }
       return this.authenticationService.login(credentials).pipe(
-        switchMap<any, any>(res => {
+        mergeMap<any, any>(res => {
           console.log({ res });
           if (res && res.success === true) {
             const jwtHelper = new JwtHelperService();
@@ -72,6 +72,7 @@ export class IdentityEffects {
             const { email, token } = res.user;
             this.svc.auth.setUser(res.user);
             localStorage.setItem('flexus.web.jwtToken', res.user.token);
+            localStorage.setItem('flexus.web.user', JSON.stringify(res));
 
             // SET AUTH METHOD OF RESPONSE
             localStorage.setItem('flexus.web.authMethod', 'local');
@@ -140,6 +141,7 @@ export class IdentityEffects {
         const { email, token } = res.user;
         this.svc.auth.setUser(res.user);
         localStorage.setItem('flexus.web.jwtToken', res.user.token);
+        localStorage.setItem('flexus.web.user', JSON.stringify(res));
 
         // SET AUTH METHOD OF RESPONSE
         localStorage.setItem('flexus.web.authMethod', 'azuread');
@@ -193,7 +195,7 @@ export class IdentityEffects {
     })
   );
 
-  @Effect()
+  @Effect({dispatch: false})
   navigateToDashboard = this.actions$.pipe(
     ofType<IdentityActions.LoginSuccess>(IdentityActions.IdentityActionTypes.LOGIN_SUCCESS),
     map(action => {
@@ -221,6 +223,7 @@ export class IdentityEffects {
           const { email, token } = data;
           this.svc.auth.setUser(data);
           localStorage.setItem('flexus.web.jwtToken', token);
+          localStorage.setItem('flexus.web.user', JSON.stringify(data));
           if (this.authenticationService.userIsAuthenticated) {
             return this.http
               .post(
@@ -269,6 +272,7 @@ export class IdentityEffects {
           const { email, token } = data;
           this.svc.auth.setUser(data);
           localStorage.setItem('flexus.web.jwtToken', token);
+          localStorage.setItem('flexus.web.user', JSON.stringify(data));
           if (this.authenticationService.userIsAuthenticated) {
             return this.http
               .post(

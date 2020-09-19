@@ -44,10 +44,15 @@ export class ClaimCardComponent implements OnInit, OnChanges, AfterViewInit, OnD
   constructor(private svc: CoreServices) {}
 
   ngOnInit() {
-    this.sla = get_sla_time(this.claim, this.statesMap);
+    if (this.statesMap) {
+      this.sla = get_sla_time(this.claim, this.statesMap);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    if (changes['statesMap']?.currentValue) {
+      this.sla = get_sla_time(this.claim, this.statesMap);
+    }
   }
 
   ngAfterViewInit() {}

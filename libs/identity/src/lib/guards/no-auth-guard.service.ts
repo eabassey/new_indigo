@@ -4,16 +4,15 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import { getIsAuthenticated } from '../store';
+import { CoreServices } from '@wilo';
 
 @Injectable()
 export class NoAuthGuard implements CanActivate {
-  authenticated$: Observable<boolean>;
 
-  constructor(private _store: Store<any>) {
-    this.authenticated$ = _store.select(getIsAuthenticated);
+  constructor(private svc: CoreServices) {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    return this.authenticated$.pipe(map(bool => !bool));
+    return this.svc.auth.isAuthenticated().pipe(map(authed => !authed));
   }
 }

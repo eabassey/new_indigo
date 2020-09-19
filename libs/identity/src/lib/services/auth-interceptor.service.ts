@@ -37,55 +37,85 @@ export class LocalAuthInterceptorService implements HttpInterceptor {
   // }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return this.svc.auth.getAccessToken().pipe(
-      switchMap(accessToken => {
-        if (localStorage.getItem(accessToken)) {
-          this.headersConfig['Authorization'] = `Token ${accessToken}`;
-        }
-        // the bellow should work
-        const localHeadersConf = { ...this.headersConfig };
-        if (request.body instanceof FormData) {
-          delete localHeadersConf['Content-Type'];
-        }
-        let newRequest = request.clone({
-          setHeaders: localHeadersConf
-        });
+    const localHeadersConf = { ...this.headersConfig };
+    if (
+      request.url.includes('/api/v2/auth/login/') ||
+      request.url.includes('v1/auth/azure/') ||
+      request.url.includes('v1/auth/azure/logout/')
+    ) {
+      delete localHeadersConf['Authorization'];
+       // the bellow should work
+       if (request.body instanceof FormData) {
+        delete localHeadersConf['Content-Type'];
+      }
+      let newRequest = request.clone({
+        setHeaders: localHeadersConf
+      });
 
-        //
-        if (
-          request.url.includes('/api/v2/auth/login/') ||
-          request.url.includes('v1/auth/azure/') ||
-          request.url.includes('v1/auth/azure/logout/')
-        ) {
-          delete localHeadersConf['Authorization'];
-        } else {
-          localHeadersConf['Authorization'] = `Token ${accessToken}`;
-        }
-        newRequest = request.clone({
-          setHeaders: localHeadersConf
-        });
+      //
 
-        return next.handle(newRequest).pipe(
-          tap(
-            (event: HttpEvent<any>) => {
-              if (event instanceof HttpResponse) {
-                // console.log({ routerURL: this.router.url });
-                // if (!this.identityConfig.no_auth_urls.includes(this.router.url) && !this.authService.userIsAuthenticated) {
-                //   // this.store.dispatch(new LogOut());
-                // }
-              }
-            },
-            (err: any) => {
-              if (err instanceof HttpErrorResponse) {
-                if (err.status === 403) {
-                  this.store.dispatch(new LogOut());
-                }
+      newRequest = request.clone({
+        setHeaders: localHeadersConf
+      });
+
+      return next.handle(newRequest).pipe(
+        tap(
+          (event: HttpEvent<any>) => {
+            if (event instanceof HttpResponse) {
+              // console.log({ routerURL: this.router.url });
+              // if (!this.identityConfig.no_auth_urls.includes(this.router.url) && !this.authService.userIsAuthenticated) {
+              //   // this.store.dispatch(new LogOut());
+              // }
+            }
+          },
+          (err: any) => {
+            if (err instanceof HttpErrorResponse) {
+              if (err.status === 403) {
+                this.store.dispatch(new LogOut());
               }
             }
-          )
-        );
-      })
-    );
+          }
+        )
+      );
+    } else {
+      const accessToken = localStorage.getItem('flexus.web.jwtToken');
+      if (accessToken) {
+        localHeadersConf['Authorization'] = `Token ${accessToken}`;
+      }
+      // the bellow should work
+      if (request.body instanceof FormData) {
+        delete localHeadersConf['Content-Type'];
+      }
+      let newRequest = request.clone({
+        setHeaders: localHeadersConf
+      });
+
+      //
+
+      newRequest = request.clone({
+        setHeaders: localHeadersConf
+      });
+
+      return next.handle(newRequest).pipe(
+        tap(
+          (event: HttpEvent<any>) => {
+            if (event instanceof HttpResponse) {
+              // console.log({ routerURL: this.router.url });
+              // if (!this.identityConfig.no_auth_urls.includes(this.router.url) && !this.authService.userIsAuthenticated) {
+              //   // this.store.dispatch(new LogOut());
+              // }
+            }
+          },
+          (err: any) => {
+            if (err instanceof HttpErrorResponse) {
+              if (err.status === 403) {
+                this.store.dispatch(new LogOut());
+              }
+            }
+          }
+        )
+      );
+    }
   }
 }
 

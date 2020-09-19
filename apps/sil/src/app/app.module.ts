@@ -52,7 +52,7 @@ import { EffectsModule } from '@ngrx/effects';
 StoreDevtoolsModule.instrument()
   ],
   providers: [
-    {provide: AuthService, useExisting: AuthImplService},
+    {provide: AuthService, useClass: AuthImplService},
     {provide: 'BACKEND_API_URL', useValue: environment.api_url},
     // Interceptor,
     // requestOptionsProvider
