@@ -11,9 +11,9 @@ import { trigger, state, style, transition, animate, AnimationEvent } from '@ang
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-// import { getActiveTheme, SetTheme, CloseAppMenu } from '@indigo/ux';
-
-import { map, skipWhile, take } from 'rxjs/operators';
+import {LogOut} from '@indigo/identity';
+import { map, skipWhile, take, tap } from 'rxjs/operators';
+import { CoreServices } from '@wilo';
 // import { AppMenuOverlayService } from './app-menu.service';
 
 const ESCAPE = 27;
@@ -58,14 +58,14 @@ export class FLXAppMenuComponent implements OnInit {
     private router: Router,
     // private controller: ManifestController<any>,
     private _store: Store<any>,
-    private cdr: ChangeDetectorRef,
+    private svc: CoreServices,
     // private navService: NavService,
     // private bf: BigFormService // public appMenuOverlayService: AppMenuOverlayService
   ) {}
 
   ngOnInit() {
+    this.currentUser$ = this.svc.auth.getUser().pipe(tap(console.log));
     // this.getOrg();
-    // this.currentUser$ = this._store.select(getCurrentUser);
     // this.version = environment.version;
 
     // if (environment.branding) {
@@ -148,7 +148,7 @@ export class FLXAppMenuComponent implements OnInit {
   signout(event) {
     // event.preventDefault();
     // this.navService.portalActions.next({ call: '', paramFunc: () => {} });
-    // this._store.dispatch(new LogOut());
+    this._store.dispatch(new LogOut());
     // this.cdr.detectChanges();
   }
 

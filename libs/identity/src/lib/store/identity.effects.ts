@@ -92,14 +92,18 @@ export class IdentityEffects {
               .pipe(
                 map((response: any) => response.payload),
                 map(
-                  staff_member =>
-                    new IdentityActions.LoginSuccess({
+                  staff_member => {
+                    const userData = {
                       email,
                       ...jwtPack,
                       token: localStorage.getItem('flexus.web.jwtToken'),
                       user: { ...staff_member, ...jwtPack.user }
-                    })
-                )
+                    }
+                    this.svc.auth.setUser(userData);
+                    localStorage.setItem('flexus.web.jwtToken', userData.token);
+                    localStorage.setItem('flexus.web.user', JSON.stringify(userData));
+                    return new IdentityActions.LoginSuccess(userData)
+                  })
               );
           } else {
             return of(new IdentityActions.LoginFail({ ...res, dataKey: 'login' }));
@@ -160,14 +164,18 @@ export class IdentityEffects {
           .pipe(
             map((response: any) => response.payload),
             map(
-              staff_member =>
-                new IdentityActions.LoginSuccess({
+              staff_member => {
+                const userData = {
                   email,
                   ...jwtPack,
                   token: localStorage.getItem('flexus.web.jwtToken'),
                   user: { ...staff_member, ...jwtPack.user }
-                })
-            )
+                }
+                this.svc.auth.setUser(userData);
+                localStorage.setItem('flexus.web.jwtToken', userData.token);
+                localStorage.setItem('flexus.web.user', JSON.stringify(userData));
+                return new IdentityActions.LoginSuccess(userData)
+              })
           );
       } else {
         return of(new IdentityActions.LoginFail({ ...res, dataKey: 'login' }));
@@ -240,14 +248,18 @@ export class IdentityEffects {
               .pipe(
                 map((response: any) => response.payload),
                 map(
-                  staff_member =>
-                    new IdentityActions.GetLoggedInUserSuccess({
+                  staff_member => {
+                    const userData = {
                       email,
                       token,
                       ...jwtPack,
                       user: { ...staff_member, ...jwtPack.user }
-                    })
-                )
+                    }
+                    this.svc.auth.setUser(userData);
+                    localStorage.setItem('flexus.web.jwtToken', userData.token);
+                    localStorage.setItem('flexus.web.user', JSON.stringify(userData));
+                    return new IdentityActions.GetLoggedInUserSuccess(userData);
+                  })
               );
           } else {
             return empty();
@@ -289,14 +301,18 @@ export class IdentityEffects {
               .pipe(
                 map((response: any) => response.payload),
                 map(
-                  staff_member =>
-                    new IdentityActions.GetLoggedInUserSuccessSilently({
+                  staff_member => {
+                    const userData = {
                       email,
                       token,
                       ...jwtPack,
                       user: { ...staff_member, ...jwtPack.user }
-                    })
-                )
+                    }
+                    this.svc.auth.setUser(userData);
+                    localStorage.setItem('flexus.web.jwtToken', token);
+                    localStorage.setItem('flexus.web.user', JSON.stringify(userData));
+                    return new IdentityActions.GetLoggedInUserSuccessSilently(userData);
+                  })
               );
           } else {
             return empty();
@@ -325,7 +341,6 @@ export class IdentityEffects {
   logout$ = this.actions$.pipe(
     ofType<IdentityActions.LogOut>(IdentityActions.IdentityActionTypes.LOGOUT),
     map(() => {
-      this.bf.bigForm.reset();
       // this.controller.dispatch(
       //   new ChangeManifestState(state => ({
       //     ...state,
@@ -338,7 +353,6 @@ export class IdentityEffects {
       //   }))
       // );
       // this.indexedDbService.currentItem.delete('currentItem');
-      this.svc.auth.setUser(null);
       this.authenticationService.logout();
       // this.store.dispatch(clearReminders());
       return new IdentityActions.LogOutSuccess();

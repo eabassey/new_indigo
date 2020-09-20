@@ -27,6 +27,7 @@ export abstract class AppBase implements OnInit, OnChanges, OnDestroy {
     ngOnInit() {
       this.sub = this.route.data.subscribe((app: AppConfig) => {
         this.app = app;
+        this.svc.configAccessor.setApp(app);
         this.handleConfig(app);
       });
       this.panelActionsSub = this.svc.actionPanel.panelActions$.pipe(delay(0)).subscribe((panelsMap) => {

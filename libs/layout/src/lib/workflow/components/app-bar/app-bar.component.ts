@@ -3,11 +3,10 @@ import { take, map, tap, filter } from 'rxjs/operators';
 
 import { Observable, Subscription, of } from 'rxjs';
 import { Store } from '@ngrx/store';
-// import { getAppMenuOpened, CloseAppMenu, OpenAppMenu } from '@indigo/ux';
-// import { BigFormService, NetworkService, getSettings, ManifestController, getActiveManifestItem } from '@wilo';
 import { AppMenuOverlayService } from '../app-menu/app-menu.service';
 import { AppMenuOverlayRef } from '../app-menu/app-menu-overlay-ref';
 import { Route, Router, ActivatedRoute } from '@angular/router';
+import { AppConfig, CoreServices, StateConfig } from '@wilo';
 
 @Component({
   selector: 'flx-app-bar',
@@ -15,12 +14,14 @@ import { Route, Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['app-bar.component.scss']
 })
 export class FLXAppBarComponent implements OnInit, OnChanges, OnDestroy {
-  @Input() manifestItem;
-  openAppMenu$: Observable<boolean>;
+  @Input() app: AppConfig;
+  state: StateConfig;
+  openAppMenu = false;
   title$: Observable<string>;
   networkCheckSubscription: Subscription;
   settings: any;
   disableMenu: boolean;
+  state$: Observable<StateConfig>;
 
   // TODO: Offline checking needs to be added
   isOffline = false;
@@ -30,61 +31,34 @@ export class FLXAppBarComponent implements OnInit, OnChanges, OnDestroy {
     // private bf: BigFormService,
     // private networkService: NetworkService,
     // public controller: ManifestController<any>,
-    // private appMenu: AppMenuOverlayService,
-    public route: ActivatedRoute
+    private appMenu: AppMenuOverlayService,
+    public route: ActivatedRoute,
+    private svc: CoreServices
   ) {}
 
   ngOnInit() {
+    this.setState();
     // this.getCurrentRoute();
     // this.getSettings();
     // this.setTitle();
-    // this.getAppMenuState();
     // this.notifyNetworkStatus();
   }
 
-  getCurrentRoute() {
-    // this.activeManifestSubscription = this.controller
-    //   .select(getActiveManifestItem)
-    //   .pipe(filter(manifestItem => manifestItem && manifestItem.id !== this._lastInitialisedManifestItemId))
-    //   .subscribe(manifestItem => {
-    //     this._lastInitialisedManifestItemId = manifestItem.id;
-    //     this.disableMenu = manifestItem.id !== 'Workflow';
-    //   });
-  }
-
-  private getSettings() {
-    // this.controller
-    //   .select(getSettings)
-    //   .pipe(take(1))
-    //   .subscribe(settings => (this.settings = settings));
-  }
 
   ngOnChanges(changes: SimpleChanges) {
-    // if (changes['manifestItem']) {
-    //   this.setTitle();
-    // }
   }
 
-  setTitle() {
-    // const title = this.manifestItem && this.manifestItem.header && this.manifestItem.header.title;
-    // if (title && typeof title === 'string') {
-    //   this.title$ = of(title);
-    // } else if (typeof title === 'function') {
-    //   this.title$ = title(this._store, this.bf);
-    // }
-  }
-
-  getAppMenuState() {
-    // this.openAppMenu$ = this._store.select(getAppMenuOpened);
+  setState() {
+    this.state$ = this.svc.configAccessor.currentState$;
   }
 
   toggleMenu() {
-    // let appMenuRef: AppMenuOverlayRef = this.appMenu.open();
-    // this.openAppMenu$.pipe(take(1)).subscribe(opened => {
-    //   if (opened) {
-    //   } else {
-    //   }
-    // });
+    let appMenuRef: AppMenuOverlayRef = this.appMenu.open();
+    if (this.openAppMenu) {
+      this.openAppMenu = false;
+    } else {
+      this.openAppMenu = true;
+    }
   }
 
   private notifyNetworkStatus() {

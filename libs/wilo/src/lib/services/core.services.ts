@@ -16,6 +16,7 @@ import { BigFormService } from './big-form.service';
 import { ClientConfig } from '../models';
 import { KeyValueStoreService } from './key-value-store.service';
 import { EventEmitter } from 'events';
+import { ConfigAccessorService } from './config-accessor.service';
 
 
 @Injectable({providedIn: 'root'})
@@ -37,6 +38,7 @@ export class CoreServices {
         public keyValueStore: KeyValueStoreService,
         public footerAccessor: FooterAccessorService,
         public headerAcessor: HeaderAccessorService,
+        public configAccessor: ConfigAccessorService,
         @Inject(BASE_URL) public baseUrl: string,
         @Inject(CLIENT_CONFIG) public clientConfig: ClientConfig,
         @Inject(CLIENT_SERVICE) public clientService: any

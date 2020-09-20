@@ -11,7 +11,7 @@
 
   <div class="current-module">
     <ng-content select=".component-title"></ng-content>
-    {{ title$ | async }} Hello Title
+    {{ (state$ | async)?.title }}
   </div>
 
   <div class="module-actions">

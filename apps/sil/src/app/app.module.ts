@@ -54,7 +54,7 @@ StoreDevtoolsModule.instrument()
   providers: [
     {provide: AuthService, useExisting: AuthImplService},
     {provide: 'BACKEND_API_URL', useValue: environment.api_url},
-    // Interceptor,
+    // Intercep*-/tor,
     // requestOptionsProvider
   ],
   bootstrap: [AppComponent]

@@ -5,6 +5,7 @@ import { StateConfig } from '@wilo';
 export const workflow: StateConfig = {
     id: 'workflow',
     name: 'Workflow',
+    title: 'Workflow',
     startNode: 'list',
     nodes: {
         list: mainListNode,

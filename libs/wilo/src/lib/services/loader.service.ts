@@ -6,7 +6,7 @@ import * as remove from 'lodash.remove';
 @Injectable({providedIn: 'root'})
 export class LoaderService {
     private tracker = [];
-    loader$ = new BehaviorSubject<any>(this.tracker);
+    private loader$ = new BehaviorSubject<any>(this.tracker);
 
     get loading$() {
         return this.loader$.asObservable().pipe(map(tr => !!tr.length), delay(0));

@@ -11,6 +11,7 @@ import { Store } from '@ngrx/store';
 import { LogOut } from '../store/identity.actions';
 // import { ToastrService } from 'ngx-toastr';
 import { MsalService } from '@azure/msal-angular';
+import { CoreServices } from '@wilo';
 
 @Injectable()
 export class AuthenticationService {
@@ -31,6 +32,7 @@ export class AuthenticationService {
     @Inject(IDENTITY_CONFIG) private identityConfig: IdentityConfig,
     private store: Store<any>,
     // private toastr: ToastrService,
+    private svc: CoreServices,
     @Optional() private msalService: MsalService
   ) {}
 
@@ -114,7 +116,10 @@ export class AuthenticationService {
   }
 
   logout() {
+    this.svc.bf.bigForm.reset();
+    this.svc.auth.setUser(null);
     localStorage.removeItem('flexus.web.jwtToken');
+    localStorage.removeItem('flexus.web.user');
     switch (localStorage.getItem('flexus.web.authMethod')) {
       case 'azuread': {
         this.msalService.logout();
