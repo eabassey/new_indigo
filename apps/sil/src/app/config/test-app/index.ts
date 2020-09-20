@@ -11,6 +11,9 @@ export const testApp: AppConfig = {
     appMenu: () => of([]),
     canActivate: [AuthGuard],
     startState: 'workflow',
+    onAppInit: (svc) => {
+      // svc.listeners.emit('dance');
+    },
     appStates: {
         testState1,
         workflow,
@@ -24,5 +27,8 @@ export const testApp: AppConfig = {
           return http.get(`${baseUrl}v1/all_info/`);
         }
       }
-    ]
+    ],
+    eventListeners: (evt) => {
+      evt.on('dance', (data) => console.log('dancing through it all', data))
+    }
 }

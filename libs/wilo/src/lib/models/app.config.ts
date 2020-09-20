@@ -2,6 +2,7 @@ import {CoreServices} from '../services';
 import {ServerCallConfig, ServerQueryConfig, EventConfig, StateConfig,} from '../models';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import {EventEmitter} from 'events';
 
 
 export interface AppConfig {
@@ -30,4 +31,5 @@ export interface AppConfig {
     appStates: { [id: string]: StateConfig };
     onAppInit?: (svc: CoreServices, route?: ActivatedRoute) => void;
     onAppDestroy?: (svc: CoreServices, route?: ActivatedRoute) => void;
+    eventListeners?: (ev: EventEmitter) => void;
 }

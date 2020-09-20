@@ -38,6 +38,9 @@ export const mainListNode: NodeConfig = {
                 // }).pipe(map((d: any) => d.payload));
             },
             onSuccess: (result, svc, call) => {
+              console.log('kiccking again aaaa')
+              svc.eventBus.emit('dance', {svc});
+              svc.eventBus.emit('dance');
                 // console.log('Callback On Success: Todos', {result, svc, call});
             }
         }

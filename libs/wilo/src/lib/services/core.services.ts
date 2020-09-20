@@ -15,10 +15,12 @@ import { IndexedDbService } from './indexeddb.service';
 import { BigFormService } from './big-form.service';
 import { ClientConfig } from '../models';
 import { KeyValueStoreService } from './key-value-store.service';
+import { EventEmitter } from 'events';
 
 
 @Injectable({providedIn: 'root'})
 export class CoreServices {
+    eventBus: EventEmitter;
     constructor(
         public bf: BigFormService,
         public http: HttpClient,
@@ -38,5 +40,7 @@ export class CoreServices {
         @Inject(BASE_URL) public baseUrl: string,
         @Inject(CLIENT_CONFIG) public clientConfig: ClientConfig,
         @Inject(CLIENT_SERVICE) public clientService: any
-    ) {}
+    ) {
+      this.eventBus = new EventEmitter();
+    }
 }
