@@ -36,7 +36,6 @@ export class IdentityModule {
     return {
       ngModule: IdentityModule,
       providers: [
-        {provide: AuthService, useClass: AuthImplService},
         { provide: IDENTITY_CONFIG, useValue: config },
         { provide: ENVIRONMENT, useValue: environment },
         {provide: JWT_TOKEN_KEY, useValue: localStorage.getItem('flexus.web.jwtToken')},
