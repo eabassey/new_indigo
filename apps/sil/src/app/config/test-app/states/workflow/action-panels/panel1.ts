@@ -25,6 +25,7 @@ export const panel1: ActionPanelConfig = {
                     key: 'testCall7',
                     errorMessage: '',
                     directCall: (svc, route) => {
+                      console.log('helo hello hellllo')
                         return svc.http.get('https://jsonplaceholder.typicode.com/posts');
                     },
                     onSuccess: (result, svc, call) => {

@@ -2,6 +2,7 @@ import {CoreServices} from '../services';
 import {ServerCallConfig, ServerQueryConfig, EventConfig, StateConfig,} from '../models';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import {EventEmitter} from 'events';
 
 
 export interface AppConfig {
@@ -16,6 +17,8 @@ export interface AppConfig {
       addReminder?: boolean;
     };
     activateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;
+    canActivate?: any[],
+    canDeactivate?: any[],
     deactivateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;
     appMenu: (svc: CoreServices, route?: ActivatedRoute) => Observable<any[]>;
   //   virtualStatesFunction?: Function;
@@ -28,4 +31,5 @@ export interface AppConfig {
     appStates: { [id: string]: StateConfig };
     onAppInit?: (svc: CoreServices, route?: ActivatedRoute) => void;
     onAppDestroy?: (svc: CoreServices, route?: ActivatedRoute) => void;
+    eventListeners?: (ev: EventEmitter) => void;
 }

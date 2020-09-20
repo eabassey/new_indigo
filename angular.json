@@ -408,6 +408,38 @@
           "style": "scss"
         }
       }
+    },
+    "identity": {
+      "projectType": "library",
+      "root": "libs/identity",
+      "sourceRoot": "libs/identity/src",
+      "prefix": "indigo",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/identity/tsconfig.lib.json",
+              "libs/identity/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/identity/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/identity/jest.config.js",
+            "tsConfig": "libs/identity/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/identity/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {

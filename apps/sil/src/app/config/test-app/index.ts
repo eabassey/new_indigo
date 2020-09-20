@@ -3,12 +3,17 @@ import { testState1 } from './states/test-state1';
 import { workflow} from './states/workflow';
 import { AppConfig } from '@wilo';
 import {SIL_27} from './states/sil-27';
+import { AuthGuard } from '@indigo/identity';
 
 
 export const testApp: AppConfig = {
     name: 'test-app',
     appMenu: () => of([]),
+    canActivate: [AuthGuard],
     startState: 'workflow',
+    onAppInit: (svc) => {
+      // svc.listeners.emit('dance');
+    },
     appStates: {
         testState1,
         workflow,
@@ -19,8 +24,11 @@ export const testApp: AppConfig = {
         key: 'all_info',
         errorMessage: '',
         directCall: ({http, baseUrl}) => {
-          return http.get(`${baseUrl}/api/v1/all_info/`);
+          return http.get(`${baseUrl}v1/all_info/`);
         }
       }
-    ]
+    ],
+    eventListeners: (evt) => {
+      evt.on('dance', (data) => console.log('dancing through it all', data))
+    }
 }

@@ -1,0 +1,28 @@
+<flx-button color="primary" class="foursure-button" *ngIf="hideFormInitially" (click)="showLoginForm()"
+  >Log in with 4-sure</flx-button
+>
+
+<form [formGroup]="loginForm" novalidate (submit)="login()" *ngIf="!hideFormInitially">
+  <fieldset [disabled]="isSubmitting$ | async" class="form-group">
+    <flx-heading size="extraLarge" type="page">Login</flx-heading>
+    <flx-input-text
+      type="text"
+      class="form-input"
+      formControlName="email"
+      placeholder="Email Address/Username"
+      autocomplete="false"
+      size="medium"
+    ></flx-input-text>
+    <flx-input-text
+      type="password"
+      class="form-input"
+      formControlName="password"
+      placeholder="Password"
+      size="medium"
+      autocomplete="false"
+    ></flx-input-text>
+    <flx-inline-error class="error" *ngIf="!isOnline"></flx-inline-error>
+    <flx-inline-error class="error" *ngIf="(error$ | async) as error" [errorMessage]="error"></flx-inline-error>
+    <flx-button color="primary" class="login-button" [disabled]="loginForm.invalid">Login</flx-button>
+  </fieldset>
+</form>

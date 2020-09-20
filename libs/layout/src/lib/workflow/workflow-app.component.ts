@@ -1,20 +1,23 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CoreServices, AppBase } from '@wilo';
 import { ActivatedRoute } from '@angular/router';
 import {Router} from '@angular/router';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 
 @Component({
     selector: 'workflow-app',
     template: `
        <main>
+       <!-- <h1 *ngIf="loading$ | async">LOADING ...</h1> -->
             <section
                 class="app-shell-container action-panel-visible"
                 #appShell
                 [ngClass]="[expandActionPanel ? 'action-panel-expand' : 'action-panel-collapse']"
             >
                 <section class="module-wrapper">
-                <flx-app-bar></flx-app-bar>
+                <flx-app-bar [app]="app"></flx-app-bar>
                 <section class="module-container">
                   <router-outlet></router-outlet>
                     <!-- <workflow-state [state]="state" [node]="node"></workflow-state> -->
@@ -61,6 +64,12 @@ import {Router} from '@angular/router';
                 </nav>
                 </div>
 
+                <flx-loader-component
+                  isFullScreen="true"
+                  *ngIf="loading$ | async"
+                  [disableBackground]="loaderOptions && !loaderOptions.showBackdrop"
+                ></flx-loader-component>
+
             </ng-container>
         </main>
     `,
@@ -68,8 +77,10 @@ import {Router} from '@angular/router';
     styleUrls: ['workflow-app.component.scss']
 })
 export class WorkflowAppComponent extends AppBase {
-
+    loading$: Observable<boolean>;
+    loaderOptions = { showBackdrop: false};
     constructor(svc: CoreServices, route: ActivatedRoute, router: Router) {
         super(svc, route, router);
+        this.loading$ = svc.loader.loading$.pipe(tap(console.log));
     }
 }

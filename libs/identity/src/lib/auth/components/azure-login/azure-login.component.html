@@ -1,0 +1,10 @@
+<flx-button color="primary" class="login-button" [disabled]="isSubmittingWithAzure" (click)="loginWithAzure()"
+  >Log in With Azure <span inlineSVG="assets/icons/azure.svg"></span
+></flx-button>
+
+<flx-loader-component
+  loadingMessage="AzureAD"
+  isFullScreen="true"
+  [disableBackground]="disableBackground"
+  *ngIf="isSubmittingWithAzure"
+></flx-loader-component>

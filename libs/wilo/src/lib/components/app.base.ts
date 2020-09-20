@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
 import { renderServerCalls, renderEvents, renderServerQueries } from '../helpers/utils';
 import {delay} from 'rxjs/operators';
+import { EventEmitter } from 'events';
 
 @Component({template: ''})
 export abstract class AppBase implements OnInit, OnChanges, OnDestroy {
@@ -26,6 +27,7 @@ export abstract class AppBase implements OnInit, OnChanges, OnDestroy {
     ngOnInit() {
       this.sub = this.route.data.subscribe((app: AppConfig) => {
         this.app = app;
+        this.svc.configAccessor.setApp(app);
         this.handleConfig(app);
       });
       this.panelActionsSub = this.svc.actionPanel.panelActions$.pipe(delay(0)).subscribe((panelsMap) => {
@@ -52,6 +54,10 @@ export abstract class AppBase implements OnInit, OnChanges, OnDestroy {
 
 
     handleConfig(app: AppConfig): void {
+        if (app.eventListeners) {
+          app.eventListeners(this.svc.eventBus);
+        }
+
         if (app?.onAppInit) {
             app.onAppInit(this.svc, this.route);
         }

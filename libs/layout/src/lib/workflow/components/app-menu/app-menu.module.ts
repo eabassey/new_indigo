@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-// import { UIElementsModule } from '@indigo/ui-elements';
+import { UIElementsModule } from '@indigo/ui-elements';
 import { CommonModule } from '@angular/common';
 import { FLXAppMenuComponent } from './app-menu.component';
 import { AppMenuOverlayService } from './app-menu.service';
@@ -10,7 +10,7 @@ import { InlineSVGModule,  } from 'ng-inline-svg';
   imports: [
     CommonModule,
     // environment.appShellFeatures.includes(HeaderActionsModule) && HeaderActionsModule,
-    // UIElementsModule,
+    UIElementsModule,
     InlineSVGModule,
     OverlayModule
   ],

@@ -4,7 +4,21 @@
 
 export const environment = {
   production: false,
-  api_url: 'http://localhost:3000',
+  azure: {
+    clientId: '4ab69d74-27cb-49bc-b095-f7bf6332a636',
+    loginUrl: 'v1/auth/azure/login',
+    codeForTokenExchangeUrl: 'v1/auth/azure/'
+  },
+  branding: {
+    logo_url: 'https://storage.googleapis.com/emp21charlitex.appspot.com/4sure/standard-bank-logo.svg',
+    byline: 'Enterprise Claims & Supplier Management Platform'
+  },
+  useMultipleLogins: false,
+  api_url: 'https://sildev.4-sure.net:10000/api/',
+  // api_url: 'http://localhost:3000',
+  base_url: 'https://sildev.4-sure.net:10000/',
+  // base_url: 'http://localhost:4200/',
+  google_maps_api_key: 'AIzaSyA28JqiZDQ8_CYVbdLKsrA-l_E0iDkW0pw',
 };
 
 /*

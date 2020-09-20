@@ -1,0 +1,20 @@
+<flx-flex-container alignItems="center">
+  <div class="logo-display">
+    <!-- <img [src]="second_logo_url" width="100px" height="28px" class="second-logo" *ngIf="second_logo_url" />  -->
+    <span class="sb-logo" [inlineSVG]="logo_url"></span>
+  </div>
+  <flx-heading size="small" align="center" weight="bold" margin="2rem 0 4rem 0">{{ byline }}</flx-heading>
+  <flx-panel class="glow-panel" hasBackground="true" density="cozy" width="400px" maxWidth="400px" margin="auto">
+    <ng-container *ngIf="useMultipleLogins; else localLogin">
+      <local-login [hideFormInitially]="useMultipleLogins"></local-login>
+      <azure-login *ngIf="azureLoginUrl" [azureLoginUrl]="azureLoginUrl"></azure-login>
+    </ng-container>
+    <ng-template #localLogin> <local-login [hideFormInitially]="useMultipleLogins"></local-login> </ng-template>
+  </flx-panel>
+  <div class="logo-display">
+    <img [src]="second_logo_url" width="100px" height="28px" class="second-logo" *ngIf="second_logo_url" />
+  </div>
+  <div class="sure-logo">
+    <span>Powered by</span> <span class="sb-logo" inlineSVG="https://storage.googleapis.com/emp21charlitex.appspot.com/4sure/4-sure-logo-new.svg"></span>
+  </div>
+</flx-flex-container>

@@ -1,0 +1,73 @@
+a {
+  cursor: pointer;
+  text-decoration: none;
+  transition: 0.5s ease-in-out all;
+  display: inherit;
+  margin-top: 1rem;
+  text-align: center;
+
+  &:hover {
+    text-decoration: none;
+    color: var(--secondary);
+  }
+}
+
+.glow-panel {
+  position: relative;
+  box-shadow: 0 0 52px var(--primary);
+  max-width: 400px;
+  background: var(--panel);
+
+  &::before {
+    background: linear-gradient(90deg, transparent, var(--primary-light), transparent);
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 80%;
+    bottom: 0;
+    height: 1px;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 4;
+  }
+
+  &::after {
+    background: linear-gradient(90deg, transparent, var(--primary-light), transparent);
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 80%;
+    top: 0;
+    height: 1px;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 4;
+  }
+}
+
+.logo-display {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+
+  span {
+    padding: 1rem 0 0 0 !important;
+  }
+}
+
+.sure-logo {
+  width: 50px;
+  margin: 2rem auto 0 auto;
+  font-size: 10px;
+
+  span {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.second-logo {
+  margin: 2rem;
+}

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 
 
 export interface IAuthService {
-    accessToken: string;
+    setUser(user): void;
     getAccessToken(): Observable<string>;
     getUser(): Observable<any>;
     isAuthenticated(): Observable<boolean>

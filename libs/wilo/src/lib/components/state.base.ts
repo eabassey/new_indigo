@@ -20,6 +20,7 @@ export abstract class StateBase implements OnInit, OnDestroy {
     ngOnInit() {
       this.sub = this.route.data.subscribe((state: StateConfig) => {
         this.state = state;
+        this.svc.configAccessor.setState(state);
         this.svc.bf.bigForm.reset({});
         this.handleConfig(state);
       });

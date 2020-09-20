@@ -25,7 +25,7 @@ import { CoreServices } from '@wilo';
   styleUrls: ['./job-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class JobCardComponent implements OnInit, AfterViewInit, OnDestroy {
+export class JobCardComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   @Input() job: any;
   @Input() claim: any;
   @Input() jobContextMenuList = [];
@@ -57,11 +57,19 @@ export class JobCardComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.skill = this.skillsMap[this.job?.skill];
-    this.sp = this.spsMap[this.job?.sp];
-    this.stateDescription = this.statesMap[this.job.state]?.description;
-    this.instruction = this.rd(true, 1, {editRoles: {1: 'Allow something'}});
-    this.renderAppointmentInfo();
+    if (this.skillsMap) this.skill = this.skillsMap[this.job?.skill];
+    if (this.spsMap) this.sp = this.spsMap[this.job?.sp];
+    if(this.statesMap) this.stateDescription = this.statesMap[this.job.state]?.description;
+    this.instruction = this.getText(true, 1, {editRoles: {1: 'Allow something'}});
+    if(this.appointmentsMap) this.renderAppointmentInfo();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+      if (changes['skillsMap']?.currentValue) this.skill = this.skillsMap[this.job?.skill];
+      if (changes['spsMap']?.currentValue) this.sp = this.spsMap[this.job?.sp];
+      if(changes['statesMap']?.currentValue) this.stateDescription = this.statesMap[this.job.state]?.description;
+      if(changes['appointmentsMap']?.currentValue) this.renderAppointmentInfo();
+
   }
 
   takeAction(job): void {
@@ -75,7 +83,7 @@ export class JobCardComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit() {
   }
 
-  rd(userCanEdit: boolean, userRole: any, instructions: any) {
+  getText(userCanEdit: boolean, userRole: any, instructions: any) {
     const instructionText = userCanEdit
         ? (instructions && instructions.editRoles[userRole]) || (instructions && instructions.editRoles[0]) || ''
         : (instructions && instructions.viewRoles[userRole]) || (instructions && instructions.viewRoles[0]) || '';

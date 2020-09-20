@@ -26,7 +26,7 @@ export const mainListNode: NodeConfig = {
             filterable: true,
             sortable: false,
             directCall: (svc, route) => {
-                return svc.http.get(`${svc.baseUrl}/api/v1/staff_action/get_summary/`, {
+                return svc.http.get(`${svc.baseUrl}v1/staff_action/get_summary/`, {
                     // headers: {'Access-Control-Allow-Origin': 'true'}
                 }).pipe(map((d: any) => d.payload));
                 // return of([])
@@ -38,6 +38,9 @@ export const mainListNode: NodeConfig = {
                 // }).pipe(map((d: any) => d.payload));
             },
             onSuccess: (result, svc, call) => {
+              console.log('kiccking again aaaa')
+              svc.eventBus.emit('dance', {svc});
+              svc.eventBus.emit('dance');
                 // console.log('Callback On Success: Todos', {result, svc, call});
             }
         }
