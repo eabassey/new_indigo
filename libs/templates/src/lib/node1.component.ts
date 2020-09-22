@@ -8,8 +8,8 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
     <div>
     Node1 stuff: {{greeting}}
         <button (click)="doWork.emit('workings')">doWork</button>
-        <button (click)="setFilter.emit({by_state2: 7})">Filter Top</button>
-        <button (click)="setFilter.emit({by_state: 10})">Filter Down</button>
+        <button (click)="setFilter.emit({filter_top: 7})">Filter Top</button>
+        <button (click)="setFilter.emit({filter_down: 10})">Filter Down</button>
         <button (click)="resetFilter.emit()">Reset Filter</button>
         <a href="/home">Go Home</a>
         <!-- <a [routerLink]="['.//actionPanel:panel1/node7']">Go Next</a> -->

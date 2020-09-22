@@ -39,9 +39,11 @@ export class PanelNodeBase implements OnInit, OnDestroy, OnChanges {
             // Initialize the first node
             if (paramMap.has('panelNodeId')) {
                 const panelNodeId = paramMap.get('panelNodeId');
-                this.activeNode = this.activePanel.nodes[panelNodeId];
+                this.activeNode = this.activePanel?.nodes[panelNodeId];
                 //
-                this.renderNode(this.activeNode);
+                if (this.activeNode) {
+                  this.renderNode(this.activeNode);
+                }
             }
         });
     }

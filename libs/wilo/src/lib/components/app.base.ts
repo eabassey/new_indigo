@@ -31,11 +31,14 @@ export abstract class AppBase implements OnInit, OnChanges, OnDestroy {
         this.handleConfig(app);
       });
       this.panelActionsSub = this.svc.actionPanel.panelActions$.pipe(delay(0)).subscribe((panelsMap) => {
-        this.panelsMap = panelsMap;
-        const res = Object.values(panelsMap).map(act => ({id: act.id, path: act.id, instruction: act.instruction, icon: act.icon}));
-        this.panelActions = res || [];
+        if (panelsMap && Object.keys(panelsMap)?.length > 0) {
+          console.log({panelsMap})
+          this.panelsMap = panelsMap;
+          const res = Object.values(panelsMap).map(act => ({id: act.id, path: act.id, instruction: act.instruction, icon: act.icon}));
+          this.panelActions = res || [];
+          this.getQueryParams();
+        }
       });
-        this.getQueryParams();
     }
     ngOnChanges() {
         // this.handleConfig(this.app);
@@ -75,7 +78,7 @@ export abstract class AppBase implements OnInit, OnChanges, OnDestroy {
 
 
     initActionPanel(panel): void {
-        if (panel && this.clickedActionPanel !== panel && this.clickedActionPanel) {
+        if (this.panelsMap && panel && this.clickedActionPanel !== panel) {
             this.clickedActionPanel = panel;
             this.activePanel = this.panelsMap[this.clickedActionPanel];
         }

@@ -12,11 +12,11 @@ export const mainListNode: NodeConfig = {
         // list$: 'dyn.variables.claims.dataset'
         // list$: {
         //     variableName: 'claims',
-        //     filterFunctions: {by_state: (id) => p => p.id < id, by_state2: (id) => p => p.id > id}
+        //     filterFunctions: {filter_down: (id) => p => p.id < id, filter_top: (id) => p => p.id > id}
         // },
         claims$: {
             variableName: 'claims',
-            // filterFunctions: {by_state: (id) => p => !!p.id}
+            filterFunctions: {filter_down: (id) => p => p.id < id, filter_top: (id) => p => p.id > id}
         }
     },
     serverCalls: [

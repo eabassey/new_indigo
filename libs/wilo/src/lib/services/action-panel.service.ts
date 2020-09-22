@@ -4,7 +4,7 @@ import { ActionPanelConfig } from '../models';
 
 @Injectable({providedIn: 'root'})
 export class ActionPanelService {
-    panelState = new BehaviorSubject<{[id: string]: ActionPanelConfig}>({});
+    panelState = new BehaviorSubject<{[id: string]: ActionPanelConfig}>(null);
 
     setActionPanel(actionPanels: {[id: string]: ActionPanelConfig}): void {
         this.panelState.next(actionPanels);

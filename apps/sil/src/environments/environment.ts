@@ -10,7 +10,7 @@ export const environment = {
     codeForTokenExchangeUrl: 'v1/auth/azure/'
   },
   branding: {
-    logo_url: 'https://storage.googleapis.com/emp21charlitex.appspot.com/4sure/standard-bank-logo.svg',
+    logo_url: '',
     byline: 'Enterprise Claims & Supplier Management Platform'
   },
   useMultipleLogins: false,

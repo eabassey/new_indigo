@@ -1,4 +1,4 @@
-import { OnInit,  OnDestroy, Component, Input, OnChanges } from '@angular/core';
+import { OnInit,  OnDestroy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import {   TemplateDefinition, ActionPanelConfig } from '../models';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -6,7 +6,7 @@ import { CoreServices } from '../services';
 import { renderServerCalls, renderTemplateDefs, renderServerQueries, renderEvents, renderFormModels } from '../helpers/utils';
 
 @Component({template: ''})
-export abstract class ActionPanelBase implements OnChanges, OnDestroy {
+export abstract class ActionPanelBase implements OnInit, OnChanges, OnDestroy {
     @Input() activePanel: ActionPanelConfig;
     serverCallsSubs: Subscription[];
     serverQueriesSubs: Subscription[];
@@ -16,10 +16,16 @@ export abstract class ActionPanelBase implements OnChanges, OnDestroy {
 
     constructor(private svc: CoreServices, private route: ActivatedRoute) {}
 
-    ngOnChanges() {
+    ngOnInit() {
         if (this.activePanel) {
             this.handleConfig(this.activePanel);
         }
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+      if (changes['activePanel']?.currentValue) {
+        this.handleConfig(this.activePanel);
+      }
     }
 
     handleConfig(panel: ActionPanelConfig) {
