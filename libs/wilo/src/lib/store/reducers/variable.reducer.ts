@@ -1,4 +1,5 @@
 import { actionTypes } from '../actions/variable.actions';
+import {clone} from 'ramda';
 
 
 const initialState = {}
@@ -7,9 +8,16 @@ export function reducer(state = initialState, action) {
     switch (action.type) {
         case actionTypes.SET_VARIABLE: {
             const {key, data} = action.payload;
+            const val = clone(data);
+            if (state[key]?.filterBy) {
+              val.filterBy = state[key]?.filterBy;
+            }
+            if (state[key]?.sortBy) {
+              val.sortBy = state[key]?.sortBy;
+            }
             return {
                 ...state,
-                [key]: data
+                [key]: val
             };
         }
         case actionTypes.ADD_FILTER: {
