@@ -10,6 +10,7 @@ import { FooterButtonConfig } from './footer-button.config';
 
 export interface NodeConfig {
     name?: string;
+    hideTab?: boolean;
     layout?: {
       showFooter: boolean;
       showHeader: boolean;

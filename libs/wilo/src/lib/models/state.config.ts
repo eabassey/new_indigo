@@ -11,6 +11,7 @@ import { NodeConfig } from './node.config';
 export interface StateConfig {
     id: string;
     name?: string;
+    showTabs?: boolean;
     layout?: {
       showFooter: boolean;
       showHeader: boolean;

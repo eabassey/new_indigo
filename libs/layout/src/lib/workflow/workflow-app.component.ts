@@ -67,7 +67,7 @@ import { tap } from 'rxjs/operators';
                 <flx-loader-component
                   isFullScreen="true"
                   *ngIf="loading$ | async"
-                  [disableBackground]="loaderOptions && !loaderOptions.showBackdrop"
+                  [disableBackground]="disableBackground"
                 ></flx-loader-component>
 
             </ng-container>
@@ -78,7 +78,7 @@ import { tap } from 'rxjs/operators';
 })
 export class WorkflowAppComponent extends AppBase {
     loading$: Observable<boolean>;
-    loaderOptions = { showBackdrop: false};
+    disableBackground = true;
     constructor(svc: CoreServices, route: ActivatedRoute, router: Router) {
         super(svc, route, router);
         this.loading$ = svc.loader.loading$.pipe(tap(console.log));

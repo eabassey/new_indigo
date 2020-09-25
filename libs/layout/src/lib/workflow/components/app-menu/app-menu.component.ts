@@ -8,12 +8,12 @@ import {
   EventEmitter
 } from '@angular/core';
 import { trigger, state, style, transition, animate, AnimationEvent } from '@angular/animations';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import {LogOut} from '@indigo/identity';
-import { map, skipWhile, take, tap } from 'rxjs/operators';
-import { CoreServices } from '@wilo';
+import { map, skipWhile, switchMap, take, tap } from 'rxjs/operators';
+import { AppConfig, CoreServices } from '@wilo';
 // import { AppMenuOverlayService } from './app-menu.service';
 
 const ESCAPE = 27;
@@ -41,8 +41,11 @@ export class FLXAppMenuComponent implements OnInit {
   theme = '';
   navItems;
   logo_url: any;
+  logoutIcon = 'app-menu-logout';
   animationState: 'void' | 'enter' | 'leave' = 'enter';
   animationStateChanged = new EventEmitter<AnimationEvent>();
+  navItems$: Observable<any>;
+  appMenuRef: any;
 
   @HostListener('document:click', ['$event.target'])
   listenToClickOutsideMenu(targetElement) {}
@@ -59,12 +62,14 @@ export class FLXAppMenuComponent implements OnInit {
     // private controller: ManifestController<any>,
     private _store: Store<any>,
     private svc: CoreServices,
+    private route: ActivatedRoute
     // private navService: NavService,
     // private bf: BigFormService // public appMenuOverlayService: AppMenuOverlayService
   ) {}
 
   ngOnInit() {
     this.currentUser$ = this.svc.auth.getUser().pipe(tap(console.log));
+    this.navItems$ = this.svc.configAccessor.currentApp$.pipe(switchMap(app => app.appMenu(this.svc, this.route)));
     // this.getOrg();
     // this.version = environment.version;
 
@@ -93,23 +98,14 @@ export class FLXAppMenuComponent implements OnInit {
     //   });
   }
 
-  getOrg() {
-    // this.controller
-    //   .select(getActiveOrganization)
-    //   .pipe(
-    //     skipWhile(org => !org),
-    //     take(1),
-    //     map(org => org)
-    //   )
-    //   .subscribe(org => {
-    //     org.appMenu(this, this._store).subscribe(menuItems => {
-    //       this.navItems = menuItems;
-    //     });
-    //   });
-  }
 
   // no more router link, this will let you do checks before navigating. which will eventually fold into actions which are dispatched to the router store
   redirect(navItem) {
+    this.svc.router.navigate([navItem.routerLink]);
+    if (!this.appMenuRef) {
+      this.appMenuRef = this.svc.keyValueStore.getItem('appMenuRef');
+    }
+    this.appMenuRef.close();
     // this._store.dispatch(new CloseAppMenu());
     // switch (navItem.routerLink) {
     //   case '/workflow/detail': {

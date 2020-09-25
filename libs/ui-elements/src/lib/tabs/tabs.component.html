@@ -1,9 +1,9 @@
 <div class="tab-container">
   <div class="tab-bar" *ngIf="tabs !== null">
     <ng-container *ngFor="let tab of tabs; let i = index">
-      <ng-container *ngIf="tab.show">
-        <div [id]="tab.targetId + 'tab'" class="tab-link" (click)="switchTab(tab.targetId + 'tab', tab.targetId, i)">
-          <span>{{ tab.display }}</span>
+      <ng-container *ngIf="tab?.show">
+        <div [id]="tab?.targetId + 'tab'" class="tab-link" routerLinkActive="active" [routerLink]="[tab.targetId]">
+          <span>{{ tab?.display }}</span>
         </div>
       </ng-container>
     </ng-container>

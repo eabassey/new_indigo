@@ -66,12 +66,12 @@ export class FLXTabsComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   setDefault() {
-    let tabIndex = 0;
-    while (this.tabs[tabIndex].show !== true && tabIndex !== this.tabs.length - 1) {
-      tabIndex++;
-    }
-    // console.log('Setting Default tab ' + this.tabs[tabIndex].display);
-    this.switchTab(this.tabs[tabIndex].targetId + 'tab', this.tabs[tabIndex].targetId);
+    // let tabIndex = 0;
+    // while (this.tabs[tabIndex].show !== true && tabIndex !== this.tabs.length - 1) {
+    //   tabIndex++;
+    // }
+    // // console.log('Setting Default tab ' + this.tabs[tabIndex].display);
+    // this.switchTab(this.tabs[tabIndex].targetId + 'tab', this.tabs[tabIndex].targetId);
   }
 
   switchTab(tabName: any, target: string, tabIndex?: number) {
@@ -117,18 +117,18 @@ export class FLXTabsComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (this.externalPages) {
-      document.getElementById(this.tabs[0].targetId + 'tab').className += ' active';
-      if (this.currentStep$ !== null) {
-        this.currentStepSub = this.currentStep$.subscribe(step => {
-          this.findTab(step);
-        });
-      }
-    } else {
-      this.setDefault();
-    }
+    // if (this.externalPages) {
+    //   document.getElementById(this.tabs[0].targetId + 'tab').className += ' active';
+    //   if (this.currentStep$ !== null) {
+    //     this.currentStepSub = this.currentStep$.subscribe(step => {
+    //       this.findTab(step);
+    //     });
+    //   }
+    // } else {
+    //   this.setDefault();
+    // }
 
-    this.cd.detectChanges();
+    // this.cd.detectChanges();
   }
 
   ngOnDestroy() {

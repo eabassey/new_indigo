@@ -6,7 +6,7 @@ import { FormGroup } from '@angular/forms';
     selector: 'textarea-input',
     template: `
       <div [formGroup]="form">
-      <textarea [disabled]="disabled" [class.is-invalid]="isDirty && !isValid" [formControlName]="field.name" [id]="field.name"
+      <textarea [disabled]="disabled" [class]="field.controlClasses" [class.is-invalid]="isDirty && !isValid" [formControlName]="field.name" [id]="field.name"
         [rows]="field.rows" [cols]="field.cols" class="form-control" [placeholder]="field.placeholder" ></textarea>
       </div>
     `

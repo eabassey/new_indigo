@@ -1,9 +1,11 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 
 
 
 @Component({
     selector: 'node2',
-    template: `Node2 stuff`
+    template: `{{text || 'Node 2 Stuffs'}}`
 })
-export class Node2Component {}
+export class Node2Component {
+  @Input() text: string;
+}

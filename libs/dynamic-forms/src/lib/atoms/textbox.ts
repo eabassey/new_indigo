@@ -6,7 +6,7 @@ import { FormGroup } from '@angular/forms';
     selector: 'textbox',
     template: `
       <div [formGroup]="form">
-        <input [disabled]="disabled" [attr.type]="field.type"  [id]="field.name" [name]="field.name" [formControlName]="field.name" />
+        <input [disabled]="disabled" [class]="field.controlClasses" [attr.type]="field.type"  [id]="field.name" [name]="field.name" [formControlName]="field.name" />
       </div>
     `
 })

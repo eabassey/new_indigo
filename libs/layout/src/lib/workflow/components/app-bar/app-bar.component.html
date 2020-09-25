@@ -2,11 +2,9 @@
   <div
     class="hamburger-menu"
     (click)="toggleMenu()"
-    [ngClass]="{ active: true }"
-    [class.disableMenu]="disableMenu"
+    [ngClass]="{ active: openAppMenu }"
   >
-  hello
-    <flx-icon type="app-menu-hamburger"></flx-icon>
+    <flx-icon [type]="hamburgerIcon"></flx-icon>
   </div>
 
   <div class="current-module">

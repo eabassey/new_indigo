@@ -20,8 +20,8 @@ export class FLXAppBarComponent implements OnInit, OnChanges, OnDestroy {
   title$: Observable<string>;
   networkCheckSubscription: Subscription;
   settings: any;
-  disableMenu: boolean;
   state$: Observable<StateConfig>;
+  hamburgerIcon = 'app-menu-hamburger';
 
   // TODO: Offline checking needs to be added
   isOffline = false;
@@ -54,6 +54,7 @@ export class FLXAppBarComponent implements OnInit, OnChanges, OnDestroy {
 
   toggleMenu() {
     let appMenuRef: AppMenuOverlayRef = this.appMenu.open();
+    this.svc.keyValueStore.setItem('appMenuRef', appMenuRef);
     if (this.openAppMenu) {
       this.openAppMenu = false;
     } else {

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
-import { StateConfig, ServerCallConfig, NodeConfig } from '../models';
+import { StateConfig } from '../models';
 import { CoreServices } from '../services/core.services';
 import { Subscription, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -7,19 +7,25 @@ import { renderServerCalls, renderEvents, renderServerQueries, renderFormModels 
 
 @Component({template: ''})
 export abstract class StateBase implements OnInit, OnDestroy {
-    @Input() state: StateConfig;
-    @Input() node: NodeConfig;
+    state: StateConfig;
     sub: Subscription;
     eventsSub: Subscription[];
     setValuesSub: Subscription;
     serverCallsSubs: Subscription[];
     serverQueriesSubs: Subscription[];
+    dynamicTabs = [];
 
     constructor(private svc: CoreServices,  private route: ActivatedRoute) {}
 
     ngOnInit() {
       this.sub = this.route.data.subscribe((state: StateConfig) => {
         this.state = state;
+        this.dynamicTabs = state?.showTabs ? Object.entries(state.nodes).map(([key, node]) => ({
+          targetId: key,
+          display: node.name,
+          show: !node.hideTab
+        })) : [];
+        console.log({dynTabs: this.dynamicTabs, state})
         this.svc.configAccessor.setState(state);
         this.svc.bf.bigForm.reset({});
         this.handleConfig(state);

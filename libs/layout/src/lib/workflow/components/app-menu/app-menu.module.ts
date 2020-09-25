@@ -5,6 +5,7 @@ import { FLXAppMenuComponent } from './app-menu.component';
 import { AppMenuOverlayService } from './app-menu.service';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { InlineSVGModule,  } from 'ng-inline-svg';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { InlineSVGModule,  } from 'ng-inline-svg';
     // environment.appShellFeatures.includes(HeaderActionsModule) && HeaderActionsModule,
     UIElementsModule,
     InlineSVGModule,
-    OverlayModule
+    OverlayModule,
+    RouterModule
   ],
   declarations: [FLXAppMenuComponent],
   exports: [FLXAppMenuComponent],

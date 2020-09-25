@@ -12,14 +12,14 @@
     </div>
 
     <a class="btn-menu-item" (click)="signout($event)">
-      <flx-icon hover="primary" class="ui-icon" type="app-menu-logout"></flx-icon>Log out
+      <flx-icon hover="primary" class="ui-icon" [type]="logoutIcon"></flx-icon>Log out
     </a>
   </div>
   <!-- <flx-glow-line margin="1rem 0"></flx-glow-line> -->
 
   <div class="app-menu-button-group">
-    <a *ngFor="let item of navItems" class="btn-menu-item" (click)="redirect(item)">
-      <!-- <flx-icon hover="primary" class="ui-icon" [type]="item?.iconType"></flx-icon> -->
+    <a *ngFor="let item of navItems$ | async" class="btn-menu-item" (click)="redirect(item)">
+      <flx-icon hover="primary" class="ui-icon" [type]="item?.iconType"></flx-icon>
       {{ item?.name }}
     </a>
   </div>

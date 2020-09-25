@@ -13,7 +13,6 @@ import { ThemeModule } from './theming/theme.module';
 import { blackoutTheme } from './theming/themes/blackout.theme';
 import { middayTheme } from './theming/themes/midday.theme';
 import { midnightTheme } from './theming/themes/midnight.theme';
-import { UiModule } from './ui/ui.module';
 import { AppFooterComponent } from './components/app-footer/app-footer.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FLXHeaderActionsComponent } from './components/header-actions/header-actions.component';
@@ -22,6 +21,7 @@ import { WorkflowPanelNodeComponent } from './workflow-panel-node.component';
 import { DynamicModule } from 'ng-dynamic-component';
 import {WiloModule} from '@wilo';
 import { RoutesService } from './routes.service';
+import { UIElementsModule } from '@indigo/ui-elements';
 
 
 @NgModule({
@@ -40,9 +40,9 @@ import { RoutesService } from './routes.service';
     imports: [
         CommonModule,
         WiloModule,
-        UiModule,
         NgxPaginationModule,
         ThemeModule,
+        UIElementsModule,
         AppMenuModule,
         SearchBannerModule,
         DynamicModule,

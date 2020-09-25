@@ -37,6 +37,8 @@ export abstract class AppBase implements OnInit, OnChanges, OnDestroy {
           const res = Object.values(panelsMap).map(act => ({id: act.id, path: act.id, instruction: act.instruction, icon: act.icon}));
           this.panelActions = res || [];
           this.getQueryParams();
+        } else {
+          this.panelActions = [];
         }
       });
     }
