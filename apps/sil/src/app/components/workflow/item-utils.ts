@@ -3,9 +3,9 @@ import * as moment from 'moment';
 import { humaniseSeconds } from '@indigo/utilities';
 
 
-export const get_indicator_color = (item, userRoles = [], comp) => {
-  const color = userRoles.includes(item.state) ? indicatorColors[item.state] : 'grey';
-  comp.indicator.color = color;
+export const get_indicator_color = (item, editStates) => {
+  const color = editStates.includes(item.state) ? indicatorColors[item.state] : 'grey';
+  return color;
 };
 
 export const get_sla_time = (item, statesMap) => {
@@ -20,4 +20,12 @@ export const get_sla_time = (item, statesMap) => {
     return { text: humaniseSeconds(actualTime), color: 'red'};
   }
 
+}
+
+
+export const getText = (userCanEdit: boolean, userRole: any, instructions: any) => {
+  const instructionText = userCanEdit
+      ? (instructions && instructions.editRoles[userRole]) || (instructions && instructions.editRoles[0]) || ''
+      : (instructions && instructions.viewRoles[userRole]) || (instructions && instructions.viewRoles[0]) || '';
+      return instructionText;
 }

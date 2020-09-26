@@ -8,7 +8,7 @@ import {
   SimpleChanges,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { get_sla_time } from '../item-utils';
+import { getText, get_indicator_color, get_sla_time } from '../item-utils';
 import { CoreServices } from '@wilo';
 
 
@@ -25,20 +25,21 @@ export class ClaimCardComponent implements OnInit, OnChanges, AfterViewInit, OnD
   @Input() appointmentsMap: {[id: number]: any};
   @Input() instructionsMap: {[id: number]: any};
   @Input() spsMap: {[id: number]: any};
-  slaTimeColor = 'grey';
+  @Input() user;
+  indicatorColor = 'grey';
   sla: {text: string; color: string};
+  stateDescription;
+  instruction;
 
   subs: any[] = [];
 
   // fse = Four Sure Event
-  engState: string;
   engClaimType: string;
 
   // This preload class is used to guard against the hiding animation on load.
   preload = true;
   isOffline = false;
   isOnline = true;
-  indicatorClass = '';
 
 
   constructor(private svc: CoreServices) {}
@@ -47,12 +48,22 @@ export class ClaimCardComponent implements OnInit, OnChanges, AfterViewInit, OnD
     if (this.statesMap) {
       this.sla = get_sla_time(this.claim, this.statesMap);
     }
+    this.indicatorColor = get_indicator_color(this.claim, this.user.user.edit_states);
+    if(this.statesMap) this.stateDescription = this.claim.state === 169 ? 'Local Draft' : this.statesMap[this.claim.state]?.description;
+
+
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['statesMap']?.currentValue) {
       this.sla = get_sla_time(this.claim, this.statesMap);
     }
+    if(changes['claim']?.currentValue || changes['user']?.currentValue) {
+      this.indicatorColor = get_indicator_color(this.claim, this.user.user.edit_states);
+    }
+    this.instruction = getText(true, 1, {editRoles: {1: 'Allow something'}});
+    if(changes['statesMap']?.currentValue) this.stateDescription = this.statesMap[this.claim.state]?.description;
+    // this.engClaimType = this.claimTypeDescriptions ? this.claimTypeDescriptions[this.itemOne.claim_type_id] : '';
   }
 
   ngAfterViewInit() {}

@@ -17,6 +17,7 @@ import { Subscription } from 'rxjs';
 import { humaniseDate } from '@indigo/utilities';
 import * as moment from 'moment';
 import { CoreServices } from '@wilo';
+import { getText, get_indicator_color } from '../item-utils';
 
 
 @Component({
@@ -29,7 +30,6 @@ export class JobCardComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   @Input() job: any;
   @Input() claim: any;
   @Input() jobContextMenuList = [];
-  @Input() user: any;
   @Input() activeOrg;
   @Input() isOnline: boolean = true;
   selectedJob: any;
@@ -43,11 +43,13 @@ export class JobCardComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   @Input() statesMap: {[id: number]: any};
   @Input() appointmentsMap: {[id: number]: any};
   @Input() instructionsMap: {[id: number]: any}
+  @Input() user;
   skill: any;
   sp: any;
   stateDescription: string;
   appt: string;
   instruction: string;
+  indicatorColor = 'grey';
 
   sub: Subscription[] = [];
   constructor(
@@ -60,8 +62,9 @@ export class JobCardComponent implements OnInit, OnChanges, AfterViewInit, OnDes
     if (this.skillsMap) this.skill = this.skillsMap[this.job?.skill];
     if (this.spsMap) this.sp = this.spsMap[this.job?.sp];
     if(this.statesMap) this.stateDescription = this.statesMap[this.job.state]?.description;
-    this.instruction = this.getText(true, 1, {editRoles: {1: 'Allow something'}});
+    this.instruction = getText(true, 1, {editRoles: {1: 'Allow something'}});
     if(this.appointmentsMap) this.renderAppointmentInfo();
+    this.indicatorColor = get_indicator_color(this.job, this.user.user.edit_states);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -69,7 +72,9 @@ export class JobCardComponent implements OnInit, OnChanges, AfterViewInit, OnDes
       if (changes['spsMap']?.currentValue) this.sp = this.spsMap[this.job?.sp];
       if(changes['statesMap']?.currentValue) this.stateDescription = this.statesMap[this.job.state]?.description;
       if(changes['appointmentsMap']?.currentValue) this.renderAppointmentInfo();
-
+      if(changes['job']?.currentValue || changes['user']?.currentValue) {
+        this.indicatorColor = get_indicator_color(this.job, this.user.user.edit_states);
+      }
   }
 
   takeAction(job): void {
@@ -83,12 +88,7 @@ export class JobCardComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   ngAfterViewInit() {
   }
 
-  getText(userCanEdit: boolean, userRole: any, instructions: any) {
-    const instructionText = userCanEdit
-        ? (instructions && instructions.editRoles[userRole]) || (instructions && instructions.editRoles[0]) || ''
-        : (instructions && instructions.viewRoles[userRole]) || (instructions && instructions.viewRoles[0]) || '';
-        return instructionText;
-  }
+
 
   renderAppointmentInfo() {
     // const appointmentInfoEl = this.appointmentInfoHolder.nativeElement;

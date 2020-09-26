@@ -4,7 +4,7 @@
     (click)="takeAction(claim)"
     [ngClass]="!isOnline && claim.state !== 169 ? 'is-offline' : null"
   >
-    <div class="indicator"><flx-indicator></flx-indicator></div>
+    <div class="indicator"><flx-indicator [color]="indicatorColor"></flx-indicator></div>
     <div class="claim-card-icons">
       <div class="context-menu-container">
         <div class="action">
@@ -46,7 +46,7 @@
       <p class="claimant">
         {{ claim.applicant?.first_name + ' ' + claim.applicant?.surname || 'No Client Name Captured' }}
       </p>
-      <p *ngIf="engState" class="claim-state">{{ claim?.state }}: {{ engState }}</p>
+      <p *ngIf="stateDescription" class="claim-state">{{ claim?.state }}: {{ stateDescription }}</p>
       <p class="sla-timer">
         <span [style.color]="sla?.color">{{sla?.text}}</span>
       </p>
@@ -61,6 +61,7 @@
       [statesMap]="statesMap"
       [appointmentsMap]="appointmentsMap"
       [instructionsMap]="instructionsMap"
+      [user]="user"
       *ngFor="let job of claim.jobs"
     >
     </job-card>

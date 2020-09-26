@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, ChangeDetectionStrategy, Inject } from "@angular/core";
-import {Observable} from 'rxjs';
+import { Component, Input, OnInit, ChangeDetectionStrategy, Inject, OnDestroy } from "@angular/core";
+import {Observable, Subscription} from 'rxjs';
 import { CoreServices, getVariable, CLIENT_CONFIG, ClientConfig } from '@wilo';
 import { map, skipWhile } from 'rxjs/operators';
 import { select } from '@ngrx/store';
@@ -28,6 +28,7 @@ import { select } from '@ngrx/store';
                     [spsMap]="spsMap"
                     [appointmentsMap]="appointmentsMap"
                     [instructionsMap]="instructionsMap"
+                    [user]="user"
                     [claim]="claim"
                     ></claim-card>
                 </div>
@@ -145,7 +146,7 @@ import { select } from '@ngrx/store';
 
     `]
 })
-export class WorkflowListComponent implements OnInit {
+export class WorkflowListComponent implements OnInit, OnDestroy {
     opened = false;
     hasSearchValues = false;
     @Input() claims$: Observable<any>;
@@ -156,12 +157,15 @@ export class WorkflowListComponent implements OnInit {
     spsMap: {[id: number]: any};
     appointmentsMap: {[id: number]: any};
     instructionsMap: {[id: number]: any};
+    user;
+    userSub: Subscription;
+    allInfoSub: Subscription;
     constructor(private svc: CoreServices) {}
 
     ngOnInit() {
         this.currentPage$ = this.svc.route.queryParamMap.pipe(map(paramMap => paramMap.get('currentPage') || 1))
         this.instructionsMap = this.getStateInstructions(this.svc.clientConfig);
-        this.svc.store.pipe(
+        this.allInfoSub = this.svc.store.pipe(
           select(getVariable('all_info')),
           // tap(console.log),
           skipWhile(x => !x)
@@ -172,6 +176,8 @@ export class WorkflowListComponent implements OnInit {
             this.spsMap = dataset.sps.reduce((acc, sp) => ({...acc, [sp.id]: sp}), {});
             this.appointmentsMap = dataset.appointment_types.reduce((acc, apt) => ({...acc, [apt.id]: apt}), {});
            });
+
+        this.userSub = this.svc.auth.getUser().pipe(skipWhile(user => !user)).subscribe(user => this.user = user);
     }
 
     getStateInstructions(clientConfig: ClientConfig) {
@@ -183,4 +189,9 @@ export class WorkflowListComponent implements OnInit {
     trackByFunc(idx, item) {
         return item.id;
       }
+
+    ngOnDestroy() {
+      if (this.allInfoSub) this.allInfoSub.unsubscribe();
+      if (this.userSub) this.userSub.unsubscribe();
+    }
 }
