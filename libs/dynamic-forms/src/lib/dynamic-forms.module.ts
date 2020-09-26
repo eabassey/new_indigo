@@ -6,6 +6,8 @@ import { FieldBuilderComponent } from './field-builder/field-builder.component';
 import { TextBoxComponent } from './atoms/textbox';
 import { TextAreaInputComponent } from './atoms/textarea';
 import { CheckBoxComponent } from './atoms/checkbox';
+import {UIElementsModule} from '@indigo/ui-elements';
+import { PipesModule } from '@indigo/pipes';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,7 @@ import { CheckBoxComponent } from './atoms/checkbox';
     TextAreaInputComponent,
     CheckBoxComponent
   ],
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, UIElementsModule, PipesModule],
   exports: [FormBuilderComponent]
 })
 export class DynamicFormsModule {}

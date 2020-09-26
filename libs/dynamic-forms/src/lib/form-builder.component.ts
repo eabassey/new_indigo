@@ -6,10 +6,13 @@ import {BigFormService} from '@wilo';
   selector: 'form-builder',
   template:`
     <form [class]="formModel.classes" [style]="formModel.styles" [formGroup]="bf.bigForm">
-      <div *ngFor="let field of formModel.fields">
+      <flx-flex-container direction="row" justifyContent="center" maxWidth="50vw">
+
+        <div *ngFor="let field of formModel.fields">
           <field-builder *ngIf="field" [field]="field" [form]="bf.bigForm"></field-builder>
           <!-- <dynamic-form-builder *ngIf="field.kind === 'group'" [fields]="field.fields" [groupName]="field.name"></dynamic-form-builder> -->
-      </div>
+        </div>
+      </flx-flex-container>
     </form>
   `,
 })
@@ -21,7 +24,7 @@ export class FormBuilderComponent implements OnInit {
   constructor(public bf: BigFormService) { }
 
   ngOnInit() {
-    console.log({FM: this.formModel})
+    console.log({FM: this.formModel});
     this.unsubcribe = this.bf.bigForm?.valueChanges.subscribe((update) => {
       console.log({update});
     });

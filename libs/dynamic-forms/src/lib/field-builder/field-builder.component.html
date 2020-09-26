@@ -1,6 +1,6 @@
 <div [hidden]="isHidden$ | async" [class]="field.controlGroupClasses" [formGroup]="form">
     <label [class]="field.labelClasses" [attr.for]="field.label">
-      {{field?.label}}
+      {{field?.label | fsToHuman }}
       <!-- <strong class="text-danger" *ngIf="showRequiredSign">*</strong> -->
     </label>
     <ng-container [ngSwitch]="field.type">

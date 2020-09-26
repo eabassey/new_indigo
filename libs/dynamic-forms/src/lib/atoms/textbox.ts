@@ -6,7 +6,8 @@ import { FormGroup } from '@angular/forms';
     selector: 'textbox',
     template: `
       <div [formGroup]="form">
-        <input [disabled]="disabled" [class]="field.controlClasses" [attr.type]="field.type"  [id]="field.name" [name]="field.name" [formControlName]="field.name" />
+        <flx-input-text [disabled]="disabled" [class]="field.controlClasses" [attr.type]="field.type"  [id]="field.name" [formControlName]="field.name" size="normal"></flx-input-text>
+        <!-- <input [disabled]="disabled" [class]="field.controlClasses" [attr.type]="field.type"  [id]="field.name" [name]="field.name" [formControlName]="field.name" /> -->
       </div>
     `
 })
