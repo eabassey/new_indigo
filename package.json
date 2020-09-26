@@ -50,7 +50,7 @@
     "@types/events": "^3.0.0",
     "dexie": "^3.0.2",
     "events": "^3.2.0",
-    "jmespath": "^0.15.0",
+    "jsonata": "^1.8.3",
     "lodash.remove": "^4.7.0",
     "msal": "^1.4.0",
     "ng-dynamic-component": "^7.0.1",

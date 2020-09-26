@@ -1,6 +1,6 @@
-import jmespath from 'jmespath';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import * as jsonata from 'jsonata';
 
 export const renderString = (jsonStr: string, queryProps: {[key: string]: string}) => (source: Observable<any>) => {
   return source.pipe(
@@ -8,13 +8,27 @@ export const renderString = (jsonStr: string, queryProps: {[key: string]: string
       const queryResult = Object.entries(queryProps).reduce((acc, [prop, query]) => {
         return {
           ...acc,
-          [prop]: jmespath.search(state, query)
+          [prop]: jsonata(query).evaluate(state)
         };
       }, {});
       return replace(jsonStr, queryResult);
     })
   );
 };
+
+// export const renderString = (jsonStr: string, queryProps: {[key: string]: string}) => (source: Observable<any>) => {
+//   return source.pipe(
+//     map(state => {
+//       const queryResult = Object.entries(queryProps).reduce((acc, [prop, query]) => {
+//         return {
+//           ...acc,
+//           [prop]: jmespath.search(state, query)
+//         };
+//       }, {});
+//       return replace(jsonStr, queryResult);
+//     })
+//   );
+// };
 
 
 

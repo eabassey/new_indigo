@@ -76,7 +76,7 @@ const transformInputs = (inputs: {[key: string]: any}, svc: CoreServices) => {
       }
       return {
         ...acc,
-        [key]: val, // As jmesPath Query string
+        [key]: val, // As Jsonata Query string
       };
     } else {
         return {
