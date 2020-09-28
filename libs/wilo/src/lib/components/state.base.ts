@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
-import { StateConfig } from '../models';
+import { ActionPanelConfig, StateConfig } from '../models';
 import { CoreServices } from '../services/core.services';
 import { Subscription, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { renderServerCalls, renderEvents, renderServerQueries, renderFormModels } from '../helpers/utils';
+import { delay } from 'rxjs/operators';
 
 @Component({template: ''})
 export abstract class StateBase implements OnInit, OnDestroy {
@@ -14,6 +15,13 @@ export abstract class StateBase implements OnInit, OnDestroy {
     serverCallsSubs: Subscription[];
     serverQueriesSubs: Subscription[];
     dynamicTabs = [];
+    activePanel: ActionPanelConfig;
+    panelActionsSub: Subscription;
+    panelsMap: {[id: string]: ActionPanelConfig}
+    expandActionPanel;
+    clickedActionPanel = null;
+    panelActions = [];
+    paramsSub: Subscription;
 
     constructor(private svc: CoreServices,  private route: ActivatedRoute) {}
 
@@ -30,7 +38,56 @@ export abstract class StateBase implements OnInit, OnDestroy {
         this.svc.bf.bigForm.reset({});
         this.handleConfig(state);
       });
+      this.panelActionsSub = this.svc.actionPanel.panelActions$.pipe(delay(0)).subscribe((panelsMap) => {
+        if (panelsMap && Object.keys(panelsMap)?.length > 0) {
+          console.log({panelsMap})
+          this.panelsMap = panelsMap;
+          const res = Object.values(panelsMap).map(act => ({id: act.id, path: act.id, instruction: act.instruction, icon: act.icon}));
+          this.panelActions = res || [];
+          this.getQueryParams();
+        } else {
+          this.panelActions = [];
+        }
+      });
     }
+
+    getQueryParams() {
+      this.paramsSub = this.route.queryParamMap.subscribe((paramMap) => {
+          // Initialize the first node
+          if (paramMap.has('expandActionPanel')) {
+              this.expandActionPanel = paramMap.get('expandActionPanel') === 'true' ? true : false;
+              console.log({exp: this.expandActionPanel})
+          }
+          this.initActionPanel(paramMap.get('panelId'));
+      });
+  }
+
+  initActionPanel(panel): void {
+    if (this.panelsMap && panel && this.clickedActionPanel !== panel) {
+        this.clickedActionPanel = panel;
+        this.activePanel = this.panelsMap[this.clickedActionPanel];
+    }
+}
+
+
+clickPanel(path: string) {
+    console.log({path})
+    if (this.clickedActionPanel && this.clickedActionPanel === path) {
+        this.toggleActionPanel();
+      } else {
+          this.expandActionPanel = true;
+        this.clickedActionPanel = path;
+        this.activePanel = this.panelsMap[this.clickedActionPanel];
+      }
+}
+
+toggleActionPanel() {
+    if (this.expandActionPanel) {
+          this.expandActionPanel = false;
+    } else {
+          this.expandActionPanel = true;
+    }
+}
 
 
     handleConfig(state: StateConfig) {
@@ -86,9 +143,15 @@ export abstract class StateBase implements OnInit, OnDestroy {
         if (this.serverCallsSubs) {
             this.serverCallsSubs.forEach(sb => sb.unsubscribe());
         }
+        if (this.paramsSub) {
+          this.paramsSub.unsubscribe();
+      }
         if (this.state && this.state.onStateDestroy) {
             this.state.onStateDestroy(this.svc, this.route);
         }
+        if (this.panelActionsSub) {
+          this.panelActionsSub.unsubscribe();
+      }
         if (this.sub) {
           this.sub.unsubscribe();
       }

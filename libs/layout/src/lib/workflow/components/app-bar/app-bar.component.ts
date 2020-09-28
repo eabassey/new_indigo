@@ -14,7 +14,6 @@ import { AppConfig, CoreServices, StateConfig } from '@wilo';
   styleUrls: ['app-bar.component.scss']
 })
 export class FLXAppBarComponent implements OnInit, OnChanges, OnDestroy {
-  @Input() app: AppConfig;
   state: StateConfig;
   openAppMenu = false;
   title$: Observable<string>;

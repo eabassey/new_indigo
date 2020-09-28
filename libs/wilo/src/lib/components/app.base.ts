@@ -8,19 +8,16 @@ import {delay} from 'rxjs/operators';
 import { EventEmitter } from 'events';
 
 @Component({template: ''})
-export abstract class AppBase implements OnInit, OnChanges, OnDestroy {
+export abstract class AppBase implements OnInit, OnDestroy {
     app: AppConfig;
-    activePanel: ActionPanelConfig;
+
     sub: Subscription;
-    panelActionsSub: Subscription;
-    panelsMap: {[id: string]: ActionPanelConfig}
-    expandActionPanel;
-    clickedActionPanel = null;
+
     serverCallsSubs: Subscription[];
     serverQueriesSubs: Subscription[];
     eventsSub: Subscription[];
-    paramsSub: Subscription;
-    panelActions = [];
+
+
 
     // ...
     constructor(private svc: CoreServices, private route: ActivatedRoute, private router: Router) {}
@@ -30,31 +27,7 @@ export abstract class AppBase implements OnInit, OnChanges, OnDestroy {
         this.svc.configAccessor.setApp(app);
         this.handleConfig(app);
       });
-      this.panelActionsSub = this.svc.actionPanel.panelActions$.pipe(delay(0)).subscribe((panelsMap) => {
-        if (panelsMap && Object.keys(panelsMap)?.length > 0) {
-          console.log({panelsMap})
-          this.panelsMap = panelsMap;
-          const res = Object.values(panelsMap).map(act => ({id: act.id, path: act.id, instruction: act.instruction, icon: act.icon}));
-          this.panelActions = res || [];
-          this.getQueryParams();
-        } else {
-          this.panelActions = [];
-        }
-      });
-    }
-    ngOnChanges() {
-        // this.handleConfig(this.app);
-    }
 
-    getQueryParams() {
-        this.paramsSub = this.route.queryParamMap.subscribe((paramMap) => {
-            // Initialize the first node
-            if (paramMap.has('expandActionPanel')) {
-                this.expandActionPanel = paramMap.get('expandActionPanel') === 'true' ? true : false;
-                console.log({exp: this.expandActionPanel})
-            }
-            this.initActionPanel(paramMap.get('panelId'));
-        });
     }
 
 
@@ -79,43 +52,14 @@ export abstract class AppBase implements OnInit, OnChanges, OnDestroy {
     }
 
 
-    initActionPanel(panel): void {
-        if (this.panelsMap && panel && this.clickedActionPanel !== panel) {
-            this.clickedActionPanel = panel;
-            this.activePanel = this.panelsMap[this.clickedActionPanel];
-        }
-    }
 
-
-    clickPanel(path: string) {
-        console.log({path})
-        if (this.clickedActionPanel && this.clickedActionPanel === path) {
-            this.toggleActionPanel();
-          } else {
-              this.expandActionPanel = true;
-            this.clickedActionPanel = path;
-            this.activePanel = this.panelsMap[this.clickedActionPanel];
-          }
-    }
-
-    toggleActionPanel() {
-        if (this.expandActionPanel) {
-              this.expandActionPanel = false;
-        } else {
-              this.expandActionPanel = true;
-        }
-    }
 
     ngOnDestroy(): void {
         if (this.serverQueriesSubs) {
             this.serverQueriesSubs.forEach(sb => sb.unsubscribe());
         }
-        if (this.paramsSub) {
-            this.paramsSub.unsubscribe();
-        }
-        if (this.panelActionsSub) {
-          this.panelActionsSub.unsubscribe();
-      }
+
+
         if (this.serverCallsSubs) {
             this.serverCallsSubs.forEach(sb => sb.unsubscribe());
         }
