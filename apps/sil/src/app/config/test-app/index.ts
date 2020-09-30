@@ -36,6 +36,22 @@ export const testApp: AppConfig = {
         workflow,
         '27': SIL_27
     },
+    serverQueries: [
+      {
+        key: 'all_info2',
+        endpoint: {
+          backends: [
+            {
+              url: `https://sildev.4-sure.net:10000/api/v1/all_info/`,
+              group: 'data',
+              query: `$filter(skills, function ($b) {
+                      $b.id <= 10
+                    })`
+            }
+          ]
+        }
+      }
+    ],
     serverCalls: [
       {
         key: 'all_info',

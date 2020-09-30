@@ -164,7 +164,7 @@ export const renderServerQueries = (serverQueries: ServerQueryConfig[], svc: Cor
         const {key, endpoint} = query;
        //  svc.loader.add(key);
         const dataSub = svc.http.post(
-          `${svc.baseUrl}/api/query`,
+          `http://localhost:3000/api/query`,
           endpoint, {headers: { Authorization: 'Bearer ' + accessToken,}}).subscribe(
          (res: any) => {
             svc.store.dispatch(setVariable({key, data: res}));

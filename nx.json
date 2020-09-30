@@ -58,6 +58,9 @@
     },
     "identity": {
       "tags": []
+    },
+    "query-server": {
+      "tags": []
     }
   }
 }

@@ -440,6 +440,61 @@
           "style": "scss"
         }
       }
+    },
+    "query-server": {
+      "root": "apps/query-server",
+      "sourceRoot": "apps/query-server/src",
+      "projectType": "application",
+      "prefix": "query-server",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/query-server",
+            "main": "apps/query-server/src/main.ts",
+            "tsConfig": "apps/query-server/tsconfig.app.json",
+            "assets": ["apps/query-server/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/query-server/src/environments/environment.ts",
+                  "with": "apps/query-server/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "query-server:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/query-server/tsconfig.app.json",
+              "apps/query-server/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/query-server/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/query-server/jest.config.js",
+            "tsConfig": "apps/query-server/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

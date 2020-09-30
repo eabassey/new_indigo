@@ -1,0 +1,47 @@
+{"version": "1-alpha",
+    "port": 3000,
+    "timeout": 3000,
+    "console_debug": true,
+    "tls": {
+      "public_key": "",
+      "private_key": ""
+    },
+    "config": {
+      "cors": {
+        "allowedHeaders": [],
+        "credentials": true,
+        "maxAge": 3600,
+        "methods": ["GET", "PUT"],
+        "origin": ["http://localhost:4200"],
+        "exposedHeaders": [],
+        "optionsSuccessStatus": 200,
+        "preflightContinue": true
+      }
+    },
+    "endpoints": [
+      {
+        "endpoint": "/val/me",
+        "headers_to_pass": ["accept"],
+        "method": "GET",
+        "backends": [
+          {
+            "url": "http://jsonplaceholder.typicode.com/todos",
+            "query": "",
+            "method": "POST",
+            "group": "",
+            "params": null,
+            "data": null,
+            "config": {}
+          },
+          {
+            "url": "http://jsonplaceholder.typicode.com/posts",
+            "query": "",
+            "group": "",
+            "params": null,
+            "data": null,
+            "config": {}
+          }
+        ]
+      }
+    ]
+  }
