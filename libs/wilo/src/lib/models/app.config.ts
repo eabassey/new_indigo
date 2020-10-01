@@ -20,7 +20,7 @@ export interface AppConfig {
     canActivate?: any[],
     canDeactivate?: any[],
     deactivateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;
-    appMenu: (svc: CoreServices, route?: ActivatedRoute) => Observable<any[]>;
+    appMenu?: (svc: CoreServices, route?: ActivatedRoute) => Observable<any[]>;
   //   virtualStatesFunction?: Function;
   //   appSearch: SearchFunc_0_0_2;
     controls?: (p) => any;

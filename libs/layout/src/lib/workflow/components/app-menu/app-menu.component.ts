@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { trigger, state, style, transition, animate, AnimationEvent } from '@angular/animations';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import {LogOut} from '@indigo/identity';
 import { map, skipWhile, switchMap, take, tap } from 'rxjs/operators';
@@ -69,7 +69,7 @@ export class FLXAppMenuComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser$ = this.svc.auth.getUser().pipe(tap(console.log));
-    this.navItems$ = this.svc.configAccessor.currentApp$.pipe(switchMap(app => app.appMenu(this.svc, this.route)));
+    this.navItems$ = this.svc.configAccessor.currentApp$.pipe(switchMap(app => app.appMenu ? app.appMenu(this.svc, this.route) : of([])));
     // this.getOrg();
     // this.version = environment.version;
 

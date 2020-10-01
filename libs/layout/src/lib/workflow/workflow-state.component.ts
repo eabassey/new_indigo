@@ -26,10 +26,10 @@ import { tap } from 'rxjs/operators';
         </ng-container>
             <router-outlet></router-outlet>
         </section>
-        <app-footer></app-footer>
+        <app-footer *ngIf="!state?.layout?.hideFooter"></app-footer>
         </section>
     </section>
-    <ng-container>
+    <ng-container *ngIf="!state?.layout?.hideActionPanel">
             <div class="action-panel-container">
                 <aside
                     class="action-panel action-panel__padding"

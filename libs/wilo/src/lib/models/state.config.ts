@@ -13,10 +13,10 @@ export interface StateConfig {
     name?: string;
     showTabs?: boolean;
     layout?: {
-      showFooter: boolean;
-      showHeader: boolean;
-      showToolbar: boolean;
-      showActionPanel: boolean;
+      hideFooter?: boolean;
+      hideHeader?: boolean;
+      hideToolbar?: boolean;
+      hideActionPanel?: boolean;
     };
     controls?: (svc: CoreServices) => ToolbarControlConfig[];
     title?: string | ((svc: CoreServices, route?: ActivatedRoute) => Observable<string>);
