@@ -16,7 +16,6 @@ export const SIL_27: StateConfig = {
         return lastName === 'mensah';
       },
       dataMutations: (svc) => {
-        console.log('hehehe lololo');
       },
       serverCalls: [{key: 'posts', errorMessage: '', directCall: (svc) => svc.http.get('https://jsonplaceholder.typicode.com/posts')}]
     }
@@ -92,7 +91,6 @@ export const SIL_27: StateConfig = {
           errorMessage: '',
           directCall: ({http}, route) => {
             const claimId = route.snapshot.paramMap.get('jobId');
-            console.log({claimId})
             return of({val: 'test'});
           }
         }

@@ -27,6 +27,6 @@ export class WorkflowAppComponent extends AppBase {
     disableBackground = true;
     constructor(svc: CoreServices, route: ActivatedRoute, router: Router) {
         super(svc, route, router);
-        this.loading$ = svc.loader.loading$.pipe(tap(console.log));
+        this.loading$ = svc.loader.loading$;
     }
 }

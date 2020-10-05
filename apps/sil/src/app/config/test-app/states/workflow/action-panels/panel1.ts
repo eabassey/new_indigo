@@ -11,7 +11,6 @@ export const panel1: ActionPanelConfig = {
             component: TP.Node1Component,
             outputs: {
                 doWork: (ev, sv) => {
-                    // console.log('Panel Event: ', {ev})
                 },
                 setFilter: (ev, svc) => {
                     svc.store.dispatch(addFilter({key: 'claims', filter: ev}));
@@ -25,11 +24,9 @@ export const panel1: ActionPanelConfig = {
                     key: 'testCall7',
                     errorMessage: '',
                     directCall: (svc, route) => {
-                      console.log('helo hello hellllo')
                         return svc.http.get('https://jsonplaceholder.typicode.com/posts');
                     },
                     onSuccess: (result, svc, call) => {
-                        // console.log('Callback On Success:Panel Posts', {result, svc, call});
                     },
                     followUpSuccessCalls: [
                         {
@@ -39,7 +36,6 @@ export const panel1: ActionPanelConfig = {
                                 return svc.http.get('https://jsonplaceholder.typicode.com/posts');
                             },
                             onSuccess: (result, svc, call) => {
-                                // console.log('Callback On Success:Panel Posts FollowupXX', {result, svc, call});
                             }
                         }
                     ]

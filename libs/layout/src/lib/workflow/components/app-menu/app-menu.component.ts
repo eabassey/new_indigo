@@ -68,7 +68,7 @@ export class FLXAppMenuComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.currentUser$ = this.svc.auth.getUser().pipe(tap(console.log));
+    this.currentUser$ = this.svc.auth.getUser();
     this.navItems$ = this.svc.configAccessor.currentApp$.pipe(switchMap(app => app.appMenu ? app.appMenu(this.svc, this.route) : of([])));
     // this.getOrg();
     // this.version = environment.version;

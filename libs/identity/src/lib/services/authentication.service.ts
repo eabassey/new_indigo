@@ -48,7 +48,6 @@ export class AuthenticationService {
           })
         );
       } else {
-        console.log(location.href);
         if (!location.href.includes('/azure/callback')) {
           this.store.dispatch(new LogOut());
         }
@@ -87,7 +86,6 @@ export class AuthenticationService {
         .pipe(
           // delay(500000),
           map(data => {
-            console.log({data})
             // this.token = data.user.token;
             return data;
           }),

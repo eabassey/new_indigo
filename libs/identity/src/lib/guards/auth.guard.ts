@@ -18,7 +18,6 @@ export class AuthGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this.svc.auth.getUser().pipe(
       map(authed => {
-        console.log({authed})
         if (!authed) {
           this._router.navigate(['/auth/login']);
           return false;

@@ -13,7 +13,6 @@ export const testApp: AppConfig = {
       return auth.getUser().pipe(
         filter(user => !!user),
         map((currentUser: any) => {
-          console.log({currentUser})
           const createRoles = [1, 6, 18];
         const menuItems = [{ id: 1, name: 'Workflow', routerLink: '/testApp/workflow/list', iconType: 'app-menu-workflow' }];
 

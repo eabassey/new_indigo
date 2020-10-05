@@ -14,7 +14,6 @@ export class AppMenuOverlayRef {
 
   close(): void {
     if (!!this.componentInstance) {
-      console.log('I SHOULD CLOSE');
       this.componentInstance.animationStateChanged
         .pipe(
           tap(e => console.log({ e })),
@@ -22,7 +21,6 @@ export class AppMenuOverlayRef {
           take(1)
         )
         .subscribe(() => {
-          console.log('START');
           this._beforeClose.next();
           this._beforeClose.complete();
           this.overlayRef.detachBackdrop();
@@ -34,7 +32,6 @@ export class AppMenuOverlayRef {
           take(1)
         )
         .subscribe(() => {
-          console.log('DONE');
           this.overlayRef.dispose();
           this._afterClosed.next();
 

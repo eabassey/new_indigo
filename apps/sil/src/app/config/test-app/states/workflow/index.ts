@@ -43,10 +43,8 @@ export const workflow: StateConfig = {
                       // }).pipe(map((d: any) => d.payload));
                   },
                   onSuccess: (result, svc, call) => {
-                    console.log('kiccking again aaaa')
                     svc.eventBus.emit('dance', {svc});
                     svc.eventBus.emit('dance');
-                      // console.log('Callback On Success: Todos', {result, svc, call});
                   }
               }
           ],
@@ -60,7 +58,6 @@ export const workflow: StateConfig = {
                       inputs: { greeting: 'Hello component'},
                       outputs: {
                           doWork: (ev, sv) => {
-                              // console.log('Node Event....: ', {ev, sv})
                           }
                       }
                   },

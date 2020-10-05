@@ -28,7 +28,6 @@ export class AppMenuOverlayService {
   constructor(private injector: Injector, private overlay: Overlay, private actions$: Actions) {}
 
   open(config: AppMenuConfig = {}) {
-    console.log('HITTING');
     // Override default config
     const appMenuConfig = { ...DEFAULT_CONFIG, ...config };
 

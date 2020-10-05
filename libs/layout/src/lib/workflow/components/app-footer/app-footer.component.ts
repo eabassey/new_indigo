@@ -14,7 +14,7 @@ export class AppFooterComponent implements OnInit {
   constructor(private svc: CoreServices) {}
 
   ngOnInit() {
-    this.activeNode$ = this.svc.footerAccessor.nodeForFooter.pipe(delay(0),tap(xy => console.log({xy})));
+    this.activeNode$ = this.svc.footerAccessor.nodeForFooter.pipe(delay(0));
     this.compInstances$ = this.svc.footerAccessor.compInstances;
   }
 

@@ -9,13 +9,11 @@ export class AuthImplService implements IAuthService {
     private userState$ = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('flexus.web.user')) ||  null);
     constructor() {}
     setUser(user) {
-      console.log('called user setter')
       this.userState$.next(user);
     }
     private get user$() {
       return this.userState$.asObservable().pipe(
         map(user => {
-          console.log({user})
           if (!user) {
             const usr = localStorage.getItem('flexus.web.user');
             return JSON.parse(usr);

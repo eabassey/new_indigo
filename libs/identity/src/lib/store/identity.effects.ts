@@ -65,7 +65,6 @@ export class IdentityEffects {
       // }
       return this.authenticationService.login(credentials).pipe(
         mergeMap<any, any>(res => {
-          console.log({ res });
           if (res && res.success === true) {
             const jwtHelper = new JwtHelperService();
             const jwtPack = jwtHelper.decodeToken(res.user.token);

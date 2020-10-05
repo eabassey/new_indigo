@@ -78,8 +78,6 @@ export class JobCardComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   }
 
   takeAction(job): void {
-    console.log({route: this.route})
-    // const text = (this.statesMap[item.state].description as string).toLowerCase().split(' ').join('-');
     this.svc.keyValueStore.setItem('workflowURL', this.router.url);
     this.router.navigate(['/testApp', job.state, {jobId: job.id}], {queryParams: {expandActionPanel: false, actionPanel: null}})
   }

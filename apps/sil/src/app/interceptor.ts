@@ -13,7 +13,6 @@ export class Interceptor implements HttpInterceptor {
 
        return this.svc.auth.getAccessToken().pipe(
            switchMap(accessToken => {
-               console.log({accessToken})
             const newRequest = request.clone({
                 setHeaders: {
                   Authorization: 'Bearer ' + accessToken,
@@ -22,14 +21,6 @@ export class Interceptor implements HttpInterceptor {
               return next.handle(newRequest);
            })
        )
-    // const accessToken = this.svc.auth.accessToken
-    // console.log({token: accessToken})
-    //    const newRequest = request.clone({
-    //     setHeaders: {
-    //       Authorization: 'Bearer ' + accessToken,
-    //     }
-    //   });
-    //   return next.handle(newRequest);
   }
 }
 

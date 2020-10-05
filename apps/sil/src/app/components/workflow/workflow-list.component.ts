@@ -163,12 +163,10 @@ export class WorkflowListComponent implements OnInit, OnDestroy {
     constructor(private svc: CoreServices) {}
 
     ngOnInit() {
-      this.svc.sq.query("$count(dyn.variables.claims.dataset[[0..5]])").subscribe(val => console.log({FromSQ: val}));
         this.currentPage$ = this.svc.route.queryParamMap.pipe(map(paramMap => paramMap.get('currentPage') || 1))
         this.instructionsMap = this.getStateInstructions(this.svc.clientConfig);
         this.allInfoSub = this.svc.store.pipe(
           select(getVariable('all_info')),
-          // tap(console.log),
           skipWhile(x => !x)
           ).subscribe(({dataset}) => {
             this.statesMap =  dataset.states

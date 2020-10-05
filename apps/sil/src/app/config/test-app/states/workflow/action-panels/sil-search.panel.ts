@@ -11,7 +11,6 @@ export const silSearchPanel: ActionPanelConfig = {
             component: TP.SearchComponent,
             outputs: {
                 doWork: (ev, sv) => {
-                    // console.log('Panel Event: ', {ev})
                 },
                 setFilter: (ev, svc) => {
                     svc.store.dispatch(addFilter({key: 'claims', filter: ev}));
