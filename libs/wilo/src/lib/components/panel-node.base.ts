@@ -62,7 +62,7 @@ export class PanelNodeBase implements OnInit, OnDestroy, OnChanges {
             }
             //
             if (this.activeNode.events) {
-              this.eventsSub = renderEvents(activeNode.events, this.svc);
+              this.eventsSub = renderEvents(activeNode.events, this.svc, this.route);
             }
             this.organisms = renderTemplateDefs(activeNode, this.svc, this.route);
         }

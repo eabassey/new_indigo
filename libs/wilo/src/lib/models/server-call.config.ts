@@ -19,6 +19,6 @@ export interface ServerCallConfig {
     followUpSuccessCalls?: ServerCallConfig[];
     followUpFailCalls?: ServerCallConfig[];
     onSuccess?: (result: any, svc?: CoreServices, serverCall?: ServerCallConfig) => void;
-    onError?: (err: any) => void;
-    onComplete?: () => void;
+    onError?: (err: any, svc?: CoreServices) => void;
+    onComplete?: (svc?: CoreServices) => void;
   };

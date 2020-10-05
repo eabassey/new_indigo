@@ -42,7 +42,7 @@ export abstract class ActionPanelBase implements OnInit, OnChanges, OnDestroy {
             this.setValuesSub = panel.setValuesToBigForm(this.svc, this.route).subscribe();
         }
         if (panel?.events) {
-            this.eventsSub = renderEvents(panel.events, this.svc);
+            this.eventsSub = renderEvents(panel.events, this.svc, this.route);
         }
         // Customize headers for action panel
         // const controls = panel.controls ? panel.controls(this.svc) : [];

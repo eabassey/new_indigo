@@ -9,6 +9,18 @@ export const SIL_27: StateConfig = {
   name: 'job-invoiced',
   title: 'Job Invoicing',
   startNode: 'node1',
+  events: {
+    checkSomething: {
+      triggerOn: ['form@lastName'],
+      triggerWhen: (lastName) => {
+        return lastName === 'mensah';
+      },
+      dataMutations: (svc) => {
+        console.log('hehehe lololo');
+      },
+      serverCalls: [{key: 'posts', errorMessage: '', directCall: (svc) => svc.http.get('https://jsonplaceholder.typicode.com/posts')}]
+    }
+  },
   nodes: {
     node1: {
       component: {
@@ -141,5 +153,10 @@ export const SIL_27: StateConfig = {
       // }
     }
   },
-
+  bigFormToStoreMapper: {
+    lastName: [(val, svc) => {
+      // console.log({svcc: svc})
+      return val.toUpperCase();
+    }, 'name.foo']
+  }
 }
