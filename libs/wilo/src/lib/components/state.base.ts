@@ -22,10 +22,12 @@ export abstract class StateBase implements OnInit, OnDestroy {
     clickedActionPanel = null;
     panelActions = [];
     paramsSub: Subscription;
+    storeMapperSubscription: Subscription;
 
     constructor(private svc: CoreServices,  private route: ActivatedRoute) {}
 
     ngOnInit() {
+      this.initStateLevelVariables();
       this.sub = this.route.data.subscribe((state: StateConfig) => {
         this.state = state;
         this.dynamicTabs = state?.showTabs ? Object.entries(state.nodes).map(([key, node]) => ({
@@ -49,6 +51,10 @@ export abstract class StateBase implements OnInit, OnDestroy {
           this.panelActions = [];
         }
       });
+    }
+
+    initStateLevelVariables() {
+      this.svc.data = {};
     }
 
     getQueryParams() {
@@ -122,7 +128,14 @@ toggleActionPanel() {
         }
         //
         if (state?.events) {
-            this.eventsSub = renderEvents(state.events, this.svc);
+            this.eventsSub = renderEvents(state.events, this.svc, this.route);
+        }
+        //
+        if (state?.bigFormToStoreMapper) {
+          this.storeMapperSubscription = this.svc.bf.bigFormToStoreMapper(state.bigFormToStoreMapper).subscribe(mapped => {
+            this.svc.actions.updateSubmissionData(mapped);
+            // this.svc.indexedDb.currentItem.put(mapped, 'currentItem');
+          });
         }
         const controls = state.controls ? state.controls(this.svc) : [];
         this.svc.headerAcessor.setHeaderControls(controls);
@@ -131,6 +144,7 @@ toggleActionPanel() {
 
 
     ngOnDestroy() {
+      console.log('changed state!!')
         if (this.eventsSub) {
             this.eventsSub.forEach(sub => sub.unsubscribe());
         }
@@ -154,6 +168,9 @@ toggleActionPanel() {
       }
         if (this.sub) {
           this.sub.unsubscribe();
+      }
+      if (this.storeMapperSubscription) {
+        this.storeMapperSubscription.unsubscribe();
       }
     }
 

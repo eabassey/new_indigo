@@ -47,7 +47,7 @@ export abstract class AppBase implements OnInit, OnDestroy {
         }
         //
         if (app?.events) {
-            this.eventsSub = renderEvents(app.events, this.svc);
+            this.eventsSub = renderEvents(app.events, this.svc, this.route);
         }
     }
 

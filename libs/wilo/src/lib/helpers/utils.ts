@@ -1,7 +1,7 @@
 import {  TemplateDefinition, NodeConfig, EventConfig, ServerCallConfig, ActionPanelConfig, StateConfig, ServerQueryConfig } from '../models';
 import { CoreServices } from '../services';
 import { map, delay, switchMap, distinctUntilChanged, pluck, skipWhile, take } from 'rxjs/operators';
-import { combineLatest, empty, interval, of, Subscription, Observable } from 'rxjs';
+import { combineLatest, empty, interval, of, Subscription, Observable, fromEvent } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { setVariable } from '../store';
 import { getVariable } from '../store/selectors/variable.selectors';
@@ -88,7 +88,7 @@ const transformInputs = (inputs: {[key: string]: any}, svc: CoreServices) => {
 };
 
 
-export const renderEvents = (events: {[name: string]: EventConfig}, svc: CoreServices) => {
+export const renderEvents = (events: {[name: string]: EventConfig}, svc: CoreServices, route: ActivatedRoute) => {
     const eventsSubscriptions: Subscription[] = [];
     if (events) {
         Object.values(events).forEach((ev: EventConfig) => {
@@ -96,21 +96,23 @@ export const renderEvents = (events: {[name: string]: EventConfig}, svc: CoreSer
             eventsSubscriptions.push(
               combineLatest([
                 ...ev.triggerOn.map((trg: string) => {
-                  if (trg.includes('sys_')) {
+                  if (trg.includes('sys@')) {
                       return getSystemEvent(trg);
-                    } else if (trg.includes('bf_')) {
-                    return svc.bf.getControl(trg).valueChanges.pipe(delay(1000));
-                  }
+                    } else if (trg.startsWith('form@')) {
+                    return getFormEvent(trg, svc);
+                    } else if(trg.startsWith('html@')) {
+                      // Example: html@#test-id:click
+                      return getHtmlEvent(trg, svc);
+                    }
                 })
               ])
                 .pipe(map(params => ev.triggerWhen(...params)))
                 .subscribe(shouldFire => {
                   if (shouldFire) {
-                    ev.dataMutations(svc);
+                    ev.dataMutations(svc, route);
                     if (ev.serverCalls) {
-                        ev.serverCalls.forEach((call: ServerCallConfig) => {
-                            // this.store.dispatch(new MakeServerCall({ dataKey, ...call }));
-                        });
+                      const serverCallsSubs = renderServerCalls(ev.serverCalls, svc, route);
+                      eventsSubscriptions.push(...serverCallsSubs);
                     }
                   }
                 })
@@ -123,7 +125,7 @@ export const renderEvents = (events: {[name: string]: EventConfig}, svc: CoreSer
 
 export const getSystemEvent = (trigger: string) => {
     switch (trigger) {
-      case 'sys_online': {
+      case 'sys@online': {
         return interval(10).pipe(
             switchMap(() => of(window.navigator.onLine)),
             distinctUntilChanged()
@@ -132,6 +134,18 @@ export const getSystemEvent = (trigger: string) => {
       default:
         return empty();
     }
+  };
+
+  export const getFormEvent = (trigger: string, svc: CoreServices) => {
+    const trg = trigger.split('@')[1];
+    return svc.bf.getControl(trg).valueChanges.pipe(delay(500));
+  };
+
+  export const getHtmlEvent = (trigger: string, svc: CoreServices) => {
+    const trg = trigger.split('@')[1];
+    console.log({trg})
+    const [selector, eventName] = trg.split(':');
+    return fromEvent(svc.$(selector).get(0), eventName);
   };
 
 
@@ -168,6 +182,7 @@ export const renderServerQueries = (serverQueries: ServerQueryConfig[], svc: Cor
           endpoint, {headers: { Authorization: 'Bearer ' + accessToken,}}).subscribe(
          (res: any) => {
             svc.store.dispatch(setVariable({key, data: res}));
+            svc.keyValueStore.setItem(key, res);
         },
         err => {
 
@@ -195,7 +210,7 @@ export const renderServerCalls = (serverCalls: ServerCallConfig[], svc: CoreServ
           svc.loader.add(key);
         }
       const completeFn = () => {
-        onComplete ? onComplete() : null;
+        onComplete ? onComplete(svc) : null;
          //
         if (followUpSuccessCalls) {
           const successSubs = renderServerCalls(followUpSuccessCalls, svc, route);
@@ -212,7 +227,7 @@ export const renderServerCalls = (serverCalls: ServerCallConfig[], svc: CoreServ
       };
       const errorFn = (err) => {
         // set errors to store
-        onError ? onError(err) : console.error(err);
+        onError ? onError(err, svc) : console.error(err);
       };
       const successFn = (results) => {
         //
@@ -233,6 +248,7 @@ export const renderServerCalls = (serverCalls: ServerCallConfig[], svc: CoreServ
             data.sortBy = {};
           }
           svc.store.dispatch(setVariable({key, data}));
+          svc.keyValueStore.setItem(key, data);
         }
         if (onSuccess)
           onSuccess(successResults, svc, call);

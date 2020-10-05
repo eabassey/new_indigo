@@ -17,11 +17,25 @@ import { ClientConfig } from '../models';
 import { KeyValueStoreService } from './key-value-store.service';
 import { EventEmitter } from 'events';
 import { ConfigAccessorService } from './config-accessor.service';
+import * as jQuery from 'jquery';
+import { addFilter, getSubmissionData, getVariable, removeFilter, resetFilter, setVariable, updateSubmissionData } from '../store';
 
 
 @Injectable({providedIn: 'root'})
 export class CoreServices {
+    data: {[id: string]: any};
     eventBus: EventEmitter;
+    actions = {
+      //  setVariable: (payload: {key: string; data: any}) => this.store.dispatch(setVariable(payload)),
+      //  addFilter: () => this.store.dispatch(addFilter),
+      //  removeFilter,
+      //  resetFilter,
+       updateSubmissionData: (payload: any) => this.store.dispatch(updateSubmissionData(payload))
+    };
+    selectors = {
+      getVariable: (prop) => this.store.select(getVariable(prop)),
+      getSubmissionData: () => this.store.select(getSubmissionData)
+    }
     constructor(
         public bf: BigFormService,
         public http: HttpClient,
@@ -43,6 +57,12 @@ export class CoreServices {
         @Inject(CLIENT_CONFIG) public clientConfig: ClientConfig,
         @Inject(CLIENT_SERVICE) public clientService: any
     ) {
+      this.data = {};
       this.eventBus = new EventEmitter();
+      this.bf.initCoreService(this);
+    }
+
+    get $ () {
+      return jQuery;
     }
 }

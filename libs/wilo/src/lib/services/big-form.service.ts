@@ -18,15 +18,17 @@ type ErrorType = 'required' | 'email' | 'min' | 'max';
 @Injectable({providedIn: 'root'})
 export class BigFormService {
   bigForm: FormGroup;
-  testSub: Subscription;
+  svc;
   private _errorMessages = {};
   bigFormErrors = {};
-  storeObject: any;
-  storeObjectSubscription: Subscription;
   constructor(
     public fb: FormBuilder,
   ) {
     this.initForm();
+  }
+
+  initCoreService(svc) {
+    this.svc = svc;
   }
 
   initForm() {
@@ -164,16 +166,14 @@ export class BigFormService {
             }, {});
           } else if (Array.isArray(storePath) && typeof storePath[0] === 'function') {
             const [func, pathToStore] = storePath;
-            const transformed = func(path(formPath.split('.'), formValues), this.storeObject, this.bigForm.value, this);
+            const transformed = func(path(formPath.split('.'), formValues), this.svc);
             return valueExists ? mergeDeepRight(acc, assocPath(pathToStore.split('.'), transformed, {})) : acc;
           } else if (Array.isArray(storePath) && Array.isArray(storePath[0])) {
             return storePath.reduce((inner1, funcToPathArray) => {
               const [func, pathToStore] = funcToPathArray;
               const transformed = func(
                 path(formPath.split('.'), formValues),
-                this.storeObject,
-                this.bigForm.value,
-                this
+                this.svc
               );
               const innerObj = valueExists
                 ? mergeDeepRight(inner1, assocPath(pathToStore.split('.'), transformed, {}))

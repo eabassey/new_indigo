@@ -45,7 +45,7 @@ export abstract class NodeBase implements OnDestroy, OnInit {
       }
       //
       if (node?.events) {
-        this.eventsSub = renderEvents(node.events, this.svc);
+        this.eventsSub = renderEvents(node.events, this.svc, this.route);
       }
       this.organisms = renderTemplateDefs(node, this.svc, this.route);
       this.svc.footerAccessor.setNodeForFooter(node);
