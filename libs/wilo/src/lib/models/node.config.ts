@@ -12,10 +12,10 @@ export interface NodeConfig {
     name?: string;
     hideTab?: boolean;
     layout?: {
-      showFooter: boolean;
-      showHeader: boolean;
-      showToolbar: boolean;
-      showActionPanel: boolean;
+      showFooter?: boolean;
+      showHeader?: boolean;
+      showToolbar?: boolean;
+      showActionPanel?: boolean;
     };
     // prevState?: any;
     controls?: (p) => any;
@@ -23,7 +23,7 @@ export interface NodeConfig {
     canDeactivate?: any[];
     activateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;
     deactivateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;
-    title?: string | ((svc: CoreServices) => Observable<string>);
+    title?: string | ((svc: CoreServices, route?: ActivatedRoute) => Observable<string>);
     footerType?: 'pagination' | 'node_nav';
 
     errorHandler?: {

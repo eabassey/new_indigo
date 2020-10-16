@@ -58,7 +58,7 @@ export class NodeFooterButtonComponent implements OnInit {
     }
 
     get isDisabled(): Observable<boolean> {
-        return this.nav.disable ? this.nav.visible(this.svc) : of(false);
+        return this.nav.disable ? this.nav.visible(this.svc, this.route) : of(false);
     }
 
      // Button Color

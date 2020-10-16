@@ -1,4 +1,3 @@
-import {App} from './app';
 import { AppConfig } from './app.config';
 
 export interface ClientConfig {

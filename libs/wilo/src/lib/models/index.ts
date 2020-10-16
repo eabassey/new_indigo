@@ -1,7 +1,5 @@
 export * from './action-panel.config';
-export * from './app';
 export * from './app.config';
-export * from './client';
 export * from './client.config';
 export * from './event.config';
 export * from './footer-button.config';

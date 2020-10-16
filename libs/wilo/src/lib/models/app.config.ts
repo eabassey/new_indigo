@@ -1,5 +1,5 @@
 import {CoreServices} from '../services';
-import {ServerCallConfig, ServerQueryConfig, EventConfig, StateConfig,} from '../models';
+import {ServerCallConfig, ServerQueryConfig, EventConfig, StateConfig, ToolbarControlConfig,} from '../models';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import {EventEmitter} from 'events';
@@ -21,10 +21,8 @@ export interface AppConfig {
     canDeactivate?: any[],
     deactivateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;
     appMenu?: (svc: CoreServices, route?: ActivatedRoute) => Observable<any[]>;
-  //   virtualStatesFunction?: Function;
-  //   appSearch: SearchFunc_0_0_2;
-    controls?: (p) => any;
-    startState: string;
+  controls?: (svc: CoreServices, route?: ActivatedRoute) => ToolbarControlConfig[];
+  startState: string;
     serverCalls?: ServerCallConfig[];
     serverQueries?: ServerQueryConfig[];
     events?: {[name: string]: EventConfig};

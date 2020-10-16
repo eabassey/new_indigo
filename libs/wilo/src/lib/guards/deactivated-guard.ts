@@ -15,7 +15,7 @@ import { of } from 'rxjs';
             state: RouterStateSnapshot
         ) {
             const guard = route.data['deactivateGuard'];
-            console.log('In deactivate: ', route.data)
+            // console.log('In deactivate: ', route.data)
             return guard ? guard(this.svc, this.route) : of(true);
     }
   }

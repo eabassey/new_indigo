@@ -13,7 +13,7 @@ export interface ActionPanelConfig {
     icon?: string;
     instruction?: string;
     title?: string | ((svc: CoreServices, route?: ActivatedRoute) => Observable<string>);
-    controls?: (svc: CoreServices) => ToolbarControlConfig[];
+    controls?: (svc: CoreServices, route?: ActivatedRoute) => ToolbarControlConfig[];
     canActivate?: any[];
     canDeactivate?: any[];
     activateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;

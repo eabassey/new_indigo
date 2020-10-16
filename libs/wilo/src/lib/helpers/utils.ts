@@ -210,7 +210,7 @@ export const renderServerCalls = (serverCalls: ServerCallConfig[], svc: CoreServ
           svc.loader.add(key);
         }
       const completeFn = () => {
-        onComplete ? onComplete(svc) : null;
+        onComplete ? onComplete(svc, route) : null;
          //
         if (followUpSuccessCalls) {
           const successSubs = renderServerCalls(followUpSuccessCalls, svc, route);
@@ -227,7 +227,7 @@ export const renderServerCalls = (serverCalls: ServerCallConfig[], svc: CoreServ
       };
       const errorFn = (err) => {
         // set errors to store
-        onError ? onError(err, svc) : console.error(err);
+        onError ? onError(err, svc, route) : console.error(err);
       };
       const successFn = (results) => {
         //
@@ -251,7 +251,7 @@ export const renderServerCalls = (serverCalls: ServerCallConfig[], svc: CoreServ
           svc.keyValueStore.setItem(key, data);
         }
         if (onSuccess)
-          onSuccess(successResults, svc, call);
+          onSuccess(successResults, svc, route, call);
       };
       //
       if (functionName) {
