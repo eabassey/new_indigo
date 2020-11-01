@@ -58,6 +58,7 @@
     "express": "4.17.1",
     "helmet": "^4.1.1",
     "http-tracer": "^1.0.0",
+    "is-promise": "^4.0.0",
     "jquery": "^3.5.1",
     "jsonata": "^1.8.3",
     "lodash.remove": "^4.7.0",

@@ -7,6 +7,7 @@ import { ServerCallConfig } from './server-call.config';
 import { ServerQueryConfig } from './server-query.config';
 import { EventConfig } from './event.config';
 import { NodeConfig } from './node.config';
+import { WhenRule } from './rule';
 
 export interface StateConfig {
     id: string;
@@ -26,7 +27,8 @@ export interface StateConfig {
     };
     canActivate?: any[],
     canDeactivate?: any[],
-    activateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;
+    activateGuard?: WhenRule;
+    // activateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;
     deactivateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;
     useMockData?: boolean;
     mockData?: {[key: string]: any};

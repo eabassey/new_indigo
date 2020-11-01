@@ -9,6 +9,19 @@ export const SIL_27: StateConfig = {
   name: 'job-invoiced',
   title: 'Job Invoicing',
   startNode: 'node1',
+  // activateGuard: ({clientConfig}) => {
+  //   return of(clientConfig.startApp === 't');
+  // },
+  activateGuard: {
+    predicates: [
+      {using: 'localStorage.getItem', withArgs: ['flexus.web.authMethod'], operator: 'equals', valueComparer: 'local'}
+      // {using: 'localStorage.getItem', withArgs: ['flexus.web.user'], operator: 'equals', resultQuery: 'email', valueComparer: 'VBCH.'}
+      // {using: 'indexedDb.contacts.get', withArgs: [1], operator: 'equals', valueComparer: undefined}
+      // {using: 'bf.bigForm.valid', operator: 'equals', valueComparer: true}
+      // {using: 'http.get', withArgs: ['https://jsonplaceholder.typicode.com/posts'], operator: 'hasLength', valueComparer: 100}
+      // {using: 'clientConfig.startApp', operator: 'equals', valueComparer: 'testAppe'}
+    ],
+  },
   events: {
     checkSomething: {
       triggerOn: ['form@lastName'],

@@ -19,6 +19,7 @@ import { EventEmitter } from 'events';
 import { ConfigAccessorService } from './config-accessor.service';
 import * as jQuery from 'jquery';
 import { addFilter, getSubmissionData, getVariable, removeFilter, resetFilter, setVariable, updateSubmissionData } from '../store';
+import { LocalStorageService } from './local-storage.service';
 
 
 @Injectable({providedIn: 'root'})
@@ -53,6 +54,7 @@ export class CoreServices {
         public footerAccessor: FooterAccessorService,
         public headerAcessor: HeaderAccessorService,
         public configAccessor: ConfigAccessorService,
+        public localStorage: LocalStorageService,
         @Inject(BASE_URL) public baseUrl: string,
         @Inject(CLIENT_CONFIG) public clientConfig: ClientConfig,
         @Inject(CLIENT_SERVICE) public clientService: any
