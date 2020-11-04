@@ -8,6 +8,7 @@ import { ServerQueryConfig } from './server-query.config';
 import { EventConfig } from './event.config';
 import { NodeConfig } from './node.config';
 import { WhenRule } from './rule';
+import { TemplateParser } from './template-parser';
 
 export interface StateConfig {
     id: string;
@@ -20,7 +21,7 @@ export interface StateConfig {
       hideActionPanel?: boolean;
     };
     controls?: (svc: CoreServices) => ToolbarControlConfig[];
-    title?: string | ((svc: CoreServices, route?: ActivatedRoute) => Observable<string>);
+    title?: TemplateParser;
     instructions?: {
       editRoles: { [id: number]: string };
       viewRoles: { [id: number]: string };
@@ -28,12 +29,8 @@ export interface StateConfig {
     canActivate?: any[],
     canDeactivate?: any[],
     activateGuard?: WhenRule;
-    // activateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;
-    deactivateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;
-    useMockData?: boolean;
-    mockData?: {[key: string]: any};
+    deactivateGuard?: WhenRule;
     actionPanel?: {[id: string]: ActionPanelConfig};
-    allowedRoles?: any[];
     serverCalls?: ServerCallConfig[];
     serverQueries?: ServerQueryConfig[];
     events?: {[name: string]: EventConfig};

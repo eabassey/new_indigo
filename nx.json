@@ -61,6 +61,13 @@
     },
     "query-server": {
       "tags": []
+    },
+    "flipple": {
+      "tags": []
+    },
+    "flipple-e2e": {
+      "tags": [],
+      "implicitDependencies": ["flipple"]
     }
   }
 }

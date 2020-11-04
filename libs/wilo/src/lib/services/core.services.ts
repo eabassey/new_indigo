@@ -20,6 +20,7 @@ import { ConfigAccessorService } from './config-accessor.service';
 import * as jQuery from 'jquery';
 import { addFilter, getSubmissionData, getVariable, removeFilter, resetFilter, setVariable, updateSubmissionData } from '../store';
 import { LocalStorageService } from './local-storage.service';
+import { TemplateParserService } from './template-parser.service';
 
 
 @Injectable({providedIn: 'root'})
@@ -54,6 +55,7 @@ export class CoreServices {
         public footerAccessor: FooterAccessorService,
         public headerAcessor: HeaderAccessorService,
         public configAccessor: ConfigAccessorService,
+        public templateParser: TemplateParserService,
         public localStorage: LocalStorageService,
         @Inject(BASE_URL) public baseUrl: string,
         @Inject(CLIENT_CONFIG) public clientConfig: ClientConfig,

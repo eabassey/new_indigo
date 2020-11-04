@@ -1,0 +1,43 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a [routerLink]="['/builder/applications']">Applications</a></li>
+    <li class="breadcrumb-item active" aria-current="page">States</li>
+  </ol>
+</nav>
+<div class="container-fluid">
+  <h2>States</h2>
+
+<div class="row">
+  <button type="button" class="btn btn-info btn-sm" [routerLink]="['./new']">Add New State</button>
+
+</div>
+
+<div class="row">
+  <table class="table table-dark table-sm">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">State Name</th>
+          <th scope="col">Last</th>
+          <th scope="col">Handle</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let state of states">
+          <th scope="row">{{state.id}}</th>
+          <td>{{state.name}}</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+          <td>
+              <div>
+                  <button type="button" class="btn btn-info btn-sm" (click)="goToEdit(state)">Edit</button>
+                  <button type="button" class="btn btn-secondary btn-sm" (click)="goToConfig(state)">Configure</button>
+                  <button type="button" class="btn btn-info btn-sm" (click)="goToNodes(state)">Nodes</button>
+              </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+</div>

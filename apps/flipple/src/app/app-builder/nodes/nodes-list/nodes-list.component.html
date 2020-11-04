@@ -1,0 +1,26 @@
+<div class="container-fluid">
+  <div class="row">
+    <nav aria-label="breadcrumb" class="col-md-12">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a [routerLink]="['/builder/applications']">Applications</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="['/builder/applications', appId, 'states']">States</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Nodes</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <h2>List Of Nodes</h2>
+      <ul>
+        <li><a [routerLink]="['./', '2525', 'general']">Node 1</a></li>
+        <li><a [routerLink]="['./', '3111', 'general']">Node 2</a></li>
+        <li><a [routerLink]="['./', '4646', 'general']">Node 3</a></li>
+        <li><a [routerLink]="['./', '8888', 'general']">Node 4</a></li>
+      </ul>
+    </div>
+    <div class="col-md-9">
+
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

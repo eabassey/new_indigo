@@ -9,7 +9,7 @@
 
   <div class="current-module">
     <ng-content select=".component-title"></ng-content>
-    {{ (state$ | async)?.title }}
+    {{ title$ | async }}
   </div>
 
   <div class="module-actions">

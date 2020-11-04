@@ -7,7 +7,7 @@ import { FormBuilderComponent, FormModel } from '@indigo/dynamic-forms';
 export const SIL_27: StateConfig = {
   id: '27',
   name: 'job-invoiced',
-  title: 'Job Invoicing',
+  title: {template: 'Job Invoicing'},
   startNode: 'node1',
   // activateGuard: ({clientConfig}) => {
   //   return of(clientConfig.startApp === 't');

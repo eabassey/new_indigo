@@ -1,0 +1,38 @@
+<div class="container-fluid">
+    <h2>Applications</h2>
+
+<div class="row">
+    <button type="button" class="btn btn-info btn-sm" [routerLink]="['./new']">Create Application</button>
+
+</div>
+
+<div class="row">
+    <table class="table table-dark table-sm">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">App Name</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let app of applications">
+            <th scope="row">{{app.id}}</th>
+            <td>{{app.name}}</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>
+                <div>
+                    <button type="button" class="btn btn-info btn-sm" (click)="goToEdit(app)">Edit</button>
+                    <button type="button" class="btn btn-secondary btn-sm" (click)="goToConfig(app)">Configure</button>
+                    <button type="button" class="btn btn-info btn-sm" (click)="goToStates(app)">App States</button>
+                    <button type="button" class="btn btn-primary btn-sm">Preview</button>
+                </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+</div>

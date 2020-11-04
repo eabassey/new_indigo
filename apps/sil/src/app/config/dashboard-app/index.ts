@@ -9,7 +9,7 @@ export const dashboardApp: AppConfig = {
     'report': {
       id: 'report',
       name: 'Report',
-      title: 'Report',
+      title: {template: 'Report'},
       layout: {
         hideFooter: true,
       },

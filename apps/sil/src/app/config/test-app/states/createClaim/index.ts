@@ -6,7 +6,7 @@ import * as TP from '@indigo/templates';
 export const createClaim: StateConfig = {
     id: 'createClaim',
     name: 'createClaim',
-    title: 'Create Claim',
+    title: {template: 'Create Claim'},
     startNode: 'policyLookup',
     showTabs: true,
     nodes: {

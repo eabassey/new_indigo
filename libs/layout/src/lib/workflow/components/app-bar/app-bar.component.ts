@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
-import { take, map, tap, filter } from 'rxjs/operators';
+import { take, map, tap, filter, switchMap } from 'rxjs/operators';
 
 import { Observable, Subscription, of } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -16,7 +16,6 @@ import { AppConfig, CoreServices, StateConfig } from '@wilo';
 export class FLXAppBarComponent implements OnInit, OnChanges, OnDestroy {
   state: StateConfig;
   openAppMenu = false;
-  title$: Observable<string>;
   networkCheckSubscription: Subscription;
   settings: any;
   state$: Observable<StateConfig>;
@@ -59,6 +58,12 @@ export class FLXAppBarComponent implements OnInit, OnChanges, OnDestroy {
     } else {
       this.openAppMenu = true;
     }
+  }
+
+  get title$() {
+   return this.state$.pipe(
+      switchMap(state => this.svc.templateParser.parse(state.title))
+    )
   }
 
   private notifyNetworkStatus() {

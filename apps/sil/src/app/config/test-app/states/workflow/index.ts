@@ -8,7 +8,7 @@ import * as TP from '@indigo/templates';
 export const workflow: StateConfig = {
     id: 'workflow',
     name: 'Workflow',
-    title: 'Workflow',
+    title: {template: 'Workfloww'},
     startNode: 'list',
     nodes: {
         list: {

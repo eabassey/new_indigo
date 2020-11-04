@@ -1,0 +1,36 @@
+<div class="container-fluid">
+  <h2>State Deactivation Rules</h2>
+
+<div class="row">
+  <button type="button" class="btn btn-info btn-sm">Add Rule</button>
+
+</div>
+
+<div class="row">
+  <table class="table table-dark table-sm">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Rule Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Is Active</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rule of [1]">
+          <th scope="row"></th>
+          <td>{{rule.name}}</td>
+          <td>Description</td>
+          <td>yes</td>
+          <td>
+              <div>
+                  <button type="button" class="btn btn-info btn-sm">Edit</button>
+                  <button type="button" class="btn btn-primary btn-sm">Delete</button>
+              </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+</div>
