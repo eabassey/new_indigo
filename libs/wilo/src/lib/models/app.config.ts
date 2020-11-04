@@ -1,8 +1,9 @@
 import {CoreServices} from '../services';
-import {ServerCallConfig, ServerQueryConfig, EventConfig, StateConfig, ToolbarControlConfig,} from '../models';
+import {ServerCallConfig, ServerQueryConfig, EventConfig, StateConfig, ToolbarControlConfig, WhenRule,} from '../models';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import {EventEmitter} from 'events';
+import { ConditionalReturn } from './conditional-return';
 
 
 export interface AppConfig {
@@ -16,11 +17,9 @@ export interface AppConfig {
       addSearchBanner?: boolean;
       addReminder?: boolean;
     };
-    activateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;
-    canActivate?: any[],
-    canDeactivate?: any[],
-    deactivateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;
-    appMenu?: (svc: CoreServices, route?: ActivatedRoute) => Observable<any[]>;
+    activateGuard?: WhenRule;
+    deactivateGuard?: WhenRule;
+    appMenu?: ConditionalReturn;
   controls?: (svc: CoreServices, route?: ActivatedRoute) => ToolbarControlConfig[];
   startState: string;
     serverCalls?: ServerCallConfig[];

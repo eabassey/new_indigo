@@ -15,7 +15,7 @@ export const createClaim: StateConfig = {
         component: {
           children:[
             {
-              component: TP.Node2Component,
+              component: 'Node2Component',
               inputs: {
                 text: 'Dummy screen for Policy Lookup'
               }
@@ -33,7 +33,7 @@ export const createClaim: StateConfig = {
         component: {
           children:[
             {
-              component: TP.Node2Component,
+              component: 'Node2Component',
               inputs: {
                 text: 'Dummy screen for Policy Details'
               }
@@ -52,7 +52,7 @@ export const createClaim: StateConfig = {
         component: {
           children:[
             {
-              component: TP.Node2Component,
+              component: 'Node2Component',
               inputs: {
                 text: 'Dummy screen for Maps'
               }
@@ -71,7 +71,7 @@ export const createClaim: StateConfig = {
         component: {
           children:[
             {
-              component: TP.Node2Component,
+              component: 'Node2Component',
               inputs: {
                 text: 'Dummy screen for Claim Details'
               }
@@ -91,7 +91,7 @@ export const createClaim: StateConfig = {
         component: {
           children:[
             {
-              component: TP.Node2Component,
+              component: 'Node2Component',
               inputs: {
                 text: 'Dummy screen for Appointments'
               }
@@ -111,7 +111,7 @@ export const createClaim: StateConfig = {
         component: {
           children:[
             {
-              component: TP.Node2Component,
+              component: 'Node2Component',
               inputs: {
                 text: 'Dummy screen for Excess'
               }
@@ -131,7 +131,7 @@ export const createClaim: StateConfig = {
         component: {
           children:[
             {
-              component: TP.Node2Component,
+              component: 'Node2Component',
               inputs: {
                 text: 'Dummy screen for History'
               }
@@ -151,7 +151,7 @@ export const createClaim: StateConfig = {
         component: {
           children:[
             {
-              component: TP.Node2Component,
+              component: 'Node2Component',
               inputs: {
                 text: 'Dummy screen for Submit'
               }

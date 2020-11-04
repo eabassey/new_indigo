@@ -10,11 +10,9 @@ import {silConfig} from './config';
 import { SilService } from './sil.service';
 import { environment } from '../environments/environment';
 // import { requestOptionsProvider, Interceptor } from './interceptor';
-import {TemplatesModule} from '@indigo/templates';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {DynamicFormsModule} from '@indigo/dynamic-forms'
 // import {DynFormModule} from 'src/app/dyn-form/dyn-form.module';
-import {SilComponentsModule} from './components/sil-components.module';
 import {AuthImplService, IdentityModule} from '@indigo/identity';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -43,8 +41,6 @@ import { EffectsModule } from '@ngrx/effects';
       login_endpoint: `${environment.api_url}v2/auth/login/`,
       no_auth_urls: ['/cons']
     }, environment),
-    SilComponentsModule,
-    TemplatesModule,
     // DynFormModule,
     RouterModule.forRoot([], {
     initialNavigation: 'enabled'

@@ -6,16 +6,17 @@ import { ActivatedRoute } from '@angular/router';
 import { setVariable } from '../store';
 import { getVariable } from '../store/selectors/variable.selectors';
 import { DecisionNodeComponent } from '../components/decision-node.component';
+import * as TP from '../templates';
 
 
 
 export const renderTemplateDefs = (activeNode: NodeConfig, svc: CoreServices, route: ActivatedRoute) => {
     if (activeNode.nodeType === 'decision') {
       return [{component: DecisionNodeComponent, inputs: {activeNode}}];
-    } else if (typeof activeNode.component === 'function') {
+    } else if (typeof activeNode.component === 'string') {
       const inputs = transformInputs(activeNode.inputs, svc);
       const outputs = transformOutputs(activeNode.outputs, svc, route);
-      return [{component: activeNode.component, inputs, outputs}];
+      return [{component: TP[activeNode.component], inputs, outputs}];
     } else {
       return (activeNode.component as TemplateDefinition).children.map((def) => {
         let inputs = {};
@@ -28,7 +29,7 @@ export const renderTemplateDefs = (activeNode: NodeConfig, svc: CoreServices, ro
 
         const localOutputs = transformOutputs(outputs, svc, route);
         return {
-              component: def.component,
+              component: TP[def.component],
               inputs: localInputs,
               outputs: localOutputs
             };
@@ -155,7 +156,7 @@ export const renderFormModels = (state: StateConfig | ActionPanelConfig) => {
          return [
              ...acc,
              ...(node && node.inputs && node.inputs.formModel ?  node.inputs.formModel.fields : []),
-             ...(node.component && typeof node.component !== 'function' && node.component.children ? (
+             ...(node.component && typeof node.component !== 'string' && node.component.children ? (
                node.component.children.reduce((acc2, ch) => {
                      return [
                          ...acc2,

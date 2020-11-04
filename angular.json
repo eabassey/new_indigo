@@ -21,8 +21,13 @@
             "polyfills": "apps/sil/src/polyfills.ts",
             "tsConfig": "apps/sil/tsconfig.app.json",
             "aot": true,
-            "assets": ["apps/sil/src/favicon.ico", "apps/sil/src/assets"],
-            "styles": ["apps/sil/src/styles.scss"],
+            "assets": [
+              "apps/sil/src/favicon.ico",
+              "apps/sil/src/assets"
+            ],
+            "styles": [
+              "apps/sil/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -80,7 +85,10 @@
               "apps/sil/tsconfig.app.json",
               "apps/sil/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/sil/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/sil/**/*"
+            ]
           }
         },
         "test": {
@@ -115,8 +123,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/sil-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/sil-e2e/**/*"]
+            "tsConfig": [
+              "apps/sil-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/sil-e2e/**/*"
+            ]
           }
         }
       }
@@ -134,7 +147,10 @@
               "libs/wilo/tsconfig.lib.json",
               "libs/wilo/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/wilo/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/wilo/**/*"
+            ]
           }
         },
         "test": {
@@ -166,7 +182,10 @@
               "libs/layout/tsconfig.lib.json",
               "libs/layout/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/layout/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/layout/**/*"
+            ]
           }
         },
         "test": {
@@ -198,7 +217,10 @@
               "libs/templates/tsconfig.lib.json",
               "libs/templates/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/templates/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/templates/**/*"
+            ]
           }
         },
         "test": {
@@ -230,7 +252,10 @@
               "libs/pipes/tsconfig.lib.json",
               "libs/pipes/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/pipes/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/pipes/**/*"
+            ]
           }
         },
         "test": {
@@ -262,7 +287,10 @@
               "libs/directives/tsconfig.lib.json",
               "libs/directives/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/directives/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/directives/**/*"
+            ]
           }
         },
         "test": {
@@ -294,7 +322,10 @@
               "libs/ui-elements/tsconfig.lib.json",
               "libs/ui-elements/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/ui-elements/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/ui-elements/**/*"
+            ]
           }
         },
         "test": {
@@ -326,7 +357,10 @@
               "libs/utilities/tsconfig.lib.json",
               "libs/utilities/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/utilities/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/utilities/**/*"
+            ]
           }
         },
         "test": {
@@ -358,7 +392,10 @@
               "libs/error-handler/tsconfig.lib.json",
               "libs/error-handler/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/error-handler/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/error-handler/**/*"
+            ]
           }
         },
         "test": {
@@ -390,7 +427,10 @@
               "libs/dynamic-forms/tsconfig.lib.json",
               "libs/dynamic-forms/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/dynamic-forms/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/dynamic-forms/**/*"
+            ]
           }
         },
         "test": {
@@ -422,7 +462,10 @@
               "libs/identity/tsconfig.lib.json",
               "libs/identity/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/identity/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/identity/**/*"
+            ]
           }
         },
         "test": {
@@ -454,7 +497,9 @@
             "outputPath": "dist/apps/query-server",
             "main": "apps/query-server/src/main.ts",
             "tsConfig": "apps/query-server/tsconfig.app.json",
-            "assets": ["apps/query-server/src/assets"]
+            "assets": [
+              "apps/query-server/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -483,7 +528,10 @@
               "apps/query-server/tsconfig.app.json",
               "apps/query-server/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/query-server/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/query-server/**/*"
+            ]
           }
         },
         "test": {
@@ -520,7 +568,9 @@
               "apps/flipple/src/favicon.ico",
               "apps/flipple/src/assets"
             ],
-            "styles": ["apps/flipple/src/styles.scss"],
+            "styles": [
+              "apps/flipple/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -578,7 +628,10 @@
               "apps/flipple/tsconfig.app.json",
               "apps/flipple/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/flipple/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/flipple/**/*"
+            ]
           }
         },
         "test": {
@@ -613,8 +666,73 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/flipple-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/flipple-e2e/**/*"]
+            "tsConfig": [
+              "apps/flipple-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/flipple-e2e/**/*"
+            ]
+          }
+        }
+      }
+    },
+    "flipple-api": {
+      "root": "apps/flipple-api",
+      "sourceRoot": "apps/flipple-api/src",
+      "projectType": "application",
+      "prefix": "flipple-api",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/flipple-api",
+            "main": "apps/flipple-api/src/main.ts",
+            "tsConfig": "apps/flipple-api/tsconfig.app.json",
+            "assets": [
+              "apps/flipple-api/src/assets"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/flipple-api/src/environments/environment.ts",
+                  "with": "apps/flipple-api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "flipple-api:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/flipple-api/tsconfig.app.json",
+              "apps/flipple-api/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/flipple-api/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/flipple-api/jest.config.js",
+            "tsConfig": "apps/flipple-api/tsconfig.spec.json",
+            "passWithNoTests": true
           }
         }
       }

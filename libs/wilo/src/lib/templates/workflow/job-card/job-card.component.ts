@@ -16,8 +16,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { humaniseDate } from '@indigo/utilities';
 import * as moment from 'moment';
-import { CoreServices } from '@wilo';
 import { getText, get_indicator_color } from '../item-utils';
+import { CoreServices } from '../../../services';
 
 
 @Component({

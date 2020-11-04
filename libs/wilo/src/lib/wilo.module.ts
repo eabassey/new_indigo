@@ -12,6 +12,7 @@ import { wiloReducers } from './store';
 import { NodeRouterComponent } from './components/node-router.component';
 import { ClientConfig } from './models';
 import { DecisionNodeComponent } from './components';
+import { TemplatesModule } from './templates';
 
 
 
@@ -20,15 +21,16 @@ const coreModules = [
     HttpClientModule,
     ReactiveFormsModule,
     DynamicIoModule,
+    TemplatesModule
 ];
 @NgModule({
   declarations: [
     NodeFooterButtonComponent,
     NodeRouterComponent,
-    DecisionNodeComponent
+    DecisionNodeComponent,
   ],
   imports: [CommonModule, StoreModule.forFeature('dyn', wiloReducers), RouterModule, ...coreModules],
-  exports: [...coreModules, NodeRouterComponent, NodeFooterButtonComponent, RouterModule]
+  exports: [...coreModules, NodeRouterComponent, NodeFooterButtonComponent, TemplatesModule, RouterModule]
 })
 export class WiloModule {
   constructor(@Optional() @SkipSelf() parentModule: WiloModule) {

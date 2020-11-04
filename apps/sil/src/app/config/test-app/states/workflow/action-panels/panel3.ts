@@ -1,4 +1,3 @@
-import * as TP from '@indigo/templates';
 import { ActionPanelConfig } from '@wilo';
 
 
@@ -9,7 +8,7 @@ export const panel3: ActionPanelConfig = {
     startNode: 'node2',
     nodes: {
         node2: {
-            component: TP.Node2Component,
+            component: 'Node2Component',
         }
     }
 };

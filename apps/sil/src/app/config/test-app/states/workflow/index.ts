@@ -1,8 +1,6 @@
 import {panel1, panel2, panel3, silSearchPanel} from './action-panels';
 import { StateConfig } from '@wilo';
-import { WorkflowListComponent } from 'apps/sil/src/app/components/workflow/workflow-list.component';
 import { map } from 'rxjs/operators';
-import * as TP from '@indigo/templates';
 
 
 export const workflow: StateConfig = {
@@ -12,7 +10,7 @@ export const workflow: StateConfig = {
     startNode: 'list',
     nodes: {
         list: {
-          component: WorkflowListComponent,
+          component: 'WorkflowListComponent',
           inputs: {
               // list$: 'dyn.variables.claims.dataset'
               // list$: {
@@ -54,16 +52,16 @@ export const workflow: StateConfig = {
           component: {
               children: [
                   {
-                      component: TP.Node1Component,
+                      component: 'Node1Component',
                       inputs: { greeting: 'Hello component'},
                       outputs: {
                           doWork: (ev, sv) => {
                           }
                       }
                   },
-                  {component: TP.Node2Component, inputs: {}, outputs: {}},
+                  {component: 'Node2Component', inputs: {}, outputs: {}},
                   {
-                      component: TP.FormRendererComponent,
+                      component: 'FormRendererComponent',
                       inputs: {
                           formModel: [
                               // new DynamicDatePickerModel({

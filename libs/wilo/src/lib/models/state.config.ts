@@ -26,8 +26,6 @@ export interface StateConfig {
       editRoles: { [id: number]: string };
       viewRoles: { [id: number]: string };
     };
-    canActivate?: any[],
-    canDeactivate?: any[],
     activateGuard?: WhenRule;
     deactivateGuard?: WhenRule;
     actionPanel?: {[id: string]: ActionPanelConfig};

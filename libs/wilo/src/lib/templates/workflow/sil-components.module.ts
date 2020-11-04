@@ -5,9 +5,9 @@ import { RouterModule } from '@angular/router';
 import {UIElementsModule} from '@indigo/ui-elements';
 import { PipesModule } from '@indigo/pipes';
 import { NgxPaginationModule } from 'ngx-pagination';
-import {WorkflowListComponent} from './workflow/workflow-list.component';
-import {ClaimCardComponent} from './workflow/claim-card/claim-card.component';
-import {JobCardComponent} from './workflow/job-card/job-card.component';
+import {WorkflowListComponent} from './workflow-list.component';
+import {ClaimCardComponent} from './claim-card/claim-card.component';
+import {JobCardComponent} from './job-card/job-card.component';
 
 @NgModule({
   declarations: [

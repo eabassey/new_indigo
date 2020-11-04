@@ -6,6 +6,7 @@ export interface WhenRule {
 export interface PredicateCondition {
   using: string; //eg: bf.bigForm.value.test
   withArgs?: any[];
+  isFunc?: boolean;
   resultQuery?: string;
   operator: PredicateOperator
   valueComparer: any;
@@ -24,9 +25,12 @@ export type PredicateOperator =
 'lessThan' |
 'lessThanOrEquals' |
 'contains' |
+'containsAny' |
 'hasLength' |
 
 
+
+//
 'not.equals' |
 'not.greaterThan' |
 'not.greaterThanOrEquals' |

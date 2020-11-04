@@ -8,8 +8,8 @@ import {
   SimpleChanges,
   ChangeDetectionStrategy,
 } from '@angular/core';
+import { CoreServices } from '../../../services';
 import { getText, get_indicator_color, get_sla_time } from '../item-utils';
-import { CoreServices } from '@wilo';
 
 
 @Component({

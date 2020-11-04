@@ -1,5 +1,4 @@
 import {  addFilter, resetFilter, ActionPanelConfig } from '@wilo';
-import * as TP from '@indigo/templates';
 
 export const panel1: ActionPanelConfig = {
     id: 'panel1',
@@ -8,7 +7,7 @@ export const panel1: ActionPanelConfig = {
     startNode: 'node1',
     nodes: {
         node1: {
-            component: TP.Node1Component,
+            component: 'Node1Component',
             outputs: {
                 doWork: (ev, sv) => {
                 },

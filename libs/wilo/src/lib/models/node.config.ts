@@ -5,8 +5,9 @@ import { ServerCallConfig } from './server-call.config';
 import { ServerQueryConfig } from './server-query.config';
 import { StateConfig } from './state.config';
 import { EventConfig } from './event.config';
-import { Type } from '@angular/core';
 import { FooterButtonConfig } from './footer-button.config';
+import { WhenRule } from './rule';
+import { TemplateParser } from './template-parser';
 
 export interface NodeConfig {
     name?: string;
@@ -19,11 +20,9 @@ export interface NodeConfig {
     };
     // prevState?: any;
     controls?: (p) => any;
-    canActivate?: any[];
-    canDeactivate?: any[];
-    activateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;
-    deactivateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;
-    title?: string | ((svc: CoreServices, route?: ActivatedRoute) => Observable<string>);
+    activateGuard?: WhenRule;
+    deactivateGuard?: WhenRule;
+    title?: TemplateParser;
     footerType?: 'pagination' | 'node_nav';
 
     errorHandler?: {
@@ -46,7 +45,7 @@ export interface NodeConfig {
     intersectData?: (svc: CoreServices, route?: ActivatedRoute) => void;
     inputs?: { [id: string]: any };
     outputs?: { [id: string]: (ev: any, svc: CoreServices) => void };
-    component?: Type<any> | TemplateDefinition;
+    component?: string | TemplateDefinition;
     navs?: FooterButtonConfig[];
 
     onNodeInit?: (svc: CoreServices, route?: ActivatedRoute) => void;
@@ -59,7 +58,7 @@ export interface TemplateDefinition {
   }
 
 export interface OrganismDefinition {
-    component: Type<any>;
+    component: string;
     inputs: { [key: string]: any };
     outputs?: { [id: string]: (ev: any, svc: CoreServices) => void };
   }

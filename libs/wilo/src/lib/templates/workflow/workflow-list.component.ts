@@ -1,8 +1,10 @@
 import { Component, Input, OnInit, ChangeDetectionStrategy, Inject, OnDestroy } from "@angular/core";
 import {Observable, Subscription} from 'rxjs';
-import { CoreServices, getVariable, CLIENT_CONFIG, ClientConfig } from '@wilo';
 import { map, skipWhile } from 'rxjs/operators';
 import { select } from '@ngrx/store';
+import { CoreServices } from '../../services';
+import { getVariable } from '../../store/selectors';
+import { ClientConfig } from '../../models';
 
 
 

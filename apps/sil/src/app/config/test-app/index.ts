@@ -9,22 +9,20 @@ import { createClaim} from './states/createClaim';
 
 export const testApp: AppConfig = {
     name: 'test-app',
-    appMenu: ({ auth }) => {
-      return auth.getUser().pipe(
-        filter(user => !!user),
-        map((currentUser: any) => {
-          const createRoles = [1, 6, 18];
-        const menuItems = [{ id: 1, name: 'Workflow', routerLink: '/testApp/workflow/list', iconType: 'app-menu-workflow' }];
-
-        if (currentUser && currentUser.user && currentUser.user.roles.some(role => createRoles.includes(role))) {
-          menuItems.push({ id: 2, name: 'New Claim', routerLink: '/testApp/createClaim/policyLookup', iconType: 'app-menu-new-claim' });
-        }
-
-        return menuItems;
-        })
-      );
+    appMenu: {
+      whenRule: {
+        predicates: [
+          {isFunc: true, using: 'auth.getUser', resultQuery: 'user.roles', operator: 'containsAny', valueComparer: [1, 6, 18]}
+        ]
+      },
+      thenReturn: [
+        { id: 1, name: 'Workflow', routerLink: '/testApp/workflow/list', iconType: 'app-menu-workflow' },
+        { id: 2, name: 'New Claim', routerLink: '/testApp/createClaim/policyLookup', iconType: 'app-menu-new-claim' }
+      ],
+      elseReturn: [
+        { id: 1, name: 'Workflow', routerLink: '/testApp/workflow/list', iconType: 'app-menu-workflow' },
+      ]
     },
-    canActivate: [AuthGuard],
     startState: 'workflow',
     onAppInit: (svc) => {
       // svc.listeners.emit('dance');

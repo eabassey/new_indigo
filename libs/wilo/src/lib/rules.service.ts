@@ -2,10 +2,11 @@ import { Injectable } from "@angular/core";
 import { CoreServices } from './services';
 import {path, split} from 'ramda';
 import { combineLatest, EMPTY, from, isObservable, Observable, of } from 'rxjs';
-import { combineAll, map, tap } from 'rxjs/operators';
+import { combineAll, map, skipWhile, tap } from 'rxjs/operators';
 import { DoRule, PredicateCondition, PredicateOperator, WhenRule } from './models/rule';
 import { query, queryValue } from './rxjs-operators';
 import isPromise from 'is-promise';
+import {contains, any} from 'ramda';
 
 
 
@@ -54,10 +55,15 @@ export class RulesService {
   runPredicate(predicate: PredicateCondition) {
     const splitted = split('.', predicate.using);
     const value = path(splitted, this.svc);
-    const result = predicate.withArgs ? value.call(this.indexingForTHISContext(splitted, this.svc),...predicate.withArgs) : value;
+    let result;
+    if (predicate.isFunc) {
+      result = predicate.withArgs ? value.call(this.indexingForTHISContext(splitted, this.svc),...predicate.withArgs) : value.call(this.indexingForTHISContext(splitted, this.svc));
+    } else {
+      result = value;
+    }
     switch (true) {
       case isObservable(result): {
-        return result.pipe(query(predicate.resultQuery), map(res => this.handleOperator(predicate.operator, res, predicate.valueComparer)));
+        return result.pipe(query(predicate.resultQuery), skipWhile(x => !x), map(res => this.handleOperator(predicate.operator, res, predicate.valueComparer)));
       }
       case isPromise(result): {
         return from(result).pipe(query(predicate.resultQuery), map(res => this.handleOperator(predicate.operator, res, predicate.valueComparer)));
@@ -81,9 +87,26 @@ export class RulesService {
       case 'greaterThan': {
         return inValue > valueComparer;
       }
+      case 'greaterThanOrEquals': {
+        return inValue >= valueComparer;
+      }
+      case 'lessThan': {
+        return inValue < valueComparer;
+      }
+      case 'lessThanOrEquals': {
+        return inValue <= valueComparer;
+      }
+      case 'contains': {
+        return contains(valueComparer, inValue);
+      }
+      case 'containsAny': {
+        return (inValue as any[]).some(contains(valueComparer));
+        // return any(contains(valueComparer))(inValue);
+      }
       case 'hasLength': {
         return inValue.length === valueComparer;
       }
+
     }
   }
 

@@ -6,26 +6,22 @@ import { ServerCallConfig } from './server-call.config';
 import { ServerQueryConfig } from './server-query.config';
 import { EventConfig } from './event.config';
 import { NodeConfig } from './node.config';
+import { WhenRule } from './rule';
+import { TemplateParser } from './template-parser';
 
 export interface ActionPanelConfig {
     id?: string;
     name?: string;
     icon?: string;
     instruction?: string;
-    title?: string | ((svc: CoreServices, route?: ActivatedRoute) => Observable<string>);
+    title?: TemplateParser;
     controls?: (svc: CoreServices, route?: ActivatedRoute) => ToolbarControlConfig[];
-    canActivate?: any[];
-    canDeactivate?: any[];
-    activateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;
-    deactivateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;
-    useMockData?: boolean;
-    mockData?: {[key: string]: any};
+    activateGuard?: WhenRule;
+    deactivateGuard?: WhenRule;
 
     initFormFields?: (svc: CoreServices, route?: ActivatedRoute) => void | Subscription;
     checkValidityForFields?: string[];
-    mockContextData?: {
-      [id: string]: any;
-    };
+
     serverCalls?: ServerCallConfig[];
     serverQueries?: ServerQueryConfig[];
     events?: {[name: string]: EventConfig};
