@@ -6,7 +6,7 @@ import { combineAll, map, skipWhile, tap } from 'rxjs/operators';
 import { DoRule, PredicateCondition, PredicateOperator, WhenRule } from './models/rule';
 import { query, queryValue } from './rxjs-operators';
 import isPromise from 'is-promise';
-import {contains, any} from 'ramda';
+import {contains, any, intersection} from 'ramda';
 
 
 
@@ -100,8 +100,9 @@ export class RulesService {
         return contains(valueComparer, inValue);
       }
       case 'containsAny': {
-        return (inValue as any[]).some(contains(valueComparer));
+        // return (inValue as any[]).some(contains(valueComparer));
         // return any(contains(valueComparer))(inValue);
+        return intersection(inValue, valueComparer)?.length > 0;
       }
       case 'hasLength': {
         return inValue.length === valueComparer;
