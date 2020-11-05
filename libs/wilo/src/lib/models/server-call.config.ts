@@ -1,7 +1,7 @@
 import { CoreServices } from '../services';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { ReturnRule } from './rule';
+import { ActionRule, ReturnRule } from './rule';
 
 export interface ServerCallConfig {
     key?: string;
@@ -18,7 +18,7 @@ export interface ServerCallConfig {
     nextNode?: string; // This is set from a nav button, but can also be written to directly if required
     followUpSuccessCalls?: ServerCallConfig[];
     followUpFailCalls?: ServerCallConfig[];
-    onSuccess?: (result: any, svc?: CoreServices, route?: ActivatedRoute, serverCall?: ServerCallConfig) => void;
-    onError?: (err: any, svc?: CoreServices, route?: ActivatedRoute) => void;
-    onComplete?: (svc?: CoreServices, route?: ActivatedRoute) => void;
+    onSuccess?: ActionRule[];
+    onError?: ActionRule[];
+    onComplete?: ActionRule[];
   };

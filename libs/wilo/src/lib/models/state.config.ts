@@ -31,7 +31,7 @@ export interface StateConfig {
     actionPanel?: {[id: string]: ActionPanelConfig};
     serverCalls?: ServerCallConfig[];
     serverQueries?: ServerQueryConfig[];
-    events?: {[name: string]: EventConfig};
+    events?: {[name: string]: WhenRule};
     setValuesToBigForm?: (svc: CoreServices, route?: ActivatedRoute) => Observable<any>;
     bigFormToStoreMapper?: { [id: string]: string | string[] | [Function, string] | [Function, string][] };
     startNode: string;

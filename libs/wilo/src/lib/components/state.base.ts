@@ -3,7 +3,7 @@ import { ActionPanelConfig, StateConfig, ToolbarControlConfig } from '../models'
 import { CoreServices } from '../services/core.services';
 import { Subscription, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { renderServerCalls, renderEvents, renderServerQueries, renderFormModels } from '../helpers/utils';
+import { renderServerCalls, renderServerQueries, renderFormModels } from '../helpers/utils';
 import { delay } from 'rxjs/operators';
 import { RulesService } from '../rules.service';
 
@@ -130,7 +130,7 @@ toggleActionPanel() {
         }
         //
         if (state?.events) {
-            this.eventsSub = renderEvents(state.events, this.svc, this.route, this.rulesService);
+            this.eventsSub = Object.values(state.events).map(rule => this.rulesService.renderWhenRule(rule).subscribe());
         }
         //
         if (state?.bigFormToStoreMapper) {

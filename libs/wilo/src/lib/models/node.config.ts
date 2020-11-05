@@ -40,7 +40,7 @@ export interface NodeConfig {
     serverCalls?: ServerCallConfig[];
     serverQueries?: ServerQueryConfig[];
     subFlow?: StateConfig;
-    events?: {[name: string]: EventConfig};
+    events?: {[name: string]: WhenRule};
     decision?: (svc: CoreServices, route?: ActivatedRoute) => void | Subscription;
     intersectData?: (svc: CoreServices, route?: ActivatedRoute) => void;
     inputs?: { [id: string]: any };

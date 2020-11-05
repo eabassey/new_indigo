@@ -3,7 +3,7 @@ import {   TemplateDefinition, ActionPanelConfig } from '../models';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { CoreServices } from '../services';
-import { renderServerCalls, renderTemplateDefs, renderServerQueries, renderEvents, renderFormModels } from '../helpers/utils';
+import { renderServerCalls, renderTemplateDefs, renderServerQueries, renderFormModels } from '../helpers/utils';
 import { RulesService } from '../rules.service';
 
 @Component({template: ''})
@@ -43,7 +43,7 @@ export abstract class ActionPanelBase implements OnInit, OnChanges, OnDestroy {
             this.setValuesSub = panel.setValuesToBigForm(this.svc, this.route).subscribe();
         }
         if (panel?.events) {
-            this.eventsSub = renderEvents(panel.events, this.svc, this.route, this.rulesService);
+          this.eventsSub = Object.values(panel.events).map(rule => this.rulesService.renderWhenRule(rule).subscribe());
         }
         // Customize headers for action panel
         // const controls = panel.controls ? panel.controls(this.svc) : [];

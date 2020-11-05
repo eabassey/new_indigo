@@ -20,7 +20,7 @@ export interface AppConfig {
     startState: string;
     serverCalls?: ServerCallConfig[];
     serverQueries?: ServerQueryConfig[];
-    events?: {[name: string]: EventConfig};
+    events?: {[name: string]: WhenRule};
     appStates: { [id: string]: StateConfig };
     onAppInit?: ActionRule[];
     onAppDestroy?: ActionRule[];

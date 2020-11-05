@@ -16,14 +16,14 @@ import {contains, any, intersection} from 'ramda';
 export class RulesService {
   constructor(private svc: CoreServices) {}
 
-  renderDoRule(rule: DoRule) {
+  renderDoRule(rule: DoRule, ...args: any[]) {
     const splitted = split('.', rule.using);
     const value = path(splitted, this.svc);
     if (value) {
       if (rule.withArgs) {
-        value.call(this.indexingForTHISContext(splitted, this.svc), ...rule.withArgs);
+        value.call(this.indexingForTHISContext(splitted, this.svc), ...args, ...rule.withArgs);
       } else {
-        value.call(this.indexingForTHISContext(splitted, this.svc));
+        value.call(this.indexingForTHISContext(splitted, this.svc), ...args);
       }
     }
   }
@@ -84,25 +84,25 @@ export class RulesService {
     }
   }
 
-  renderActionRule(rule: ActionRule) {
+  renderActionRule(rule: ActionRule, ...args: any[]) {
     switch (rule.type) {
       case 'do': {
-        this.renderDoRule(rule);
+        this.renderDoRule(rule, ...args);
         break;
       }
       case 'when': {
-        this.renderWhenRule(rule);
+        this.renderWhenRule(rule, ...args);
         break;
       }
     }
   }
 
-  renderWhenRule(rule: WhenRule) {
+  renderWhenRule(rule: WhenRule, ...args: any[]) {
     return this.runAllPredicates(rule.predicates).pipe(
       tap(canRun => {
         if (canRun) {
           if (rule.doRules)
-          rule.doRules.forEach(doRule => this.renderDoRule(doRule));
+          rule.doRules.forEach(doRule => this.renderDoRule(doRule, ...args));
         }
       })
     );

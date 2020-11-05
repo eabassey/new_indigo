@@ -24,15 +24,7 @@ export const SIL_27: StateConfig = {
     ],
   },
   events: {
-    checkSomething: {
-      triggerOn: ['form@lastName'],
-      triggerWhen: (lastName) => {
-        return lastName === 'mensah';
-      },
-      dataMutations: (svc) => {
-      },
-      // serverCalls: [{key: 'posts', errorMessage: '', directCall: (svc) => svc.http.get('https://jsonplaceholder.typicode.com/posts')}]
-    }
+
   },
   nodes: {
     node1: {

@@ -3,7 +3,7 @@ import {  NodeConfig, ActionPanelConfig } from '../models';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { CoreServices } from '../services';
-import { renderServerCalls, renderTemplateDefs, renderEvents, renderServerQueries } from '../helpers/utils';
+import { renderServerCalls, renderTemplateDefs, renderServerQueries } from '../helpers/utils';
 import { RulesService } from '../rules.service';
 
 
@@ -63,7 +63,7 @@ export class PanelNodeBase implements OnInit, OnDestroy, OnChanges {
             }
             //
             if (this.activeNode.events) {
-              this.eventsSub = renderEvents(activeNode.events, this.svc, this.route, this.rulesService);
+              this.eventsSub = Object.values(this.activeNode.events).map(rule => this.rulesService.renderWhenRule(rule).subscribe());
             }
             this.organisms = renderTemplateDefs(activeNode, this.svc, this.route);
         }

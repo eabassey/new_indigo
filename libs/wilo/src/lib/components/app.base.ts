@@ -3,7 +3,7 @@ import { StateConfig, AppConfig, NodeConfig, ActionPanelConfig } from '../models
 import { CoreServices } from '../services';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
-import { renderServerCalls, renderEvents, renderServerQueries } from '../helpers/utils';
+import { renderServerCalls, renderServerQueries } from '../helpers/utils';
 import {delay} from 'rxjs/operators';
 import { EventEmitter } from 'events';
 import { RulesService } from '../rules.service';
@@ -45,7 +45,7 @@ export abstract class AppBase implements OnInit, OnDestroy {
         }
         //
         if (app?.events) {
-            this.eventsSub = renderEvents(app.events, this.svc, this.route, this.rulesService);
+          this.eventsSub = Object.values(app.events).map(rule => this.rulesService.renderWhenRule(rule).subscribe());
         }
     }
 

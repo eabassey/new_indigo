@@ -90,39 +90,39 @@ const transformInputs = (inputs: {[key: string]: any}, svc: CoreServices) => {
 };
 
 
-export const renderEvents = (events: {[name: string]: EventConfig}, svc: CoreServices, route: ActivatedRoute, rulesService: RulesService) => {
-    const eventsSubscriptions: Subscription[] = [];
-    if (events) {
-        Object.values(events).forEach((ev: EventConfig) => {
-            //
-            eventsSubscriptions.push(
-              combineLatest([
-                ...ev.triggerOn.map((trg: string) => {
-                  if (trg.includes('sys@')) {
-                      return getSystemEvent(trg);
-                    } else if (trg.startsWith('form@')) {
-                    return getFormEvent(trg, svc);
-                    } else if(trg.startsWith('html@')) {
-                      // Example: html@#test-id:click
-                      return getHtmlEvent(trg, svc);
-                    }
-                })
-              ])
-                .pipe(map(params => ev.triggerWhen(...params)))
-                .subscribe(shouldFire => {
-                  if (shouldFire) {
-                    ev.dataMutations(svc, route);
-                    if (ev.serverCalls) {
-                      const serverCallsSubs = renderServerCalls(ev.serverCalls, svc, route, rulesService);
-                      eventsSubscriptions.push(...serverCallsSubs);
-                    }
-                  }
-                })
-            );
-        });
-      }
-    return eventsSubscriptions;
-};
+// export const renderEvents = (events: {[name: string]: EventConfig}, svc: CoreServices, route: ActivatedRoute, rulesService: RulesService) => {
+//     const eventsSubscriptions: Subscription[] = [];
+//     if (events) {
+//         Object.values(events).forEach((ev: EventConfig) => {
+//             //
+//             eventsSubscriptions.push(
+//               combineLatest([
+//                 ...ev.triggerOn.map((trg: string) => {
+//                   if (trg.includes('sys@')) {
+//                       return getSystemEvent(trg);
+//                     } else if (trg.startsWith('form@')) {
+//                     return getFormEvent(trg, svc);
+//                     } else if(trg.startsWith('html@')) {
+//                       // Example: html@#test-id:click
+//                       return getHtmlEvent(trg, svc);
+//                     }
+//                 })
+//               ])
+//                 .pipe(map(params => ev.triggerWhen(...params)))
+//                 .subscribe(shouldFire => {
+//                   if (shouldFire) {
+//                     ev.dataMutations(svc, route);
+//                     if (ev.serverCalls) {
+//                       const serverCallsSubs = renderServerCalls(ev.serverCalls, svc, route, rulesService);
+//                       eventsSubscriptions.push(...serverCallsSubs);
+//                     }
+//                   }
+//                 })
+//             );
+//         });
+//       }
+//     return eventsSubscriptions;
+// };
 
 
 export const getSystemEvent = (trigger: string) => {
@@ -212,7 +212,7 @@ export const renderServerCalls = (serverCalls: ServerCallConfig[], svc: CoreServ
           svc.loader.add(key);
         }
       const completeFn = () => {
-        onComplete ? onComplete(svc, route) : null;
+        onComplete ? onComplete.forEach(rule => rulesService.renderActionRule(rule)) : null;
          //
         if (followUpSuccessCalls) {
           const successSubs = renderServerCalls(followUpSuccessCalls, svc, route, rulesService);
@@ -229,7 +229,7 @@ export const renderServerCalls = (serverCalls: ServerCallConfig[], svc: CoreServ
       };
       const errorFn = (err) => {
         // set errors to store
-        onError ? onError(err, svc, route) : console.error(err);
+        onError ? onError.forEach(rule => rulesService.renderActionRule(rule, err)) : console.error(err);
       };
       const successFn = (results) => {
         //
@@ -253,7 +253,7 @@ export const renderServerCalls = (serverCalls: ServerCallConfig[], svc: CoreServ
           svc.keyValueStore.setItem(key, data);
         }
         if (onSuccess)
-          onSuccess(successResults, svc, route, call);
+         onSuccess.forEach(rule => rulesService.renderActionRule(rule, successResults, call))
       };
       //
       if (functionName) {

@@ -3,7 +3,7 @@ import {  NodeConfig } from '../models';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { CoreServices } from '../services';
-import { renderServerCalls, renderTemplateDefs, renderEvents, renderServerQueries } from '../helpers/utils';
+import { renderServerCalls, renderTemplateDefs, renderServerQueries } from '../helpers/utils';
 import { RulesService } from '../rules.service';
 
 
@@ -46,7 +46,7 @@ export abstract class NodeBase implements OnDestroy, OnInit {
       }
       //
       if (node?.events) {
-        this.eventsSub = renderEvents(node.events, this.svc, this.route, this.rulesService);
+        this.eventsSub = Object.values(node.events).map(rule => this.rulesService.renderWhenRule(rule).subscribe());
       }
       this.organisms = renderTemplateDefs(node, this.svc, this.route);
       this.svc.footerAccessor.setNodeForFooter(node);
