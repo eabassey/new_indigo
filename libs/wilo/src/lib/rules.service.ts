@@ -3,7 +3,7 @@ import { CoreServices } from './services';
 import {path, split} from 'ramda';
 import { combineLatest, EMPTY, from, isObservable, Observable, of } from 'rxjs';
 import { combineAll, map, skipWhile, tap } from 'rxjs/operators';
-import { ConditionalReturnRule, DoRule, ReturnRule, PredicateCondition, PredicateOperator, SingleReturnRule, WhenRule } from './models/rule';
+import { ConditionalReturnRule, DoRule, ReturnRule, PredicateCondition, PredicateOperator, SingleReturnRule, WhenRule, ActionRule } from './models/rule';
 import { query, queryValue } from './rxjs-operators';
 import isPromise from 'is-promise';
 import {contains, any, intersection} from 'ramda';
@@ -80,6 +80,19 @@ export class RulesService {
       }
       case 'conditional_return': {
         return this.renderConditionalReturnRule(rule);
+      }
+    }
+  }
+
+  renderActionRule(rule: ActionRule) {
+    switch (rule.type) {
+      case 'do': {
+        this.renderDoRule(rule);
+        break;
+      }
+      case 'when': {
+        this.renderWhenRule(rule);
+        break;
       }
     }
   }

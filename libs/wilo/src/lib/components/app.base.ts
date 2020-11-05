@@ -38,7 +38,7 @@ export abstract class AppBase implements OnInit, OnDestroy {
         }
 
         if (app?.onAppInit) {
-            app.onAppInit(this.svc, this.route);
+            app.onAppInit.forEach(rule => this.rulesService.renderActionRule(rule));
         }
         if (app?.serverQueries) {
             this.serverQueriesSubs = renderServerQueries(app.serverQueries, this.svc, this.route)
@@ -68,7 +68,7 @@ export abstract class AppBase implements OnInit, OnDestroy {
             this.eventsSub.forEach(sub => sub.unsubscribe());
         }
         if (this.app && this.app.onAppDestroy) {
-            this.app.onAppDestroy(this.svc, this.route);
+            this.app.onAppDestroy.forEach(rule => this.rulesService.renderActionRule(rule));
         }
     }
 

@@ -31,7 +31,7 @@ export abstract class ActionPanelBase implements OnInit, OnChanges, OnDestroy {
 
     handleConfig(panel: ActionPanelConfig) {
         if (panel?.onPanelInit) {
-            panel.onPanelInit(this.svc, this.route);
+            panel.onPanelInit.forEach(rule => this.rulesService.renderActionRule(rule));
         }
         if (panel?.serverQueries) {
             this.serverQueriesSubs = renderServerQueries(panel.serverQueries, this.svc, this.route)
@@ -70,7 +70,7 @@ export abstract class ActionPanelBase implements OnInit, OnChanges, OnDestroy {
             this.eventsSub.forEach(sub => sub.unsubscribe());
         }
         if (this.activePanel && this.activePanel.onPanelDestroy) {
-            this.activePanel.onPanelDestroy(this.svc, this.route);
+            this.activePanel.onPanelDestroy.forEach(rule => this.rulesService.renderActionRule(rule));
         }
     }
 

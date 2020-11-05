@@ -6,7 +6,7 @@ import { ServerQueryConfig } from './server-query.config';
 import { StateConfig } from './state.config';
 import { EventConfig } from './event.config';
 import { FooterButtonConfig } from './footer-button.config';
-import { WhenRule } from './rule';
+import { ActionRule, WhenRule } from './rule';
 import { TemplateParser } from './template-parser';
 
 export interface NodeConfig {
@@ -48,8 +48,8 @@ export interface NodeConfig {
     component?: string | TemplateDefinition;
     navs?: FooterButtonConfig[];
 
-    onNodeInit?: (svc: CoreServices, route?: ActivatedRoute) => void;
-    onNodeDestroy?: (svc: CoreServices, route?: ActivatedRoute) => void;
+    onNodeInit?: ActionRule[];
+    onNodeDestroy?: ActionRule[];
   }
 
 export interface TemplateDefinition {

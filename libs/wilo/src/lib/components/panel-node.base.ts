@@ -52,7 +52,7 @@ export class PanelNodeBase implements OnInit, OnDestroy, OnChanges {
     renderNode(activeNode) {
         if (activeNode) {
             if (activeNode.onNodeInit) {
-                activeNode.onNodeInit(this.svc, this.route);
+                activeNode.onNodeInit.forEach(rule => this.rulesService.renderActionRule(rule));
             }
             if (activeNode.serverQueries) {
               this.serverQueriesSubs = renderServerQueries(activeNode.serverQueries, this.svc, this.route);
@@ -85,7 +85,7 @@ export class PanelNodeBase implements OnInit, OnDestroy, OnChanges {
          this.serverCallsSubs.forEach(sb => sb.unsubscribe());
         }
       if (this.activeNode && this.activeNode.onNodeDestroy) {
-          this.activeNode.onNodeDestroy(this.svc, this.route);
+          this.activeNode.onNodeDestroy.forEach(rule => this.rulesService.renderActionRule(rule));
         }
     }
 

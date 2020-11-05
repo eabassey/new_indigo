@@ -100,7 +100,7 @@ toggleActionPanel() {
     handleConfig(state: StateConfig) {
           //
         if (state?.onStateInit) {
-            state.onStateInit(this.svc, this.route);
+            state.onStateInit.forEach(rule => this.rulesService.renderActionRule(rule));
         }
         //
         if (state?.actionPanel) {
@@ -162,7 +162,7 @@ toggleActionPanel() {
           this.paramsSub.unsubscribe();
       }
         if (this.state && this.state.onStateDestroy) {
-            this.state.onStateDestroy(this.svc, this.route);
+            this.state.onStateDestroy.forEach(rule => this.rulesService.renderActionRule(rule));
         }
         if (this.panelActionsSub) {
           this.panelActionsSub.unsubscribe();

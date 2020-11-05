@@ -12,6 +12,7 @@ export const testApp: AppConfig = {
     appMenu: {
       type: 'conditional_return',
       whenRule: {
+        type: 'when',
         predicates: [
           {isFunc: true, using: 'auth.getUser', resultQuery: 'user.roles', operator: 'containsAny', valueComparer: [1, 6, 18]}
         ]
@@ -25,9 +26,18 @@ export const testApp: AppConfig = {
       ]
     },
     startState: 'workflow',
-    onAppInit: (svc) => {
-      // svc.listeners.emit('dance');
-    },
+    onAppInit: [
+      {
+        type: 'do',
+        using: 'eventBus.emit', //svc.eventBus.emit('dance')
+        withArgs: ['dance', 'lighter']
+      },
+      {
+        type: 'do',
+        using: 'eventBus.emit', //svc.eventBus.emit('dance')
+        withArgs: ['dance', 'brown']
+      }
+    ],
     appStates: {
         createClaim,
         workflow,

@@ -7,7 +7,7 @@ import { ServerCallConfig } from './server-call.config';
 import { ServerQueryConfig } from './server-query.config';
 import { EventConfig } from './event.config';
 import { NodeConfig } from './node.config';
-import { WhenRule } from './rule';
+import { ActionRule, DoRule, WhenRule } from './rule';
 import { TemplateParser } from './template-parser';
 
 export interface StateConfig {
@@ -43,7 +43,7 @@ export interface StateConfig {
       [id: string]: (svc: CoreServices, route?: ActivatedRoute) => { template: any; storeBinding: any };
     };
     nodes?: { [id: string]: NodeConfig };
-    onStateInit?: (svc: CoreServices, route?: ActivatedRoute) => void;
-    onStateDestroy?: (svc: CoreServices, route?: ActivatedRoute) => void;
+    onStateInit?: ActionRule[];
+    onStateDestroy?: ActionRule[];
     flowErrorMessages?: { [key: string]: string };
   }

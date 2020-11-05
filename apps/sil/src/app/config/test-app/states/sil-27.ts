@@ -13,6 +13,7 @@ export const SIL_27: StateConfig = {
   //   return of(clientConfig.startApp === 't');
   // },
   activateGuard: {
+    type: 'when',
     predicates: [
       {using: 'localStorage.getItem', withArgs: ['flexus.web.authMethod'], operator: 'equals', valueComparer: 'local'}
       // {using: 'localStorage.getItem', withArgs: ['flexus.web.user'], operator: 'equals', resultQuery: 'email', valueComparer: 'VBCH.'}

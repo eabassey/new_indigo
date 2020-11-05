@@ -1,4 +1,7 @@
+export type ActionRule = WhenRule | DoRule;
+
 export interface WhenRule {
+  type: 'when',
   predicates: PredicateCondition[];
   doRules?: DoRule[];
 }
@@ -13,6 +16,7 @@ export interface PredicateCondition {
 }
 
 export interface DoRule {
+  type: 'do';
   using: string; // Eg: http.get
   withArgs?: any[]
 }

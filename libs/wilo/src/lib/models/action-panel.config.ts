@@ -6,7 +6,7 @@ import { ServerCallConfig } from './server-call.config';
 import { ServerQueryConfig } from './server-query.config';
 import { EventConfig } from './event.config';
 import { NodeConfig } from './node.config';
-import { WhenRule } from './rule';
+import { ActionRule, WhenRule } from './rule';
 import { TemplateParser } from './template-parser';
 
 export interface ActionPanelConfig {
@@ -28,7 +28,7 @@ export interface ActionPanelConfig {
     setValuesToBigForm?: (svc: CoreServices, route?: ActivatedRoute) => Observable<any>;
     startNode: string;
     nodes?: { [id: string]: NodeConfig };
-    onPanelInit?: (svc: CoreServices, route?: ActivatedRoute) => void;
-    onPanelDestroy?: (svc: CoreServices, route?: ActivatedRoute) => void;
+    onPanelInit?: ActionRule[];
+    onPanelDestroy?: ActionRule[];
 
   }

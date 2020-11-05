@@ -35,7 +35,7 @@ export abstract class NodeBase implements OnDestroy, OnInit {
     handleConfig(node: NodeConfig) {
       //
       if (node?.onNodeInit) {
-        node.onNodeInit(this.svc, this.route);
+        node.onNodeInit.forEach(rule => this.rulesService.renderActionRule(rule));
       }
       if (node?.serverQueries) {
         this.serverQueriesSubs = renderServerQueries(node.serverQueries, this.svc, this.route)
@@ -68,7 +68,7 @@ export abstract class NodeBase implements OnDestroy, OnInit {
          this.serverCallsSubs.forEach(sb => sb.unsubscribe());
         }
       if (this.node && this.node.onNodeDestroy) {
-          this.node.onNodeDestroy(this.svc, this.route);
+          this.node.onNodeDestroy.forEach(rule => this.rulesService.renderActionRule(rule));
         }
     }
 

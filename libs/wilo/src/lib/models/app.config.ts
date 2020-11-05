@@ -1,9 +1,6 @@
-import {CoreServices} from '../services';
-import {ServerCallConfig, ServerQueryConfig, EventConfig, StateConfig, ToolbarControlConfig, WhenRule,} from '../models';
-import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import {ServerCallConfig, ServerQueryConfig, EventConfig, StateConfig, WhenRule,} from '../models';
 import {EventEmitter} from 'events';
-import { ConditionalReturnRule, ReturnRule } from './rule';
+import { ActionRule, ReturnRule } from './rule';
 
 
 export interface AppConfig {
@@ -25,7 +22,7 @@ export interface AppConfig {
     serverQueries?: ServerQueryConfig[];
     events?: {[name: string]: EventConfig};
     appStates: { [id: string]: StateConfig };
-    onAppInit?: (svc: CoreServices, route?: ActivatedRoute) => void;
-    onAppDestroy?: (svc: CoreServices, route?: ActivatedRoute) => void;
+    onAppInit?: ActionRule[];
+    onAppDestroy?: ActionRule[];
     eventListeners?: (ev: EventEmitter) => void;
 }
