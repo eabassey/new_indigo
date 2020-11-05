@@ -13,7 +13,7 @@ import { Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import {LogOut} from '@indigo/identity';
 import { map, skipWhile, switchMap, take, tap } from 'rxjs/operators';
-import { AppConfig, ConditionalReturnService, CoreServices } from '@wilo';
+import { AppConfig, CoreServices, RulesService } from '@wilo';
 // import { AppMenuOverlayService } from './app-menu.service';
 
 const ESCAPE = 27;
@@ -62,7 +62,7 @@ export class FLXAppMenuComponent implements OnInit {
     // private controller: ManifestController<any>,
     private _store: Store<any>,
     private svc: CoreServices,
-    private conditionalReturnService: ConditionalReturnService,
+    private rulesService: RulesService,
     private route: ActivatedRoute
     // private navService: NavService,
     // private bf: BigFormService // public appMenuOverlayService: AppMenuOverlayService
@@ -70,7 +70,7 @@ export class FLXAppMenuComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser$ = this.svc.auth.getUser();
-    this.navItems$ = this.svc.configAccessor.currentApp$.pipe(switchMap(app => app.appMenu ? this.conditionalReturnService.checkCondition(app.appMenu) : of([])));
+    this.navItems$ = this.svc.configAccessor.currentApp$.pipe(switchMap(app => app.appMenu ? this.rulesService.renderReturnRule(app.appMenu) : of([])));
     // this.getOrg();
     // this.version = environment.version;
 

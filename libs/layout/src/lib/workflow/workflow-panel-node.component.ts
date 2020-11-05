@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CoreServices, PanelNodeBase } from '@wilo';
+import { CoreServices, PanelNodeBase, RulesService } from '@wilo';
 import { ActivatedRoute } from '@angular/router';
 
 
@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
     `
 })
 export class WorkflowPanelNodeComponent extends PanelNodeBase {
-    constructor(svc: CoreServices, route: ActivatedRoute) {
-        super(svc, route);
+    constructor(svc: CoreServices, route: ActivatedRoute, rulesService: RulesService) {
+        super(svc, route, rulesService);
     }
 }

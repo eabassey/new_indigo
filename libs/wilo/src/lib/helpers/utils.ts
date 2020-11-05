@@ -7,6 +7,7 @@ import { setVariable } from '../store';
 import { getVariable } from '../store/selectors/variable.selectors';
 import { DecisionNodeComponent } from '../components/decision-node.component';
 import * as TP from '../templates';
+import { RulesService } from '../rules.service';
 
 
 
@@ -89,7 +90,7 @@ const transformInputs = (inputs: {[key: string]: any}, svc: CoreServices) => {
 };
 
 
-export const renderEvents = (events: {[name: string]: EventConfig}, svc: CoreServices, route: ActivatedRoute) => {
+export const renderEvents = (events: {[name: string]: EventConfig}, svc: CoreServices, route: ActivatedRoute, rulesService: RulesService) => {
     const eventsSubscriptions: Subscription[] = [];
     if (events) {
         Object.values(events).forEach((ev: EventConfig) => {
@@ -112,7 +113,7 @@ export const renderEvents = (events: {[name: string]: EventConfig}, svc: CoreSer
                   if (shouldFire) {
                     ev.dataMutations(svc, route);
                     if (ev.serverCalls) {
-                      const serverCallsSubs = renderServerCalls(ev.serverCalls, svc, route);
+                      const serverCallsSubs = renderServerCalls(ev.serverCalls, svc, route, rulesService);
                       eventsSubscriptions.push(...serverCallsSubs);
                     }
                   }
@@ -201,7 +202,7 @@ export const renderServerQueries = (serverQueries: ServerQueryConfig[], svc: Cor
  };
 
 
-export const renderServerCalls = (serverCalls: ServerCallConfig[], svc: CoreServices, route: ActivatedRoute) => {
+export const renderServerCalls = (serverCalls: ServerCallConfig[], svc: CoreServices, route: ActivatedRoute, rulesService: RulesService) => {
   const subs: Subscription[] = [];
   if (serverCalls && serverCalls.length > 0) {
     serverCalls.forEach(call => {
@@ -214,7 +215,7 @@ export const renderServerCalls = (serverCalls: ServerCallConfig[], svc: CoreServ
         onComplete ? onComplete(svc, route) : null;
          //
         if (followUpSuccessCalls) {
-          const successSubs = renderServerCalls(followUpSuccessCalls, svc, route);
+          const successSubs = renderServerCalls(followUpSuccessCalls, svc, route, rulesService);
           subs.push(...successSubs);
         }
         if (!isBackgroundTask) {
@@ -222,7 +223,7 @@ export const renderServerCalls = (serverCalls: ServerCallConfig[], svc: CoreServ
           svc.loader.remove(key);
         }
         if (followUpFailCalls) {
-          const failSubs = renderServerCalls(followUpFailCalls, svc, route);
+          const failSubs = renderServerCalls(followUpFailCalls, svc, route, rulesService);
           subs.push(...failSubs);
         }
       };
@@ -261,7 +262,7 @@ export const renderServerCalls = (serverCalls: ServerCallConfig[], svc: CoreServ
          subs.push(funcSub);
 
       } else if (directCall) {
-         const directSub = directCall(svc, route)
+         const directSub = rulesService.renderReturnRule(directCall)
           .subscribe(successFn, errorFn, completeFn);
          subs.push(directSub);
       }

@@ -5,6 +5,7 @@ import { Subscription, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { renderServerCalls, renderEvents, renderServerQueries, renderFormModels } from '../helpers/utils';
 import { delay } from 'rxjs/operators';
+import { RulesService } from '../rules.service';
 
 @Component({template: ''})
 export abstract class StateBase implements OnInit, OnDestroy {
@@ -24,7 +25,7 @@ export abstract class StateBase implements OnInit, OnDestroy {
     paramsSub: Subscription;
     storeMapperSubscription: Subscription;
 
-    constructor(private svc: CoreServices,  private route: ActivatedRoute) {}
+    constructor(private svc: CoreServices,  private route: ActivatedRoute, private rulesService: RulesService) {}
 
     ngOnInit() {
       this.initStateLevelVariables();
@@ -124,11 +125,11 @@ toggleActionPanel() {
           }
         //
         if (state?.serverCalls) {
-            this.serverCallsSubs = renderServerCalls(state.serverCalls, this.svc, this.route);
+            this.serverCallsSubs = renderServerCalls(state.serverCalls, this.svc, this.route, this.rulesService);
         }
         //
         if (state?.events) {
-            this.eventsSub = renderEvents(state.events, this.svc, this.route);
+            this.eventsSub = renderEvents(state.events, this.svc, this.route, this.rulesService);
         }
         //
         if (state?.bigFormToStoreMapper) {

@@ -17,6 +17,24 @@ export interface DoRule {
   withArgs?: any[]
 }
 
+export type ReturnRule = SingleReturnRule | ConditionalReturnRule;
+
+export interface SingleReturnRule {
+  type: 'single_return';
+  isFunc?: boolean;
+  using: string; // Eg: http.get
+  withArgs?: any[];
+  resultQuery?: string;
+}
+
+
+export interface ConditionalReturnRule {
+  type: 'conditional_return'
+  whenRule: WhenRule;
+  thenReturn: any;
+  elseReturn?: any;
+}
+
 
 export type PredicateOperator =
 'equals' |

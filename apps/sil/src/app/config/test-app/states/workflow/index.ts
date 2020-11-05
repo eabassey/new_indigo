@@ -26,24 +26,31 @@ export const workflow: StateConfig = {
               {
                   key: 'claims',
                   errorMessage: '',
-                  filterable: true,
-                  sortable: false,
-                  directCall: (svc, route) => {
-                      return svc.http.get(`${svc.baseUrl}v1/staff_action/get_summary/`, {
-                          // headers: {'Access-Control-Allow-Origin': 'true'}
-                      }).pipe(map((d: any) => d.payload));
-                      // return of([])
-                      // return svc.http.post('/api/query', {
-                      //     backends: [
-                      //         {url: 'http://localhost:3000/claimSummary'},
-                      //         // {url: 'http://localhost:3000/claimSummary', query: 'payload[0:15]', group: 'payload'}
-                      //     ]
-                      // }).pipe(map((d: any) => d.payload));
-                  },
-                  onSuccess: (result, svc, call) => {
-                    svc.eventBus.emit('dance', {svc});
-                    svc.eventBus.emit('dance');
+                  // filterable: true,
+                  // sortable: false,
+                  directCall: {
+                    type: 'single_return',
+                    isFunc: true,
+                    using: 'http.get',
+                    withArgs: ['https://sildev.4-sure.net:10000/api/v1/staff_action/get_summary/'],
+                    resultQuery: 'payload'
                   }
+                  // directCall: (svc, route) => {
+                  //     return svc.http.get(`${svc.baseUrl}v1/staff_action/get_summary/`, {
+                  //         // headers: {'Access-Control-Allow-Origin': 'true'}
+                  //     }).pipe(map((d: any) => d.payload));
+                  //     // return of([])
+                  //     // return svc.http.post('/api/query', {
+                  //     //     backends: [
+                  //     //         {url: 'http://localhost:3000/claimSummary'},
+                  //     //         // {url: 'http://localhost:3000/claimSummary', query: 'payload[0:15]', group: 'payload'}
+                  //     //     ]
+                  //     // }).pipe(map((d: any) => d.payload));
+                  // },
+                  // onSuccess: (result, svc, call) => {
+                  //   svc.eventBus.emit('dance', {svc});
+                  //   svc.eventBus.emit('dance');
+                  // }
               }
           ],
           footerType: 'pagination'

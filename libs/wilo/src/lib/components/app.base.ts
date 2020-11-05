@@ -6,6 +6,7 @@ import { Subscription, Observable } from 'rxjs';
 import { renderServerCalls, renderEvents, renderServerQueries } from '../helpers/utils';
 import {delay} from 'rxjs/operators';
 import { EventEmitter } from 'events';
+import { RulesService } from '../rules.service';
 
 @Component({template: ''})
 export abstract class AppBase implements OnInit, OnDestroy {
@@ -20,7 +21,7 @@ export abstract class AppBase implements OnInit, OnDestroy {
 
 
     // ...
-    constructor(private svc: CoreServices, private route: ActivatedRoute, private router: Router) {}
+    constructor(private svc: CoreServices, private route: ActivatedRoute, private router: Router, private rulesService: RulesService) {}
     ngOnInit() {
       this.sub = this.route.data.subscribe((app: AppConfig) => {
         this.app = app;
@@ -43,11 +44,11 @@ export abstract class AppBase implements OnInit, OnDestroy {
             this.serverQueriesSubs = renderServerQueries(app.serverQueries, this.svc, this.route)
         }
         if (app?.serverCalls) {
-            this.serverCallsSubs = renderServerCalls(app.serverCalls, this.svc, this.route);
+            this.serverCallsSubs = renderServerCalls(app.serverCalls, this.svc, this.route, this.rulesService);
         }
         //
         if (app?.events) {
-            this.eventsSub = renderEvents(app.events, this.svc, this.route);
+            this.eventsSub = renderEvents(app.events, this.svc, this.route, this.rulesService);
         }
     }
 

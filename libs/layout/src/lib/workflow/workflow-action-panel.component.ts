@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ActionPanelBase, CoreServices } from '@wilo';
+import { ActionPanelBase, CoreServices, RulesService } from '@wilo';
 
 
 @Component({
@@ -13,8 +13,8 @@ import { ActionPanelBase, CoreServices } from '@wilo';
     `
 })
 export class WorkflowActionPanelComponent extends ActionPanelBase {
-    constructor(svc: CoreServices, route: ActivatedRoute) {
-        super(svc, route);
+    constructor(svc: CoreServices, route: ActivatedRoute, rulesService: RulesService) {
+        super(svc, route, rulesService);
     }
 
 

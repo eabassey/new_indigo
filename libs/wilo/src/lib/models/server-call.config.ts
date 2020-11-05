@@ -1,6 +1,7 @@
 import { CoreServices } from '../services';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { ReturnRule } from './rule';
 
 export interface ServerCallConfig {
     key?: string;
@@ -11,7 +12,7 @@ export interface ServerCallConfig {
     timeoutMilliseconds?: number;
     filterable?: boolean;
     sortable?: boolean;
-    directCall?: (svc: CoreServices, route?: ActivatedRoute) => Observable<any>;
+    directCall?: ReturnRule;
     errorMessage: string;
     functionArgs?: any;
     nextNode?: string; // This is set from a nav button, but can also be written to directly if required

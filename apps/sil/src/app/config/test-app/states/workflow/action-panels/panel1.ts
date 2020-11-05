@@ -18,28 +18,28 @@ export const panel1: ActionPanelConfig = {
                     svc.store.dispatch(resetFilter({key: 'claims'}));
                 }
             },
-            serverCalls: [
-                {
-                    key: 'testCall7',
-                    errorMessage: '',
-                    directCall: (svc, route) => {
-                        return svc.http.get('https://jsonplaceholder.typicode.com/posts');
-                    },
-                    onSuccess: (result, svc, call) => {
-                    },
-                    followUpSuccessCalls: [
-                        {
-                            key: 'testFollowup',
-                            errorMessage: '',
-                            directCall: (svc, route) => {
-                                return svc.http.get('https://jsonplaceholder.typicode.com/posts');
-                            },
-                            onSuccess: (result, svc, call) => {
-                            }
-                        }
-                    ]
-                }
-            ],
+            // serverCalls: [
+            //     {
+            //         key: 'testCall7',
+            //         errorMessage: '',
+            //         directCall: (svc, route) => {
+            //             return svc.http.get('https://jsonplaceholder.typicode.com/posts');
+            //         },
+            //         onSuccess: (result, svc, call) => {
+            //         },
+            //         followUpSuccessCalls: [
+            //             {
+            //                 key: 'testFollowup',
+            //                 errorMessage: '',
+            //                 directCall: (svc, route) => {
+            //                     return svc.http.get('https://jsonplaceholder.typicode.com/posts');
+            //                 },
+            //                 onSuccess: (result, svc, call) => {
+            //                 }
+            //             }
+            //         ]
+            //     }
+            // ],
         }
     }
 }

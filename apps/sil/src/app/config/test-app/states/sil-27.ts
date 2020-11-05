@@ -30,7 +30,7 @@ export const SIL_27: StateConfig = {
       },
       dataMutations: (svc) => {
       },
-      serverCalls: [{key: 'posts', errorMessage: '', directCall: (svc) => svc.http.get('https://jsonplaceholder.typicode.com/posts')}]
+      // serverCalls: [{key: 'posts', errorMessage: '', directCall: (svc) => svc.http.get('https://jsonplaceholder.typicode.com/posts')}]
     }
   },
   nodes: {
@@ -98,16 +98,16 @@ export const SIL_27: StateConfig = {
           return EMPTY;
         }
       },
-      serverCalls: [
-        {
-          key: 'fullItemOne',
-          errorMessage: '',
-          directCall: ({http}, route) => {
-            const claimId = route.snapshot.paramMap.get('jobId');
-            return of({val: 'test'});
-          }
-        }
-      ],
+      // serverCalls: [
+      //   {
+      //     key: 'fullItemOne',
+      //     errorMessage: '',
+      //     directCall: ({http}, route) => {
+      //       const claimId = route.snapshot.paramMap.get('jobId');
+      //       return of({val: 'test'});
+      //     }
+      //   }
+      // ],
       decision: () => {},
       // decision: ({}) => {
       //   return forkJoin([

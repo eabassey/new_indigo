@@ -3,7 +3,7 @@ import { CoreServices } from './services';
 import {path, split} from 'ramda';
 import { combineLatest, EMPTY, from, isObservable, Observable, of } from 'rxjs';
 import { combineAll, map, skipWhile, tap } from 'rxjs/operators';
-import { DoRule, PredicateCondition, PredicateOperator, ReturnRule, WhenRule } from './models/rule';
+import { ConditionalReturnRule, DoRule, ReturnRule, PredicateCondition, PredicateOperator, SingleReturnRule, WhenRule } from './models/rule';
 import { query, queryValue } from './rxjs-operators';
 import isPromise from 'is-promise';
 import {contains, any, intersection} from 'ramda';
@@ -17,23 +17,69 @@ export class RulesService {
   constructor(private svc: CoreServices) {}
 
   renderDoRule(rule: DoRule) {
-    const func = path(split('.', rule.using), this.svc);
-    if (func) {
+    const splitted = split('.', rule.using);
+    const value = path(splitted, this.svc);
+    if (value) {
       if (rule.withArgs) {
-        func(...rule.withArgs);
+        value.call(this.indexingForTHISContext(splitted, this.svc), ...rule.withArgs);
       } else {
-        func();
+        value.call(this.indexingForTHISContext(splitted, this.svc));
       }
     }
   }
 
+  private renderSimpleReturnRule(rule: SingleReturnRule) {
+    const splitted = split('.', rule.using);
+    const value = path(splitted, this.svc);
+    const resultQuery = rule.resultQuery || '';
+    if (rule.isFunc) {
+      if (value) {
+        if (rule.withArgs) {
+         const result = value.call(this.indexingForTHISContext(splitted, this.svc),...rule.withArgs);
+         switch (true) {
+           case isObservable(result): {
+             return result.pipe(query(resultQuery))
+           }
+           case isPromise(result): {
+             return from(result).pipe(query(resultQuery))
+           }
+           default: {
+             return of(result).pipe(query(resultQuery));
+           }
+         }
+        } else {
+          const result = value.call(this.indexingForTHISContext(splitted, this.svc));
+          switch (true) {
+            case isObservable(result): {
+              return result.pipe(query(resultQuery))
+            }
+            case isPromise(result): {
+              return from(result).pipe(query(resultQuery))
+            }
+            default: {
+              return of(result).pipe(query(resultQuery));
+            }
+          }
+        }
+      }
+    } else {
+      return value
+    }
+  }
+
+  private renderConditionalReturnRule(data: ConditionalReturnRule) {
+    return this.renderWhenRule(data.whenRule).pipe(
+      map(positive => (positive ? data.thenReturn : data.elseReturn))
+    );
+  }
+
   renderReturnRule(rule: ReturnRule) {
-    const func = path(split('.', rule.using), this.svc);
-    if (func) {
-      if (rule.withArgs) {
-       return func(...rule.withArgs);
-      } else {
-        return func();
+    switch (rule.type) {
+      case 'single_return': {
+        return this.renderSimpleReturnRule(rule);
+      }
+      case 'conditional_return': {
+        return this.renderConditionalReturnRule(rule);
       }
     }
   }

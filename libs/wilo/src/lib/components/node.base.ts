@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { CoreServices } from '../services';
 import { renderServerCalls, renderTemplateDefs, renderEvents, renderServerQueries } from '../helpers/utils';
+import { RulesService } from '../rules.service';
 
 
 @Component({template: ''})
@@ -21,7 +22,7 @@ export abstract class NodeBase implements OnDestroy, OnInit {
   serverCallsSubs: Subscription[];
   eventsSub: Subscription[];
 
-    constructor(private svc: CoreServices, private route: ActivatedRoute) {}
+    constructor(private svc: CoreServices, private route: ActivatedRoute, private rulesService: RulesService) {}
 
     ngOnInit() {
       this.sub =  this.route.data.subscribe((node: NodeConfig) => {
@@ -41,11 +42,11 @@ export abstract class NodeBase implements OnDestroy, OnInit {
       }
       //
       if (node?.serverCalls) {
-        this.serverCallsSubs = renderServerCalls(node.serverCalls, this.svc, this.route);
+        this.serverCallsSubs = renderServerCalls(node.serverCalls, this.svc, this.route, this.rulesService);
       }
       //
       if (node?.events) {
-        this.eventsSub = renderEvents(node.events, this.svc, this.route);
+        this.eventsSub = renderEvents(node.events, this.svc, this.route, this.rulesService);
       }
       this.organisms = renderTemplateDefs(node, this.svc, this.route);
       this.svc.footerAccessor.setNodeForFooter(node);

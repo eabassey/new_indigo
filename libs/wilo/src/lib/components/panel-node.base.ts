@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { CoreServices } from '../services';
 import { renderServerCalls, renderTemplateDefs, renderEvents, renderServerQueries } from '../helpers/utils';
+import { RulesService } from '../rules.service';
 
 
 @Component({template: ''})
@@ -22,7 +23,7 @@ export class PanelNodeBase implements OnInit, OnDestroy, OnChanges {
   serverCallsSubs: Subscription[];
   eventsSub: Subscription[];
 
-    constructor(private svc: CoreServices, private route: ActivatedRoute) {}
+    constructor(private svc: CoreServices, private route: ActivatedRoute, private rulesService: RulesService) {}
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes.actionPanel) {
@@ -58,11 +59,11 @@ export class PanelNodeBase implements OnInit, OnDestroy, OnChanges {
             }
             //
             if (this.activeNode.serverCalls) {
-              this.serverCallsSubs = renderServerCalls(activeNode.serverCalls, this.svc, this.route);
+              this.serverCallsSubs = renderServerCalls(activeNode.serverCalls, this.svc, this.route, this.rulesService);
             }
             //
             if (this.activeNode.events) {
-              this.eventsSub = renderEvents(activeNode.events, this.svc, this.route);
+              this.eventsSub = renderEvents(activeNode.events, this.svc, this.route, this.rulesService);
             }
             this.organisms = renderTemplateDefs(activeNode, this.svc, this.route);
         }

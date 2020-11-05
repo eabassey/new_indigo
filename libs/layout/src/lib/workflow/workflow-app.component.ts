@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { CoreServices, AppBase } from '@wilo';
+import { CoreServices, AppBase, RulesService } from '@wilo';
 import { ActivatedRoute } from '@angular/router';
 import {Router} from '@angular/router';
 import { Observable } from 'rxjs';
@@ -25,8 +25,8 @@ import { tap } from 'rxjs/operators';
 export class WorkflowAppComponent extends AppBase {
   loading$: Observable<boolean>;
     disableBackground = true;
-    constructor(svc: CoreServices, route: ActivatedRoute, router: Router) {
-        super(svc, route, router);
+    constructor(svc: CoreServices, route: ActivatedRoute, router: Router, rulesService: RulesService) {
+        super(svc, route, router, rulesService);
         this.loading$ = svc.loader.loading$;
     }
 }

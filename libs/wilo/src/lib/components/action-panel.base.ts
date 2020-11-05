@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { CoreServices } from '../services';
 import { renderServerCalls, renderTemplateDefs, renderServerQueries, renderEvents, renderFormModels } from '../helpers/utils';
+import { RulesService } from '../rules.service';
 
 @Component({template: ''})
 export abstract class ActionPanelBase implements OnInit, OnChanges, OnDestroy {
@@ -14,7 +15,7 @@ export abstract class ActionPanelBase implements OnInit, OnChanges, OnDestroy {
     eventsSub: Subscription[];
     sub: Subscription;
 
-    constructor(private svc: CoreServices, private route: ActivatedRoute) {}
+    constructor(private svc: CoreServices, private route: ActivatedRoute, private rulesService: RulesService) {}
 
     ngOnInit() {
         if (this.activePanel) {
@@ -36,13 +37,13 @@ export abstract class ActionPanelBase implements OnInit, OnChanges, OnDestroy {
             this.serverQueriesSubs = renderServerQueries(panel.serverQueries, this.svc, this.route)
         }
         if (panel?.serverCalls) {
-            this.serverCallsSubs = renderServerCalls(panel.serverCalls, this.svc, this.route);
+            this.serverCallsSubs = renderServerCalls(panel.serverCalls, this.svc, this.route, this.rulesService);
         }
         if (panel?.setValuesToBigForm) {
             this.setValuesSub = panel.setValuesToBigForm(this.svc, this.route).subscribe();
         }
         if (panel?.events) {
-            this.eventsSub = renderEvents(panel.events, this.svc, this.route);
+            this.eventsSub = renderEvents(panel.events, this.svc, this.route, this.rulesService);
         }
         // Customize headers for action panel
         // const controls = panel.controls ? panel.controls(this.svc) : [];

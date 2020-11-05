@@ -10,6 +10,7 @@ import { createClaim} from './states/createClaim';
 export const testApp: AppConfig = {
     name: 'test-app',
     appMenu: {
+      type: 'conditional_return',
       whenRule: {
         predicates: [
           {isFunc: true, using: 'auth.getUser', resultQuery: 'user.roles', operator: 'containsAny', valueComparer: [1, 6, 18]}
@@ -52,8 +53,11 @@ export const testApp: AppConfig = {
       {
         key: 'all_info',
         errorMessage: '',
-        directCall: ({http, baseUrl}) => {
-          return http.get(`${baseUrl}v1/all_info/`);
+        directCall: {
+          type: 'single_return',
+          isFunc: true,
+          using: 'http.get',
+          withArgs: [`https://sildev.4-sure.net:10000/api/v1/all_info/`]
         }
       }
     ],

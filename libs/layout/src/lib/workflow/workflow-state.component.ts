@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CoreServices, StateBase } from '@wilo';
+import { CoreServices, RulesService, StateBase } from '@wilo';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -77,8 +77,8 @@ import { tap } from 'rxjs/operators';
 export class WorkflowStateComponent extends StateBase {
   currentTab$;
 
-    constructor(svc: CoreServices, route: ActivatedRoute) {
-        super(svc, route);
+    constructor(svc: CoreServices, route: ActivatedRoute, rulesService: RulesService) {
+        super(svc, route, rulesService);
 
       }
 

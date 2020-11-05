@@ -3,7 +3,7 @@ import {ServerCallConfig, ServerQueryConfig, EventConfig, StateConfig, ToolbarCo
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import {EventEmitter} from 'events';
-import { ConditionalReturn } from './conditional-return';
+import { ConditionalReturnRule, ReturnRule } from './rule';
 
 
 export interface AppConfig {
@@ -19,9 +19,8 @@ export interface AppConfig {
     };
     activateGuard?: WhenRule;
     deactivateGuard?: WhenRule;
-    appMenu?: ConditionalReturn;
-  controls?: (svc: CoreServices, route?: ActivatedRoute) => ToolbarControlConfig[];
-  startState: string;
+    appMenu?: ReturnRule;
+    startState: string;
     serverCalls?: ServerCallConfig[];
     serverQueries?: ServerQueryConfig[];
     events?: {[name: string]: EventConfig};
