@@ -3,7 +3,7 @@ import { CoreServices } from './services';
 import {path, split} from 'ramda';
 import { combineLatest, EMPTY, from, isObservable, Observable, of } from 'rxjs';
 import { combineAll, map, skipWhile, tap } from 'rxjs/operators';
-import { DoRule, PredicateCondition, PredicateOperator, WhenRule } from './models/rule';
+import { DoRule, PredicateCondition, PredicateOperator, ReturnRule, WhenRule } from './models/rule';
 import { query, queryValue } from './rxjs-operators';
 import isPromise from 'is-promise';
 import {contains, any, intersection} from 'ramda';
@@ -23,6 +23,17 @@ export class RulesService {
         func(...rule.withArgs);
       } else {
         func();
+      }
+    }
+  }
+
+  renderReturnRule(rule: ReturnRule) {
+    const func = path(split('.', rule.using), this.svc);
+    if (func) {
+      if (rule.withArgs) {
+       return func(...rule.withArgs);
+      } else {
+        return func();
       }
     }
   }
