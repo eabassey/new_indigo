@@ -24,7 +24,7 @@ export interface ActionPanelConfig {
 
     serverCalls?: ServerCallConfig[];
     serverQueries?: ServerQueryConfig[];
-    events?: {[name: string]: EventConfig};
+    events?: {[name: string]: WhenRule};
     setValuesToBigForm?: (svc: CoreServices, route?: ActivatedRoute) => Observable<any>;
     startNode: string;
     nodes?: { [id: string]: NodeConfig };
