@@ -33,9 +33,6 @@ export abstract class AppBase implements OnInit, OnDestroy {
 
 
     handleConfig(app: AppConfig): void {
-        if (app.eventListeners) {
-          app.eventListeners(this.svc.eventBus);
-        }
 
         if (app?.onAppInit) {
             app.onAppInit.forEach(rule => this.rulesService.renderActionRule(rule));

@@ -16,7 +16,7 @@ export interface AppConfig {
     };
     activateGuard?: WhenRule;
     deactivateGuard?: WhenRule;
-    appMenu?: ReturnRule;
+    appMenu?: ReturnRule<{id: number; name: string; routerLink: string; iconType: string;}[]>;
     startState: string;
     serverCalls?: ServerCallConfig[];
     serverQueries?: ServerQueryConfig[];
@@ -24,5 +24,4 @@ export interface AppConfig {
     appStates: { [id: string]: StateConfig };
     onAppInit?: ActionRule[];
     onAppDestroy?: ActionRule[];
-    eventListeners?: (ev: EventEmitter) => void;
 }

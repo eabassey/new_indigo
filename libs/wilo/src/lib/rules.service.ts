@@ -28,7 +28,7 @@ export class RulesService {
     }
   }
 
-  private renderSimpleReturnRule(rule: SingleReturnRule) {
+  private renderSimpleReturnRule<T>(rule: SingleReturnRule): Observable<T> {
     const splitted = split('.', rule.using);
     const value = path(splitted, this.svc);
     const resultQuery = rule.resultQuery || '';
@@ -38,26 +38,26 @@ export class RulesService {
          const result = value.call(this.indexingForTHISContext(splitted, this.svc),...rule.withArgs);
          switch (true) {
            case isObservable(result): {
-             return result.pipe(query(resultQuery))
+             return result.pipe(query(resultQuery)) as Observable<T>;
            }
            case isPromise(result): {
-             return from(result).pipe(query(resultQuery))
+             return from(result).pipe(query(resultQuery)) as Observable<T>
            }
            default: {
-             return of(result).pipe(query(resultQuery));
+             return of(result).pipe(query(resultQuery)) as Observable<T>;
            }
          }
         } else {
           const result = value.call(this.indexingForTHISContext(splitted, this.svc));
           switch (true) {
             case isObservable(result): {
-              return result.pipe(query(resultQuery))
+              return result.pipe(query(resultQuery)) as Observable<T>
             }
             case isPromise(result): {
-              return from(result).pipe(query(resultQuery))
+              return from(result).pipe(query(resultQuery)) as Observable<T>
             }
             default: {
-              return of(result).pipe(query(resultQuery));
+              return of(result).pipe(query(resultQuery)) as Observable<T>;
             }
           }
         }
@@ -67,19 +67,19 @@ export class RulesService {
     }
   }
 
-  private renderConditionalReturnRule(data: ConditionalReturnRule) {
+  private renderConditionalReturnRule<T>(data: ConditionalReturnRule<T>) {
     return this.renderWhenRule(data.whenRule).pipe(
       map(positive => (positive ? data.thenReturn : data.elseReturn))
     );
   }
 
-  renderReturnRule(rule: ReturnRule) {
+  renderReturnRule<T>(rule: ReturnRule<T>): Observable<T> {
     switch (rule.type) {
       case 'single_return': {
         return this.renderSimpleReturnRule(rule);
       }
       case 'conditional_return': {
-        return this.renderConditionalReturnRule(rule);
+        return this.renderConditionalReturnRule<T>(rule);
       }
     }
   }

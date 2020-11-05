@@ -7,7 +7,7 @@ import { ServerCallConfig } from './server-call.config';
 import { ServerQueryConfig } from './server-query.config';
 import { EventConfig } from './event.config';
 import { NodeConfig } from './node.config';
-import { ActionRule, DoRule, WhenRule } from './rule';
+import { ActionRule, DoRule, ReturnRule, WhenRule } from './rule';
 import { TemplateParser } from './template-parser';
 
 export interface StateConfig {
@@ -20,7 +20,7 @@ export interface StateConfig {
       hideToolbar?: boolean;
       hideActionPanel?: boolean;
     };
-    controls?: (svc: CoreServices) => ToolbarControlConfig[];
+    controls?: ReturnRule<ToolbarControlConfig[]>;
     title?: TemplateParser;
     instructions?: {
       editRoles: { [id: number]: string };

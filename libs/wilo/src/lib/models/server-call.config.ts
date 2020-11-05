@@ -12,7 +12,7 @@ export interface ServerCallConfig {
     timeoutMilliseconds?: number;
     filterable?: boolean;
     sortable?: boolean;
-    directCall?: ReturnRule;
+    directCall?: ReturnRule<any>;
     errorMessage: string;
     functionArgs?: any;
     nextNode?: string; // This is set from a nav button, but can also be written to directly if required

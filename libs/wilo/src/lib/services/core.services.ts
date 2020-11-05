@@ -27,6 +27,8 @@ import { TemplateParserService } from './template-parser.service';
 export class CoreServices {
     data: {[id: string]: any};
     eventBus: EventEmitter;
+    window: Window;
+    console: Console;
     actions = {
       //  setVariable: (payload: {key: string; data: any}) => this.store.dispatch(setVariable(payload)),
       //  addFilter: () => this.store.dispatch(addFilter),
@@ -62,6 +64,8 @@ export class CoreServices {
         @Inject(CLIENT_SERVICE) public clientService: any
     ) {
       this.data = {};
+      this.window = window;
+      this.console = console;
       this.eventBus = new EventEmitter();
       this.bf.initCoreService(this);
     }

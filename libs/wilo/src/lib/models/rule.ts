@@ -21,7 +21,7 @@ export interface DoRule {
   withArgs?: any[]
 }
 
-export type ReturnRule = SingleReturnRule | ConditionalReturnRule;
+export type ReturnRule<T> = SingleReturnRule | ConditionalReturnRule<T>;
 
 export interface SingleReturnRule {
   type: 'single_return';
@@ -32,11 +32,11 @@ export interface SingleReturnRule {
 }
 
 
-export interface ConditionalReturnRule {
+export interface ConditionalReturnRule<T> {
   type: 'conditional_return'
   whenRule: WhenRule;
-  thenReturn: any;
-  elseReturn?: any;
+  thenReturn: T;
+  elseReturn?: T;
 }
 
 

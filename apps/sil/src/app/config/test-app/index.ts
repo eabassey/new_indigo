@@ -70,8 +70,5 @@ export const testApp: AppConfig = {
           withArgs: [`https://sildev.4-sure.net:10000/api/v1/all_info/`]
         }
       }
-    ],
-    eventListeners: (evt) => {
-      evt.on('dance', (data) => console.log('dancing through it all', data))
-    }
+    ]
 }

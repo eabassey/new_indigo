@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
-import { ActionPanelConfig, StateConfig } from '../models';
+import { ActionPanelConfig, StateConfig, ToolbarControlConfig } from '../models';
 import { CoreServices } from '../services/core.services';
 import { Subscription, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -15,6 +15,7 @@ export abstract class StateBase implements OnInit, OnDestroy {
     setValuesSub: Subscription;
     serverCallsSubs: Subscription[];
     serverQueriesSubs: Subscription[];
+    controlsSub: Subscription;
     dynamicTabs = [];
     activePanel: ActionPanelConfig;
     panelActionsSub: Subscription;
@@ -138,8 +139,12 @@ toggleActionPanel() {
             // this.svc.indexedDb.currentItem.put(mapped, 'currentItem');
           });
         }
-        const controls = state.controls ? state.controls(this.svc) : [];
-        this.svc.headerAcessor.setHeaderControls(controls);
+        //
+        if (state?.controls) {
+          this.controlsSub = this.rulesService.renderReturnRule<ToolbarControlConfig[]>(state.controls).subscribe(controls => {
+            this.svc.headerAcessor.setHeaderControls(controls);
+          });
+        }
     }
 
 
@@ -172,6 +177,9 @@ toggleActionPanel() {
       }
       if (this.storeMapperSubscription) {
         this.storeMapperSubscription.unsubscribe();
+      }
+      if (this.controlsSub) {
+        this.controlsSub.unsubscribe();
       }
     }
 
