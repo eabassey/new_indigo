@@ -19,6 +19,7 @@ export const environment = {
   base_url: 'https://sildev.4-sure.net:10000/',
   // base_url: 'http://localhost:4200/',
   google_maps_api_key: 'AIzaSyA28JqiZDQ8_CYVbdLKsrA-l_E0iDkW0pw',
+  config_url: 'http://localhost:3434/config'
 };
 
 /*

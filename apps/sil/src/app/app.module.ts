@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import {WiloModule, AuthService} from '@wilo';
-import {WorkflowLayoutModule, WorkflowLayoutComponent} from '@indigo/layout';
+import { ApplicationRef, APP_INITIALIZER, DoBootstrap, Injector, NgModule } from '@angular/core';
+import {WiloModule, AuthService, CoreServices, ClientConfig} from '@wilo';
+import {WorkflowLayoutModule, WorkflowLayoutComponent, RoutesService} from '@indigo/layout';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { RouterModule } from '@angular/router';
@@ -15,6 +15,7 @@ import {DynamicFormsModule} from '@indigo/dynamic-forms'
 // import {DynFormModule} from 'src/app/dyn-form/dyn-form.module';
 import {AuthImplService, IdentityModule} from '@indigo/identity';
 import { EffectsModule } from '@ngrx/effects';
+
 
 
 @NgModule({
@@ -42,9 +43,7 @@ import { EffectsModule } from '@ngrx/effects';
       no_auth_urls: ['/cons']
     }, environment),
     // DynFormModule,
-    RouterModule.forRoot([], {
-    initialNavigation: 'enabled'
-}),
+    RouterModule.forRoot([]),
 StoreDevtoolsModule.instrument()
   ],
   providers: [
@@ -53,6 +52,18 @@ StoreDevtoolsModule.instrument()
     // Intercep*-/tor,
     // requestOptionsProvider
   ],
-  bootstrap: [AppComponent]
+  // bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule implements DoBootstrap{
+  constructor(private svc: CoreServices, private rs: RoutesService) {}
+  ngDoBootstrap(app: ApplicationRef) {
+    fetch(environment.config_url).then(res => res.json())
+    .then(config => {
+      console.log({config})
+      this.rs.generateAppRoutes(config.apps);
+      this.svc.router.config.unshift({path: '', redirectTo: config.startApp, pathMatch: 'full'});
+      console.log({routes: this.svc.router.config})
+      app.bootstrap(AppComponent)
+    });
+  }
+ }

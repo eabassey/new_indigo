@@ -44,7 +44,7 @@ router.get('/', (req, res) => {
             workflow: {
               id: 'workflow',
               name: 'Workflow',
-              title: {template: 'Workfloww'},
+              title: {template: 'Workflowwer'},
               startNode: 'list',
               nodes: {
                   list: {
@@ -96,7 +96,8 @@ router.get('/', (req, res) => {
     }
     }
   };
-  res.json(config)
+
+  res.json(config);
 })
 
 
