@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { RouterModule } from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {silConfig} from './config';
 import { SilService } from './sil.service';
 import { environment } from '../environments/environment';
 // import { requestOptionsProvider, Interceptor } from './interceptor';
@@ -30,7 +29,6 @@ import { EffectsModule } from '@ngrx/effects';
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     WiloModule.forRoot({
-      clientConfig: silConfig,
       clientService: SilService,
       indexedDbName: 'dynDB',
       base_url: environment.api_url
@@ -60,6 +58,7 @@ export class AppModule implements DoBootstrap{
     fetch(environment.config_url).then(res => res.json())
     .then(config => {
       console.log({config})
+      this.svc.clientConfig = config;
       this.rs.generateAppRoutes(config.apps);
       this.svc.router.config.unshift({path: '', redirectTo: config.startApp, pathMatch: 'full'});
       console.log({routes: this.svc.router.config})

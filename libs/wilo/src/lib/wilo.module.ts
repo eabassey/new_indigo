@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DynamicIoModule } from 'ng-dynamic-component';
 import {RouterModule, Route } from '@angular/router';
-import { CLIENT_CONFIG, CLIENT_SERVICE, BASE_URL, INDEXED_DB_NAME } from './services/constants';
+import { CLIENT_SERVICE, BASE_URL, INDEXED_DB_NAME } from './services/constants';
 import { NodeFooterButtonComponent } from './components/node-footer-button.component';
 import { StoreModule } from '@ngrx/store';
 import { wiloReducers } from './store';
@@ -39,7 +39,6 @@ export class WiloModule {
       }
   }
   static forRoot(config: {
-    clientConfig: ClientConfig;
     clientService: any;
     base_url: string;
     indexedDbName: string;
@@ -47,7 +46,6 @@ export class WiloModule {
     return {
       ngModule: WiloModule,
       providers: [
-        {provide: CLIENT_CONFIG, useValue: config.clientConfig},
         {provide: CLIENT_SERVICE, useExisting: config.clientService},
         {provide: BASE_URL, useValue: config.base_url},
         {provide: INDEXED_DB_NAME, useValue: config.indexedDbName},

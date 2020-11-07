@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, Inject, HostBinding, Renderer2, PLATFORM_ID } from '@angular/core';
-import { CoreServices, CLIENT_CONFIG } from '@wilo';
+import { CoreServices } from '@wilo';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { THEMES, ACTIVE_THEME, Theme } from './theming/symbols';
@@ -30,9 +30,8 @@ export class WorkflowLayoutComponent extends ClientConfigBase {
                 private renderer: Renderer2,
                 @Inject(PLATFORM_ID) platformId: any,
                 @Inject(THEMES) public themes: Theme[],
-                @Inject(ACTIVE_THEME) public theme: string,
-                @Inject(CLIENT_CONFIG) public clientConfig: ClientConfig) {
-        super(svc, route, clientConfig);
+                @Inject(ACTIVE_THEME) public theme: string) {
+        super(svc, route);
 
         if (isPlatformBrowser(platformId)) {
           const htmlEl = document.getElementById('root-app');

@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { Router, Route } from '@angular/router';
-import { CLIENT_CONFIG, ClientConfig, AppConfig, ActivatedGuard, DeactivateGuard } from '@wilo';
+import { AppConfig, ActivatedGuard, DeactivateGuard } from '@wilo';
 import { WorkflowAppComponent } from './workflow-app.component';
 import { WorkflowStateComponent } from './workflow-state.component';
 import { WorkflowNodeComponent } from './workflow-node.component';
@@ -9,7 +9,6 @@ import { WorkflowNodeComponent } from './workflow-node.component';
 @Injectable({providedIn: 'root'})
 export class RoutesService {
     constructor(
-        @Inject(CLIENT_CONFIG) private clientConfig: ClientConfig,
         private router: Router
     ) {
         // this.router.config.unshift({path: '', redirectTo: this.clientConfig.startApp, pathMatch: 'full'});

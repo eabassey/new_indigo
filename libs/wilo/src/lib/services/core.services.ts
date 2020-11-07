@@ -4,7 +4,7 @@ import { ModalService } from './modal.service';
 import { NavService } from './nav.service';
 import { StoreQuery } from './store-query.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CLIENT_SERVICE, BASE_URL, CLIENT_CONFIG } from './constants';
+import { CLIENT_SERVICE, BASE_URL } from './constants';
 import { Store } from '@ngrx/store';
 import { LoaderService } from './loader.service';
 import { AuthService } from './auth.service';
@@ -13,7 +13,6 @@ import { FooterAccessorService } from './footer-accessor.service';
 import { HeaderAccessorService } from './header-accessor.service';
 import { IndexedDbService } from './indexeddb.service';
 import { BigFormService } from './big-form.service';
-import { ClientConfig } from '../models';
 import { KeyValueStoreService } from './key-value-store.service';
 import { EventEmitter } from 'events';
 import { ConfigAccessorService } from './config-accessor.service';
@@ -21,6 +20,7 @@ import * as jQuery from 'jquery';
 import { addFilter, getSubmissionData, getVariable, removeFilter, resetFilter, setVariable, updateSubmissionData } from '../store';
 import { LocalStorageService } from './local-storage.service';
 import { TemplateParserService } from './template-parser.service';
+import { ClientConfig } from '../models';
 
 
 @Injectable({providedIn: 'root'})
@@ -29,6 +29,7 @@ export class CoreServices {
     eventBus: EventEmitter;
     window: Window;
     console: Console;
+    clientConfig: ClientConfig = null;
     actions = {
       //  setVariable: (payload: {key: string; data: any}) => this.store.dispatch(setVariable(payload)),
       //  addFilter: () => this.store.dispatch(addFilter),
@@ -60,7 +61,6 @@ export class CoreServices {
         public templateParser: TemplateParserService,
         public localStorage: LocalStorageService,
         @Inject(BASE_URL) public baseUrl: string,
-        @Inject(CLIENT_CONFIG) public clientConfig: ClientConfig,
         @Inject(CLIENT_SERVICE) public clientService: any
     ) {
       this.data = {};
