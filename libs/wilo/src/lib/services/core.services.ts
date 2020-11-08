@@ -21,6 +21,7 @@ import { addFilter, getSubmissionData, getVariable, removeFilter, resetFilter, s
 import { LocalStorageService } from './local-storage.service';
 import { TemplateParserService } from './template-parser.service';
 import { ClientConfig } from '../models';
+import { DataQueryService } from './data-query.service';
 
 
 @Injectable({providedIn: 'root'})
@@ -51,6 +52,7 @@ export class CoreServices {
         public route: ActivatedRoute,
         public store: Store<any>,
         public loader: LoaderService,
+        public dataQuery: DataQueryService,
         public auth: AuthService,
         public indexedDb: IndexedDbService,
         public actionPanel: ActionPanelService,

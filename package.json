@@ -64,6 +64,7 @@
     "jquery": "^3.5.1",
     "jsonata": "^1.8.3",
     "lodash.remove": "^4.7.0",
+    "mingo": "^3.1.0",
     "msal": "^1.4.0",
     "ng-dynamic-component": "^7.0.1",
     "ngx-pagination": "^5.0.0",

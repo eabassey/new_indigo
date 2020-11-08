@@ -57,7 +57,8 @@ router.get('/', (req, res) => {
                         // },
                         claims$: {
                             variableName: 'claims',
-                            // filterFunctions: {filter_down: (id) => p => p.id < id, filter_top: (id) => p => p.id > id}
+                            // filterFunctions: {filter_down: (id) => p => p.id < id, filter_top: (id) => p => p.id > id},
+                            // filterCreteria: {filter_down_by_5: {id: {$lt: 5}}, filter_top_by_10: {id: {$gte: 10}}}
                         }
                     },
                     serverCalls: [

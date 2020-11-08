@@ -9,3 +9,4 @@ export * from './footer-accessor.service';
 export * from './header-accessor.service';
 export * from './i-auth.service';
 export * from './big-form.service';
+export * from './data-query.service';

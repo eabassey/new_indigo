@@ -17,12 +17,7 @@
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
       "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e"
-        ]
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
       }
     }
   },
@@ -32,9 +27,7 @@
     },
     "sil-e2e": {
       "tags": [],
-      "implicitDependencies": [
-        "sil"
-      ]
+      "implicitDependencies": ["sil"]
     },
     "wilo": {
       "tags": []
@@ -74,9 +67,7 @@
     },
     "flipple-e2e": {
       "tags": [],
-      "implicitDependencies": [
-        "flipple"
-      ]
+      "implicitDependencies": ["flipple"]
     },
     "flipple-api": {
       "tags": []
