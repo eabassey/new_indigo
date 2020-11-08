@@ -14,7 +14,7 @@ export const setVariable = (payload: {key: string, data: any}) => ({
 });
 
 
-export const addFilter = (payload: {key: string, filter: {[filterId: string]: any}}) => ({
+export const addFilter = (payload: {key: string, filterKey: string}) => ({
     type: actionTypes.ADD_FILTER,
     payload
 });

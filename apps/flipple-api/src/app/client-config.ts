@@ -46,6 +46,38 @@ router.get('/', (req, res) => {
               name: 'Workflow',
               title: {template: 'Workflowwer'},
               startNode: 'list',
+              actionPanel: {
+                panel1: {
+                  id: 'panel1',
+                  icon: 'bucket',
+                  instruction: 'showing panel 1',
+                  startNode: 'node1',
+                  nodes: {
+                      node1: {
+                          component: 'Node1Component',
+                          inputs: {
+                            greetings: "Hellow component",
+                            filterButtons: [
+                              {buttonText: 'Filterrr Top', onClick: [{type: 'do', using: 'actions.addFilter', withArgs: [{key: 'claims', filterKey: 'filter_top_by_10'}]}]},
+                              {buttonText: 'Reset Filter', onClick: [{type: 'do', using: 'actions.resetFilter', withArgs: [{key: 'claims'}]}]},
+                              {buttonText: 'Remove Filter', onClick: [{type: 'do', using: 'actions.removeFilter', withArgs: [{key: 'claims', filterKey: 'filter_top_by_10'}]}]}
+                            ]
+                          },
+                          // outputs: {
+
+                          //     // doWork: (ev, sv) => {
+                          //     // },
+                          //     // setFilter: (ev, svc) => {svc.
+                          //     //     svc.store.dispatch(addFilter({key: 'claims', filter: ev}));
+                          //     // },
+                          //     // resetFilter: (ev, svc) => {
+                          //     //     svc.store.dispatch(resetFilter({key: 'claims'}));
+                          //     // }
+                          // },
+                      }
+                  }
+              }
+              },
               nodes: {
                   list: {
                     component: 'WorkflowListComponent',
@@ -57,8 +89,7 @@ router.get('/', (req, res) => {
                         // },
                         claims$: {
                             variableName: 'claims',
-                            // filterFunctions: {filter_down: (id) => p => p.id < id, filter_top: (id) => p => p.id > id},
-                            // filterCreteria: {filter_down_by_5: {id: {$lt: 5}}, filter_top_by_10: {id: {$gte: 10}}}
+                            filterCriteria: {filter_down_by_5: {id: {$lt: 5}}, filter_top_by_10: {state: 17}}
                         }
                     },
                     serverCalls: [

@@ -1,4 +1,4 @@
-import {  TemplateDefinition, NodeConfig, EventConfig, ServerCallConfig, ActionPanelConfig, StateConfig, ServerQueryConfig } from '../models';
+import {  TemplateDefinition, NodeConfig, EventConfig, ServerCallConfig, ActionPanelConfig, StateConfig, ServerQueryConfig, DoRule, ActionRule } from '../models';
 import { CoreServices } from '../services';
 import { map, delay, switchMap, distinctUntilChanged, pluck, skipWhile, take } from 'rxjs/operators';
 import { combineLatest, empty, interval, of, Subscription, Observable, fromEvent } from 'rxjs';
@@ -11,12 +11,12 @@ import { RulesService } from '../rules.service';
 
 
 
-export const renderTemplateDefs = (activeNode: NodeConfig, svc: CoreServices, route: ActivatedRoute) => {
+export const renderTemplateDefs = (activeNode: NodeConfig, svc: CoreServices, route: ActivatedRoute, rulesService: RulesService) => {
     if (activeNode.nodeType === 'decision') {
       return [{component: DecisionNodeComponent, inputs: {activeNode}}];
     } else if (typeof activeNode.component === 'string') {
       const inputs = transformInputs(activeNode.inputs, svc);
-      const outputs = transformOutputs(activeNode.outputs, svc, route);
+      const outputs = transformOutputs(activeNode.outputs, svc, route, rulesService);
       return [{component: TP[activeNode.component], inputs, outputs}];
     } else {
       return (activeNode.component as TemplateDefinition).children.map((def) => {
@@ -28,7 +28,7 @@ export const renderTemplateDefs = (activeNode: NodeConfig, svc: CoreServices, ro
         outputs = activeNode.outputs ? {...outputs, ...activeNode.outputs} : outputs;
         outputs = def.outputs ? {...outputs, ...def.outputs} : outputs;
 
-        const localOutputs = transformOutputs(outputs, svc, route);
+        const localOutputs = transformOutputs(outputs, svc, route, rulesService);
         return {
               component: TP[def.component],
               inputs: localInputs,
@@ -39,11 +39,11 @@ export const renderTemplateDefs = (activeNode: NodeConfig, svc: CoreServices, ro
     }
 };
 
-const transformOutputs = (outputs: {[key: string]: any}, svc: CoreServices, route: ActivatedRoute) => {
-  return outputs ? Object.entries(outputs).reduce((acc, [key, value]) => {
+const transformOutputs = (outputs: {[key: string]: ActionRule[]}, svc: CoreServices, route: ActivatedRoute, rulesService: RulesService) => {
+  return outputs ? Object.entries(outputs).reduce((acc, [key, rules]) => {
     return {
       ...acc,
-      [key]: {handler: value, args: ['$event', svc, route] }
+      [key]: {handler: () => rules.forEach(rule => rulesService.renderActionRule(rule)), args: [] }
     };
   }, {}) : {};
 };
@@ -56,17 +56,21 @@ const transformInputs = (inputs: {[key: string]: any}, svc: CoreServices) => {
         val = svc.sq.query(value);
       } else {
         // TYPE: VariableQuerySet -> { variableName: '', filterFunctions: {}, sortFunctions: {}}
+         // filterCriteria: {filter_down_by_5: {id: {$lt: 5}}, filter_top_by_10: {id: {$gte: 10}}}
         if (value.variableName) {
           val = svc.store.select(getVariable(value.variableName)).pipe(
             skipWhile(x => !x),
             map((querySet) => {
               // querySet -> {dataset: [], filterBy: {'filter_name': arg}, sortBy: {}}
-              if (querySet && querySet.filterBy && value.filterFunctions) {
+              if (querySet && querySet.filterBy && value.filterCriteria) {
                 let result = querySet.dataset;
-                const filterFns = Object.entries(querySet.filterBy)
-                .map(([filterName, arg]) => value.filterFunctions[filterName](arg));
-                filterFns.forEach(fn => result = result ? result.filter(fn) : result);
-                return result;
+                const selectedCriteria = Object.keys(querySet.filterBy)
+                                          .map(cret => value.filterCriteria[cret]);
+                console.log({selectedCriteria})
+                // .map(([filterName,]) => value.filterFunctions[filterName](arg));
+                // selectedCriteria.forEach(fn => result = result ? result.filter(fn) : result);
+                const res = selectedCriteria ? svc.dataQuery.useMongoQuery(result, {criteria: JSON.stringify({$and: selectedCriteria})}) : result;
+                return res;
               } else {
                 return querySet.dataset;
               }

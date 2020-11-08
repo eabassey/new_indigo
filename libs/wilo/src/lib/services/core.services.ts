@@ -33,9 +33,9 @@ export class CoreServices {
     clientConfig: ClientConfig = null;
     actions = {
       //  setVariable: (payload: {key: string; data: any}) => this.store.dispatch(setVariable(payload)),
-      //  addFilter: () => this.store.dispatch(addFilter),
-      //  removeFilter,
-      //  resetFilter,
+       addFilter: (payload) => this.store.dispatch(addFilter(payload)),
+       removeFilter: (payload) => this.store.dispatch(removeFilter(payload)),
+       resetFilter: (payload) => this.store.dispatch(resetFilter(payload)),
        updateSubmissionData: (payload: any) => this.store.dispatch(updateSubmissionData(payload))
     };
     selectors = {

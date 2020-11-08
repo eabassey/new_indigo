@@ -21,18 +21,19 @@ export function reducer(state = initialState, action) {
             };
         }
         case actionTypes.ADD_FILTER: {
-            const {key, filter} = action.payload;
+            const {key, filterKey} = action.payload;
             return {
                 ...state,
                 [key]: {
                     ...state[key],
                     filterBy: {
                         ...state[key].filterBy,
-                        ...filter
+                        [filterKey]: filterKey
                     }
                 }
             };
         }
+        // TO CORRECT
         case actionTypes.REMOVE_FILTER: {
             const {key, filterKey} = action.payload;
             const filterBy = state[key].filterBy;

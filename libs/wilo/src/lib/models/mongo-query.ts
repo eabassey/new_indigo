@@ -3,7 +3,7 @@
 export interface MongoQuery {
   collectionPath?: string;
   criteria: string;
-  projection: string;
+  projection?: string;
   skip?: number;
   limit?: number;
   sort?: string;

@@ -65,7 +65,7 @@ export class PanelNodeBase implements OnInit, OnDestroy, OnChanges {
             if (this.activeNode.events) {
               this.eventsSub = Object.values(this.activeNode.events).map(rule => this.rulesService.renderWhenRule(rule).subscribe());
             }
-            this.organisms = renderTemplateDefs(activeNode, this.svc, this.route);
+            this.organisms = renderTemplateDefs(activeNode, this.svc, this.route, this.rulesService);
         }
     }
 

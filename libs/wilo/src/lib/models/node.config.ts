@@ -6,7 +6,7 @@ import { ServerQueryConfig } from './server-query.config';
 import { StateConfig } from './state.config';
 import { EventConfig } from './event.config';
 import { FooterButtonConfig } from './footer-button.config';
-import { ActionRule, WhenRule } from './rule';
+import { ActionRule, DoRule, WhenRule } from './rule';
 import { TemplateParser } from './template-parser';
 
 export interface NodeConfig {
@@ -44,7 +44,7 @@ export interface NodeConfig {
     decision?: (svc: CoreServices, route?: ActivatedRoute) => void | Subscription;
     intersectData?: (svc: CoreServices, route?: ActivatedRoute) => void;
     inputs?: { [id: string]: any };
-    outputs?: { [id: string]: (ev: any, svc: CoreServices) => void };
+    outputs?: { [id: string]: ActionRule[]};
     component?: string | TemplateDefinition;
     navs?: FooterButtonConfig[];
 
@@ -60,5 +60,5 @@ export interface TemplateDefinition {
 export interface OrganismDefinition {
     component: string;
     inputs: { [key: string]: any };
-    outputs?: { [id: string]: (ev: any, svc: CoreServices) => void };
+    outputs?: { [id: string]: ActionRule[] };
   }
