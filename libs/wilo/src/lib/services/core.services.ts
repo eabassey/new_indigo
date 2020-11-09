@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable, Inject, Optional } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { ModalService } from './modal.service';
 import { NavService } from './nav.service';
@@ -22,6 +22,8 @@ import { LocalStorageService } from './local-storage.service';
 import { TemplateParserService } from './template-parser.service';
 import { ClientConfig } from '../models';
 import { DataQueryService } from './data-query.service';
+import { SignalRService } from './signalr.service';
+import { DataTransformersService } from './data-transformers.service';
 
 
 @Injectable({providedIn: 'root'})
@@ -54,6 +56,7 @@ export class CoreServices {
         public loader: LoaderService,
         public dataQuery: DataQueryService,
         public auth: AuthService,
+        public dataTransformers: DataTransformersService,
         public indexedDb: IndexedDbService,
         public actionPanel: ActionPanelService,
         public keyValueStore: KeyValueStoreService,
@@ -63,7 +66,8 @@ export class CoreServices {
         public templateParser: TemplateParserService,
         public localStorage: LocalStorageService,
         @Inject(BASE_URL) public baseUrl: string,
-        @Inject(CLIENT_SERVICE) public clientService: any
+        @Inject(CLIENT_SERVICE) public clientService: any,
+        @Optional() public signalR: SignalRService,
     ) {
       this.data = {};
       this.window = window;
