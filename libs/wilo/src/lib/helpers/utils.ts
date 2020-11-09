@@ -239,7 +239,8 @@ export const renderServerCalls = (serverCalls: ServerCallConfig[], svc: CoreServ
         //
         let successResults;
         if (transformResponse) {
-          successResults = transformResponse(results);
+          successResults = svc.dataTransformers.transform(results, transformResponse); // transformResponse(results);
+          console.log({successResults});
         } else {
           successResults = results;
         }

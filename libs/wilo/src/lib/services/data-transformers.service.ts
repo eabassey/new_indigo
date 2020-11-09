@@ -2,20 +2,25 @@ import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
 import { path, mergeDeepRight, last, assocPath, split } from 'ramda';
 import { debounceTime, map } from 'rxjs/operators';
+import { Transformable } from '../models/transformable';
 
 
-interface Transformable {
-  parentMapper: { [key: string]: string };
-  childMappers?: {path: string; mapper: {[id: string]: string}}[];
-}
+
 
 
 @Injectable({providedIn: 'root'})
 export class DataTransformersService {
   constructor() {}
 
-  transform (data: object[], transformable: Transformable) {
-    return data.map(parentRawObj => {
+  transform (data: any, transformable: Transformable) {
+    let parentRawArray;
+    if (transformable.parentPath) {
+      const splittedParentPath = split('.', transformable.parentPath);
+      parentRawArray = path(splittedParentPath, data);
+    } else {
+      parentRawArray = data;
+    }
+    return parentRawArray.map(parentRawObj => {
       const parentObj = transformFunc(parentRawObj, transformable.parentMapper);
       if (transformable?.childMappers?.length) {
         transformable.childMappers.forEach(child => {

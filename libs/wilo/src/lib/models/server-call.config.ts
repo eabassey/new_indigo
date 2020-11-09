@@ -2,13 +2,14 @@ import { CoreServices } from '../services';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { ActionRule, ReturnRule } from './rule';
+import { Transformable } from './transformable';
 
 export interface ServerCallConfig {
     key?: string;
     functionName?: string;
     isBackgroundTask?: boolean;
     ignoreFalseError?: boolean;
-    transformResponse?: (data: any) => any;
+    transformResponse?: Transformable;
     timeoutMilliseconds?: number;
     filterable?: boolean;
     sortable?: boolean;

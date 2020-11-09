@@ -104,7 +104,23 @@ router.get('/', (req, res) => {
                               using: 'http.get',
                               withArgs: ['https://sildev.4-sure.net:10000/api/v1/staff_action/get_summary/'],
                               resultQuery: 'payload'
-                            }
+                            },
+                            // transformResponse: {
+                            //   // parentPath: 'payload',
+                            //   parentMapper: {
+                            //     'applicant.first_name': 'first_name',
+                            //     'applicant.id_number': 'id_number'
+                            //   },
+                            //   childMappers: [
+                            //     {
+                            //       path: 'jobs',
+                            //       mapper: {
+                            //         id: 'id',
+                            //         'appointment.range_start': 'start_time'
+                            //       }
+                            //     }
+                            //   ]
+                            // }
                         }
                     ],
                     footerType: 'pagination'
