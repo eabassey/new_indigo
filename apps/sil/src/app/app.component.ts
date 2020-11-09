@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WorkflowLayoutComponent } from '@indigo/layout';
 import mingo from 'mingo';
 
 @Component({
@@ -13,6 +14,7 @@ export class AppComponent implements OnInit {
     {name: 'John', age: 30},
     {name: 'Sam', age: 4}
   ]
+  comp = WorkflowLayoutComponent
 
   ngOnInit() {
     let cursor = mingo.find(this.data, JSON.parse(JSON.stringify({age: {$lte: 5}})))
