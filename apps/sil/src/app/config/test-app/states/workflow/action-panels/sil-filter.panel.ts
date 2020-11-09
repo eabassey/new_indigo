@@ -1,5 +1,4 @@
 // import {  addFilter, resetFilter, ActionPanelConfig } from '@wilo';
-// import * as TP from '@indigo/templates';
 
 // export const silFilterPanel: ActionPanelConfig = {
 //     id: 'filter',

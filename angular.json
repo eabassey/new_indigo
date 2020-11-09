@@ -185,38 +185,6 @@
         }
       }
     },
-    "templates": {
-      "projectType": "library",
-      "root": "libs/templates",
-      "sourceRoot": "libs/templates/src",
-      "prefix": "indigo",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/templates/tsconfig.lib.json",
-              "libs/templates/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/templates/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/templates/jest.config.js",
-            "tsConfig": "libs/templates/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "libs/templates/src/test-setup.ts"
-          }
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
     "pipes": {
       "projectType": "library",
       "root": "libs/pipes",

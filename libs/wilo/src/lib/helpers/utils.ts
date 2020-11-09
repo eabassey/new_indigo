@@ -6,8 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { setVariable } from '../store';
 import { getVariable } from '../store/selectors/variable.selectors';
 import { DecisionNodeComponent } from '../components/decision-node.component';
-import * as TP from '../templates';
 import { RulesService } from '../rules.service';
+import * as TP from '../templates';
 
 
 

@@ -1,5 +1,4 @@
 import { AppConfig } from '@wilo';
-import * as TP from '@indigo/templates';
 
 
 export const dashboardApp: AppConfig = {

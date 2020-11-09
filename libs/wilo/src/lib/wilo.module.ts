@@ -12,7 +12,7 @@ import { wiloReducers } from './store';
 import { NodeRouterComponent } from './components/node-router.component';
 import { ClientConfig } from './models';
 import { DecisionNodeComponent } from './components';
-import { TemplatesModule } from './templates';
+import { TemplatesModule } from './templates/templates.module';
 
 
 
@@ -21,7 +21,6 @@ const coreModules = [
     HttpClientModule,
     ReactiveFormsModule,
     DynamicIoModule,
-    TemplatesModule
 ];
 @NgModule({
   declarations: [
@@ -29,7 +28,7 @@ const coreModules = [
     NodeRouterComponent,
     DecisionNodeComponent,
   ],
-  imports: [CommonModule, StoreModule.forFeature('dyn', wiloReducers), RouterModule, ...coreModules],
+  imports: [CommonModule, StoreModule.forFeature('dyn', wiloReducers), TemplatesModule, RouterModule, ...coreModules],
   exports: [...coreModules, NodeRouterComponent, NodeFooterButtonComponent, TemplatesModule, RouterModule]
 })
 export class WiloModule {

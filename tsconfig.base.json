@@ -18,7 +18,6 @@
     "paths": {
       "@wilo": ["libs/wilo/src/index.ts"],
       "@indigo/layout": ["libs/layout/src/index.ts"],
-      "@indigo/templates": ["libs/templates/src/index.ts"],
       "@indigo/pipes": ["libs/pipes/src/index.ts"],
       "@indigo/directives": ["libs/directives/src/index.ts"],
       "@indigo/ui-elements": ["libs/ui-elements/src/index.ts"],

@@ -1,6 +1,5 @@
 import { StateConfig } from '@wilo';
 import { navigateToWorkflowButton } from '../../shared';
-import * as TP from '@indigo/templates';
 
 
 export const createClaim: StateConfig = {
