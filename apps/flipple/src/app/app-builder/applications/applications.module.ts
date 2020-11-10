@@ -12,12 +12,15 @@ import { ApplicationConfigServercallsComponent } from './application-config/appl
 import { ApplicationConfigServerqueriesComponent } from './application-config/application-config-serverqueries/application-config-serverqueries.component';
 import { ApplicationConfigEventsComponent } from './application-config/application-config-events/application-config-events.component';
 import { ApplicationEditComponent } from './application-edit/application-edit.component';
+import {ReactiveFormsModule} from '@angular/forms';
+
 
 
 @NgModule({
   declarations: [ApplicationsComponent, ApplicationsListComponent, ApplicationEditComponent, ApplicationConfigComponent, ApplicationConfigSettingsComponent, ApplicationConfigActivateComponent, ApplicationConfigDeactivateComponent, ApplicationConfigServercallsComponent, ApplicationConfigServerqueriesComponent, ApplicationConfigEventsComponent],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     ApplicationsRoutingModule
   ]
 })

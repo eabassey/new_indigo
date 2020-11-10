@@ -5,6 +5,7 @@ import { ActionRule, ReturnRule } from './rule';
 
 export interface AppConfig {
     name: string;
+    description?: string;
     settings?: {
       addActionPanel?: boolean;
       addHeaderActions?: boolean;
