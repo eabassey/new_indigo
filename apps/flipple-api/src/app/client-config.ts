@@ -127,6 +127,92 @@ router.get('/', (req, res) => {
                 },
               },
 
+          },
+          27: {
+            id: '27',
+            name: 'job-invoiced',
+            title: {template: 'Job Invoicing'},
+            startNode: 'node1',
+            // activateGuard: ({clientConfig}) => {
+            //   return of(clientConfig.startApp === 't');
+            // },
+            // activateGuard: {
+            //   type: 'when',
+            //   predicates: [
+            //     {using: 'localStorage.getItem', withArgs: ['flexus.web.authMethod'], operator: 'equals', valueComparer: 'local'}
+            //     // {using: 'localStorage.getItem', withArgs: ['flexus.web.user'], operator: 'equals', resultQuery: 'email', valueComparer: 'VBCH.'}
+            //     // {using: 'indexedDb.contacts.get', withArgs: [1], operator: 'equals', valueComparer: undefined}
+            //     // {using: 'bf.bigForm.valid', operator: 'equals', valueComparer: true}
+            //     // {using: 'http.get', withArgs: ['https://jsonplaceholder.typicode.com/posts'], operator: 'hasLength', valueComparer: 100}
+            //     // {using: 'clientConfig.startApp', operator: 'equals', valueComparer: 'testAppe'}
+            //   ],
+            // },
+            events: {
+
+            },
+            nodes: {
+              node1: {
+                component: {
+                  children:[
+                    {component: 'Node1Component', inputs: {}},
+                    {
+                      component: 'FormBuilderComponent',
+                      inputs: {
+                        formModel: {
+                          fields: [
+                            {type: 'text', label: 'First Name', name: 'firstName', value: '', controlClasses:"test", validators: [{type: 'required', errorMessage :"Please give first name"}, {type: 'minlength', arg: 5}]},
+                            {type: 'text', label: 'Last Name', name: 'lastName', value: ''},
+                            {type: 'textarea', label: 'Address', name: 'address', value: '', placeholder : '', rows: 4, cols: 20},
+                            {type: 'checkbox', name: 'gender', options: [{label: 'Male', key: 'male'}, {label: 'Female', key: 'female'}]}
+                          ]
+                        }
+                      }
+                    },
+                    {component: 'Node1Component', inputs: {}},
+                  ]
+                },
+                navs: [
+                  {text: 'To Workflow',
+                  // onClick: (svc) => {
+                  //   const url = svc.keyValueStore.getItem('workflowURL');
+                  //   svc.router.navigateByUrl(url);
+                  // },
+                  location: 'left'
+                },
+                  {text: 'To Node 22', routerLink: ['node2'], location: 'right'}
+                ],
+                footerType: 'node_nav'
+              },
+              node2: {
+                component: {
+                  children:[
+                    {component: 'Node1Component', inputs: {}},
+                    {
+                      component: 'FormBuilderComponent',
+                      inputs: {
+                        formModel: {
+                          fields: [
+                            {type: 'text', label: 'First Name', name: 'firstName', value: '', validators: [{type: 'required', errorMessage :"Please give first name"}, {type: 'minLength', arg: 5}]},
+                          ]
+                        }
+                      }
+                    },
+                    {component: 'Node1Component', inputs: {}},
+                  ]
+                },
+                navs: [
+                  {text: 'Back To Node 1', routerLink: ['./node1'], location: 'right'}
+                ],
+                footerType: 'node_nav'
+              },
+              MiscellaneousClass: {
+                name: 'miscellaneous-class',
+                nodeType: 'decision',
+              }
+            },
+            bigFormToStoreMapper: {
+
+            }
           }
         },
         serverCalls: [

@@ -52,7 +52,7 @@ export const SIL_27: StateConfig = {
         onClick: (svc) => {
           const url = svc.keyValueStore.getItem('workflowURL');
           svc.router.navigateByUrl(url);
-        } ,
+        },
         location: 'left'
       },
         {text: 'To Node 22', routerLink: ['node2'], location: 'right'}
