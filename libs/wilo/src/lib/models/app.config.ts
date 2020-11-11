@@ -8,7 +8,7 @@ export interface AppConfig {
     description?: string;
     settings?: {
       addActionPanel?: boolean;
-      addHeaderActions?: boolean;
+      addToolbarActions?: boolean;
       addAppBar?: boolean;
       addFooter?: boolean;
       addAppMenu?: boolean;

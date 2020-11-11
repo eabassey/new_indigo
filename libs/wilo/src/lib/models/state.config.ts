@@ -13,6 +13,7 @@ import { TemplateParser } from './template-parser';
 export interface StateConfig {
     id: string;
     name?: string;
+    description?: string;
     showTabs?: boolean;
     layout?: {
       hideFooter?: boolean;
