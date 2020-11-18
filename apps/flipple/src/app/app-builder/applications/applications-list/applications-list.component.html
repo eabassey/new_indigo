@@ -12,8 +12,8 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">App Name</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">Start State</th>
+            <th scope="col">--</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -21,8 +21,8 @@
           <tr *ngFor="let app of applications">
             <th scope="row">{{app.id}}</th>
             <td>{{app.name}}</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+            <td>{{app.startState}}</td>
+            <td>--</td>
             <td>
                 <div>
                     <button type="button" class="btn btn-info btn-sm" (click)="goToEdit(app)">Edit</button>

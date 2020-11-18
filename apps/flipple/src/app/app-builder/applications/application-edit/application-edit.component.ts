@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AppConfig } from '@wilo';
 import { ApplicationsService } from '../applications.service';
 
 @Component({
@@ -21,12 +22,19 @@ application;
 
   ngOnInit(): void {
       const id = this.route.snapshot.paramMap.get('appId');
-      this.application = this.applicationsService.applications.find(a => a.id === id);
-      this.editForm = this.fb.group({
-        name: '',
-        startState: '',
-        description: ''
-      });
+      this.setForm();
+      this.applicationsService.getApp(id).then(app => {
+        this.application = app;
+        this.setForm(app);
+      })
+  }
+
+  setForm(app?: AppConfig) {
+    this.editForm = this.fb.group({
+      name: app?.name || '',
+      startState: app?.startState || '',
+      description: app?.description || ''
+    });
   }
 
   save() {

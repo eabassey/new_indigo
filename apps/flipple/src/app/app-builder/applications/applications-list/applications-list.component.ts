@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {ApplicationsService} from '../applications.service';
+import {AppConfig, ClientConfig} from '@wilo';
 
 @Component({
   selector: 'app-applications-list',
@@ -10,7 +11,7 @@ import {ApplicationsService} from '../applications.service';
 export class ApplicationsListComponent implements OnInit {
 
 
-  applications;
+  applications: AppConfig[];
   constructor(
       private applicationsService: ApplicationsService,
     private router: Router,
@@ -18,7 +19,10 @@ export class ApplicationsListComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.applications = this.applicationsService.applications;
+    this.applicationsService.getConfig().then((config: ClientConfig) => {
+      this.applications = Object.entries(config.apps).map(([id,val]) => ({id, ...val}));
+    })
+    // this.applications = this.applicationsService.applications;
   }
 
   goToEdit(app) {

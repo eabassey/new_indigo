@@ -7,8 +7,9 @@ import * as cors from 'cors';
 import * as compression from 'compression';
 
 
+
 import applicationRoutes from './app/applications';
-import configRoutes from './app/client-config';
+import getConfig from './app/client-config';
 
 //
 const app = express();
@@ -20,25 +21,58 @@ app.use(compression());
 app.use(bodyParser.json());
 
 
+//
+const MongoClient = require('mongodb').MongoClient;
+// Connection URL
+const url = 'mongodb://localhost:27017';
 
-//Custom Headers
-app.use((req, res, next) => {
-  res.setHeader("x-4sure", "You should be working for us..");
-  // res.removeHeader('x-powered-by');
-  next();
-});
+// Database Name
+const dbName = 'configdb';
 
 //
-app.use("/config", configRoutes);
-app.use("/applications", applicationRoutes);
+const findDocuments = function(db, callback) {
+  // Get the documents collection
+  const collection = db.collection('sil');
+  // Find some documents
+  collection.find({}).toArray(function(err, docs) {
+    console.log("Found the following records");
+    console.log(docs)
+    callback(docs);
+  });
+}
+
+// Use connect method to connect to the server
+MongoClient.connect(url, function(err, client) {
+  console.log("Connected successfully to server");
+
+  const db = client.db(dbName);
+
+  // findDocuments(db, function() {
+  //   client.close();
+  // })
+
+  //Custom Headers
+  app.use((req, res, next) => {
+    res.setHeader("x-4sure", "You should be working for us..");
+    // res.removeHeader('x-powered-by');
+    next();
+  });
+
+  //
+  app.use("/config", getConfig(db));
+  app.use("/applications", applicationRoutes);
 
 
-app.get('/api', (req, res) => {
-  res.send({ message: 'Welcome to babados!' });
+  app.get('/api', (req, res) => {
+    res.send({ message: 'Welcome to babados!' });
+  });
+
+  const port = process.env.port || 3434;
+  const server = app.listen(port, () => {
+    console.log(`Listening at http://localhost:${port}/api`);
+  });
+  server.on('error', console.error);
 });
 
-const port = process.env.port || 3434;
-const server = app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}/api`);
-});
-server.on('error', console.error);
+
+

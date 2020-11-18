@@ -13,6 +13,7 @@ import { ApplicationConfigServerqueriesComponent } from './application-config/ap
 import { ApplicationConfigEventsComponent } from './application-config/application-config-events/application-config-events.component';
 import { ApplicationEditComponent } from './application-edit/application-edit.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 
 
@@ -21,6 +22,7 @@ import {ReactiveFormsModule} from '@angular/forms';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    HttpClientModule,
     ApplicationsRoutingModule
   ]
 })

@@ -4,6 +4,7 @@ import { ActionRule, ReturnRule } from './rule';
 
 
 export interface AppConfig {
+  id?: string;
     name: string;
     description?: string;
     settings?: {
