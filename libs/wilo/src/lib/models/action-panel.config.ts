@@ -6,7 +6,7 @@ import { ServerCallConfig } from './server-call.config';
 import { ServerQueryConfig } from './server-query.config';
 import { EventConfig } from './event.config';
 import { NodeConfig } from './node.config';
-import { ActionRule, WhenRule } from './rule';
+import { ActionRule, ReturnRule, WhenRule } from './rule';
 import { TemplateParser } from './template-parser';
 
 export interface ActionPanelConfig {
@@ -15,17 +15,15 @@ export interface ActionPanelConfig {
     icon?: string;
     instruction?: string;
     title?: TemplateParser;
-    controls?: (svc: CoreServices, route?: ActivatedRoute) => ToolbarControlConfig[];
+    controls?: ReturnRule<ToolbarControlConfig[]>;
     activateGuard?: WhenRule;
     deactivateGuard?: WhenRule;
 
-    initFormFields?: (svc: CoreServices, route?: ActivatedRoute) => void | Subscription;
     checkValidityForFields?: string[];
 
     serverCalls?: ServerCallConfig[];
     serverQueries?: ServerQueryConfig[];
     events?: {[name: string]: WhenRule};
-    setValuesToBigForm?: (svc: CoreServices, route?: ActivatedRoute) => Observable<any>;
     startNode: string;
     nodes?: { [id: string]: NodeConfig };
     onPanelInit?: ActionRule[];

@@ -9,7 +9,7 @@ import * as compression from 'compression';
 
 
 import applicationRoutes from './app/applications';
-import getConfig from './app/client-config';
+import {getConfig} from './app/client-config';
 
 //
 const app = express();
@@ -28,18 +28,6 @@ const url = 'mongodb://localhost:27017';
 
 // Database Name
 const dbName = 'configdb';
-
-//
-const findDocuments = function(db, callback) {
-  // Get the documents collection
-  const collection = db.collection('sil');
-  // Find some documents
-  collection.find({}).toArray(function(err, docs) {
-    console.log("Found the following records");
-    console.log(docs)
-    callback(docs);
-  });
-}
 
 // Use connect method to connect to the server
 MongoClient.connect(url, function(err, client) {

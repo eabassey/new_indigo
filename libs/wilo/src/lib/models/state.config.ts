@@ -33,15 +33,11 @@ export interface StateConfig {
     serverCalls?: ServerCallConfig[];
     serverQueries?: ServerQueryConfig[];
     events?: {[name: string]: WhenRule};
-    setValuesToBigForm?: (svc: CoreServices, route?: ActivatedRoute) => Observable<any>;
     bigFormToStoreMapper?: { [id: string]: string | string[] | [Function, string] | [Function, string][] };
     startNode: string;
     contextMenu?: {
       itemOne: { [id: string]: StateConfig };
       itemTwo: { [id: string]: StateConfig };
-    };
-    views?: {
-      [id: string]: (svc: CoreServices, route?: ActivatedRoute) => { template: any; storeBinding: any };
     };
     nodes?: { [id: string]: NodeConfig };
     onStateInit?: ActionRule[];
