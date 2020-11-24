@@ -6,8 +6,8 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { RouterModule } from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {silConfig} from './config';
-import { SilService } from './sil.service';
+import {clientConfig} from './config';
+import { AppService } from './app.service';
 import { environment } from '../environments/environment';
 // import { requestOptionsProvider, Interceptor } from './interceptor';
 import {TemplatesModule} from '@indigo/templates';
@@ -31,8 +31,8 @@ import { EffectsModule } from '@ngrx/effects';
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     WiloModule.forRoot({
-      clientConfig: silConfig,
-      clientService: SilService,
+      clientConfig: clientConfig,
+      clientService: AppService,
       indexedDbName: 'dynDB',
       base_url: environment.api_url
     }),
@@ -45,17 +45,12 @@ import { EffectsModule } from '@ngrx/effects';
     }, environment),
     SilComponentsModule,
     TemplatesModule,
-    // DynFormModule,
-    RouterModule.forRoot([], {
-    initialNavigation: 'enabled'
-}),
-StoreDevtoolsModule.instrument()
+    RouterModule.forRoot([]),
+    StoreDevtoolsModule.instrument()
   ],
   providers: [
     {provide: AuthService, useExisting: AuthImplService},
     {provide: 'BACKEND_API_URL', useValue: environment.api_url},
-    // Intercep*-/tor,
-    // requestOptionsProvider
   ],
   bootstrap: [AppComponent]
 })

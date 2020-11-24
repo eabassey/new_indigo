@@ -13,40 +13,6 @@ export class RoutesService {
         @Inject(CLIENT_CONFIG) private clientConfig: ClientConfig,
         private router: Router
     ) {
-        // const routes: Route[] = [
-        //     {
-        //         path: '',
-        //         redirectTo: this.clientConfig.startApp,
-        //         pathMatch: 'full',
-        //     },
-        //     {
-        //         path: ':app',
-        //         children: [
-        //             {
-        //                 path: '',
-        //                 redirectTo: this.clientConfig.apps[this.clientConfig.startApp].startState,
-        //                 pathMatch: 'prefix'
-        //             },
-        //             {
-        //                 path: ':state',
-        //                 children: [
-        //                     {
-        //                         path: '',
-        //                         // tslint:disable-next-line: max-line-length
-        //                         redirectTo: this.clientConfig.apps[this.clientConfig.startApp].appStates[this.clientConfig.apps[this.clientConfig.startApp].startState].startNode,
-        //                         pathMatch: 'prefix'
-        //                     },
-        //                     {
-        //                         path: ':node',
-        //                         component: WorkflowLayoutComponent
-        //                     }
-        //                 ]
-        //            }
-        //         ]
-        //     }
-        // ];
-        // Render start App
-        // this.router.config.unshift(...routes);
         this.router.config.unshift({path: '', redirectTo: this.clientConfig.startApp, pathMatch: 'full'});
         this.generateAppRoutes(this.clientConfig.apps);
     }

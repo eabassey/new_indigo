@@ -3,7 +3,7 @@ import { testApp } from './test-app';
 import { dashboardApp } from './dashboard-app';
 import { ClientConfig } from '@wilo';
 
-export const silConfig: ClientConfig = {
+export const clientConfig: ClientConfig = {
     name: 'Standard Bank',
     startApp: 'testApp',
     apps: {
