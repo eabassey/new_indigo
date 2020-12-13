@@ -118,9 +118,9 @@ toggleActionPanel() {
         }
         //
         // initialize form fields
-        if (state?.setValuesToBigForm) {
-            this.setValuesSub = state.setValuesToBigForm(this.svc, this.route).subscribe();
-        }
+        // if (state?.setValuesToBigForm) {
+        //     this.setValuesSub = state.setValuesToBigForm(this.svc, this.route).subscribe();
+        // }
         if (state?.serverQueries) {
             this.serverQueriesSubs = renderServerQueries(state.serverQueries, this.svc, this.route)
           }

@@ -8,8 +8,7 @@ import * as compression from 'compression';
 
 
 
-import applicationRoutes from './app/applications';
-import {getConfig} from './app/client-config';
+import { getClientHandler } from './app/handlers/get-client.handler';
 
 //
 const app = express();
@@ -30,7 +29,7 @@ const url = 'mongodb://localhost:27017';
 const dbName = 'configdb';
 
 // Use connect method to connect to the server
-MongoClient.connect(url, function(err, client) {
+MongoClient.connect(url, {useUnifiedTopology: true}, function(err, client) {
   console.log("Connected successfully to server");
 
   const db = client.db(dbName);
@@ -47,8 +46,9 @@ MongoClient.connect(url, function(err, client) {
   });
 
   //
-  app.use("/config", getConfig(db));
-  app.use("/applications", applicationRoutes);
+  app.get("/api/client/:clientId", getClientHandler(db));
+  app.get("/config", getClientHandler(db));
+  // app.get("/api/client/:clientId/applications", getApplications(db));
 
 
   app.get('/api', (req, res) => {

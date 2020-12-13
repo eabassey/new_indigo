@@ -1,7 +1,7 @@
 import { ClientConfig } from '@wilo';
 
 
-export const getClientHandler = (req, res) => {
+export const getClientHandler = db => (req, res) => {
   const config: ClientConfig = {
     name: 'FNB Bank',
     startApp: 'testApp',
@@ -55,6 +55,7 @@ export const getClientHandler = (req, res) => {
                           inputs: {
                             greetings: "Hellow component",
                             filterButtons: [
+                              {buttonText: 'Logger', onClick: [{type: 'do', using: 'console.log', withArgs: ['Logging now...', 'Hello there', {key: 'claims', filterKey: 'filter_top_by_10'}]}]},
                               {buttonText: 'Filterrr Top', onClick: [{type: 'do', using: 'actions.addFilter', withArgs: [{key: 'claims', filterKey: 'filter_top_by_10'}]}]},
                               {buttonText: 'Reset Filter', onClick: [{type: 'do', using: 'actions.resetFilter', withArgs: [{key: 'claims'}]}]},
                               {buttonText: 'Remove Filter', onClick: [{type: 'do', using: 'actions.removeFilter', withArgs: [{key: 'claims', filterKey: 'filter_top_by_10'}]}]}
@@ -77,8 +78,9 @@ export const getClientHandler = (req, res) => {
               },
               nodes: {
                   list: {
-                    component: 'WorkflowListComponent',
+                    component: 'WorkflowList',
                     inputs: {
+                        todos: ['dance', 'eat', 'dream'],
                         // list$: 'dyn.variables.claims.dataset'
                         // list$: {
                         //     variableName: 'claims',
@@ -231,9 +233,9 @@ export const getClientHandler = (req, res) => {
   res.json(config);
 
   // Get the documents collection
-    // const collection = db.collection('sil');
+    // const collection = db.collection(req.params.clientId);
     // // Find some documents
-    // collection.find({}).toArray(function(err, docs) {
+    // collection.find({_id: '5fb58d7aa60b56cc64fa24ca'}).toArray(function(err, docs) {
     //   console.log("Found the following records");
     //   console.log(docs)
     //   res.json(docs);

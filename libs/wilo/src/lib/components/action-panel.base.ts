@@ -39,9 +39,9 @@ export abstract class ActionPanelBase implements OnInit, OnChanges, OnDestroy {
         if (panel?.serverCalls) {
             this.serverCallsSubs = renderServerCalls(panel.serverCalls, this.svc, this.route, this.rulesService);
         }
-        if (panel?.setValuesToBigForm) {
-            this.setValuesSub = panel.setValuesToBigForm(this.svc, this.route).subscribe();
-        }
+        // if (panel?.setValuesToBigForm) {
+        //     this.setValuesSub = panel.setValuesToBigForm(this.svc, this.route).subscribe();
+        // }
         if (panel?.events) {
           this.eventsSub = Object.values(panel.events).map(rule => this.rulesService.renderWhenRule(rule).subscribe());
         }
