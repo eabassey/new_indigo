@@ -8,7 +8,6 @@ import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
   selector: 'flx-button-group',
   templateUrl: './button-group.component.html',
   styleUrls: ['./button-group.component.scss'],
-  encapsulation: ViewEncapsulation.Native
 })
 export class FLXButtonGroupComponent implements OnInit {
   private _group = '';

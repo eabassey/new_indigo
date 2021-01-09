@@ -19,22 +19,23 @@ import { CoreServices } from '@wilo';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ClaimCardComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
-  @Input() claim: any;
-  @Input() statesMap: {[id: number]: any};
-  @Input() skillsMap: {[id: number]: any};
-  @Input() appointmentsMap: {[id: number]: any};
-  @Input() instructionsMap: {[id: number]: any};
-  @Input() spsMap: {[id: number]: any};
-  @Input() user;
+  @Input() claim!: any;
+  @Input() statesMap!: {[id: number]: any};
+  @Input() skillsMap!: {[id: number]: any};
+  @Input() appointmentsMap!: {[id: number]: any};
+  @Input() instructionsMap!: {[id: number]: any};
+  @Input() spsMap!: {[id: number]: any};
+  @Input() user!: any;
   indicatorColor = 'grey';
-  sla: {text: string; color: string};
-  stateDescription;
-  instruction;
+  sla!: {text: string; color: string} | undefined;
+  stateDescription!: any;
+  isClickable=false;
+  instruction!: any;
 
   subs: any[] = [];
 
   // fse = Four Sure Event
-  engClaimType: string;
+  engClaimType!: string;
 
   // This preload class is used to guard against the hiding animation on load.
   preload = true;
@@ -68,11 +69,11 @@ export class ClaimCardComponent implements OnInit, OnChanges, AfterViewInit, OnD
 
   ngAfterViewInit() {}
 
-  selectItem(claim) {
+  selectItem(claim: any) {
     // this.select.emit(claim);
   }
 
-  selectMenuItem(item, {}) {
+  selectMenuItem(item: any, {}) {
 
   }
 
@@ -89,7 +90,7 @@ export class ClaimCardComponent implements OnInit, OnChanges, AfterViewInit, OnD
     // this.fseSendJobMessage.emit(jobId);
   }
 
-  takeAction(claim): void {
+  takeAction(claim: any): void {
     const text = (this.statesMap[claim.state] as string).toLowerCase().split(' ').join('-');
     this.svc.router.navigate([`../${text}`, {claimId: claim.id}])
   }

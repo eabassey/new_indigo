@@ -50,7 +50,7 @@ Convert a dotted path to a location inside an object.
 @param {String} path dotted to indicate levels in an object.
 @param {Object} view for the data.
 */
-function extractValue(path, view) {
+function extractValue(path: any, view: any) {
   // Short circuit for direct matches.
   if (view && view[path]) return view[path];
 
@@ -80,11 +80,11 @@ NOTE: I also wrote an implementation that does not use regex but it is actually 
 @param {String} input template.
 @param {Object} view details.
 */
-function replace(input, view) {
+function replace(input: any, view: any) {
   // optimization to avoid regex calls (indexOf is strictly faster)
   if (input.indexOf(TEMPLATE_OPEN) === -1) return input;
   let result;
-  const replaced = input.replace(REGEX, function(original, path) {
+  const replaced = input.replace(REGEX, function(original: any, path: any) {
     const value = extractValue(path, view);
     if (undefined === value || null === value) {
       return original;

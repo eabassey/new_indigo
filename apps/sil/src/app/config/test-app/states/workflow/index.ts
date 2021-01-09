@@ -21,7 +21,7 @@ export const workflow: StateConfig = {
               // },
               claims$: {
                   variableName: 'claims',
-                  filterFunctions: {filter_down: (id) => p => p.id < id, filter_top: (id) => p => p.id > id}
+                  filterFunctions: {filter_down: (id: any) => (p: any) => p.id < id, filter_top: (id: any) => (p: any) => p.id > id}
               }
           },
           serverCalls: [
@@ -43,8 +43,8 @@ export const workflow: StateConfig = {
                       // }).pipe(map((d: any) => d.payload));
                   },
                   onSuccess: (result, svc, call) => {
-                    svc.eventBus.emit('dance', {svc});
-                    svc.eventBus.emit('dance');
+                    svc?.eventBus.emit('dance', {svc});
+                    svc?.eventBus.emit('dance');
                   }
               }
           ],
@@ -89,7 +89,7 @@ export const workflow: StateConfig = {
           footerType: 'node_nav',
           navs: [
               // {isPreviousButton: true, text: 'Prev', routerLink: ['../testNode3', {foo: 'zee'}]}
-              {text: 'To Node2', routerLink: ['list'], onClick: (ev, inst, svc, route) => inst[0].doWork.emit({ev})},
+              {text: 'To Node2', routerLink: ['list'], onClick: (ev, inst, svc, route) => {if(inst) inst[0].doWork.emit({ev})}},
               {text: 'To Node3', routerLink: ['testNode3', {foo: 'zee'}]}
           ]
       }

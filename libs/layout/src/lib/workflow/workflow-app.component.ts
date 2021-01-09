@@ -13,7 +13,7 @@ import { tap } from 'rxjs/operators';
        <!-- <h1 *ngIf="loading$ | async">LOADING ...</h1> -->
             <router-outlet></router-outlet>
             <flx-loader-component
-                  isFullScreen="true"
+                  [isFullScreen]="isFullScreen"
                   *ngIf="loading$ | async"
                   [disableBackground]="disableBackground"
                 ></flx-loader-component>
@@ -24,6 +24,7 @@ import { tap } from 'rxjs/operators';
 })
 export class WorkflowAppComponent extends AppBase {
   loading$: Observable<boolean>;
+  isFullScreen = true;
     disableBackground = true;
     constructor(svc: CoreServices, route: ActivatedRoute, router: Router) {
         super(svc, route, router);

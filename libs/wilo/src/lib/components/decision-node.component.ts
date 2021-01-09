@@ -10,8 +10,8 @@ import { ActivatedRoute } from '@angular/router';
   template: ''
 })
 export class DecisionNodeComponent implements OnInit, OnDestroy {
-  sub: Subscription | void;
-  @Input() activeNode: NodeConfig;
+  sub!: Subscription | void;
+  @Input() activeNode!: NodeConfig;
   constructor(private svc: CoreServices, private route: ActivatedRoute) {}
 
   ngOnInit() {

@@ -18,13 +18,13 @@ import { BigFormService } from '@wilo';
 })
 export class FormRendererComponent implements OnInit {
     @Input() formModel: any;
-    @Input() test$: Observable<any>;
+    @Input() test$!: Observable<any>;
     constructor(public bf: BigFormService) {}
 
     ngOnInit() {
     }
 
-    onChange(ev) {
+    onChange(ev: any) {
         console.log({OnChange: ev});
     }
 }

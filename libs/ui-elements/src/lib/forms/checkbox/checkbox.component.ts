@@ -15,9 +15,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ],
 })
 export class FLXCheckboxComponent implements OnInit, ControlValueAccessor {
-  value: boolean;
+  value!: boolean;
   // onChange: (x : booelan ) => void;
-  onTouch: () => void;
+  onTouch!: () => void;
   // disabled: boolean;
 
   private _checked = false;
@@ -65,7 +65,7 @@ export class FLXCheckboxComponent implements OnInit, ControlValueAccessor {
     return this._tabIndex;
   }
 
-  @Input() id: string;
+  @Input() id!: string;
 
   @Input()
   set margin(marval: string) {

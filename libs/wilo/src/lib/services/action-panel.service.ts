@@ -4,13 +4,13 @@ import { ActionPanelConfig } from '../models';
 
 @Injectable({providedIn: 'root'})
 export class ActionPanelService {
-    panelState = new BehaviorSubject<{[id: string]: ActionPanelConfig}>(null);
+    panelState = new BehaviorSubject<{[id: string]: ActionPanelConfig} | null>(null);
 
     setActionPanel(actionPanels: {[id: string]: ActionPanelConfig}): void {
         this.panelState.next(actionPanels);
     }
 
     get panelActions$(): Observable<{[id: string]: ActionPanelConfig}> {
-        return this.panelState.asObservable();
+        return this.panelState.asObservable() as Observable<{[id: string]: ActionPanelConfig}> ;
     }
 }

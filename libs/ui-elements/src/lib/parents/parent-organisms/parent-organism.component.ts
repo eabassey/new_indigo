@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormGroup, Validators, FormControl, AbstractControlOptions } from '@angular/forms';
-import { CustomValidators, cleanUpSub, dirtyPatchIntoForm, inlineRecursiveMerge } from '@indigo/utilities';
+import { CustomValidators, cleanUpSub } from '@indigo/utilities';
 
 export interface DefaultOrganismConfig {
   parentForm?: FormGroup;
@@ -31,13 +31,7 @@ export abstract class ParentOrganismComponent<OrganismData, OrganismConfig = Def
     return cleanUpSub;
   }
 
-  get dirtyPatchIntoForm() {
-    return dirtyPatchIntoForm;
-  }
 
-  get inlineRecursiveMerge() {
-    return inlineRecursiveMerge;
-  }
 
   get Validators() {
     return Validators;

@@ -37,7 +37,7 @@ export class LocalAuthInterceptorService implements HttpInterceptor {
   // }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const localHeadersConf = { ...this.headersConfig };
+    const localHeadersConf: any = { ...this.headersConfig };
     if (
       request.url.includes('/api/v2/auth/login/') ||
       request.url.includes('v1/auth/azure/') ||

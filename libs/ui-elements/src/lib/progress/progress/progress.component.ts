@@ -4,24 +4,21 @@ import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } 
   selector: 'flx-progress',
   templateUrl: './progress.component.html',
   styleUrls: ['./progress.component.css'],
-  encapsulation: ViewEncapsulation.Native,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FLXProgressComponent implements OnInit {
   private _unit = '%';
-  private _value: number;
-  private _max;
-  private _mode;
 
-  unitCount: number;
-  maxinput: number;
-  width: string;
-  valueinput: number;
+
+  unitCount!: number;
+  maxinput!: number;
+  width!: string;
+  valueinput!: number;
   modeClass = '';
   progressClass = '';
   // isPercentage: boolean ;
-  displayUnit: boolean;
-  displayMax: boolean;
+  displayUnit!: boolean;
+  displayMax!: boolean;
 
   isMetricRequired = false;
 

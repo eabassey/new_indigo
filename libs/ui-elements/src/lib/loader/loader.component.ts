@@ -13,7 +13,7 @@ export class FLXLoaderComponent implements OnInit, OnDestroy {
   showText = true;
   dotInterval: any;
 
-  @ViewChild('loadingDots', { static: false }) dots: ElementRef;
+  @ViewChild('loadingDots', { static: false }) dots!: ElementRef;
 
   @Input() loadingMessage: string = 'Loading';
   @Input() disableBackground: boolean = false;

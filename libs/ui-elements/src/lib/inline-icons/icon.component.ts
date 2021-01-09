@@ -23,26 +23,26 @@ import { IconTypes } from './icon-types';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ERIconComponent implements OnInit, OnDestroy {
-  private _size: string = null;
-  private _color: string = null;
-  private _type: IconTypes = 'circle-add';
-  private _instruction: string = null;
-  private _hoverColor: string = null;
-  private _activeColor: string = null;
+  private _size: string = '';
+  private _color: string = '';
+  private _type: IconTypes | string = 'circle-add';
+  private _instruction: string = '';
+  private _hoverColor: string = '';
+  private _activeColor: string = '';
   private _enabled = false;
-  private _isClickable: boolean;
-  private _hasBackground: string;
+  private _isClickable!: boolean;
+  private _hasBackground!: string;
 
-  iconSize: string;
-  iconColor: string;
-  iconHover: string;
-  iconActive: string;
+  iconSize!: string;
+  iconColor!: string;
+  iconHover!: string;
+  iconActive!: string;
 
-  iconProperties: string;
+  iconProperties!: string;
   svgPaths = '';
 
-  @ViewChild('svgPaths', { static: true }) innerSVG: ElementRef;
-  @ViewChild('customIcon', { static: true }) icon: ElementRef;
+  @ViewChild('svgPaths', { static: true }) innerSVG!: ElementRef;
+  @ViewChild('customIcon', { static: true }) icon!: ElementRef;
 
   @Input() layout: 'right' | 'left' | 'bottom' | 'rounded' | 'center' | 'none' = 'none';
   @Input() use: 'default' | 'button' | 'action-panel' | 'center' | 'app-bar' = 'default';
@@ -186,7 +186,7 @@ export class ERIconComponent implements OnInit, OnDestroy {
   }
 
   /* ============================= ICON TYPES ============================= */
-  @Input() set type(icon: IconTypes) {
+  @Input() set type(icon: IconTypes | string) {
     // Copy only the icon paths here (inside the <g></g> tags)
     this._type = icon;
     switch (icon) {
@@ -1386,7 +1386,7 @@ export class ERIconComponent implements OnInit, OnDestroy {
       // console.log('Cannot read SVG path');
     }
   }
-  get type(): IconTypes {
+  get type(): IconTypes | string {
     return this._type;
   }
 

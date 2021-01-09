@@ -3,7 +3,7 @@ import * as moment from 'moment';
 import { toInteger, toFloat } from './conversions';
 
 export function CheckAllKeysProviedExistInObject(
-  obj: object,
+  obj: {[id: string]: any} = {},
   keyList: Array<string>,
   exactCheck = false,
   noNulls = false
@@ -58,7 +58,7 @@ export const isUndefined = (obj: object): boolean => obj === undefined;
  * these functions return false when there is no error and true when there is
  * @param val value to check, will cast to a string
  */
-export const checkAlphaNumeric = val => (val + '').match(/\W/) !== null;
+export const checkAlphaNumeric = (val: any) => (val + '').match(/\W/) !== null;
 
 /**
  * ***
@@ -68,7 +68,7 @@ export const checkAlphaNumeric = val => (val + '').match(/\W/) !== null;
  * @returns true when anything matches
  * @returns false when nothing matches
  */
-export const checkExclusionPattern = (val, pattern: RegExp) => pattern.test(`${val}`);
+export const checkExclusionPattern = (val: any, pattern: RegExp) => pattern.test(`${val}`);
 
 /**
  * ***
@@ -78,41 +78,41 @@ export const checkExclusionPattern = (val, pattern: RegExp) => pattern.test(`${v
  * @returns true when nothing matches
  * @returns false when there is something that matchs
  */
-export const checkInclusionPattern = (val, pattern: RegExp) => !pattern.test(`${val}`);
+export const checkInclusionPattern = (val: any, pattern: RegExp) => !pattern.test(`${val}`);
 
 /**
  *
  * these functions return false when there is no error and true when there is
  * @param val value to check, will cast to a string
  */
-export const checkAlphaNumericWithSpacesDot = val => (val + '').match(/[^\w .]+/) !== null;
+export const checkAlphaNumericWithSpacesDot = (val: any) => (val + '').match(/[^\w .]+/) !== null;
 
 /**
  *
  * these functions return false when there is no error and true when there is
  * @param val value to check, will cast to a string
  */
-export const checkAlphaNumericWithSpacesDotDash = val => (val + '').match(/[^\w .-]+/) !== null;
+export const checkAlphaNumericWithSpacesDotDash = (val: any) => (val + '').match(/[^\w .-]+/) !== null;
 
 /**
  *
  * these functions return false when there is no error and true when there is
  * @param val value to check, will cast to a string
  */
-export const checkAlphaNumericWithSpaces = val => (val + '').match(/[^\w ]+/) !== null;
+export const checkAlphaNumericWithSpaces = (val: any) => (val + '').match(/[^\w ]+/) !== null;
 /**
  *
  * these functions return false when there is no error and true when there is
  * @param val value to check, will cast to a string
  */
-export const checkCharactersWithSpaces = val => (val + '').match(/^[a-zA-Z\s]*$/) !== null;
+export const checkCharactersWithSpaces = (val: any) => (val + '').match(/^[a-zA-Z\s]*$/) !== null;
 
 /**
  *
  * these functions return false when there is no error and true when there is
  * @param val value to check, will cast to a string
  */
-export const checkCellphone = val => {
+export const checkCellphone = (val: any) => {
   if ((val + '').match(/[^0-9-()+ ]/) === null) {
     const res = (val + '').match(/[0-9]/g);
     return res === null || res.length < 6 ? true : false;
@@ -126,28 +126,28 @@ export const checkCellphone = val => {
  * these functions return false when there is no error and true when there is
  * @param val value to check,
  */
-export const checkNoSpaces = val => (val + '').match(/\s/g) !== null;
+export const checkNoSpaces = (val: any) => (val + '').match(/\s/g) !== null;
 
 /**
  *
  * these functions return false when there is no error and true when there is
  * @param val value to check,
  */
-export const checkDate = val => !moment(val).isValid();
+export const checkDate = (val: any) => !moment(val).isValid();
 
 /**
  *
  * these functions return false when there is no error and true when there is
  * @param val value to check, will cast to a string
  */
-export const checkFutureDate = val => moment(val).isAfter(moment.now());
+export const checkFutureDate = (val: any) => moment(val).isAfter(moment.now());
 
 /**
  * these functions return false when there is no error and true when there is
  *
  * @param value
  */
-export const checkNumber = val => (val + '').match(/\D+/) !== null;
+export const checkNumber = (val: any) => (val + '').match(/\D+/) !== null;
 
 /**
  * Checks that Value is a currency shape
@@ -156,14 +156,14 @@ export const checkNumber = val => (val + '').match(/\D+/) !== null;
  *
  * @param value
  */
-export const checkCurrency = val => !RegExp(/^\d*(\.\d{0,2})?$/).test(val + '');
+export const checkCurrency = (val: any) => !RegExp(/^\d*(\.\d{0,2})?$/).test(val + '');
 
 /**
  *
  * these functions return false when there is no error and true when there is
  * @param val
  */
-export const checkEmail = val =>
+export const checkEmail = (val: any) =>
   (val + '').match(
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/g
   ) === null;
@@ -225,7 +225,7 @@ export const checkLength = (val: string, len: number) => ((val + '').length > le
 /**
  * will return true if null undefined or empty is found
  */
-export const checkForNullUndefinedOrEmptyInObject = val => {
+export const checkForNullUndefinedOrEmptyInObject = (val: any) => {
   // for each key in the object
   return Object.keys(val).reduce((retVal, key) => {
     // check each defined key for null blank 0 undefined or empty if so return true else return prev
@@ -255,42 +255,42 @@ export class CustomValidators {
    * @emits Validator Function
    * @param siblingName This is  the name of the sibling control to poke
    */
-  static pokeSibling = (siblingName: string) => {
-    return (control: AbstractControl): null => {
-      if (control.parent) {
-        const sibling: AbstractControl = control.parent.controls[siblingName];
-        if (sibling) {
-          sibling.markAsDirty({ onlySelf: true });
-          sibling.markAsTouched({ onlySelf: true });
-          sibling.updateValueAndValidity({ onlySelf: true });
-          return null;
-        }
-        return null;
-      }
-      return null;
-    };
-  };
+  // static pokeSibling = (siblingName: string) => {
+  //   return (control: AbstractControl): null => {
+  //     if (control.parent) {
+  //       const sibling: AbstractControl = control.parent.controls[siblingName];
+  //       if (sibling) {
+  //         sibling.markAsDirty({ onlySelf: true });
+  //         sibling.markAsTouched({ onlySelf: true });
+  //         sibling.updateValueAndValidity({ onlySelf: true });
+  //         return null;
+  //       }
+  //       return null;
+  //     }
+  //     return null;
+  //   };
+  // };
 
   // Aleks TODO: add generic---->
-  static cleanSiblingOnValue = (valueToCheck: any, ...siblingNames: string[]) => {
-    return (control: AbstractControl): null => {
-      if (control.parent) {
-        if (control.value === valueToCheck) {
-          for (const sibName of siblingNames) {
-            if (!!sibName) {
-              const sibling: AbstractControl = control.parent.controls[sibName];
-              if (sibling && sibling.value !== null) {
-                // console.log({ sibling });
-                sibling.setValue(null);
-              }
-            }
-          }
-        }
-        return null;
-      }
-      return null;
-    };
-  };
+  // static cleanSiblingOnValue = (valueToCheck: any, ...siblingNames: string[]) => {
+  //   return (control: AbstractControl): null => {
+  //     if (control.parent) {
+  //       if (control.value === valueToCheck) {
+  //         for (const sibName of siblingNames) {
+  //           if (!!sibName) {
+  //             const sibling: AbstractControl = control.parent.controls[sibName];
+  //             if (sibling && sibling.value !== null) {
+  //               // console.log({ sibling });
+  //               sibling.setValue(null);
+  //             }
+  //           }
+  //         }
+  //       }
+  //       return null;
+  //     }
+  //     return null;
+  //   };
+  // };
 
   /**
    * used to check a date is not in the future

@@ -15,8 +15,8 @@ import { CoreServices } from '../services';
     `
 })
 export class NodeRouterComponent {
-    @Input() organisms;
-    @Input() compInstances;
+    @Input() organisms!: any;
+    @Input() compInstances!: any[];
     constructor(private svc: CoreServices) {}
 
     componentCreated(compRef: ComponentRef<any>) {

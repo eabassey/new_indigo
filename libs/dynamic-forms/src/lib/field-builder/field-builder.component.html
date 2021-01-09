@@ -1,6 +1,6 @@
 <div [hidden]="isHidden$ | async" [class]="field.controlGroupClasses" [formGroup]="form">
     <label [class]="field.labelClasses" [attr.for]="field.label">
-      {{field?.label | fsToHuman }}
+      {{(field?.label || '') | fsToHuman }}
       <!-- <strong class="text-danger" *ngIf="showRequiredSign">*</strong> -->
     </label>
     <ng-container [ngSwitch]="field.type">
@@ -12,7 +12,7 @@
       <file [disabled]="isDisabled$ | async" *ngSwitchCase="'file'" [field]="field" [form]="form"></file> -->
       <div class="alert alert-danger my-1 p-2 fadeInDown animated" *ngIf="!isValid && isDirty">
         <div *ngFor="let key of errorKeys">
-          <div *ngIf="fieldErrors[key]">{{errorMessages[key]}}</div>
+          <div *ngIf="fieldErrors && fieldErrors[key]">{{errorMessages[key]}}</div>
         </div>
       </div>
     </ng-container>

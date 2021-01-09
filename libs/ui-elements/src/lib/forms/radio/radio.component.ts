@@ -15,9 +15,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ],
 })
 export class FLXRadioComponent implements OnInit, ControlValueAccessor {
-  value: string;
-  onChange: () => void;
-  onTouch: () => void;
+  value!: string;
+  onChange!: () => void;
+  onTouch!: () => void;
 
   private _checked = false;
   private _disabled = false;
@@ -47,8 +47,8 @@ export class FLXRadioComponent implements OnInit, ControlValueAccessor {
     return this._disabled;
   }
 
-  @Input() id: string;
-  @Input() name: string;
+  @Input() id!: string;
+  @Input() name!: string;
 
   // Radio Stacked
 

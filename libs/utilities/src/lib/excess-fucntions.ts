@@ -16,7 +16,7 @@
 
 export function findExcessRow(jobId: any, excess: any[]): any {
   // console.log({ search: excess, for: jobId });
-  const res = [];
+  const res: any[] = [];
   excess.forEach((entry) => {
     if (entry['job_id'] === jobId) {
       if (entry['reason'] === 'Standard Excess') {

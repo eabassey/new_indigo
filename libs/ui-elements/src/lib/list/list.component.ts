@@ -22,7 +22,7 @@ export class FLXListAtom extends ParentAtom {
   // ============================================= Inputs =============================================================
   private readonly defaultHeadingType = FLXListAtomHeadingType.none;
   @Input() headingType: FLXListAtomHeadingType = this.defaultHeadingType;
-  @Input() ItemList: ListAtomData;
+  @Input() ItemList!: ListAtomData;
   get columnHeadingClasses() {
     switch (this.headingType) {
       case FLXListAtomHeadingType['row-headings']:

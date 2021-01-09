@@ -17,24 +17,24 @@ import { returnOrDefault } from '@indigo/utilities';
 export class FLXTextareaComponent implements OnInit, ControlValueAccessor {
   constructor(private _fb: FormBuilder) {}
 
-  private _autoFocus: boolean;
-  private _cols: number;
-  private _disabled: boolean;
+  private _autoFocus!: boolean;
+  private _cols!: number;
+  private _disabled!: boolean;
   private _defaultValue = '';
-  private _form: string;
-  private _inFocus: boolean;
-  private _textArea: HTMLTextAreaElement;
-  private _maxLength: number;
-  private _name: string;
+  private _form!: string;
+  private _inFocus!: boolean;
+  private _textArea!: HTMLTextAreaElement;
+  private _maxLength!: number;
+  private _name!: string;
   private _placeholder = '';
-  private _readonly: boolean;
-  private _rows: number;
+  private _readonly!: boolean;
+  private _rows!: number;
   private _type = 'textarea';
   private _value = '';
-  private _wrap: string;
-  private _width: string;
+  private _wrap!: string;
+  private _width!: string;
 
-  @Input() id: string;
+  @Input() id!: string;
 
   @ViewChild('inputElement', { static: true })
   set input(input: ElementRef<HTMLTextAreaElement>) {
@@ -146,7 +146,7 @@ export class FLXTextareaComponent implements OnInit, ControlValueAccessor {
     //  console.log('Width for text area' + this._width);
   }
   get width() {
-    return returnOrDefault(`${this._width}`);
+    return returnOrDefault(`${this._width}`, '');
   }
 
   @Input()
@@ -154,7 +154,7 @@ export class FLXTextareaComponent implements OnInit, ControlValueAccessor {
     this._maxLength = mL;
   }
   get maxLength() {
-    return returnOrDefault(this._maxLength);
+    return returnOrDefault(this._maxLength, 0);
   }
 
   get inFocus() {

@@ -8,8 +8,8 @@ import { IconTypes } from '../../inline-icons/icon-types';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FLXAlertComponent implements OnInit {
-  private _title: string;
-  private _message: string;
+  private _title!: string;
+  private _message!: string;
   private _type = 'primary';
 
   styleClasses = {

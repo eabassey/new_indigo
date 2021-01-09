@@ -16,10 +16,10 @@ import { FLXModalComponent } from '@indigo/ui-elements';
   ]
 })
 export class ErrorHandlerComponent implements OnInit, OnDestroy {
-  node;
-  nodeSub: Subscription;
-  loginPageError$;
-  @ViewChild(FLXModalComponent, { static: true }) warningModal: FLXModalComponent;
+  node!: any;
+  nodeSub!: Subscription;
+  loginPageError$!: any;
+  @ViewChild(FLXModalComponent, { static: true }) warningModal!: FLXModalComponent;
 
   constructor(private store: Store<any>) {}
 
@@ -39,11 +39,11 @@ export class ErrorHandlerComponent implements OnInit, OnDestroy {
     }
   }
 
-  autoRetry(retryCall) {
+  autoRetry(retryCall: any) {
     // retry action...
   }
 
-  retry(retryCall) {
+  retry(retryCall: any) {
     // this.store.dispatch(new RemoveError({ dataKey: retryCall.dataKey }));
     // this.store.dispatch(new MakeServerCall({ ...retryCall }));
   }

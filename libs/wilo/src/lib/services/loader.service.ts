@@ -1,11 +1,11 @@
 import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { map, tap, delay } from 'rxjs/operators';
-import * as remove from 'lodash.remove';
+import {remove} from 'lodash';
 
 @Injectable({providedIn: 'root'})
 export class LoaderService {
-    private tracker = [];
+    private tracker: string[] = [];
     private loader$ = new BehaviorSubject<any>(this.tracker);
 
     get loading$() {
@@ -18,7 +18,7 @@ export class LoaderService {
     }
 
     remove(loaderId: string) {
-        remove(this.tracker, n => n === loaderId);
+        remove(this.tracker, (n: string) => n === loaderId);
         this.loader$.next(this.tracker);
     }
 }

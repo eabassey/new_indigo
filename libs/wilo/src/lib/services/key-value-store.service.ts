@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable({providedIn: 'root'})
 export class KeyValueStoreService {
-  private store = {};
+  private store: {[id: string]: any} = {};
 
   getItem(key: string) {
     return this.store[key];

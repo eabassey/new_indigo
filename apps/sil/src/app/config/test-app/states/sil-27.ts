@@ -44,8 +44,10 @@ export const SIL_27: StateConfig = {
       navs: [
         {text: 'To Workflow',
         onClick: (svc) => {
-          const url = svc.keyValueStore.getItem('workflowURL');
-          svc.router.navigateByUrl(url);
+          if (svc) {
+            const url = svc.keyValueStore.getItem('workflowURL');
+            svc.router.navigateByUrl(url);
+          }
         } ,
         location: 'left'
       },
@@ -90,7 +92,7 @@ export const SIL_27: StateConfig = {
           key: 'fullItemOne',
           errorMessage: '',
           directCall: ({http}, route) => {
-            const claimId = route.snapshot.paramMap.get('jobId');
+            const claimId = route?.snapshot.paramMap.get('jobId');
             return of({val: 'test'});
           }
         }
@@ -152,7 +154,7 @@ export const SIL_27: StateConfig = {
     }
   },
   bigFormToStoreMapper: {
-    lastName: [(val, svc) => {
+    lastName: [(val: any, svc: any) => {
       // console.log({svcc: svc})
       return val.toUpperCase();
     }, 'name.foo']

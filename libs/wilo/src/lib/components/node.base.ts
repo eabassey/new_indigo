@@ -8,18 +8,18 @@ import { renderServerCalls, renderTemplateDefs, renderEvents, renderServerQuerie
 
 @Component({template: ''})
 export abstract class NodeBase implements OnDestroy, OnInit {
-    node: NodeConfig;
-    sub: Subscription;
-    compInstances = [];
-    serverQueriesSubs: Subscription[];
-    organisms = [
+    node!: NodeConfig;
+    sub!: Subscription;
+    compInstances: any[] = [];
+    serverQueriesSubs!: Subscription[];
+    organisms: any[] = [
         // {
         //   component: TestComponent,
         //   inputs: {},
         // },
       ];
-  serverCallsSubs: Subscription[];
-  eventsSub: Subscription[];
+  serverCallsSubs!: Subscription[];
+  eventsSub!: Subscription[];
 
     constructor(private svc: CoreServices, private route: ActivatedRoute) {}
 

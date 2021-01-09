@@ -40,7 +40,7 @@ export interface ModalNavButton {
 })
 export class FLXModalComponent implements OnInit, OnDestroy {
   private _color = '';
-  _type: string;
+  _type!: string;
   _close = false;
   _submit = true;
 
@@ -52,17 +52,17 @@ export class FLXModalComponent implements OnInit, OnDestroy {
     return Object.values(this.styleClasses);
   }
 
-  overlayRef: OverlayRef;
-  backdropSub: Subscription;
-  @ViewChild('overlayTemplate', { static: false }) overlayTemplate: CdkPortal;
-  @ViewChild('modalHeader', { static: false }) modalHeader: ElementRef;
-  @ViewChild('modalContent', { static: false }) modalContent: ElementRef;
+  overlayRef!: OverlayRef;
+  backdropSub!: Subscription;
+  @ViewChild('overlayTemplate', { static: false }) overlayTemplate!: CdkPortal;
+  @ViewChild('modalHeader', { static: false }) modalHeader!: ElementRef;
+  @ViewChild('modalContent', { static: false }) modalContent!: ElementRef;
 
   @Input() backgroundClose = false; // if true, you can click the background to close
   @Input() message = '';
-  @Input() heading: string = null;
-  @Input() subheading: string = null;
-  @Input() navButtons: ModalNavButton[] = null;
+  @Input() heading: string = '';
+  @Input() subheading: string = '';
+  @Input() navButtons: ModalNavButton[] = [];
   @Input() displayHeading = true;
 
   @Input() set type(t: string) {
@@ -130,7 +130,7 @@ export class FLXModalComponent implements OnInit, OnDestroy {
     this._submit = t === 'true' ? true : false;
   }
   get submitButton() {
-    return returnOrDefault(this._submit);
+    return returnOrDefault(this._submit, false);
   }
 
   // ======================================== General Methods ========================================
@@ -211,7 +211,7 @@ export class FLXModalComponent implements OnInit, OnDestroy {
     this.subheading = heading;
   }
 
-  takeButtonAction(button) {
+  takeButtonAction(button: any) {
     // append Click handler from navs manifest
     if (button.clickHandler) {
       button.clickHandler(button);
@@ -242,11 +242,11 @@ export class FLXModalComponent implements OnInit, OnDestroy {
 
   clearData() {
     // this.navButtons = null;
-    this.heading = null;
+    this.heading = '';
     if (!!this.modalContent) {
       this.modalContent.nativeElement.innerHTML = '';
       this.message = '';
-      this.subheading = null;
+      this.subheading = '';
     }
   }
 }

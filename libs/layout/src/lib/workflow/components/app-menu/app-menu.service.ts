@@ -24,7 +24,7 @@ const DEFAULT_CONFIG: AppMenuConfig = {
 
 @Injectable()
 export class AppMenuOverlayService {
-  appMenuRef: AppMenuOverlayRef;
+  appMenuRef!: AppMenuOverlayRef;
   constructor(private injector: Injector, private overlay: Overlay, private actions$: Actions) {}
 
   open(config: AppMenuConfig = {}) {

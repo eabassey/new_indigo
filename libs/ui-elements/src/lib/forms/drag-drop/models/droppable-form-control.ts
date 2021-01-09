@@ -8,7 +8,7 @@ export abstract class DroppableFormControl {
     this._dropReceiver = /(true|t)/gi.test(`${v}`) || v === null || v === undefined || v === '' ? true : false;
   }
 
-  private _dropReceiver;
+  private _dropReceiver!: any;
 
   /**
    * @override this , this method will eb called on a drop event, by implementing this class
@@ -27,8 +27,8 @@ export abstract class DroppableFormControl {
     if (this._dropReceiver === true) {
       // console.log(e);
       // console.log(e.dataTransfer.getData('erDragDrop'));
-      const dragData = e.dataTransfer.getData('erDragDrop');
-      this.processDrop(dragData);
+      const dragData = e?.dataTransfer?.getData('erDragDrop');
+      this.processDrop(dragData as string);
     }
   }
 

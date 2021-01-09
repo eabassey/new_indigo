@@ -9,9 +9,9 @@ import { Store } from '@ngrx/store';
   pure: false,
 })
 export class SpSkillNamePipe implements PipeTransform {
-  transform(spSkillId: number, skills: any): string {
+  transform(spSkillId: any, skills: any): string {
     if (skills.length > 0) {
-      const current = skills.find((currentSkill) => currentSkill.id === spSkillId[0]);
+      const current = skills.find((currentSkill: any) => currentSkill.id === spSkillId[0]);
       return current.name || 'NA';
     }
     return 'NA';

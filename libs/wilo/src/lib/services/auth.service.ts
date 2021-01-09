@@ -5,7 +5,7 @@ import { IAuthService } from './i-auth.service';
 
 @Injectable({providedIn: 'root'})
 export class AuthService implements IAuthService {
-    setUser(user) {
+    setUser(user: any) {
       throw new Error('');
     }
     logout(): Promise<void> {

@@ -24,7 +24,7 @@ export class NodeFooterButtonComponent implements OnInit {
   private _color = '';
   private _size = '';
   private _display = '';
-  private _maxWidth;
+  private _maxWidth!: any;
   styleClasses = {
     colorClass: 'button--colour-default',
     sizeClass: 'button--size-default',
@@ -35,9 +35,9 @@ export class NodeFooterButtonComponent implements OnInit {
     shapeClass: ''
   };
 
-  public arrClasses: string[];
-    @Input() nav: FooterButtonConfig;
-    @Input() compInstances; // Array of instances in order
+  public arrClasses!: string[];
+    @Input() nav!: FooterButtonConfig;
+    @Input() compInstances!: any[]; // Array of instances in order
     constructor(private svc: CoreServices, private route: ActivatedRoute) {}
 
     ngOnInit() {
@@ -58,7 +58,7 @@ export class NodeFooterButtonComponent implements OnInit {
     }
 
     get isDisabled(): Observable<boolean> {
-        return this.nav.disable ? this.nav.visible(this.svc, this.route) : of(false);
+        return this.nav.disable ? this.nav.disable(this.svc, this.route) : of(false);
     }
 
      // Button Color

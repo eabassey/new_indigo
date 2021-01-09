@@ -7,6 +7,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FLXNoResultsComponent {
-  @Input() message: string;
+  @Input() message!: string;
   constructor() {}
 }

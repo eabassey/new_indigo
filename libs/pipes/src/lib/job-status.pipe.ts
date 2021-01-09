@@ -6,7 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class JobStatusPipe implements PipeTransform {
 
   transform(value: string | number): string {
-    let jobStatus: string;
 
     switch (value) {
       case 1:
@@ -14,35 +13,30 @@ export class JobStatusPipe implements PipeTransform {
       case 5:
       case 105:
       case 'None': {
-        jobStatus = 'Valid Claim';
-        break;
+        return 'Valid Claim';
       }
       case 2:
       case 102: {
-        jobStatus = 'Repudiated Job';
-        break;
+        return 'Repudiated Job';
       }
       case 3:
       case 103: {
-        jobStatus = 'Private Work Job';
-        break;
+        return 'Private Work Job';
       }
       case 4:
       case 104: {
-        jobStatus = 'Job Cancelled';
-        break;
+        return 'Job Cancelled';
       }
       case 6:
       case 106: {
-        jobStatus = 'Warranty Claim';
-        break;
+        return 'Warranty Claim';
       }
       case '-': {
-        jobStatus = '-';
-        break;
+        return '-';
       }
+      default:
+        return '';
     }
-    return jobStatus;
   }
 
 }

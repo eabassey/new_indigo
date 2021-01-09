@@ -17,9 +17,9 @@ import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Output } 
 export class FLXRatingComponent implements ControlValueAccessor {
   @Output() click = new EventEmitter();
   ratings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  onTouch;
-  onChange;
-  value: number;
+  onTouch!: any;
+  onChange!: any;
+  value!: number;
   isDisabled = false;
   touched = false;
 

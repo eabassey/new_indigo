@@ -16,7 +16,7 @@ import { Directive, HostListener, Input, ElementRef, Renderer2, OnInit } from '@
 export class HoverClickCopyDirective implements OnInit {
   selectedText: any;
   selected: any;
-  copysuccess: boolean;
+  copysuccess: boolean = false;
   _ElTypeMatch: boolean;
   dFrag: any;
   fragDiv: any;
@@ -41,9 +41,9 @@ export class HoverClickCopyDirective implements OnInit {
    */
   // =========================== INPUTS ================================== /
 
-  @Input('hoverClickCopy') highlightColor: string;
-  @Input() defaultColor: string;
-  @Input() set override(x) {
+  @Input('hoverClickCopy') highlightColor!: string;
+  @Input() defaultColor!: string;
+  @Input() set override(x: any) {
     this._ElTypeMatch = x || true;
   }
 
@@ -90,7 +90,7 @@ export class HoverClickCopyDirective implements OnInit {
     if (this._ElTypeMatch === false) {
       return;
     }
-    this.highlight(null);
+    this.highlight('');
     this.clearId();
   }
   @HostListener('mouseup') onmouseup() {
@@ -108,9 +108,7 @@ export class HoverClickCopyDirective implements OnInit {
 
   private getSelectionText() {
     if (window.getSelection) {
-      this.selectedText = window
-        .getSelection()
-        .toString()
+      this.selectedText = window?.getSelection()?.toString()
         .trim();
       this.selected = this.copySelectedText();
     }
@@ -123,7 +121,7 @@ export class HoverClickCopyDirective implements OnInit {
     }
     return this.copysuccess;
   }
-  private selectText(element) {
+  private selectText(element: any) {
     if (/INPUT|TEXTAREA/i.test(element.tagName)) {
       element.focus();
       if (element.setSelectionRange) {
@@ -134,7 +132,7 @@ export class HoverClickCopyDirective implements OnInit {
       return;
     }
     if (window.getSelection) {
-      window.getSelection().selectAllChildren(element);
+      window?.getSelection()?.selectAllChildren(element);
     }
   }
   private highlight(color: string) {

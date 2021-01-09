@@ -58,7 +58,7 @@ export class FLXCardComponent {
     return FLXCardClickLocation;
   }
 
-  private _config: FLXCardConfig;
+  private _config!: FLXCardConfig;
 
   @Input() set config(c: FLXCardConfig) {
     this._config = { ...FLXCardComponent.defaultConfig, ...c };
@@ -68,10 +68,10 @@ export class FLXCardComponent {
     return returnOrDefault(this._config, FLXCardComponent.defaultConfig);
   }
 
-  private _expanded: boolean;
+  private _expanded: boolean | undefined;
 
   get expanded() {
-    return this._expanded;
+    return !!this._expanded;
   }
 
   @Input()
@@ -87,9 +87,9 @@ export class FLXCardComponent {
   }
 
   handleClick(origin: FLXCardClickLocation) {
-    if (this._config.expansionToggles[origin] === true) {
-      this._expanded = !this._expanded;
-    }
+    // if (this._config && this._config.expansionToggles[origin] === true) {
+    //   this._expanded = !this._expanded;
+    // }
   }
 
   ngOnInit() {}

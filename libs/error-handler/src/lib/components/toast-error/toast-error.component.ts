@@ -9,10 +9,10 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './toast-error.component.html',
 })
 export class ToastErrorComponent implements OnInit, OnDestroy {
-  @Input() errorMessage;
-  errors;
-  errorsSub: Subscription;
-  errorKeys = [];
+  @Input() errorMessage!: any;
+  errors!: any;
+  errorsSub!: Subscription;
+  errorKeys: any[] = [];
 
   @Output() cancel = new EventEmitter<string>();
   @Output() retry = new EventEmitter<any>();
@@ -33,7 +33,7 @@ export class ToastErrorComponent implements OnInit, OnDestroy {
     // this.store.dispatch(new RemoveError({ dataKey: key }));
   }
 
-  onRetry(retryCall) {
+  onRetry(retryCall: any) {
     this.retry.emit(retryCall);
     // this.store.dispatch(new RemoveError({ dataKey: retryCall.dataKey }));
     // this.store.dispatch(new MakeServerCall({ ...retryCall }));

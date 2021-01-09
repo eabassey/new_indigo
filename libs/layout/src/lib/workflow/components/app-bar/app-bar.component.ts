@@ -14,12 +14,12 @@ import { AppConfig, CoreServices, StateConfig } from '@wilo';
   styleUrls: ['app-bar.component.scss']
 })
 export class FLXAppBarComponent implements OnInit, OnChanges, OnDestroy {
-  state: StateConfig;
+  state!: StateConfig;
   openAppMenu = false;
-  title$: Observable<string>;
-  networkCheckSubscription: Subscription;
-  settings: any;
-  state$: Observable<StateConfig>;
+  title$!: Observable<string>;
+  networkCheckSubscription!: Subscription;
+  settings!: any;
+  state$!: Observable<StateConfig | null>;
   hamburgerIcon = 'app-menu-hamburger';
 
   // TODO: Offline checking needs to be added

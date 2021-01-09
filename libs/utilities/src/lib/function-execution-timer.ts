@@ -3,7 +3,7 @@ export class FunctionExecutionTimer {
   // ===========================================  Variables ===========================================================
   // ---------------------------------------- Internal Variables ------------------------------------------
   // The timer being executed and controlled by this class
-  private _currentTimer: Subscription;
+  private _currentTimer!: Subscription | null;
   // The name of this Timer
   private _name: string;
   // the function that this timer will execute
@@ -26,11 +26,11 @@ export class FunctionExecutionTimer {
   // ============================================= setters ============================================================
 
   set toDoFn(val: any) {
-    this.reset(null, val);
+    // this.reset(null, val);
   }
 
   set dueTime(val: number | Date) {
-    this.reset(val);
+    // this.reset(val);
   }
   // ============================================ Constructor =========================================================
   /**
@@ -39,7 +39,7 @@ export class FunctionExecutionTimer {
    * @param toDoFn new function to eb executed by this timer when it restarts
    * @param name The name for this timer, to be used as a way to reference a particular timer among a set
    */
-  constructor(dueTime: number | Date = null, toDoFn: () => void, name = '') {
+  constructor(dueTime: number | Date, toDoFn: () => void, name = '') {
     this._name = name;
     this._toDoFn = toDoFn;
     this._dueTime = dueTime;
@@ -59,7 +59,7 @@ export class FunctionExecutionTimer {
     }
 
     if (!this._currentTimer) {
-      this._currentTimer = timer(this._dueTime).subscribe(x => this._toDoFn(x));
+      this._currentTimer = timer(this._dueTime).subscribe(x => this._toDoFn());
     }
   }
 
@@ -74,20 +74,6 @@ export class FunctionExecutionTimer {
     }
   }
 
-  /**
-   * Used to re-start the timer
-   * @param dueTime the ms till this must execute or the date on which this must execute
-   * @param toDoFn new function to eb executed by this timer when it restarts
-   */
-  reset(dueTime: number | Date = null, toDoFn: (_) => any = null) {
-    this.stop();
-    if (dueTime !== null) {
-      this._dueTime = dueTime;
-    }
-    if (toDoFn !== null) {
-      this._toDoFn = toDoFn;
-    }
-    this.start();
-  }
+
   // ------------------------------------------ Internal Methods ------------------------------------------
 }

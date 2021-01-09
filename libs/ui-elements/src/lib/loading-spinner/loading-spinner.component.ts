@@ -7,5 +7,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FLXLoadingSpinnerComponent {
-  @Input() type: string;
+  @Input() type!: string;
 }

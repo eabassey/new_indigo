@@ -11,7 +11,7 @@ export const defaultERCardListConfig: FLXCardListConfig = {};
   styleUrls: ['./card-list.component.scss'],
 })
 export class FLXCardListComponent {
-  private _config: FLXCardListConfig;
+  private _config!: FLXCardListConfig;
 
   @Input() set type(type: string) {}
 }

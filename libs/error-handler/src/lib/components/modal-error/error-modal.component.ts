@@ -9,16 +9,16 @@ import { getErrors } from '../../store';
   styleUrls: ['./error-modal.component.scss']
 })
 export class FLXErrorModalComponent implements OnInit, OnDestroy {
-  @Input() errorMessage;
-  @Input() node;
+  @Input() errorMessage!: any;
+  @Input() node!: any;
   // @Input() id: string;
   // @Input() NgModel: NgModel;
   // @Input() heading: string = '';
   // element: any;
   // _type: string;
-  errors;
-  errorsSub: Subscription;
-  errorKeys = [];
+  errors!: any;
+  errorsSub!: Subscription;
+  errorKeys: string[] = [];
 
   // @Input() set type(t: string) {
   //   this._type = t;
@@ -85,7 +85,7 @@ export class FLXErrorModalComponent implements OnInit, OnDestroy {
     });
   }
 
-  onAutoRetryCall(node, retryCall) {
+  onAutoRetryCall(node: any, retryCall: any) {
     if (node && node.errorHandler && node.errorHandler.retryPolicy === 'auto') {
       //
       this.autoRetry.emit({ retryInterval: 3000, retryCount: 3 });
@@ -101,7 +101,7 @@ export class FLXErrorModalComponent implements OnInit, OnDestroy {
     // this.store.dispatch(new RemoveError({ dataKey: key }));
   }
 
-  onRetry(retryCall) {
+  onRetry(retryCall: any) {
     this.retry.emit(retryCall);
     // this.store.dispatch(new RemoveError({ dataKey: retryCall.dataKey }));
     // this.store.dispatch(new MakeServerCall({ ...retryCall }));
@@ -126,7 +126,7 @@ export class FLXErrorModalComponent implements OnInit, OnDestroy {
   // }
 
   setMessage(content: any[]) {
-    const doc = document.getElementById('modal-content-output');
+    const doc = document.getElementById('modal-content-output') as HTMLElement;
     doc.innerHTML = '';
     content.forEach(element => {
       doc.innerHTML += element + '<br />';

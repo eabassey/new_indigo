@@ -23,7 +23,7 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
     `
 })
 export class Node1Component {
-    @Input() greeting: string;
+    @Input() greeting!: string;
     @Output() doWork = new EventEmitter();
     @Output() setFilter = new EventEmitter();
     @Output() resetFilter = new EventEmitter();

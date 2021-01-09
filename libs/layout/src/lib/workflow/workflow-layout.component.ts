@@ -21,8 +21,8 @@ import { AppConfig, StateConfig, NodeConfig, ClientConfig } from '@wilo';
     styleUrls: ['workflow-layout.component.scss']
 })
 export class WorkflowLayoutComponent extends ClientConfigBase {
-    isAuthenticated: boolean;
-    user;
+    isAuthenticated!: boolean;
+    user!: any;
 
     constructor(
                 svc: CoreServices,

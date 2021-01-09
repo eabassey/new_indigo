@@ -9,17 +9,18 @@ export class ExcessCollectionPipe implements PipeTransform {
     let excessCollectionString: string;
     switch (value) {
       case 1:
-        excessCollectionString = 'Standard Insurance to collect excess';
+        return 'Standard Insurance to collect excess';
         break;
       case 2:
         if (args === 1) {
-          excessCollectionString = 'Team Leader to collect excess';
+          return 'Team Leader to collect excess';
         } else {
-          excessCollectionString = 'SP Handler to collect excess';
+          return 'SP Handler to collect excess';
         }
         break;
+        default:
+          return '';
     }
-    return excessCollectionString;
   }
 
 }

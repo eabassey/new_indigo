@@ -9,8 +9,8 @@ import { CoreServices } from '@wilo';
   styleUrls: ['app-footer.component.scss']
 })
 export class AppFooterComponent implements OnInit {
-  activeNode$;
-  compInstances$;
+  activeNode$!: any;
+  compInstances$!: any;
   constructor(private svc: CoreServices) {}
 
   ngOnInit() {

@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class DomHandler {
   public static zindex: number = 1000;
 
-  private calculatedScrollbarWidth: number = null;
+  private calculatedScrollbarWidth: number = 0;
 
   private browser: any;
 
@@ -163,7 +163,7 @@ export class DomHandler {
     return dimensions;
   }
 
-  public scrollInView(container, item) {
+  public scrollInView(container: any, item: any) {
     let borderTopValue: string = getComputedStyle(container).getPropertyValue('borderTopWidth');
     let borderTop: number = borderTopValue ? parseFloat(borderTopValue) : 0;
     let paddingTopValue: string = getComputedStyle(container).getPropertyValue('paddingTop');
@@ -182,7 +182,7 @@ export class DomHandler {
     }
   }
 
-  public fadeIn(element, duration: number): void {
+  public fadeIn(element: any, duration: number): void {
     element.style.opacity = 0;
 
     let last = +new Date();
@@ -200,7 +200,7 @@ export class DomHandler {
     tick();
   }
 
-  public fadeOut(element, ms) {
+  public fadeOut(element: any, ms: any) {
     var opacity = 1,
       interval = 50,
       duration = ms,
@@ -228,20 +228,20 @@ export class DomHandler {
     return (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0);
   }
 
-  public matches(element, selector: string): boolean {
-    var p = Element.prototype;
-    var f =
-      p['matches'] ||
-      p.webkitMatchesSelector ||
-      p['mozMatchesSelector'] ||
-      (p as any).msMatchesSelector ||
-      function(s) {
-        return [].indexOf.call(document.querySelectorAll(s), this) !== -1;
-      };
-    return f.call(element, selector);
-  }
+  // public matches(element: any, selector: string): boolean {
+  //   var p = Element.prototype;
+  //   var f =
+  //     p['matches'] ||
+  //     p.webkitMatchesSelector ||
+  //     p['mozMatchesSelector'] ||
+  //     (p as any).msMatchesSelector ||
+  //     function(s) {
+  //       return [].indexOf.call(document.querySelectorAll(s), this) !== -1;
+  //     };
+  //   return f.call(element, selector);
+  // }
 
-  public getOuterWidth(el, margin?) {
+  public getOuterWidth(el: any, margin?: any) {
     let width = el.offsetWidth;
 
     if (margin) {
@@ -252,17 +252,17 @@ export class DomHandler {
     return width;
   }
 
-  public getHorizontalPadding(el) {
+  public getHorizontalPadding(el: any) {
     let style = getComputedStyle(el);
     return parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
   }
 
-  public getHorizontalMargin(el) {
+  public getHorizontalMargin(el: any) {
     let style = getComputedStyle(el);
     return parseFloat(style.marginLeft) + parseFloat(style.marginRight);
   }
 
-  public innerWidth(el) {
+  public innerWidth(el: any) {
     let width = el.offsetWidth;
     let style = getComputedStyle(el);
 
@@ -270,7 +270,7 @@ export class DomHandler {
     return width;
   }
 
-  public width(el) {
+  public width(el: any) {
     let width = el.offsetWidth;
     let style = getComputedStyle(el);
 
@@ -278,7 +278,7 @@ export class DomHandler {
     return width;
   }
 
-  public getInnerHeight(el) {
+  public getInnerHeight(el: any) {
     let height = el.offsetHeight;
     let style = getComputedStyle(el);
 
@@ -286,7 +286,7 @@ export class DomHandler {
     return height;
   }
 
-  public getOuterHeight(el, margin?) {
+  public getOuterHeight(el: any, margin?: any) {
     let height = el.offsetHeight;
 
     if (margin) {
@@ -297,7 +297,7 @@ export class DomHandler {
     return height;
   }
 
-  public getHeight(el): number {
+  public getHeight(el: any): number {
     let height = el.offsetHeight;
     let style = getComputedStyle(el);
 
@@ -306,7 +306,7 @@ export class DomHandler {
     return height;
   }
 
-  public getWidth(el): number {
+  public getWidth(el: any): number {
     let width = el.offsetWidth;
     let style = getComputedStyle(el);
 
@@ -326,7 +326,7 @@ export class DomHandler {
     return { width: w, height: h };
   }
 
-  public getOffset(el) {
+  public getOffset(el: any) {
     let rect = el.getBoundingClientRect();
 
     return {
@@ -408,28 +408,28 @@ export class DomHandler {
     (element as any)[methodName].apply(element, args);
   }
 
-  clearSelection(): void {
-    if (window.getSelection) {
-      if (window.getSelection().empty) {
-        window.getSelection().empty();
-      } else if (
-        window.getSelection().removeAllRanges &&
-        window.getSelection().rangeCount > 0 &&
-        window
-          .getSelection()
-          .getRangeAt(0)
-          .getClientRects().length > 0
-      ) {
-        window.getSelection().removeAllRanges();
-      }
-    } else if (document['selection'] && document['selection'].empty) {
-      try {
-        document['selection'].empty();
-      } catch (error) {
-        //ignore IE bug
-      }
-    }
-  }
+  // clearSelection(): void {
+  //   if (window.getSelection) {
+  //     if (window.getSelection().empty) {
+  //       window.getSelection().empty();
+  //     } else if (
+  //       window.getSelection().removeAllRanges &&
+  //       window.getSelection().rangeCount > 0 &&
+  //       window
+  //         .getSelection()
+  //         .getRangeAt(0)
+  //         .getClientRects().length > 0
+  //     ) {
+  //       window.getSelection().removeAllRanges();
+  //     }
+  //   } else if (document['selection'] && document['selection'].empty) {
+  //     try {
+  //       document['selection'].empty();
+  //     } catch (error) {
+  //       //ignore IE bug
+  //     }
+  //   }
+  // }
 
   getBrowser() {
     if (!this.browser) {
@@ -467,7 +467,7 @@ export class DomHandler {
     };
   }
 
-  isInteger(value): boolean {
+  isInteger(value: any): boolean {
     if (Number.isInteger) {
       return Number.isInteger(value);
     } else {

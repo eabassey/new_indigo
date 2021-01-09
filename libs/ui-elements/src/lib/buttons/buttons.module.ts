@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FLXButtonSetOrganism } from './button-set/button-set.component';
 import { FLXButtonComponent } from './button/button.component';
 import { FLXButtonGroupComponent } from './button-group/button-group.component';
 import { FLXToggleButtonsComponent } from './button-toggle/button-toggle.component';
@@ -13,7 +12,6 @@ import { FLXIconModule } from '../inline-icons';
   declarations: [
     FLXButtonComponent,
     FLXButtonGroupComponent,
-    FLXButtonSetOrganism,
     FLXToggleButtonsComponent,
     FLXSvgButtonComponent,
     FLXAccordionButtonComponent,
@@ -21,7 +19,6 @@ import { FLXIconModule } from '../inline-icons';
   exports: [
     FLXButtonComponent,
     FLXButtonGroupComponent,
-    FLXButtonSetOrganism,
     FLXToggleButtonsComponent,
     FLXSvgButtonComponent,
     FLXAccordionButtonComponent,

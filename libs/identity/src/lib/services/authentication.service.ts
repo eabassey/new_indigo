@@ -21,7 +21,7 @@ export class AuthenticationService {
     Authorization: `Token ${localStorage.getItem('flexus.web.jwtToken')}`
   };
 
-  api_url: string;
+  api_url!: string;
 
   auth_urls = [];
 
@@ -80,7 +80,7 @@ export class AuthenticationService {
       const { api_url } = this.environment;
       console.log({credentials, config: this.identityConfig})
       return this._http
-        .post<any>(this.identityConfig.login_endpoint, {
+        .post<any>(this.identityConfig.login_endpoint as string, {
           user: credentials
         })
         .pipe(
@@ -101,9 +101,9 @@ export class AuthenticationService {
     }
   }
 
-  sendResetLink(email): any {
+  sendResetLink(email: any): any {
     return this._http
-      .post(this.identityConfig.send_reset_link_endpoint, {
+      .post(this.identityConfig.send_reset_link_endpoint as string, {
         email
       })
       .pipe(
@@ -140,6 +140,6 @@ export class AuthenticationService {
 
   getTokenExpirationDate(token: string): Date {
     const jwtHelper = new JwtHelperService();
-    return jwtHelper.getTokenExpirationDate(token);
+    return jwtHelper.getTokenExpirationDate(token) as Date;
   }
 }

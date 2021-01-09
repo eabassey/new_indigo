@@ -17,14 +17,14 @@ export class FLXButtonComponent implements OnInit, OnChanges {
   private _selected = '';
   private _disabled = false;
   private _tabIndex = -1;
-  private _maxWidth;
+  private _maxWidth!: any;
   private _align = 'center';
   private _title?: string;
   private _margin?: string;
   private _mustDisableOnLoad = false;
 
-  public arrClasses: string[];
-  public isLoading$: Observable<boolean>;
+  public arrClasses!: string[];
+  public isLoading$!: Observable<boolean>;
 
   @Output() clicked = new EventEmitter();
 
@@ -43,7 +43,7 @@ export class FLXButtonComponent implements OnInit, OnChanges {
     this._title = title;
   }
   get title() {
-    return this._title;
+    return this._title as string;
   }
 
   @Input()
@@ -61,7 +61,7 @@ export class FLXButtonComponent implements OnInit, OnChanges {
     this._margin = value;
   }
   get margin() {
-    return this._margin;
+    return this._margin as string;
   }
 
   // Button Color
@@ -212,7 +212,7 @@ export class FLXButtonComponent implements OnInit, OnChanges {
     return this._maxWidth;
   }
 
-  private _allCaps: boolean;
+  private _allCaps!: boolean;
   @Input()
   set allCaps(caps: boolean) {
     this._allCaps = caps;

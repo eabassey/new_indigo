@@ -3,7 +3,7 @@ import { timer } from 'rxjs';
 
 // const http$ = this.http.get<Course[]>('/api/courses');
 
-export const autoRetry = (obs$, retryInterval, retryCount) =>
+export const autoRetry = (obs$: any, retryInterval: any, retryCount: any) =>
   obs$.pipe(
     // tap(() => console.log('HTTP request executed')),
     // map(res => Object.values(res["payload"]) ),

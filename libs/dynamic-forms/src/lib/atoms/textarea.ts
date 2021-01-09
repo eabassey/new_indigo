@@ -13,8 +13,8 @@ import { FormGroup } from '@angular/forms';
 })
 export class TextAreaInputComponent {
     @Input() field: any = {};
-    @Input() form: FormGroup;
-    @Input() disabled: boolean;
+    @Input() form!: FormGroup;
+    @Input() disabled: boolean = false;
     get isValid() { return this.form.controls[this.field.name].valid; }
     get isDirty() { return this.form.controls[this.field.name].dirty; }
 

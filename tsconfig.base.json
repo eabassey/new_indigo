@@ -3,6 +3,10 @@
   "compilerOptions": {
     "rootDir": ".",
     "sourceMap": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
@@ -11,7 +15,7 @@
     "target": "es2015",
     "module": "esnext",
     "typeRoots": ["node_modules/@types"],
-    "lib": ["es2017", "dom"],
+    "lib": ["es2018", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
@@ -27,6 +31,11 @@
       "@indigo/dynamic-forms": ["libs/dynamic-forms/src/index.ts"],
       "@indigo/identity": ["libs/identity/src/index.ts"]
     }
+  },
+  "angularCompilerOptions": {
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
   },
   "exclude": ["node_modules", "tmp"]
 }

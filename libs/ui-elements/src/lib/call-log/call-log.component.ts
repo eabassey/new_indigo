@@ -49,7 +49,7 @@ export class FLXCallLogComponent implements OnInit {
 
   private _call_log: any;
 
-  @Input() location: string;
+  @Input() location!: string;
   locationClass = 'general-call-log';
 
   @Input()

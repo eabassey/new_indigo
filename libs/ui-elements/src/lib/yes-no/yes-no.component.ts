@@ -15,9 +15,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class YesNoComponent implements ControlValueAccessor {
-  onTouch;
-  onChange;
-  value: boolean = null;
+  onTouch!: (_?: any) => void;
+  onChange!: (_?: any) => void;
+  value: boolean = false;
   isDisabled = false;
   touched = false;
   @Output() buttonClick: EventEmitter<boolean> = new EventEmitter();

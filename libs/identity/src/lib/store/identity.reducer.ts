@@ -12,7 +12,7 @@ export interface IdentityState {
 const initialIdentityState: IdentityState = {
   currentUser: null,
   error: null,
-  isAuthenticated: null,
+  isAuthenticated: false,
   message: null,
   submitted: false,
   submitting: false

@@ -13,8 +13,8 @@ export const renderTemplateDefs = (activeNode: NodeConfig, svc: CoreServices, ro
     if (activeNode.nodeType === 'decision') {
       return [{component: DecisionNodeComponent, inputs: {activeNode}}];
     } else if (typeof activeNode.component === 'function') {
-      const inputs = transformInputs(activeNode.inputs, svc);
-      const outputs = transformOutputs(activeNode.outputs, svc, route);
+      const inputs = transformInputs(activeNode.inputs as {[id: string]: any}, svc);
+      const outputs = transformOutputs(activeNode.outputs as {[id: string]: any}, svc, route);
       return [{component: activeNode.component, inputs, outputs}];
     } else {
       return (activeNode.component as TemplateDefinition).children.map((def) => {
@@ -49,7 +49,7 @@ const transformOutputs = (outputs: {[key: string]: any}, svc: CoreServices, rout
 const transformInputs = (inputs: {[key: string]: any}, svc: CoreServices) => {
   return inputs ? Object.entries(inputs).reduce((acc, [key, value]: [string, any]) => {
     if (key.endsWith('$')) {
-      let val: Observable<any>;
+      let val: Observable<any> | null;
       if (typeof value === 'string') {
         val = svc.sq.query(value);
       } else {
@@ -103,6 +103,8 @@ export const renderEvents = (events: {[name: string]: EventConfig}, svc: CoreSer
                     } else if(trg.startsWith('html@')) {
                       // Example: html@#test-id:click
                       return getHtmlEvent(trg, svc);
+                    } else {
+                      return getFormEvent(trg, svc);
                     }
                 })
               ])
@@ -151,12 +153,12 @@ export const getSystemEvent = (trigger: string) => {
 
 
 export const renderFormModels = (state: StateConfig | ActionPanelConfig) => {
-    return Object.values(state.nodes).reduce((acc, node) => {
+    return state?.nodes ? Object.values(state.nodes).reduce((acc: any, node: any) => {
          return [
              ...acc,
              ...(node && node.inputs && node.inputs.formModel ?  node.inputs.formModel.fields : []),
              ...(node.component && typeof node.component !== 'function' && node.component.children ? (
-               node.component.children.reduce((acc2, ch) => {
+               node.component.children.reduce((acc2: any, ch: any) => {
                      return [
                          ...acc2,
                          ...(ch && ch.inputs && ch.inputs.formModel && ch.inputs.formModel.fields ? ch.inputs.formModel.fields : [])
@@ -164,7 +166,7 @@ export const renderFormModels = (state: StateConfig | ActionPanelConfig) => {
                  }, [])
              ) : [])
          ];
-     }, []) || [];
+     }, []) : [];
  };
 
 export const renderServerQueries = (serverQueries: ServerQueryConfig[], svc: CoreServices, route: ActivatedRoute) => {
@@ -206,7 +208,7 @@ export const renderServerCalls = (serverCalls: ServerCallConfig[], svc: CoreServ
     serverCalls.forEach(call => {
       const {directCall, key, functionName, functionArgs, filterable, sortable, transformResponse,
         onSuccess, onError, onComplete, followUpSuccessCalls, followUpFailCalls, isBackgroundTask} = call;
-      if (!isBackgroundTask) {
+      if (!isBackgroundTask && key) {
           svc.loader.add(key);
         }
       const completeFn = () => {
@@ -216,7 +218,7 @@ export const renderServerCalls = (serverCalls: ServerCallConfig[], svc: CoreServ
           const successSubs = renderServerCalls(followUpSuccessCalls, svc, route);
           subs.push(...successSubs);
         }
-        if (!isBackgroundTask) {
+        if (!isBackgroundTask && key) {
           console.log('lala', key);
           svc.loader.remove(key);
         }
@@ -225,11 +227,11 @@ export const renderServerCalls = (serverCalls: ServerCallConfig[], svc: CoreServ
           subs.push(...failSubs);
         }
       };
-      const errorFn = (err) => {
+      const errorFn = (err: any) => {
         // set errors to store
         onError ? onError(err, svc, route) : console.error(err);
       };
-      const successFn = (results) => {
+      const successFn = (results: any) => {
         //
         let successResults;
         if (transformResponse) {

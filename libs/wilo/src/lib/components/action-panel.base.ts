@@ -7,12 +7,12 @@ import { renderServerCalls, renderTemplateDefs, renderServerQueries, renderEvent
 
 @Component({template: ''})
 export abstract class ActionPanelBase implements OnInit, OnChanges, OnDestroy {
-    @Input() activePanel: ActionPanelConfig;
-    serverCallsSubs: Subscription[];
-    serverQueriesSubs: Subscription[];
-    setValuesSub: Subscription;
-    eventsSub: Subscription[];
-    sub: Subscription;
+    @Input() activePanel!: ActionPanelConfig;
+    serverCallsSubs!: Subscription[];
+    serverQueriesSubs!: Subscription[];
+    setValuesSub!: Subscription;
+    eventsSub!: Subscription[];
+    sub!: Subscription;
 
     constructor(private svc: CoreServices, private route: ActivatedRoute) {}
 

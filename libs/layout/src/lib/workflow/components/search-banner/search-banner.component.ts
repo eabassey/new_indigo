@@ -19,8 +19,8 @@ import { map, take, skipWhile, withLatestFrom } from 'rxjs/operators';
 })
 export class FLXSearchBannerComponent implements OnInit, OnDestroy {
   // ============================== private vars ==============================
-  private _searchResultSubscription: Subscription;
-  private _filterSubscription: Subscription;
+  private _searchResultSubscription!: Subscription;
+  private _filterSubscription!: Subscription;
 
   // ============================== public vars ==============================
   public hasSearchValues = false;

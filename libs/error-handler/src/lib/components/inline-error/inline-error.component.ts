@@ -10,11 +10,11 @@ import { RemoveError } from '../../store/error-handler.actions';
   styleUrls: ['./inline-error.component.scss']
 })
 export class InlineErrorComponent implements OnInit, OnDestroy {
-  @Input() errorMessage;
-  @Input() node;
-  errors;
-  errorsSub: Subscription;
-  errorKeys = [];
+  @Input() errorMessage!: string;
+  @Input() node!: any;
+  errors!: any;
+  errorsSub!: Subscription;
+  errorKeys: any[] = [];
 
   @Output() cancel = new EventEmitter<string>();
   @Output() retry = new EventEmitter<any>();
@@ -38,7 +38,7 @@ export class InlineErrorComponent implements OnInit, OnDestroy {
     });
   }
 
-  onAutoRetryCall(node, retryCall) {
+  onAutoRetryCall(node: any, retryCall: any) {
     if (node && node.errorHandler && node.errorHandler.retryPolicy === 'auto') {
       //
       this.autoRetry.emit({ retryInterval: 3000, retryCount: 3 });
@@ -54,7 +54,7 @@ export class InlineErrorComponent implements OnInit, OnDestroy {
     this.store.dispatch(new RemoveError({ dataKey: key }));
   }
 
-  onRetry(retryCall) {
+  onRetry(retryCall: any) {
     this.retry.emit(retryCall);
     // this.store.dispatch(new RemoveError({ dataKey: retryCall.dataKey }));
     // this.store.dispatch(new MakeServerCall({ ...retryCall }));

@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
   pure: false
 })
 export class AppointmentTypePipe implements PipeTransform {
-  private appointmentTypeString: string = undefined;
+  private appointmentTypeString!: string;
 
   constructor(
     // private _store: Store<fromStore.SharedState>

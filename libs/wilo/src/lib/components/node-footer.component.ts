@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({template: ''})
 export abstract class NodeFooterBase implements OnInit {
     @Input() navs: FooterButtonConfig[] = [];
-    @Input() compInstances;
+    @Input() compInstances!: any[];
 
     //
     // toMain: FlexusNodeNav = {

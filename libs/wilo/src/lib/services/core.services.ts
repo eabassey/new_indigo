@@ -33,7 +33,7 @@ export class CoreServices {
        updateSubmissionData: (payload: any) => this.store.dispatch(updateSubmissionData(payload))
     };
     selectors = {
-      getVariable: (prop) => this.store.select(getVariable(prop)),
+      getVariable: (prop: any) => this.store.select(getVariable(prop)),
       getSubmissionData: () => this.store.select(getSubmissionData)
     }
     constructor(

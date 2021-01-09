@@ -18,7 +18,7 @@ import { Observable } from 'rxjs';
 export class FLXLabelComponent implements OnInit {
   private _text?: string;
 
-  @Input() text$: Observable<any>;
+  @Input() text$!: Observable<any>;
 
   @Input() set class(val: string) {
     switch (val) {

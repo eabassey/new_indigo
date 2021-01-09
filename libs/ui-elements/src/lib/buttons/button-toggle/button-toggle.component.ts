@@ -33,12 +33,12 @@ export enum ERToggleButtonsDirection {
  */
 export class FLXToggleButtonsComponent {
   //========================= Variables ==============================
-  private _options: Array<string>;
-  private _direction: ERToggleButtonsDirection;
+  private _options!: Array<string>;
+  private _direction!: ERToggleButtonsDirection;
   private _disabled: boolean = false;
 
-  selectedOption: string;
-  onTouch = (_) => {};
+  selectedOption!: string;
+  onTouch = (_: any) => {};
   onChange = (_: string) => {};
 
   // ========================= Inputs =================================

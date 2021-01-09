@@ -32,6 +32,8 @@ export class PaymentMethodPipe implements PipeTransform {
       case 8:
         paymentMethodString = 'Bond Account';
         break;
+        default:
+          paymentMethodString = ''
     }
     return paymentMethodString;
   }

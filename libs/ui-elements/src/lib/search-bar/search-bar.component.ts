@@ -27,9 +27,9 @@ export class SearchBarComponent implements ControlValueAccessor, OnInit, OnDestr
     inSearch: new FormControl('', [Validators.minLength(4)])
   });
   disabled = false;
-  internalFormSub: Subscription;
-  private _onTouch: () => void;
-  private _onChange: (obj) => void;
+  internalFormSub!: Subscription;
+  private _onTouch!: () => void;
+  private _onChange!: (obj: any) => void;
   // toggleOptions = ['offline', 'online'];
   @Output() clear = new EventEmitter();
   @Output() doSearch = new EventEmitter();

@@ -10,28 +10,3 @@ export const channel = [
   { value: 6, display: 'SMS' },
 ];
 
-export function transformCallLog<T>(log: {
-  reason: number;
-  new_reason: string;
-  direction: number;
-  new_direction: string;
-  channel: number;
-  new_channel: string;
-  date: string;
-  time: string;
-}) {
-  log.date = moment(log['timestamp']).format(moment.HTML5_FMT.DATE);
-  log.time = moment(log['timestamp']).format(moment.HTML5_FMT.TIME);
-
-  reason.forEach((res) => {
-    if (res.value === log.reason) log.new_reason = res.display;
-  });
-  direction.forEach((dir) => {
-    if (dir.value === log.direction) log.new_direction = dir.display;
-  });
-  channel.forEach((chan) => {
-    if (chan.value === log.channel) log.new_channel = chan.display;
-  });
-
-  return log;
-}

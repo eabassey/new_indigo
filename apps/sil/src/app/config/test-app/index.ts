@@ -16,7 +16,7 @@ export const testApp: AppConfig = {
           const createRoles = [1, 6, 18];
         const menuItems = [{ id: 1, name: 'Workflow', routerLink: '/testApp/workflow/list', iconType: 'app-menu-workflow' }];
 
-        if (currentUser && currentUser.user && currentUser.user.roles.some(role => createRoles.includes(role))) {
+        if (currentUser && currentUser.user && currentUser.user.roles.some((role: any) => createRoles.includes(role))) {
           menuItems.push({ id: 2, name: 'New Claim', routerLink: '/testApp/createClaim/policyLookup', iconType: 'app-menu-new-claim' });
         }
 

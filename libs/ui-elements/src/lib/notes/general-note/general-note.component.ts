@@ -9,10 +9,10 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 export class FLXGeneralNoteComponent implements OnInit {
   private _note: any;
 
-  @Input() location: string;
+  @Input() location!: string;
   locationClass = 'general-note';
 
-  @Input() currentUser;
+  @Input() currentUser!: any;
 
   @Input()
   set note(note: any) {
@@ -22,8 +22,8 @@ export class FLXGeneralNoteComponent implements OnInit {
     return this._note;
   }
 
-  getRoles(roles) {
-    const x = roles.map(b => b.description);
+  getRoles(roles: any[]) {
+    const x = roles.map((b: any) => b.description);
     return x.toString();
   }
 

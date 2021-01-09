@@ -48,7 +48,7 @@ export class FLXAccordionButtonComponent implements OnInit {
     this._title = title;
   }
   get title() {
-    return this._title;
+    return this._title as string;
   }
 
   @Input()

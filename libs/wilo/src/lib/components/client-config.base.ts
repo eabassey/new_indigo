@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 
 @Component({template: ''})
 export abstract class ClientConfigBase implements OnInit {
-    loading$: Observable<boolean>;
+    loading$!: Observable<boolean>;
   constructor(
     public svc: CoreServices,
     public route: ActivatedRoute,

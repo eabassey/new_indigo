@@ -22,7 +22,7 @@ export class FLXDraggableDataDirective implements OnInit {
   @HostListener('dragstart', ['$event'])
   onDragStart(e: DragEvent) {
     // console.log(this._toBeSent);
-    e.dataTransfer.setData('erDragDrop', this._toBeSent);
+    e?.dataTransfer?.setData('erDragDrop', this._toBeSent);
     // console.log(e.dataTransfer.getData('erDragDrop'));
   }
   // ============================================ Constructor =========================================================

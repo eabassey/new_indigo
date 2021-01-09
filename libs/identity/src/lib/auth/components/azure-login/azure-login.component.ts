@@ -7,10 +7,11 @@ import { ENVIRONMENT } from '../../../services/constants';
   styleUrls: ['azure-login.component.scss']
 })
 export class AzureLoginComponent {
-  @Input() disabled: boolean;
-  @Input() azureLoginUrl: string;
-  isSubmittingWithAzure: boolean;
-  disableBackground: boolean;
+  @Input() disabled!: boolean;
+  @Input() azureLoginUrl!: string;
+  isSubmittingWithAzure!: boolean;
+  disableBackground!: boolean;
+  isFullScreen = true;
 
   constructor(@Inject(ENVIRONMENT) private environment: any) {}
 

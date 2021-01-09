@@ -17,17 +17,17 @@ type ErrorType = 'required' | 'email' | 'min' | 'max';
 
 @Injectable({providedIn: 'root'})
 export class BigFormService {
-  bigForm: FormGroup;
-  svc;
-  private _errorMessages = {};
-  bigFormErrors = {};
+  bigForm!: FormGroup;
+  svc!: any;
+  private _errorMessages: {[id: string]: any} = {};
+  bigFormErrors: {[id: string]: any} = {};
   constructor(
     public fb: FormBuilder,
   ) {
     this.initForm();
   }
 
-  initCoreService(svc) {
+  initCoreService(svc: any) {
     this.svc = svc;
   }
 
@@ -42,11 +42,11 @@ export class BigFormService {
   }
 
   createFormGroup(formModel: any[], options: AbstractControlOptions = {}) {
-    const controls = {};
+    const controls: {[id: string]: any} = {};
     formModel.forEach(model => {
       switch (model.type) {
         case 'checkbox': {
-          const opts = {};
+          const opts: {[id: string]: any} = {};
           for (const opt of model.options) {
             opts[opt.key] = new FormControl();
           }
@@ -101,7 +101,7 @@ export class BigFormService {
     );
   }
 
-  getSourceValue(source, fieldPath: string) {
+  getSourceValue(source: any, fieldPath: string) {
     const thePath = fieldPath.split('.');
     return path(thePath, source) || '';
   }
@@ -124,7 +124,7 @@ export class BigFormService {
     }
     if (path.length > 1) {
       for (let i = 1; i < path.length; i++) {
-        control = control.get(path[i]);
+        control = control.get(path[i]) as AbstractControl;
       }
     }
     return control;
@@ -138,7 +138,7 @@ export class BigFormService {
       if (this.bigForm.get(path[0])) {
         (<FormGroup>this.bigForm.get(path[0])).addControl(path[1], new FormControl(null));
       } else {
-        this.bigForm.addControl(path[0], new FormGroup({ [path[1]]: null }));
+        this.bigForm.addControl(path[0], new FormGroup({ [path[1]]: new FormControl(null) }));
       }
     }
   }
@@ -205,13 +205,13 @@ export class BigFormService {
     ).pipe(map(res => res.every(val => val === true)));
   }
 
-  getFormGroupErrors(form: FormGroup | FormArray) {
+  getFormGroupErrors(form: FormGroup | FormArray): any {
     if (Array.isArray(form.controls)) {
       return form.controls
         .map((ctrl, key) => {
           const control = form.get(`${key}`);
           if (control instanceof FormControl) {
-            const controlErrors: ValidationErrors = control.errors;
+            const controlErrors: ValidationErrors = control.errors as ValidationErrors;
             if (controlErrors) {
               return Object.keys(controlErrors).map(keyError => {
                 return `${key}:${keyError}`;
@@ -228,7 +228,7 @@ export class BigFormService {
         .map(key => {
           const control = form.get(key);
           if (control instanceof FormControl) {
-            const controlErrors: ValidationErrors = control.errors;
+            const controlErrors: ValidationErrors = control.errors as ValidationErrors;
             if (controlErrors) {
               return Object.keys(controlErrors).map(keyError => {
                 return `${key}:${keyError}`;
@@ -245,10 +245,10 @@ export class BigFormService {
 
   getErrorMessagesForDisplay(errorMessages: { [key: string]: string }) {
     const formGroupErrors = flatten(this.getFormGroupErrors(this.bigForm));
-    const errors = formGroupErrors.map(key => {
+    const errors = formGroupErrors.map((key: any) => {
       return key && errorMessages && errorMessages[key];
     });
-    return uniq(flatten(errors.filter(val => !!val)));
+    return uniq(flatten(errors.filter((val: any) => !!val)));
   }
 
   // retrieveErrors$() {

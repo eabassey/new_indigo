@@ -31,7 +31,7 @@ export class RoutesService {
                     children: [
                         {path: '', redirectTo: app.startState, pathMatch: 'prefix'},
 
-                        ...Object.entries(app.appStates).map(([stateKey, state]) => {
+                        ...Object.entries(app.appStates).map(([stateKey, state]: [string, any]) => {
                                 return {
                                     path: stateKey,
                                     component: WorkflowStateComponent, // app.stateComp, // this.stateBase, // FlexusStateComponent,
@@ -40,7 +40,7 @@ export class RoutesService {
                                     canDeactivate: [DeactivateGuard, ...(state.canDeactivate ? state.canDeactivate : [])],
                                     children: [
                                         {path: '', redirectTo: state.startNode, pathMatch: 'prefix'},
-                                        ...Object.entries(state.nodes).map(([nodeKey, node]) => {
+                                        ...Object.entries(state.nodes).map(([nodeKey, node]: [string, any]) => {
                                                 return {
                                                     path: nodeKey,
                                                     component: WorkflowNodeComponent, // app.nodeComp, // this.nodeBase, // FlexusNodeComponent,

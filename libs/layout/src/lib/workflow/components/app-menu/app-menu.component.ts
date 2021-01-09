@@ -35,20 +35,20 @@ const ANIMATION_TIMINGS = '400ms cubic-bezier(0.25, 0.8, 0.25, 1)';
 })
 export class FLXAppMenuComponent implements OnInit {
   @Input() opened = true;
-  version: string;
-  currentUser$: Observable<any>;
-  themeCheckedStatus: boolean;
+  version!: string;
+  currentUser$!: Observable<any>;
+  themeCheckedStatus!: boolean;
   theme = '';
-  navItems;
-  logo_url: any;
+  navItems!: any;
+  logo_url!: any;
   logoutIcon = 'app-menu-logout';
   animationState: 'void' | 'enter' | 'leave' = 'enter';
   animationStateChanged = new EventEmitter<AnimationEvent>();
-  navItems$: Observable<any>;
-  appMenuRef: any;
+  navItems$!: Observable<any>;
+  appMenuRef!: any;
 
   @HostListener('document:click', ['$event.target'])
-  listenToClickOutsideMenu(targetElement) {}
+  listenToClickOutsideMenu(targetElement: any) {}
 
   // @HostListener('document:keydown', ['$event']) private handleKeyDown(event: KeyboardEvent) {
   //   const key = event.key;
@@ -69,7 +69,7 @@ export class FLXAppMenuComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser$ = this.svc.auth.getUser();
-    this.navItems$ = this.svc.configAccessor.currentApp$.pipe(switchMap(app => app.appMenu ? app.appMenu(this.svc, this.route) : of([])));
+    this.navItems$ = this.svc.configAccessor.currentApp$.pipe(switchMap(app => app && app.appMenu ? app.appMenu(this.svc, this.route) : of([])));
     // this.getOrg();
     // this.version = environment.version;
 
@@ -100,7 +100,7 @@ export class FLXAppMenuComponent implements OnInit {
 
 
   // no more router link, this will let you do checks before navigating. which will eventually fold into actions which are dispatched to the router store
-  redirect(navItem) {
+  redirect(navItem: any) {
     this.svc.router.navigate([navItem.routerLink]);
     if (!this.appMenuRef) {
       this.appMenuRef = this.svc.keyValueStore.getItem('appMenuRef');
@@ -133,7 +133,7 @@ export class FLXAppMenuComponent implements OnInit {
     // }
   }
 
-  toggleEditable(event) {
+  toggleEditable(event: any) {
     // if (event.target.checked) {
     //   this._store.dispatch(new SetTheme({ name: 'midday' }));
     // } else {
@@ -141,7 +141,7 @@ export class FLXAppMenuComponent implements OnInit {
     // }
   }
 
-  signout(event) {
+  signout(event: any) {
     // event.preventDefault();
     // this.navService.portalActions.next({ call: '', paramFunc: () => {} });
     this._store.dispatch(new LogOut());

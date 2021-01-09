@@ -8,7 +8,7 @@ import { Observable, Subject } from 'rxjs';
 export class AppMenuOverlayRef {
   private _beforeClose = new Subject<void>();
   private _afterClosed = new Subject<void>();
-  componentInstance: FLXAppMenuComponent;
+  componentInstance!: FLXAppMenuComponent | null;
 
   constructor(private overlayRef: OverlayRef) {}
 

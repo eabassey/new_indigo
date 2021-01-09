@@ -8,7 +8,7 @@ const initialState: State = {
   errors: {}
 };
 
-export function reducer(state = initialState, action) {
+export function reducer(state = initialState, action: any) {
   switch (action.type) {
     case ADD_ERROR: {
       const err = action.payload;

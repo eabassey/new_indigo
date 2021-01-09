@@ -3,12 +3,12 @@ import * as moment from 'moment';
 import { humaniseSeconds } from '@indigo/utilities';
 
 
-export const get_indicator_color = (item, editStates) => {
+export const get_indicator_color = (item: any, editStates: any) => {
   const color = editStates.includes(item.state) ? indicatorColors[item.state] : 'grey';
   return color;
 };
 
-export const get_sla_time = (item, statesMap) => {
+export const get_sla_time = (item: any, statesMap: any) => {
   const currentSLA = statesMap[item.state]?.sla_time;
   const actualTime = moment().diff(moment(item.state_change_date), 's');
   const result = (actualTime / currentSLA) * 100;
@@ -17,6 +17,8 @@ export const get_sla_time = (item, statesMap) => {
   } else if (result >= 81 && result <= 100) {
     return {text: humaniseSeconds(actualTime), color: '#DAA520'};
   } else if (result >= 101) {
+    return { text: humaniseSeconds(actualTime), color: 'red'};
+  }else {
     return { text: humaniseSeconds(actualTime), color: 'red'};
   }
 

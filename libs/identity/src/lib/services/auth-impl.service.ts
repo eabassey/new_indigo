@@ -6,16 +6,16 @@ import { map, pluck, skipWhile } from 'rxjs/operators';
 @Injectable({providedIn: 'root'})
 export class AuthImplService implements IAuthService {
 
-    private userState$ = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('flexus.web.user')) ||  null);
+    private userState$ = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('flexus.web.user') as string) ||  null);
     constructor() {}
-    setUser(user) {
+    setUser(user: any) {
       this.userState$.next(user);
     }
     private get user$() {
       return this.userState$.asObservable().pipe(
         map(user => {
           if (!user) {
-            const usr = localStorage.getItem('flexus.web.user');
+            const usr = localStorage.getItem('flexus.web.user') as string;
             return JSON.parse(usr);
           }
           return user;

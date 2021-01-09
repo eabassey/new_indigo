@@ -90,42 +90,42 @@ export class FLXInputTextComponent extends DroppableFormControl implements OnIni
   } = {};
 
   // ---------------------------------------- Internal Variables ------------------------------------------
-  private _autocomplete: boolean;
-  private _autofocus: boolean;
-  private _disabled: boolean;
-  private _collapsable: boolean;
+  private _autocomplete!: boolean;
+  private _autofocus!: boolean;
+  private _disabled!: boolean;
+  private _collapsable!: boolean;
   // private _formControlName: string;
-  private _id: string;
-  private _inFocus: boolean;
-  private _input: HTMLInputElement;
-  private _maxLength: number;
+  private _id!: string;
+  private _inFocus!: boolean;
+  private _input!: HTMLInputElement;
+  private _maxLength!: number;
   // private _name: string;
-  private _noFutureDate: boolean;
-  private _noEndingSpace: boolean;
-  private _open: boolean;
-  private _onValidatorChange: Function;
-  private _pattern: string;
-  private _placeholder: string;
-  private _readonly: boolean;
-  private _required: boolean;
-  private _svgContent: string;
-  private _type: string;
+  private _noFutureDate!: boolean;
+  private _noEndingSpace!: boolean;
+  private _open!: boolean;
+  private _onValidatorChange!: Function;
+  private _pattern!: string;
+  private _placeholder!: string;
+  private _readonly!: boolean;
+  private _required!: boolean;
+  private _svgContent!: string;
+  private _type!: string;
   private _tabIndex = -1;
-  private _svg: SVGElement;
-  private _radius: string;
+  private _svg!: SVGElement;
+  private _radius!: string;
 
   private _recalculate = true;
-  private _decimal: number;
-  private _margin: any;
-  private _width: any;
-  private _currentComposedValidator: ValidatorFn;
+  private _decimal!: number;
+  private _margin!: any;
+  private _width!: any;
+  private _currentComposedValidator!: ValidatorFn;
   private _mustRemoveNonAsciiChars = true;
-  private _onlyValidPhoneChars;
-  private _valueChangeSubscription: Subscription;
+  private _onlyValidPhoneChars!: any;
+  private _valueChangeSubscription!: Subscription;
 
   // ------------------------------------------ Function Variables --------------------------------------------------
-  sendChanges: (_: any) => {};
-  touchChanges: () => {};
+  sendChanges!: (_: any) => {};
+  touchChanges!: () => {};
   // ============================================= Inputs ============================================================
 
   @Input()
@@ -223,7 +223,7 @@ export class FLXInputTextComponent extends DroppableFormControl implements OnIni
     this._id = id;
   }
   get id() {
-    return returnOrDefault(this._id);
+    return returnOrDefault(this._id, '');
   }
 
   @Input()
@@ -328,11 +328,11 @@ export class FLXInputTextComponent extends DroppableFormControl implements OnIni
   }
 
   @Input()
-  set inputClass(val: string) {
+  set inputClass(val: string | undefined) {
     this.styleClasses.inputClass = val;
   }
-  get inputClass() {
-    return this.styleClasses.inputClass ? this.styleClasses.shapeClass : '';
+  get inputClass(): string | undefined {
+    return this.styleClasses && this.styleClasses.inputClass ? this.styleClasses.shapeClass : '';
   }
 
   // @Input()
@@ -420,7 +420,7 @@ export class FLXInputTextComponent extends DroppableFormControl implements OnIni
     }
   }
 
-  @ViewChild('inputContainer', { static: true }) inputContainer: ElementRef<HTMLDivElement>;
+  @ViewChild('inputContainer', { static: true }) inputContainer!: ElementRef<HTMLDivElement>;
 
   // ============================================= Get/Sets ===========================================================
 
@@ -493,7 +493,7 @@ export class FLXInputTextComponent extends DroppableFormControl implements OnIni
     e.cancelBubble = true;
 
     // bellow is to follow normal change process in the case of pasting data after trimming off the excess poop
-    this.writeValue(e.clipboardData.getData('Text').trim());
+    this.writeValue(e?.clipboardData?.getData('Text').trim());
     this.handleChanges();
   }
   // ------------------------------------------ Internal Methods ------------------------------------------
@@ -510,7 +510,7 @@ export class FLXInputTextComponent extends DroppableFormControl implements OnIni
     this._renderer.setAttribute(svgElement, 'viewBox', '0 0 24 24');
 
     // putting together the child elements
-    RIGHT_ARROW_SVG.forEach(elementDescObject => {
+    RIGHT_ARROW_SVG.forEach((elementDescObject: any) => {
       const subObj = this._renderer.createElement(elementDescObject.type, 'svg');
       Object.keys(elementDescObject.props).forEach((propKey: string) => {
         this._renderer.setAttribute(subObj, propKey, elementDescObject.props[propKey]);
@@ -567,7 +567,7 @@ export class FLXInputTextComponent extends DroppableFormControl implements OnIni
     this.cdr.detectChanges();
   }
   // ------------------------------------------ Validation Methods ----------------------------------------
-  validate(c: AbstractControl): ValidationErrors {
+  validate(c: AbstractControl): ValidationErrors | null {
     if (c && c.value !== null && c.value !== undefined) {
       if (this._valueChangeSubscription) this._valueChangeSubscription.unsubscribe();
       this._valueChangeSubscription = c.valueChanges
@@ -639,7 +639,7 @@ export class FLXInputTextComponent extends DroppableFormControl implements OnIni
         validatorArray.push(CustomValidators.noEndingSpaces);
       }
 
-      this._currentComposedValidator = Validators.compose(validatorArray);
+      this._currentComposedValidator = Validators.compose(validatorArray) as ValidatorFn;
     }
     return this._currentComposedValidator(c);
   }

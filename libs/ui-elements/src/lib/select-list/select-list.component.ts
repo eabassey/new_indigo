@@ -32,18 +32,18 @@ export interface SelectListOption {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FLXSelectListComponent implements OnInit, OnDestroy, AfterViewInit, IControlValueAccessor {
-  public FilterForm: FormGroup;
+  public FilterForm!: FormGroup;
   public isCollapsed: boolean = false;
-  public isDisabled: boolean;
+  public isDisabled: boolean = false;
   public displayList: BehaviorSubject<SelectListOption[]> = new BehaviorSubject<SelectListOption[]>([]);
   public isViewInitialised: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public filterSub: Subscription;
+  public filterSub!: Subscription | undefined;
 
   @Input()
-  public heading: string;
+  public heading!: string;
 
   @Input()
-  public subheading: string;
+  public subheading!: string;
 
   private _selectedOptions: Set<string> = new Set();
   get selectedOptions() {
@@ -109,14 +109,14 @@ export class FLXSelectListComponent implements OnInit, OnDestroy, AfterViewInit,
   }
 
   @Input()
-  public options: SelectListOption[];
+  public options!: SelectListOption[];
 
   @Input()
-  public options$: Observable<SelectListOption[]>;
+  public options$!: Observable<SelectListOption[]>;
 
-  public sendChanges: (_: any) => {};
-  public touchChanges: (_: any) => {};
-  public validateFn: (_: any) => {};
+  public sendChanges!: (_: any) => {};
+  public touchChanges!: (_: any) => {};
+  public validateFn!: (_: any) => {};
 
   constructor(private changeDetector: ChangeDetectorRef) {}
 
@@ -151,7 +151,7 @@ export class FLXSelectListComponent implements OnInit, OnDestroy, AfterViewInit,
         searchField: new FormControl('')
       });
 
-      this.filterSub = this.FilterForm.get('searchField').valueChanges.subscribe(sf => {
+      this.filterSub = this.FilterForm.get('searchField')?.valueChanges.subscribe(sf => {
         const filteredOptions = this.options.filter(item => item.display.toLowerCase().includes(sf.toLowerCase()));
         this.displayList.next(filteredOptions);
         this.changeDetector.detectChanges();
@@ -204,7 +204,7 @@ export class FLXSelectListComponent implements OnInit, OnDestroy, AfterViewInit,
           if (this.collapseOnSelect) {
             this.collapseAndScroll(option.value);
           } else if (!this.collapseOnSelect && this.canFilter) {
-            this.FilterForm.get('searchField').patchValue('');
+            this.FilterForm.get('searchField')?.patchValue('');
             this.collapseAndScroll(option.value);
           }
         }

@@ -9,22 +9,15 @@ import { FLXLayoutsModule } from './layouts';
 import { FLXProgressModule } from './progress';
 import { FLXIconModule } from './inline-icons';
 import { FLXRatingModule } from './rating';
-import { FLXReactiveFormsErrorDisplayModule } from './reactive-form-error-display';
 import { FLXPanelsModule } from './panels';
 import { FLXLoadingSpinnerModule } from './loading-spinner';
 import { FLXLoaderModule } from './loader';
 import { FLXLabelsModule } from './labels';
-import { DateTimeConfigurableModule } from './date-time-configurable-picker';
-import { FLXTimePickerModule } from './timepicker';
 import { FLXGlowLineModule } from './glow-line';
 import { FLXTabsModule } from './tabs';
-import { FLXFileViewerModule } from './files/file-viewer';
-import { FLXKeyValueListModule } from './key-value-display';
 import { FLXIndicatorModule } from './indicator';
-import { FLXListsModule } from './lists';
 import { FLXCardsModule } from './cards';
 import { FLXSuccessTickModule } from './success-tick/success-tick.module';
-import { FLXNestedObjectKeyValueListModule } from './nested-object-key-value-list/nested-object-key-value-list.module';
 import { FLXTableModule } from './tables';
 import { FLXModalsModule } from './modals';
 import { FLXNoResultsModule } from './no-results/no-results.module';
@@ -43,7 +36,6 @@ export const UIElements: any[] = [
   FLXFormsModule,
   FLXHeadingsModule,
   FLXIconModule,
-  FLXKeyValueListModule,
   FLXLabelsModule,
   FLXLayoutsModule,
   FLXLoaderModule,
@@ -55,17 +47,11 @@ export const UIElements: any[] = [
   FLXSelectListModule,
   FLXTextareaModule,
   FLXYesNoModule,
-  FLXReactiveFormsErrorDisplayModule,
-  DateTimeConfigurableModule,
-  FLXTimePickerModule,
   FLXSuccessTickModule,
   FLXGlowLineModule,
   FLXTabsModule,
-  FLXFileViewerModule,
   FLXIndicatorModule,
-  FLXListsModule,
   FLXCardsModule,
-  FLXNestedObjectKeyValueListModule,
   FLXTableModule,
   FLXNoResultsModule,
   FLXNotesModule,
@@ -80,7 +66,7 @@ export const UIElements: any[] = [
   entryComponents: []
 })
 export class UIElementsModule {
-  static forRoot(config) {
+  static forRoot(config: any) {
     return {
       ngModule: UIElementsModule,
       providers: [{ provide: 'environment', useValue: config.environment }]

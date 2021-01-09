@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FLXCardModule } from './card/card.module';
-import { FLXEntityCardModule } from './entity-card';
-import { FLXActionableTableCardComponentModule } from './actionable-table-card';
 
 @NgModule({
-  imports: [CommonModule, FLXCardModule, FLXEntityCardModule, FLXActionableTableCardComponentModule],
+  imports: [CommonModule, FLXCardModule],
   declarations: [],
-  exports: [FLXEntityCardModule, FLXCardModule, FLXActionableTableCardComponentModule],
+  exports: [FLXCardModule],
 })
 export class FLXCardsModule {}

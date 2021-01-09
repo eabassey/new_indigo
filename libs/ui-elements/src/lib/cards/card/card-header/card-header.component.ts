@@ -19,7 +19,7 @@ export interface FLXCardHeaderConfig {
   styleUrls: ['./card-header.component.scss']
 })
 export class FLXCardHeaderComponent implements OnInit {
-  private _config: FLXCardHeaderConfig;
+  private _config!: FLXCardHeaderConfig;
   @Input() set config(c: FLXCardHeaderConfig) {
     this._config = {
       display: FLXCardOrientation.vertical,

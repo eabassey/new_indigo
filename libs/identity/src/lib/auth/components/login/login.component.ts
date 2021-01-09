@@ -9,14 +9,14 @@ import { ENVIRONMENT } from '../../../services/constants';
   // changeDetection: ChangeDetectionStrategy.OnPush, // causing error message to misbehave
 })
 export class LoginComponent implements OnInit {
-  logo_url: string;
-  second_logo_url: string;
-  byline: string;
+  logo_url!: string;
+  second_logo_url!: string;
+  byline!: string;
 
   //
-  azureLoginUrl: string;
+  azureLoginUrl!: string;
 
-  useMultipleLogins: boolean;
+  useMultipleLogins!: boolean;
 
   constructor(private cdr: ChangeDetectorRef, private _store: Store<any>, @Inject(ENVIRONMENT) private environment: any) {}
 

@@ -18,7 +18,7 @@ export interface NodeConfig {
       showActionPanel?: boolean;
     };
     // prevState?: any;
-    controls?: (p) => any;
+    controls?: (p: any) => any;
     canActivate?: any[];
     canDeactivate?: any[];
     activateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;

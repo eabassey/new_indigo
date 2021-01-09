@@ -27,18 +27,18 @@ import { isNullOrUndefined } from './validation';
  *  if index is '' it will return the object that was passed ot it
  * @param def the default value to return in the case the the intended return value is not found
  */
-export const getByArrayIndex = (obj: object, index: string[], def = null) =>
-  !!index && index.length > 0
-    ? !isNullOrUndefined(obj)
-      ? index.reduce(
-          (pv: object, cv) => {
-            return !isNullOrUndefined(pv) && pv !== def ? pv[cv] : def;
-          },
-          // isNullOrUndefined(pv) || pv === def ? def : pv[cv],
-          obj,
-        )
-      : def
-    : obj;
+// export const getByArrayIndex = (obj: object, index: string[], def = null) =>
+//   !!index && index.length > 0
+//     ? !isNullOrUndefined(obj)
+//       ? index.reduce(
+//           (pv: object, cv) => {
+//             return !isNullOrUndefined(pv) && pv !== def ? pv[cv] : def;
+//           },
+//           // isNullOrUndefined(pv) || pv === def ? def : pv[cv],
+//           obj,
+//         )
+//       : def
+//     : obj;
 
 /**
  * Function to embed an item inside an object, pretty simple but quite powerful when combined

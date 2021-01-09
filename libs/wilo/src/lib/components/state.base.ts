@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
-import { ActionPanelConfig, StateConfig } from '../models';
+import { ActionPanelConfig, NodeConfig, StateConfig } from '../models';
 import { CoreServices } from '../services/core.services';
 import { Subscription, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -8,29 +8,29 @@ import { delay } from 'rxjs/operators';
 
 @Component({template: ''})
 export abstract class StateBase implements OnInit, OnDestroy {
-    state: StateConfig;
-    sub: Subscription;
-    eventsSub: Subscription[];
-    setValuesSub: Subscription;
-    serverCallsSubs: Subscription[];
-    serverQueriesSubs: Subscription[];
-    dynamicTabs = [];
-    activePanel: ActionPanelConfig;
-    panelActionsSub: Subscription;
-    panelsMap: {[id: string]: ActionPanelConfig}
-    expandActionPanel;
-    clickedActionPanel = null;
-    panelActions = [];
-    paramsSub: Subscription;
-    storeMapperSubscription: Subscription;
+    state!: StateConfig;
+    sub!: Subscription;
+    eventsSub!: Subscription[];
+    setValuesSub!: Subscription;
+    serverCallsSubs!: Subscription[];
+    serverQueriesSubs!: Subscription[];
+    dynamicTabs: any[] = [];
+    activePanel!: ActionPanelConfig;
+    panelActionsSub!: Subscription;
+    panelsMap!: {[id: string]: ActionPanelConfig}
+    expandActionPanel!: boolean;
+    clickedActionPanel = '';
+    panelActions: any[] = [];
+    paramsSub!: Subscription;
+    storeMapperSubscription!: Subscription;
 
     constructor(private svc: CoreServices,  private route: ActivatedRoute) {}
 
     ngOnInit() {
       this.initStateLevelVariables();
-      this.sub = this.route.data.subscribe((state: StateConfig) => {
-        this.state = state;
-        this.dynamicTabs = state?.showTabs ? Object.entries(state.nodes).map(([key, node]) => ({
+      this.sub = this.route.data.subscribe((state: any) => {
+        this.state = state as StateConfig;
+        this.dynamicTabs = state?.showTabs ? Object.entries(state.nodes).map(([key, node]: [string, any]) => ({
           targetId: key,
           display: node.name,
           show: !node.hideTab
@@ -68,7 +68,7 @@ export abstract class StateBase implements OnInit, OnDestroy {
       });
   }
 
-  initActionPanel(panel): void {
+  initActionPanel(panel: any): void {
     if (this.panelsMap && panel && this.clickedActionPanel !== panel) {
         this.clickedActionPanel = panel;
         this.activePanel = this.panelsMap[this.clickedActionPanel];
@@ -108,12 +108,12 @@ toggleActionPanel() {
           this.svc.actionPanel.setActionPanel({});
         }
         //
-        console.log({state})
-        const formModel = renderFormModels(state);
-        if (formModel) {
-          const formGroup = this.svc.bf.createFormGroup(formModel);
-          this.svc.bf.initialize(formGroup);
-        }
+        // console.log({state})
+        // const formModel = renderFormModels(state);
+        // if (formModel) {
+        //   const formGroup = this.svc.bf.createFormGroup(formModel);
+        //   this.svc.bf.initialize(formGroup);
+        // }
         //
         // initialize form fields
         if (state?.setValuesToBigForm) {

@@ -2,9 +2,9 @@ import { actionTypes } from '../actions/variable.actions';
 import {clone} from 'ramda';
 
 
-const initialState = {}
+const initialState: {[id: string]: any} = {}
 
-export function reducer(state = initialState, action) {
+export function reducer(state = initialState, action: any) {
     switch (action.type) {
         case actionTypes.SET_VARIABLE: {
             const {key, data} = action.payload;

@@ -20,7 +20,7 @@ export class ErrorsService {
     });
   }
 
-  log(error) {
+  log(error: any) {
     // Log the error to the console
     console.error(error);
     // Send error to server
@@ -28,7 +28,7 @@ export class ErrorsService {
     return fakeHttpService.post(errorToSend);
   }
 
-  addContextInfo(error) {
+  addContextInfo(error: any) {
     // You can include context details here (usually coming from other services: UserService...)
     const name = error.name || null;
     const appId = 'shthppnsApp';
@@ -47,7 +47,7 @@ export class ErrorsService {
 }
 
 class fakeHttpService {
-  static post(error): Observable<any> {
+  static post(error: any): Observable<any> {
     return of(error);
   }
 }

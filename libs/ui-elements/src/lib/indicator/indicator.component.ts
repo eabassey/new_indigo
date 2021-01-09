@@ -79,7 +79,7 @@ export class FLXIndicatorComponent implements OnInit {
     }
   }
 
-  @ViewChild('indicator', { static: false }) indicator: ElementRef;
+  @ViewChild('indicator', { static: false }) indicator!: ElementRef;
 
   constructor() {}
 

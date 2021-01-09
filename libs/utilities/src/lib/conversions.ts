@@ -48,7 +48,7 @@ export function transformArrayToObject<T>(arrValues: Array<T>, arrKey: Array<str
     throw new Error(`This function expects two arrays with the second being at least as large as the first`);
   }
 
-  const objOut = {};
+  const objOut: {[id: string]: any} = {};
   for (let idx = 0; idx < arrValuesLen; idx++) {
     objOut[arrKey[idx]] = arrValues[idx];
   }

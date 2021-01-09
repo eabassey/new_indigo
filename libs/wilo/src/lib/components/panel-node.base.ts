@@ -8,24 +8,24 @@ import { renderServerCalls, renderTemplateDefs, renderEvents, renderServerQuerie
 
 @Component({template: ''})
 export class PanelNodeBase implements OnInit, OnDestroy, OnChanges {
-    @Input() activePanel: ActionPanelConfig;
-    activeNode: NodeConfig;
-    sub: Subscription;
+    @Input() activePanel!: ActionPanelConfig;
+    activeNode!: NodeConfig;
+    sub!: Subscription;
     compInstances = [];
-    serverQueriesSubs: Subscription[];
-    organisms = [
+    serverQueriesSubs!: Subscription[];
+    organisms: any[] = [
         // {
         //   component: TestComponent,
         //   inputs: {},
         // },
       ];
-  serverCallsSubs: Subscription[];
-  eventsSub: Subscription[];
+  serverCallsSubs!: Subscription[];
+  eventsSub!: Subscription[];
 
     constructor(private svc: CoreServices, private route: ActivatedRoute) {}
 
     ngOnChanges(changes: SimpleChanges) {
-        if (changes.actionPanel) {
+        if (changes.actionPanel && this.activePanel?.nodes) {
           console.log({panelPanel: this.activePanel})
             this.activeNode = this.activePanel.nodes[this.activePanel.startNode];
             if (this.activeNode) {
@@ -39,7 +39,9 @@ export class PanelNodeBase implements OnInit, OnDestroy, OnChanges {
             // Initialize the first node
             if (paramMap.has('panelNodeId')) {
                 const panelNodeId = paramMap.get('panelNodeId');
-                this.activeNode = this.activePanel?.nodes[panelNodeId];
+                if (this.activePanel?.nodes && panelNodeId) {
+                  this.activeNode = this.activePanel?.nodes[panelNodeId];
+                }
                 //
                 if (this.activeNode) {
                   this.renderNode(this.activeNode);
@@ -48,7 +50,7 @@ export class PanelNodeBase implements OnInit, OnDestroy, OnChanges {
         });
     }
 
-    renderNode(activeNode) {
+    renderNode(activeNode: NodeConfig) {
         if (activeNode) {
             if (activeNode.onNodeInit) {
                 activeNode.onNodeInit(this.svc, this.route);
@@ -57,11 +59,11 @@ export class PanelNodeBase implements OnInit, OnDestroy, OnChanges {
               this.serverQueriesSubs = renderServerQueries(activeNode.serverQueries, this.svc, this.route);
             }
             //
-            if (this.activeNode.serverCalls) {
+            if (activeNode.serverCalls) {
               this.serverCallsSubs = renderServerCalls(activeNode.serverCalls, this.svc, this.route);
             }
             //
-            if (this.activeNode.events) {
+            if (activeNode.events) {
               this.eventsSub = renderEvents(activeNode.events, this.svc, this.route);
             }
             this.organisms = renderTemplateDefs(activeNode, this.svc, this.route);

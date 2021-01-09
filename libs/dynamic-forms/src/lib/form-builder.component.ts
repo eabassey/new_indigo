@@ -18,8 +18,8 @@ import {BigFormService} from '@wilo';
 })
 export class FormBuilderComponent implements OnInit {
   @Output() onSubmit = new EventEmitter();
-  @Input() formModel: FormModel;
-  @Input() groupName: string;
+  @Input() formModel!: FormModel;
+  @Input() groupName!: string;
   unsubcribe: any
   constructor(public bf: BigFormService) { }
 

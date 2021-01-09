@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { take, skipWhile } from 'rxjs/operators';
 
 @Component({
@@ -15,13 +15,13 @@ export class FLXDynamicTableComponent implements OnInit, OnDestroy {
   //     { Name: 'Ashfaque Shaikh', Accepted: '2' },
   //     { Name: 'Kyle' },
   //   ];
-  @Input() heading: string = null;
-  @Input() subheading: string = null;
+  @Input() heading: string = '';
+  @Input() subheading: string = '';
 
-  @Input() tableData$: Observable<Array<object>> = null;
+  @Input() tableData$: Observable<Array<object>> = of([]);
   @Input() emptyCellName = 'N/A';
-  @Input() missingFieldText: string;
-  @Input() excludeFields: string[];
+  @Input() missingFieldText!: string;
+  @Input() excludeFields!: string[];
 
   createTable() {
     this.tableData$
@@ -29,7 +29,7 @@ export class FLXDynamicTableComponent implements OnInit, OnDestroy {
         skipWhile((x) => !x),
         take(1),
       )
-      .subscribe((tableData) => {
+      .subscribe((tableData: any) => {
         if (tableData.length > 0) {
           const tableLength = tableData.length;
           // CREATE DYNAMIC TABLE.
@@ -85,8 +85,10 @@ export class FLXDynamicTableComponent implements OnInit, OnDestroy {
 
           // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
           const divContainer = document.getElementById('my-dynamic-table');
-          divContainer.innerHTML = '';
-          divContainer.appendChild(table);
+          if (!!divContainer) {
+            divContainer.innerHTML = '';
+            divContainer.appendChild(table);
+          }
         }
       });
   }

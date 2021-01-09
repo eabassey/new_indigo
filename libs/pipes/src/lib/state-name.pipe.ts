@@ -9,9 +9,9 @@ import { map } from 'rxjs/operators';
   pure: false,
 })
 export class StateNamePipe implements PipeTransform {
-  transform(stateId: number, states: any): string {
+  transform(stateId: any, states: any): string {
     if (states.length > 0) {
-      const current = states.find((currentState) => currentState.id === +stateId[0]);
+      const current = states.find((currentState: any) => currentState.id === +stateId[0]);
       return current.description;
     }
     return 'NA';

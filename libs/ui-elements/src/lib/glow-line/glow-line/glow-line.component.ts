@@ -7,9 +7,9 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FLXGlowLineComponent implements OnInit {
-  private _color: string;
-  private _size: string;
-  private _margin: string;
+  private _color!: string;
+  private _size!: string;
+  private _margin!: string;
 
   get arrayClasses() {
     return Object.values(this.styleClasses);

@@ -149,17 +149,17 @@ import { select } from '@ngrx/store';
 export class WorkflowListComponent implements OnInit, OnDestroy {
     opened = false;
     hasSearchValues = false;
-    @Input() claims$: Observable<any>;
-    currentPage$;
+    @Input() claims$!: Observable<any>;
+    currentPage$!: any;
     pageSize = 30;
-    statesMap: {[id: number]: any};
-    skillsMap: {[id: number]: any};
-    spsMap: {[id: number]: any};
-    appointmentsMap: {[id: number]: any};
-    instructionsMap: {[id: number]: any};
-    user;
-    userSub: Subscription;
-    allInfoSub: Subscription;
+    statesMap!: {[id: number]: any};
+    skillsMap!: {[id: number]: any};
+    spsMap!: {[id: number]: any};
+    appointmentsMap!: {[id: number]: any};
+    instructionsMap!: {[id: number]: any};
+    user!: any;
+    userSub!: Subscription;
+    allInfoSub!: Subscription;
     constructor(private svc: CoreServices) {}
 
     ngOnInit() {
@@ -170,10 +170,10 @@ export class WorkflowListComponent implements OnInit, OnDestroy {
           skipWhile(x => !x)
           ).subscribe(({dataset}) => {
             this.statesMap =  dataset.states
-               .reduce((acc, state) => ({ ...acc, [state.id]: state }), {});
-            this.skillsMap = dataset.skills.reduce((acc, skill) => ({...acc, [skill.id]: skill}), {});
-            this.spsMap = dataset.sps.reduce((acc, sp) => ({...acc, [sp.id]: sp}), {});
-            this.appointmentsMap = dataset.appointment_types.reduce((acc, apt) => ({...acc, [apt.id]: apt}), {});
+               .reduce((acc: any, state: any) => ({ ...acc, [state.id]: state }), {});
+            this.skillsMap = dataset.skills.reduce((acc: any, skill: any) => ({...acc, [skill.id]: skill}), {});
+            this.spsMap = dataset.sps.reduce((acc: any, sp: any) => ({...acc, [sp.id]: sp}), {});
+            this.appointmentsMap = dataset.appointment_types.reduce((acc: any, apt: any) => ({...acc, [apt.id]: apt}), {});
            });
 
         this.userSub = this.svc.auth.getUser().pipe(skipWhile(user => !user)).subscribe(user => this.user = user);
@@ -185,7 +185,7 @@ export class WorkflowListComponent implements OnInit, OnDestroy {
       );
     }
 
-    trackByFunc(idx, item) {
+    trackByFunc(idx: any, item: any) {
         return item.id;
       }
 

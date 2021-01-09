@@ -9,20 +9,20 @@ import { EventEmitter } from 'events';
 
 @Component({template: ''})
 export abstract class AppBase implements OnInit, OnDestroy {
-    app: AppConfig;
+    app!: AppConfig;
 
-    sub: Subscription;
+    sub!: Subscription;
 
-    serverCallsSubs: Subscription[];
-    serverQueriesSubs: Subscription[];
-    eventsSub: Subscription[];
+    serverCallsSubs!: Subscription[];
+    serverQueriesSubs!: Subscription[];
+    eventsSub!: Subscription[];
 
 
 
     // ...
     constructor(private svc: CoreServices, private route: ActivatedRoute, private router: Router) {}
     ngOnInit() {
-      this.sub = this.route.data.subscribe((app: AppConfig) => {
+      this.sub = this.route.data.subscribe((app: any) => {
         this.app = app;
         this.svc.configAccessor.setApp(app);
         this.handleConfig(app);

@@ -10,7 +10,7 @@ import { take, pluck, map } from 'rxjs/operators';
  * @param value value to check if null or undefined, will return if not
  * @param def value to return if value param is null, can be null too
  */
-export function returnOrDefault<T = any>(value: T, def: T = null) {
+export function returnOrDefault<T = any>(value: T, def: T) {
   return !checkNullUndefined(value) ? value : def;
 }
 
@@ -41,7 +41,7 @@ export function returnOrDefault<T = any>(value: T, def: T = null) {
 //   return true;
 // }
 
-export function b64toBlob(b64Data, contentType = '', sliceSize = 512): Blob {
+export function b64toBlob(b64Data: any, contentType = '', sliceSize = 512): Blob {
   const byteCharacters = atob(b64Data);
   const byteArrays = [];
 
@@ -91,48 +91,7 @@ export function setIfNot<T>(reference: T, def: T) {
   }
 }
 
-/**
- * Pure function , will return a copy of the filtered array / copy of the entry
- * @param arr The array to be searched through
- * @param key The key that exists in the array entries to check for
- * @param searchValue the value to search for
- * @param returnLength the length of the set to return
- * -1 will return the entire filtered version regardless of length
- * >0 will return whatever length
- * @default returnLength 1
- * @param retValue default value to return incase nothing is found ,
- * @default null
- */
-export function searchForArrayEntriesByKey<T extends object, K extends keyof T>(
-  arr: T[],
-  key: K,
-  searchValue: T[K],
-  returnLength = -1,
-  retValue: T[] = null
-): T[] {
-  if (
-    checkNullUndefined(arr) ||
-    checkNullUndefined(key) ||
-    checkNullUndefined(searchValue) ||
-    checkNullUndefined(returnLength)
-  ) {
-    return retValue;
-  }
-  const filteredArray = arr.filter(value => value[key] === searchValue);
-  // const returnValue: T[] = returnLength !== -1 ? filteredArray.slice(0, returnLength) : filteredArray.slice();
-  if (filteredArray.length > 0) {
-    // if anything eas returned
-    // if (returnLength === 1) {
-    //   // if 1 return the entry
-    //   return filteredArray.slice(0, 1)[0];
-    // } else {
-    // otherwise check for -1 and slice accordingly, 0 will make weird stuff happen
-    return returnLength !== -1 ? filteredArray.slice(0, returnLength) : filteredArray.slice();
-    // }
-  } else {
-    return retValue;
-  }
-}
+
 
 // let x = { a: 1, b: 2, c: 3, d: 4 };
 
@@ -143,41 +102,6 @@ export function searchForArrayEntriesByKey<T extends object, K extends keyof T>(
 export function cleanUpSub(obs: Subscription) {
   if (obs && !obs.closed) {
     obs.unsubscribe();
-  }
-}
-
-/**
- * !important! MAKE SURE THE DATA SHAPE AND CONTROL STRUCTURE MATCH
- * method used to patch data into a form while dirtying the fields that have data patched
- * this method will throw an error if the data shape and control structure do not match, it
- * !important! MAKE SURE THE DATA SHAPE AND CONTROL STRUCTURE MATCH
- * @param data data to be patched in
- * @param form form Group/ control to be used for patching
- * @param onlySelf used to control if the form should be properly dirtied or not, pass false to dirty the parent form , otherwise
- * will just dirty the child
- * @kind simple recursive
- */
-export function dirtyPatchIntoForm(form: AbstractControl, data, onlySelf = true, top = true) {
-  if (!!data) {
-    if (form['controls']) {
-      // this has controls call recursively
-      Object.keys(form['controls']).forEach(controlKey => {
-        // for each key check if there is data for that control
-        if (data[controlKey]) {
-          // if there is then you should update recursively
-          this.dirtyPatchIntoForm(form['controls'][controlKey], data[controlKey], onlySelf, false);
-        }
-      });
-      // this is an initial naive implementation
-      // if (top) {
-      //   form.markAsPristine();
-      // }
-    } else {
-      const control = <FormControl>form;
-      // this has no controls meaning it is a control so insert and mark as dirty
-      control.markAsDirty({ onlySelf });
-      control.setValue(data);
-    }
   }
 }
 
@@ -196,33 +120,6 @@ export function dirtyPatchIntoForm(form: AbstractControl, data, onlySelf = true,
 //   return typeof value === 'number' && isFinite(value) && Math.floor(value) === value;
 // };
 
-/**
- * a function used to traverse an object by a supplied string index
- * @param obj object to travers through by the supplied index
- * @param index the string index to traverse the object with traversal points separated by '.' ie obj.'1.x'.
- *  if index is '' it will return the object that was passed ot it
- * @param def the default value to return in the case the the intended return value is not found
- */
-export const getByIndex = (obj: object, index: string, def = null) =>
-  index !== ''
-    ? !isNullOrUndefined(obj)
-      ? index.split('.').reduce(
-          (pv: object, cv) => {
-            return !isNullOrUndefined(pv) && pv !== def ? pv[cv] : def;
-          },
-          // isNullOrUndefined(pv) || pv === def ? def : pv[cv],
-          obj
-        )
-      : def
-    : obj;
-// currently T is just to force a return type, in practice T should be updated to be  a union of all types of arrays
-export function functionalRecursiveMerge<T = any>(...toMerge): T {
-  let out = {};
-  for (const entry of toMerge) {
-    inlineRecursiveMerge(out, entry);
-  }
-  return <T>{ ...out };
-}
 /**
  * will copy the properties out of the passed object ,  prop by prop and write it into a new object
  * note this method implements a shallow copy
@@ -252,6 +149,7 @@ export function fullDeepCopy<T>(obj: T & object): T {
           // else recurse with this copy
           out[key] = <any>fullDeepCopy(<object>working);
         }
+        break;
       }
       //  by default we can just copy it over
       default: {
@@ -282,44 +180,6 @@ export function fullyReferentiallyBreakingCopy<T = any>(obj: T): T {
   return obj;
 }
 
-export const inlineRecursiveMerge = (toBeInsertedInto: Object, toBeInserted: Object) => {
-  if (!toBeInserted && !toBeInsertedInto) {
-    toBeInsertedInto = {};
-    return;
-  }
-  if (!toBeInserted) {
-    return;
-  }
-  if (!toBeInsertedInto) {
-    toBeInsertedInto = { ...toBeInserted };
-    return;
-  }
-  // if (Array.isArray(toBeInsertedInto) !== Array.isArray(toBeInserted)) {
-  //   toBeInsertedInto = toBeInserted;
-  //   return;
-  // }
-  for (const key in toBeInserted) {
-    //  if key exists in to be TBT
-    //  ? if type !primitive
-    //    ? recurse
-    //    : insert/ overwrite
-    //  : insert
-    if (toBeInsertedInto[key]) {
-      if (
-        typeof toBeInserted[key] === 'object' &&
-        Array.isArray(toBeInsertedInto[key]) === Array.isArray(toBeInserted[key])
-      ) {
-        // call selfe
-
-        inlineRecursiveMerge(toBeInsertedInto[key], toBeInserted[key]);
-      } else {
-        toBeInsertedInto[key] = toBeInserted[key];
-      }
-    } else {
-      toBeInsertedInto[key] = toBeInserted[key];
-    }
-  }
-};
 
 // export const isNull = (obj: object): boolean => obj === null;
 // export const isNullOrUndefined = (obj: object): boolean => isNull(obj) || isUndefined(obj);
@@ -525,8 +385,8 @@ export const convertDateTimeToTimeStamp = (dateTime: string): number => {
 //lookupValue is the lookupProp value you have
 //example You have the sp_id of 5 and want the associated name
 //   (SP, sp_id, sp_name, 5, storeObj)
-export const getAllInfoIndex = (section, lookupProp, returnProp, lookupValue, storeObj) => {
-  return storeObj['allInfo'][section].reduce((acc, sec) => {
+export const getAllInfoIndex = (section: any, lookupProp: any, returnProp: any, lookupValue: any, storeObj: any) => {
+  return storeObj['allInfo'][section].reduce((acc: any, sec: any) => {
     return { ...acc, [sec[lookupProp]]: sec[returnProp] };
   }, {})[lookupValue];
 };

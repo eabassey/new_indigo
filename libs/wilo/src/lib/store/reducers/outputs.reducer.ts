@@ -5,7 +5,7 @@ const initialState = {
   submissionData: null
 }
 
-export function reducer(state = initialState, action) {
+export function reducer(state = initialState, action: any) {
     switch (action.type) {
         case outputsTypes.UPDATE_SUBMISSION_DATA: {
             const submissionData = action.payload;

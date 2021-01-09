@@ -75,14 +75,14 @@ import { tap } from 'rxjs/operators';
     styleUrls: ['workflow-state.component.scss']
 })
 export class WorkflowStateComponent extends StateBase {
-  currentTab$;
+  currentTab$!: any;
 
     constructor(svc: CoreServices, route: ActivatedRoute) {
         super(svc, route);
 
       }
 
-  selectTab(tab) {
+  selectTab(tab: any) {
 
   }
 }

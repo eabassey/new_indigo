@@ -329,7 +329,7 @@ export class IdentityEffects {
   navigateTo$ = this.actions$.pipe(
     ofType<IdentityActions.GetLoggedInUserSuccess>(IdentityActions.IdentityActionTypes.GET_LOGGED_IN_USER_SUCCESS),
     map(action => {
-      if (!this.identityConfig.no_auth_urls.includes(this.router.url)) {
+      if (!(this.identityConfig.no_auth_urls as string[]).includes(this.router.url)) {
         this.router.navigate([this.identityConfig.after_login_url]);
       }
       // return new GetAllInfo(`${this.environment.api_url}v1/all_info/`);

@@ -30,25 +30,25 @@ export class JobCardComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   @Input() job: any;
   @Input() claim: any;
   @Input() jobContextMenuList = [];
-  @Input() activeOrg;
+  @Input() activeOrg: any;
   @Input() isOnline: boolean = true;
   selectedJob: any;
-  buttonText: string;
-  appointment_text;
+  buttonText!: string;
+  appointment_text!: string;
   appointment_text_color = '';
-  @ViewChild('appointmentInfo', {read: ElementRef}) appointmentInfoHolder: ElementRef;
+  @ViewChild('appointmentInfo', {read: ElementRef}) appointmentInfoHolder!: ElementRef;
 
-  @Input() skillsMap: {[id: number]: any};
-  @Input() spsMap: {[id: number]: any};
-  @Input() statesMap: {[id: number]: any};
-  @Input() appointmentsMap: {[id: number]: any};
-  @Input() instructionsMap: {[id: number]: any}
-  @Input() user;
+  @Input() skillsMap!: {[id: number]: any};
+  @Input() spsMap!: {[id: number]: any};
+  @Input() statesMap!: {[id: number]: any};
+  @Input() appointmentsMap!: {[id: number]: any};
+  @Input() instructionsMap!: {[id: number]: any}
+  @Input() user!: any;
   skill: any;
   sp: any;
-  stateDescription: string;
-  appt: string;
-  instruction: string;
+  stateDescription!: string;
+  appt!: string;
+  instruction!: string;
   indicatorColor = 'grey';
 
   sub: Subscription[] = [];
@@ -77,7 +77,7 @@ export class JobCardComponent implements OnInit, OnChanges, AfterViewInit, OnDes
       }
   }
 
-  takeAction(job): void {
+  takeAction(job: any): void {
     this.svc.keyValueStore.setItem('workflowURL', this.router.url);
     this.router.navigate(['/testApp', job.state, {jobId: job.id}], {queryParams: {expandActionPanel: false, actionPanel: null}})
   }
@@ -106,7 +106,9 @@ export class JobCardComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   }
 
 
-  selectMenuItem(job, menuItem) {
+  selectMenuItem(
+    job: any, menuItem: any
+    ) {
     this.svc.router.navigate(['/workflow/detail'], { skipLocationChange: true });
   }
 

@@ -20,9 +20,9 @@ import { ToolbarControlConfig, CoreServices } from '@wilo';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FLXHeaderActionsComponent implements OnInit, OnDestroy, OnChanges {
-  @Input() manifestItem;
-  headerControls$: Observable<ToolbarControlConfig[]>;
-  clickedControl = null;
+  @Input() manifestItem!: any;
+  headerControls$!: Observable<ToolbarControlConfig[]>;
+  clickedControl: any = null;
   state = 'opened';
   isOffline = true;
   reversed = false;
@@ -66,7 +66,7 @@ export class FLXHeaderActionsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   onClick(action: ToolbarControlConfig) {
-    action.command();
+   if(action && action.command) action.command();
     this.clickedControl = action;
     // this.state = 'closed';
     // setTimeout(() => {
@@ -74,13 +74,13 @@ export class FLXHeaderActionsComponent implements OnInit, OnDestroy, OnChanges {
     // }, 1000);
   }
 
-  loadView(viewKey, params: { reverse: boolean }) {
+  loadView(viewKey: any, params: { reverse: boolean }) {
     // const viewFunc = this.manifestItem.views[viewKey];
     // this.controller.dispatch(new SetView({ func: viewFunc, key: viewKey, params }));
     // console.log('Loading view....');
   }
 
-  useExistingDataSource(viewData) {
+  useExistingDataSource(viewData: any) {
     // this.controller.dispatch(new UseExistingDatasourceForView(viewData));
   }
 

@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class InlineIconSvgDirective implements OnInit, OnChanges {
   constructor(private elementRef: ElementRef, private http: HttpClient) {}
   // Get svg name from directive attr
-  @Input('inline-icon-svg') filename: string;
+  @Input('inline-icon-svg') filename!: string;
   // on init assign file name to var and GET via HTTP client
   ngOnInit() {
     let svgTxt = this.http.get(`/assets/icons/${this.filename}.svg`, {
@@ -21,6 +21,8 @@ export class InlineIconSvgDirective implements OnInit, OnChanges {
       err => {
         if (err.status === 404) {
           return false;
+        } else {
+          return false; // redundant...
         }
       }
     );

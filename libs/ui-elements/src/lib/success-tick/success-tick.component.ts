@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 export class FLXSuccessTickComponent implements OnInit, AfterViewInit {
   constructor(private router: Router) {}
   @Input() autoClose = true;
-  @Input() copyText$: Observable<any>;
+  @Input() copyText$!: Observable<any>;
   @Input() copyTextHeading = 'Claim Number';
   ngOnInit() {}
 

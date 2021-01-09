@@ -5,11 +5,11 @@ import { INDEXED_DB_NAME } from './constants';
 
 @Injectable({providedIn: 'root'})
 export class IndexedDbService extends Dexie {
-    endpointStore= {};
-    contacts: Dexie.Table<any, number>;
-    constructor (@Inject(INDEXED_DB_NAME) databaseName) {
+    endpointStore: {[id: string]: any}= {};
+    // contacts: Dexie.Table<any, number>;
+    constructor (@Inject(INDEXED_DB_NAME) databaseName: string) {
         super(databaseName);
-        this.version(1).stores({contacts: 'uuid'});
+        this.version(1).stores({items: 'uuid'});
         // Open it
         this.open().catch(err => {
             console.error(`Open failed: ${err.stack}`);

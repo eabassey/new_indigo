@@ -8,11 +8,11 @@ export class FLXCallFilterPipe implements PipeTransform {
     if (value !== undefined && value !== null) {
       switch (items[0]) {
         case 'callReason':
-          return items[1].find(i => i.id === value).name;
+          return items[1].find((i: any) => i.id === value).name;
         case 'callChannel':
-          return items[1].find(i => i.id === value).name;
+          return items[1].find((i: any) => i.id === value).name;
         case 'callDirection':
-          return items[1].find(i => i.id === value).name;
+          return items[1].find((i: any) => i.id === value).name;
         default:
           return '';
       }

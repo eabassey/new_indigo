@@ -5,9 +5,9 @@ import { AppConfig, NodeConfig, StateConfig } from '../models';
 
 @Injectable({providedIn: 'root'})
 export class ConfigAccessorService {
-  private app$ = new BehaviorSubject<AppConfig>(null);
-  private state$ = new BehaviorSubject<StateConfig>(null);
-  private node$ = new BehaviorSubject<NodeConfig>(null);
+  private app$ = new BehaviorSubject<AppConfig | null>(null);
+  private state$ = new BehaviorSubject<StateConfig | null>(null);
+  private node$ = new BehaviorSubject<NodeConfig | null>(null);
 
   setApp(app: AppConfig) {
     this.app$.next(app);

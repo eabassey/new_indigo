@@ -14,16 +14,16 @@ type ButtonCreationArgumentsArray =
   | [string, boolean, string, Position, Color, Size, Depth, Width, Shape];
 
 export class DynamicButtonClass implements DynamicButton {
-  public dynamic_btn_name: string;
-  public dynamic_btn_eventType: string;
-  public dynamic_btn_position: Position; // Position on the bottom bar
-  public dynamic_btn_disable: boolean;
+  public dynamic_btn_name!: string;
+  public dynamic_btn_eventType!: string;
+  public dynamic_btn_position!: Position; // Position on the bottom bar
+  public dynamic_btn_disable!: boolean;
   public color?: Color;
   public size?: Size;
   public width?: Width;
   public shape?: Shape;
 
-  processObject(values, defaults) {
+  processObject(values: any, defaults: any) {
     const obj = { ...defaults, ...values };
     const { dynamic_btn_name, dynamic_btn_eventType, dynamic_btn_position, dynamic_btn_disable, color, size, width, shape } = obj;
 
@@ -41,7 +41,7 @@ export class DynamicButtonClass implements DynamicButton {
   constructor(name: string, disabled$: Observable<boolean>);
   // constructor(args: );
   constructor(...args: ButtonCreationArgumentsArray);
-  constructor(...args) {
+  constructor(...args: any[]) {
     const nameArr = ['dynamic_btn_name', 'dynamic_btn_disable', 'dynamic_btn_eventType', 'dynamic_btn_position', 'color', 'size', 'width', 'shape'];
     let configObject: Partial<DynamicButton> = {};
     switch (args.length) {
@@ -108,16 +108,16 @@ type ObsButtonCreationArgumentsArray =
   | [string, Observable<boolean>, string, Position, Color, Size, Depth, Width, Shape];
 
 export class ObsDynamicButtonClass implements DynamicButtonObs {
-  public dynamic_btn_name: string;
-  public dynamic_btn_eventType: string;
-  public dynamic_btn_position: Position; // Position on the bottom bar
-  public disabled$: Observable<boolean>;
+  public dynamic_btn_name!: string;
+  public dynamic_btn_eventType!: string;
+  public dynamic_btn_position!: Position; // Position on the bottom bar
+  public disabled$!: Observable<boolean>;
   public color?: Color;
   public size?: Size;
   public width?: Width;
   public shape?: Shape;
 
-  processObject(values, defaults) {
+  processObject(values: any, defaults: any) {
     const obj = { ...defaults, ...values };
     const { dynamic_btn_name, dynamic_btn_eventType, dynamic_btn_position, disabled$, color, size, width, shape } = obj;
 
@@ -134,7 +134,7 @@ export class ObsDynamicButtonClass implements DynamicButtonObs {
   constructor(config: Partial<DynamicButtonObs> | ObsButtonCreationArgumentsArray);
   constructor(name: string, disabled$: Observable<boolean>);
   constructor(...args: ObsButtonCreationArgumentsArray);
-  constructor(...args) {
+  constructor(...args: any[]) {
     const nameArr = ['dynamic_btn_name', 'disabled$', 'dynamic_btn_eventType', 'dynamic_btn_position', 'color', 'size', 'width', 'shape'];
     let configObject: Partial<DynamicButton> = {};
     switch (args.length) {

@@ -10,7 +10,7 @@ import { CoreServices } from '@wilo';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  authenticated$: Observable<boolean>;
+  authenticated$!: Observable<boolean>;
 
   constructor(private _router: Router, private svc: CoreServices) {
   }

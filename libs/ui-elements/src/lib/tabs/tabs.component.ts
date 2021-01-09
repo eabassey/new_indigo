@@ -45,13 +45,13 @@ export interface TabsData {
   styleUrls: ['./tabs.component.scss']
 })
 export class FLXTabsComponent implements OnInit, OnDestroy, AfterViewInit {
-  @Input() tabs: TabsData[] = null;
+  @Input() tabs: TabsData[] = [];
   @Input() externalPages = true;
-  @Input() defaultTab: string = null; // TODO
+  @Input() defaultTab: string = ''; // TODO
 
   // an observable is used if you want to keep track of the current component
-  @Input() currentStep$: Observable<any> = null;
-  currentStepSub: Subscription;
+  @Input() currentStep$!: Observable<any>;
+  currentStepSub!: Subscription;
 
   @Output() outputEventStream: EventEmitter<any> = new EventEmitter();
 
@@ -84,7 +84,10 @@ export class FLXTabsComponent implements OnInit, OnDestroy, AfterViewInit {
         page.style.display = 'none';
       }
       if (target !== 'default') {
-        document.getElementById(target).style.display = 'block';
+        const ele = document.getElementById(target);
+        if (ele) {
+          ele.style.display = 'block';
+        }
       } else {
         const def = pages[0] as HTMLElement;
         def.style.display = 'block';

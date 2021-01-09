@@ -16,14 +16,14 @@ import { getIdentitySubmitting, getLoginError, Login, ResetForgotPassword } from
   styleUrls: ['local-login.component.scss']
 })
 export class LocalLoginComponent implements OnInit, OnDestroy {
-  loginForm: FormGroup;
+  loginForm!: FormGroup;
   isOnline = true;
-  formSub: Subscription;
-  networkSub: Subscription;
-  error$: Observable<any>;
-  @Input() hideFormInitially: boolean;
+  formSub!: Subscription;
+  networkSub!: Subscription;
+  error$!: Observable<any>;
+  @Input() hideFormInitially!: boolean;
 
-  isSubmitting$: Observable<boolean>;
+  isSubmitting$!: Observable<boolean>;
   constructor(
     private _fb: FormBuilder,
     private _store: Store<any>,
