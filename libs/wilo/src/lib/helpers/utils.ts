@@ -100,10 +100,12 @@ export const renderEvents = (events: {[name: string]: EventConfig}, svc: CoreSer
                       return getSystemEvent(trg);
                     } else if (trg.startsWith('form@')) {
                     return getFormEvent(trg, svc);
-                    } else if(trg.startsWith('html@')) {
-                      // Example: html@#test-id:click
-                      return getHtmlEvent(trg, svc);
-                    } else {
+                    } 
+                    // else if(trg.startsWith('html@')) {
+                    //   // Example: html@#test-id:click
+                    //   return getHtmlEvent(trg, svc);
+                    // } 
+                    else {
                       return getFormEvent(trg, svc);
                     }
                 })
@@ -143,12 +145,12 @@ export const getSystemEvent = (trigger: string) => {
     return svc.bf.getControl(trg).valueChanges.pipe(delay(500));
   };
 
-  export const getHtmlEvent = (trigger: string, svc: CoreServices) => {
-    const trg = trigger.split('@')[1];
-    console.log({trg})
-    const [selector, eventName] = trg.split(':');
-    return fromEvent(svc.$(selector).get(0), eventName);
-  };
+  // export const getHtmlEvent = (trigger: string, svc: CoreServices) => {
+  //   const trg = trigger.split('@')[1];
+  //   console.log({trg})
+  //   const [selector, eventName] = trg.split(':');
+  //   return fromEvent(svc.$(selector).get(0), eventName);
+  // };
 
 
 

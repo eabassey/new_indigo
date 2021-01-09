@@ -17,7 +17,7 @@ import { ClientConfig } from '../models';
 import { KeyValueStoreService } from './key-value-store.service';
 import { EventEmitter } from 'events';
 import { ConfigAccessorService } from './config-accessor.service';
-import * as jQuery from 'jquery';
+// import * as jQuery from 'jquery';
 import { addFilter, getSubmissionData, getVariable, removeFilter, resetFilter, setVariable, updateSubmissionData } from '../store';
 
 
@@ -62,7 +62,7 @@ export class CoreServices {
       this.bf.initCoreService(this);
     }
 
-    get $ () {
-      return jQuery;
-    }
+    // get $ () {
+    //   return jQuery;
+    // }
 }
