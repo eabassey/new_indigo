@@ -151,6 +151,7 @@ export const SIL_27: StateConfig = {
       //       }
       //     });
       // }
+      footerType: 'none'
     }
   },
   bigFormToStoreMapper: {

@@ -22,6 +22,7 @@ export const silSearchPanel: ActionPanelConfig = {
             serverCalls: [
 
             ],
+            footerType: 'none'
         }
     }
 }

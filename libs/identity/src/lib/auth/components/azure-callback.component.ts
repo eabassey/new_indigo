@@ -9,13 +9,14 @@ import { AzureLogin } from '../../store';
   selector: 'azure-callback',
   template: `
     <flx-loader-component
-      isFullScreen="true"
+      [isFullScreen]="isFullScreen"
       [disableBackground]="loaderOptions && !loaderOptions.showBackdrop"
     ></flx-loader-component>
   `
 })
 export class AzureCallbackComponent implements OnInit {
   loaderOptions = { showBackdrop: true };
+  isFullScreen = false;
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,

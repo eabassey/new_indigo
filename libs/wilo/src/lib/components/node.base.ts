@@ -24,8 +24,8 @@ export abstract class NodeBase implements OnDestroy, OnInit {
     constructor(private svc: CoreServices, private route: ActivatedRoute) {}
 
     ngOnInit() {
-      this.sub =  this.route.data.subscribe((node: NodeConfig) => {
-        this.node = node;
+      this.sub =  this.route.data.subscribe((node: any) => {
+        this.node = node as NodeConfig;
         this.svc.configAccessor.setNode(node);
         this.handleConfig(node);
       });

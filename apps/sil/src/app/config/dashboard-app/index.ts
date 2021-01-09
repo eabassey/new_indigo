@@ -17,7 +17,8 @@ export const dashboardApp: AppConfig = {
       nodes: {
         'operations': {
           component: TP.Node2Component,
-          inputs: {text: 'Dashboard report opss'}
+          inputs: {text: 'Dashboard report opss'},
+          footerType: 'none'
         }
       }
     }

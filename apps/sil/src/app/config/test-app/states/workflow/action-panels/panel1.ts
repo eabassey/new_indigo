@@ -41,6 +41,7 @@ export const panel1: ActionPanelConfig = {
                     ]
                 }
             ],
+            footerType: 'none'
         }
     }
 }

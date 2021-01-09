@@ -1,9 +1,9 @@
 
 export interface ToolbarControlConfig {
     id?: any;
-    icon?: string;
+    icon: string;
     text?: string;
-    instruction?: string;
+    instruction: string;
     command?: Function;
     type?: 'standalone' | 'dropdown';
     children?: ToolbarControlConfig[];

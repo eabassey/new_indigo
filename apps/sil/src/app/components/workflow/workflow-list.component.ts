@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ChangeDetectionStrategy, Inject, OnDestroy } from "@angular/core";
-import {Observable, Subscription} from 'rxjs';
+import {Observable, of, Subscription} from 'rxjs';
 import { CoreServices, getVariable, CLIENT_CONFIG, ClientConfig } from '@wilo';
 import { map, skipWhile } from 'rxjs/operators';
 import { select } from '@ngrx/store';
@@ -20,7 +20,7 @@ import { select } from '@ngrx/store';
             <ng-container *ngIf="(claims$ | async) as claims">
                 <ng-container *ngIf="claims.length >= 1">
                 <div
-                *ngFor="let claim of (claims | paginate: { itemsPerPage: pageSize, currentPage: (currentPage$ | async), id: 'list' }); index as i; trackBy: trackByFunc"
+                *ngFor="let claim of (claims | paginate: { itemsPerPage: pageSize, currentPage: currentPage, id: 'list' }); index as i; trackBy: trackByFunc"
                 >
                     <claim-card
                     [skillsMap]="skillsMap"
@@ -150,7 +150,9 @@ export class WorkflowListComponent implements OnInit, OnDestroy {
     opened = false;
     hasSearchValues = false;
     @Input() claims$!: Observable<any>;
-    currentPage$!: any;
+    // currentPage$: Observable<number |string | undefined | null> = of(1);
+    currentPageSub!: Subscription | null;
+    currentPage: number = 1;
     pageSize = 30;
     statesMap!: {[id: number]: any};
     skillsMap!: {[id: number]: any};
@@ -163,7 +165,10 @@ export class WorkflowListComponent implements OnInit, OnDestroy {
     constructor(private svc: CoreServices) {}
 
     ngOnInit() {
-        this.currentPage$ = this.svc.route.queryParamMap.pipe(map(paramMap => paramMap.get('currentPage') || 1))
+        this.currentPageSub = this.svc.route.queryParamMap.subscribe(paramMap => {
+            const currentPage = paramMap.get('currentPage');
+            this.currentPage = !!currentPage ? +currentPage : 1;
+        });
         this.instructionsMap = this.getStateInstructions(this.svc.clientConfig);
         this.allInfoSub = this.svc.store.pipe(
           select(getVariable('all_info')),
@@ -192,5 +197,6 @@ export class WorkflowListComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
       if (this.allInfoSub) this.allInfoSub.unsubscribe();
       if (this.userSub) this.userSub.unsubscribe();
+      if (this.currentPageSub) this.currentPageSub.unsubscribe();
     }
 }

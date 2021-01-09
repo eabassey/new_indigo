@@ -66,7 +66,7 @@ export class FLXButtonComponent implements OnInit, OnChanges {
 
   // Button Color
   @Input()
-  set color(color: string) {
+  set color(color: string | undefined) {
     switch (color) {
       case 'default':
         this.styleClasses.colorClass = 'button--colour-default';
@@ -95,7 +95,7 @@ export class FLXButtonComponent implements OnInit, OnChanges {
       default:
         this.styleClasses.colorClass = 'button--colour-default';
     }
-    this._color = color;
+    this._color = color as string;
   }
   get color() {
     return this._color;

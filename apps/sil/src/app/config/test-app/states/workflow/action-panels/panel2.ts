@@ -9,6 +9,7 @@ export const panel2: ActionPanelConfig = {
     nodes: {
         node2: {
             component: TP.Node2Component,
+            footerType: 'none'
         }
     }
 };

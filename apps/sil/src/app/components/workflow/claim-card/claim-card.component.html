@@ -14,7 +14,7 @@
       <div class="indicator-icons">
         <!-- CAT indicator -->
         <div class="action" *ngIf="claim && claim?.cat_code && claim?.cat_code != null">
-          <flx-icon size="small" type="storms" instruction="Catastrophe" color="indicator" isClickable="isClickable">
+          <flx-icon size="small" type="storms" instruction="Catastrophe" color="indicator" [isClickable]="isClickable">
           </flx-icon>
         </div>
         <!-- Private Client indicator -->

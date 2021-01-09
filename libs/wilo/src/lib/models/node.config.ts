@@ -24,7 +24,7 @@ export interface NodeConfig {
     activateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;
     deactivateGuard?: (svc: CoreServices, route?: ActivatedRoute) => Observable<boolean>;
     title?: string | ((svc: CoreServices, route?: ActivatedRoute) => Observable<string>);
-    footerType?: 'pagination' | 'node_nav';
+    footerType: 'pagination' | 'node_nav' | 'none';
 
     errorHandler?: {
       displayFormat: 'inline' | 'toast' | 'dialog' | 'none';

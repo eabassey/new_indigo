@@ -17,12 +17,12 @@
     <div class="workflow-action" *ngFor="let control of headerControls$ | async">
       <flx-icon
         *ngIf="control?.type === 'standalone'"
-        [type]="control?.icon"
+        [type]="control.icon"
         [isActive]="clickedControl?.id === control.id ? true : false"
         active="none"
         class="action-panel-button"
         (click)="onClick(control)"
-        [instruction]="control?.instruction"
+        [instruction]="control.instruction"
         >{{ control?.icon }}</flx-icon>
       <!-- <flx-context-menu *ngIf="action?.type === 'dropdown'" icon="view" use="app-bar" [state]="state">
         <ul>
