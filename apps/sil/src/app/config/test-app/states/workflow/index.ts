@@ -14,7 +14,7 @@ export const workflow: StateConfig = {
         list: {
           component: WorkflowListComponent,
           inputs: {
-              // list$: 'dyn.variables.claims.dataset'
+              // list$: 'variables.claims.dataset'
               // list$: {
               //     variableName: 'claims',
               //     filterFunctions: {filter_down: (id) => p => p.id < id, filter_top: (id) => p => p.id > id}
@@ -31,6 +31,7 @@ export const workflow: StateConfig = {
                   filterable: true,
                   sortable: false,
                   directCall: (svc, route) => {
+                      svc.auth.getUser().subscribe(user => console.log({user}));
                       return svc.http.get(`${svc.baseUrl}v1/staff_action/get_summary/`, {
                           // headers: {'Access-Control-Allow-Origin': 'true'}
                       }).pipe(map((d: any) => d.payload));

@@ -27,7 +27,7 @@ const coreModules = [
     NodeRouterComponent,
     DecisionNodeComponent
   ],
-  imports: [CommonModule, StoreModule.forFeature('dyn', wiloReducers), RouterModule, ...coreModules],
+  imports: [CommonModule, StoreModule, RouterModule, ...coreModules],
   exports: [...coreModules, NodeRouterComponent, NodeFooterButtonComponent, RouterModule]
 })
 export class WiloModule {

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {WiloModule, AuthService} from '@wilo';
+import {WiloModule, AuthService, wiloReducers} from '@wilo';
 import {WorkflowLayoutModule, WorkflowLayoutComponent} from '@indigo/layout';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
@@ -28,10 +28,10 @@ import { EffectsModule } from '@ngrx/effects';
     BrowserAnimationsModule,
     WorkflowLayoutModule,
     DynamicFormsModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot(wiloReducers),
     EffectsModule.forRoot([]),
     WiloModule.forRoot({
-      clientConfig: clientConfig,
+      clientConfig: clientConfig, 
       clientService: AppService,
       indexedDbName: 'dynDB',
       base_url: environment.api_url
